@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LogoPrezentFull from '../../../assets/images/logo_prezent_full.png';
-import LogoPrezentHidden from '../../../assets/images/logo_prezent_hidden.png';
 import { PiArchiveDuotone, PiArchiveFill, PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiMegaphoneDuotone, PiMegaphoneFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill, PiWalletDuotone, PiWalletFill } from 'react-icons/pi';
 import Menu from '../../menu';
 import { useNavigate } from 'react-router-dom';
@@ -124,9 +122,9 @@ const Sidebar = (props) => {
             } flex justify-center items-center py-4 h-16 border-b border-neutral40`}
         >
             {props.isExpand ? (
-                <img src={LogoPrezentFull} alt="LogoPrezent" />
+                <img src="" alt="LogoPrezent" />
             ) : (
-                <img src={LogoPrezentHidden} alt="LogoPrezent" />
+                <img src="" alt="LogoPrezent" />
             )}
         </div>
         <div className='flex items-center justify-center border-b border-neutral40 py-3.5 px-2 cursor-pointer' onClick={props.onClick}>

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import LogoPrezentFull from '../../../assets/images/logo_prezent_full.png';
 import PrimaryButton from '../../../components/button/primarybutton';
 import TextInput from '../../../components/textinput';
 import ModalLoading from '../../../components/modal/modalLoading';
@@ -129,7 +128,7 @@ const Login = () => {
 
         <div className="bg-white rounded-md drop-shadow-md z-10">
             <div className='mt-8 mx-6 flex justify-center'>
-                <img src={LogoPrezentFull} alt="Logo" />
+                <img src="" alt="Logo" />
             </div>
             <div className='mt-6 mx-6'>
                 <p className='font-semibold text-black text-2xl'>Sign In</p>
@@ -159,9 +158,9 @@ const Login = () => {
 
         <div className='absolute bottom-0 z-20 w-full text-center py-2'>
             <div className='flex justify-center'>
-                <p className='text-neutral300'>© 2000-2023 PT. Sprint Asia Technology</p>
+                <p className='text-neutral300'>© </p>
                 <p className='mx-1'>|</p>
-                <a className='text-primary500 font-medium cursor-pointer' href='https://prezent.co.id/'>Help Center</a>
+                <a className='text-primary500 font-medium cursor-pointer' href=''>Help Center</a>
             </div>
         </div>
 
