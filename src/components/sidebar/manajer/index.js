@@ -8,15 +8,15 @@ const Sidebar = (props) => {
         {
             currentNavigation: 1,
             logo: [PiChartPieDuotone, PiChartPieFill],
-            title: 'Dashboard',
-            urlLink: '/manajer/dashboard',
+            title: 'Home',
+            urlLink: '/manager-operasional/dashboard',
             isOpen: false,
             subMenu: [],
         },
         {
             currentNavigation: 2,
             logo: [PiNotebookDuotone, PiNotebookFill],
-            title: 'Report',
+            title: 'Inventory',
             // urlLink: '/system-admin/report',
             isOpen: false,
             subMenu: [],
@@ -24,7 +24,7 @@ const Sidebar = (props) => {
         {
             currentNavigation: 3,
             logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
-            title: 'Integration',
+            title: 'Sales',
             urlLink: '',
             isOpen: false,
             subMenu: [
@@ -45,7 +45,7 @@ const Sidebar = (props) => {
         {
             currentNavigation: 4,
             logo: [PiUserDuotone, PiUserFill],
-            title: 'Admin',
+            title: 'Procurement',
             urlLink: '',
             isOpen: false,
             subMenu: [
@@ -65,16 +65,38 @@ const Sidebar = (props) => {
         },
         {
             currentNavigation: 5,
+            logo: [PiUserDuotone, PiUserFill],
+            title: 'Shipment',
+            urlLink: '',
+            isOpen: false,
+            subMenu: [
+                {
+                    currentNavigation: 4.1,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'Client',
+                    // urlLink: '/system-admin/dashboard-client',
+                },
+                {
+                    currentNavigation: 4.2,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'User',
+                    // urlLink: '/system-admin/dashboard-user',
+                },
+            ],
+        },
+
+        {
+            currentNavigation: 6,
             logo: [PiGearDuotone, PiGearFill],
             title: 'Settings',
             urlLink: '',
             isOpen: false,
             subMenu: [
                 {
-                    currentNavigation: 5.1,
+                    currentNavigation: 6.1,
                     logo: [PiGearDuotone, PiGearFill],
-                    title: 'Change Password',
-                    // urlLink: '/system-admin/change-password',
+                    title: 'Register Member',
+                    urlLink: '/manager-operasional/register',
                 },
             ],
         },

@@ -12,10 +12,19 @@ const ProtectedRoutes = ({ element: Component }) => {
 
     const manajerRoutes = [
         '/manajer/dashboard',
+        '/manajer/register',
+    ];
+
+    const managerOperasionalRoutes = [
+        '/manager-operasional/dashboard',
+        '/manager-operasional/register',
     ];
 
     if (isAuthenticated) {
         if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {
+            return <Component />;
+        }
+        else if (userInfo.role === 'Manager Operasional' && canAccessRoute(window.location.pathname, managerOperasionalRoutes)) {
             return <Component />;
         } 
         else {
