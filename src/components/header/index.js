@@ -62,7 +62,7 @@ const Header = ({
                             <div className='w-52 bg-white border border-neutral40 rounded-md shadow-md mt-2'>
                                 <Notification
                                     dataNotification={[
-                                        { title: "Change Password", navigate: "/business-admin/change-password", logo: PiUserCircleDuotone},
+                                        { title: "Profile", navigate: "/profile", logo: PiDoorOpenDuotone},
                                         { title: "Logout", navigate: "/logout", logo: PiDoorOpenDuotone},
                                     ]}
                                 />

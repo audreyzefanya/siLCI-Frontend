@@ -17,9 +17,29 @@ const Sidebar = (props) => {
             currentNavigation: 2,
             logo: [PiNotebookDuotone, PiNotebookFill],
             title: 'Inventory',
-            // urlLink: '/system-admin/report',
+            urlLink: ''
             isOpen: false,
-            subMenu: [],
+            subMenu: [
+                            {
+                                currentNavigation: 2.1,
+                                logo: [PiGearDuotone, PiGearFill],
+                                title: 'Daftar Gudang',
+                                urlLink: '/staf-gudang/daftar-gudang',
+                            },
+                            {
+                                currentNavigation: 2.2,
+                                logo: [PiGearDuotone, PiGearFill],
+                                title: 'Daftar Pabrik',
+                                urlLink: '',
+                            },
+                            {
+                                currentNavigation: 2.3,
+                                logo: [PiGearDuotone, PiGearFill],
+                                title: 'Daftar Barang',
+                                urlLink: '',
+                            },
+                        ],
+
         },
         {
             currentNavigation: 3,

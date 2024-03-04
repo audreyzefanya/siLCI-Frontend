@@ -6,7 +6,7 @@ import DangerButton from '../../button/dangerbutton';
 import Dropzone from '../../dropzone/uploadfile';
 import TextInput from '../../textinput';
 import DropdownText from '../../dropdown/dropdownText';
-import { GetAllProvince } from '../../../service/usermanagement/endpoint';
+// import { GetAllProvince } from '../../../service/usermanagement/endpoint';
 
 const ModalState = ({
     isOpen = false,
@@ -45,7 +45,7 @@ const ModalState = ({
 
 
     useEffect(() => {
-        handleGetIndustry()
+        // handleGetIndustry()
     }, [])
 
     const cancelButtonRef = useRef(null);
@@ -67,16 +67,16 @@ const ModalState = ({
         }
     }
 
-    async function handleGetIndustry() {
-        try {
-            const response = await GetAllProvince()
-            const industryName = handleGetArrayFromApi(response.data)
-            setDataIndustry(industryName)
-        }
-        catch {
-            handleOpenModalResult("failed", "Sorry, unable to get data industry at the moment. Please try again")
-        }
-    }
+    // async function handleGetIndustry() {
+    //     try {
+    //         const response = await GetAllProvince()
+    //         const industryName = handleGetArrayFromApi(response.data)
+    //         setDataIndustry(industryName)
+    //     }
+    //     catch {
+    //         handleOpenModalResult("failed", "Sorry, unable to get data industry at the moment. Please try again")
+    //     }
+    // }
 
     function handleOpenModalResult(type, subtitle) {
         setTimeout(() => {

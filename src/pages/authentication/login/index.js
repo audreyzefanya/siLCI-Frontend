@@ -26,6 +26,9 @@ const Login = () => {
             if (userInfo.role == "Manajer") {
                 navigateTo("/manajer/dashboard")
             }
+            else if (userInfo.role == "Manager Operasional") {
+                navigateTo("/manager-operasional/dashboard")
+            }
             else {
                 navigateTo("/logout")
             }
@@ -42,6 +45,9 @@ const Login = () => {
             console.log(userInfo.role)
             if (userInfo.role == "Manajer") {
                 navigateTo("/manajer/dashboard")
+            }
+            else if (userInfo.role == "Manager Operasional") {
+                navigateTo("/manager-operasional/dashboard")
             }
             else {
                 navigateTo("/login")
@@ -72,12 +78,13 @@ const Login = () => {
                     localStorage.setItem('token', response.access_token);
                     console.log(localStorage.token)
                     localStorage.setItem('userInfo', JSON.stringify({
+                        "id": response.data.id,
                         "username": response.data.username, 
                         "email": response.data.email,
                         "role": response.data.role
                     }));
                     setIsModalOpenLoading(false);
-                    console.log("VERO")
+                    console.log()
                     handleNavigateToDashboard();
     
                     // try {
@@ -144,15 +151,12 @@ const Login = () => {
                     <TextInput title='Password' placeholder='Input Password' type='password' value={password} onChange={setPassword}/>
                 </div>
             </div>
-            {/* <div className='my-4 mx-6 flex justify-end'>
-                <p className='text-primary500 font-medium cursor-pointer' onClick={handleNavigateToForgotPassword}>Forgot Password?</p>
-            </div> */}
+            <div className='my-4 mx-6 flex justify-end'>
+            </div>
             <div className='mx-6'>
                 <PrimaryButton type='full' title='Sign in' size='large' onClick={handlePostLogin}/>
             </div>
             <div className='flex justify-center mx-6 mt-8 mb-10'>
-                <p className='text-black font-normal'>Don't have an account? </p>
-                <p className='text-primary500 font-medium cursor-pointer ml-1'>Sign Up</p>
             </div>
         </div>
 

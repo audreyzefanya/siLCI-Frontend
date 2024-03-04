@@ -23,7 +23,7 @@ const Notification = (props) => {
             <img src={Profile} className='w-10 h-10 mr-2' />
             <div className='flex-1'>
                 <p className='text-sm text-black font-semibold whitespace-nowrap'>{userInfo ? userInfo.username : "Undefined Name"}</p>
-                <p className='text-xs text-neutral300 font-normal whitespace-nowrap'>{userInfo ? userInfo.roleName : "Undefined Role"}</p>
+                <p className='text-xs text-neutral300 font-normal whitespace-nowrap'>{userInfo ? userInfo.role : "Undefined Role"}</p>
             </div>
         </div>
         <div className="border-b border-neutral40 w-full"></div>
