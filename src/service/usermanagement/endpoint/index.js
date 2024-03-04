@@ -29,6 +29,7 @@ export const PostRegisterUser = async (username, password, email, role) => {
     }
 }
 
+// Get User Details
 export const GetUserDetails = async (id) => {
     try {
         const response = await UserManagementService.get(`/api/user/${id}/`);

@@ -144,9 +144,9 @@ const Sidebar = (props) => {
             } flex justify-center items-center py-4 h-16 border-b border-neutral40`}
         >
             {props.isExpand ? (
-                <img src="" alt="LogoPrezent" />
+                <img src="" alt="Logo" />
             ) : (
-                <img src="" alt="LogoPrezent" />
+                <img src="" alt="Logo" />
             )}
         </div>
         <div className='flex items-center justify-center border-b border-neutral40 py-3.5 px-2 cursor-pointer' onClick={props.onClick}>

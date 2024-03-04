@@ -18,6 +18,7 @@ const ProtectedRoutes = ({ element: Component }) => {
     const managerOperasionalRoutes = [
         '/manager-operasional/dashboard',
         '/manager-operasional/register',
+        '/profile',
     ];
 
     if (isAuthenticated) {

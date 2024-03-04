@@ -6,6 +6,7 @@ import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
 import ManajerDashboard from '../../pages/manajer/dashboard';
 import RegisterPage from '../../pages/manajer/register';
+import profilepage from '../../pages/manajer/profile/profilepage';
 
 const Routing = () => {
   return (
@@ -22,6 +23,8 @@ const Routing = () => {
 
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
+
+            <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
 
             {/*------Open Routes------*/}
             <Route path="/logout" element={<Logout />} />
