@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import LogoPrezentFull from '../../../assets/images/logo_prezent_full.png';
 import PrimaryButton from '../../../components/button/primarybutton';
 import TextInput from '../../../components/textinput';
 import ModalLoading from '../../../components/modal/modalLoading';
@@ -27,6 +26,9 @@ const Login = () => {
             if (userInfo.role == "Manajer") {
                 navigateTo("/manajer/dashboard")
             }
+            else if (userInfo.role == "Manager Operasional") {
+                navigateTo("/manager-operasional/dashboard")
+            }
             else {
                 navigateTo("/logout")
             }
@@ -43,6 +45,9 @@ const Login = () => {
             console.log(userInfo.role)
             if (userInfo.role == "Manajer") {
                 navigateTo("/manajer/dashboard")
+            }
+            else if (userInfo.role == "Manager Operasional") {
+                navigateTo("/manager-operasional/dashboard")
             }
             else {
                 navigateTo("/login")
@@ -73,12 +78,13 @@ const Login = () => {
                     localStorage.setItem('token', response.access_token);
                     console.log(localStorage.token)
                     localStorage.setItem('userInfo', JSON.stringify({
+                        "id": response.data.id,
                         "username": response.data.username, 
                         "email": response.data.email,
                         "role": response.data.role
                     }));
                     setIsModalOpenLoading(false);
-                    console.log("VERO")
+                    console.log()
                     handleNavigateToDashboard();
     
                     // try {
@@ -129,7 +135,7 @@ const Login = () => {
 
         <div className="bg-white rounded-md drop-shadow-md z-10">
             <div className='mt-8 mx-6 flex justify-center'>
-                <img src={LogoPrezentFull} alt="Logo" />
+                <img src="" alt="Logo" />
             </div>
             <div className='mt-6 mx-6'>
                 <p className='font-semibold text-black text-2xl'>Sign In</p>
@@ -145,23 +151,20 @@ const Login = () => {
                     <TextInput title='Password' placeholder='Input Password' type='password' value={password} onChange={setPassword}/>
                 </div>
             </div>
-            {/* <div className='my-4 mx-6 flex justify-end'>
-                <p className='text-primary500 font-medium cursor-pointer' onClick={handleNavigateToForgotPassword}>Forgot Password?</p>
-            </div> */}
+            <div className='my-4 mx-6 flex justify-end'>
+            </div>
             <div className='mx-6'>
                 <PrimaryButton type='full' title='Sign in' size='large' onClick={handlePostLogin}/>
             </div>
             <div className='flex justify-center mx-6 mt-8 mb-10'>
-                <p className='text-black font-normal'>Don't have an account? </p>
-                <p className='text-primary500 font-medium cursor-pointer ml-1'>Sign Up</p>
             </div>
         </div>
 
         <div className='absolute bottom-0 z-20 w-full text-center py-2'>
             <div className='flex justify-center'>
-                <p className='text-neutral300'>© 2000-2023 PT. Sprint Asia Technology</p>
+                <p className='text-neutral300'>© </p>
                 <p className='mx-1'>|</p>
-                <a className='text-primary500 font-medium cursor-pointer' href='https://prezent.co.id/'>Help Center</a>
+                <a className='text-primary500 font-medium cursor-pointer' href=''>Help Center</a>
             </div>
         </div>
 

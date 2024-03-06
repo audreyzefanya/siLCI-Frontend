@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PerusahaanImporService = axios.create({
     // baseURL: process.env.REACT_APP_USER_MANAGEMENT_API_BASE_URL,
-    baseURL: "http://localhost:8000/",
+    baseURL: "https://propensi-a08-be-production.up.railway.app/",
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
