@@ -13,7 +13,6 @@ const ProtectedRoutes = ({ element: Component }) => {
     const manajerRoutes = [
         '/manajer/dashboard',
         '/manajer/register',
-        '/manajer/detail-gudang/:idGudang',
     ];
 
     const managerOperasionalRoutes = [
@@ -23,33 +22,26 @@ const ProtectedRoutes = ({ element: Component }) => {
         '/perusahaan',
         '/perusahaan/:id_perusahaan',
         '/perusahaan/:id_perusahaan/add',
-        '/manager-operasional/daftar-gudang',
-        '/manager-operasional/detail-gudang/:idGudang',
+        '/daftar-gudang',
+        '/detail-gudang/:id_gudang',
+        '/daftar-gudang/add',
         '/profile',
     ];
 
-//    const stafGudangRoutes = [
-//            '/staf-gudang/daftar-gudang',
-//        ];
 
     if (isAuthenticated) {
-        if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {
-            return <Component />;
+            if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {
+                return <Component />;
+            }
+            else if (userInfo.role === 'Manager Operasional' && canAccessRoute(window.location.pathname, managerOperasionalRoutes)) {
+                return <Component />;
+            }
+            else {
+                return <Navigate to="/logout" />;
+            }
+        } else {
+            return <Navigate to="/login" />;
         }
-        else if (userInfo.role === 'Manager Operasional' && canAccessRoute(window.location.pathname, managerOperasionalRoutes)) {
-            return <Component />;
-        }
-//        else if (userInfo.role === 'Staf Gudang' && canAccessRoute(window.location.pathname, stafGudangRoutes)) {
-//            return <Component />;
-//        }
-        }
-
-        else {
-            return <Navigate to="/logout" />;
-        }
-    } else {
-        return <Navigate to="/login" />;
-    }
-};
+    };
 
 export default ProtectedRoutes;

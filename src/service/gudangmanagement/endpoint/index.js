@@ -1,4 +1,4 @@
-import GudangManagementService from "../daftargudangService";
+import GudangManagementService from "../gudangmanagementService";
 
 export const fetchDataGudang = async (nama, alamat) => {
     try {
@@ -12,3 +12,14 @@ export const fetchDataGudang = async (nama, alamat) => {
         throw error;
     }
    }
+
+export const fetchDetailGudang = async (id_gudang) => {
+  try {
+      const response = await GudangManagementService.get('api/gudang/barang-gudang/', + id_gudang, '/detail');
+      return response.data;
+  } catch (error) {
+      throw error;
+  }
+}
+
+

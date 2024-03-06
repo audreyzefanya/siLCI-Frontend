@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const PrimaryButton = ({
-    title = "Pilih",
+    title = "Lihat Detail",
     type = "wrap",
     isActive = true,
     size = "large",
@@ -24,15 +24,15 @@ const PrimaryButton = ({
     return (
         <button
             className={`
-                ${(isPressed && isActive) ? 'bg-2C358C text-white' : (isActive ? 'bg-primary500 hover:bg-primary600 text-white cursor-pointer' : 'bg-neutral30 text-neutral80 cursor-default')}
+                ${(isPressed && isActive) ? 'bg-DA3732 text-white' : (isActive ? 'bg-primary500 hover:bg-primary600 text-white cursor-pointer' : 'bg-neutral30 text-neutral80 cursor-default')}
                 ${type === "full" && "w-full"}
                 ${size === "small" && "text-sm h-7"}
                 ${size === "medium" && "text-md h-8"}
                 ${size === "large" && "text-lg h-10"}
                 ${size === "very large" && "text-xl h-12"}
                 ${size === "extra very large" && "text-2xl h-14"}
-                rounded-lg drop-shadow-md text-center py-1.5 px-4 flex justify-center items-center`
-            }
+                rounded-lg drop-shadow-md text-center py-1.5 px-4 flex justify-center items-center`}
+            style={{ backgroundColor: '#DA3732' }}
             disabled={!isActive}
             onClick={handleClick}
             onMouseDown={handleButtonPress}
