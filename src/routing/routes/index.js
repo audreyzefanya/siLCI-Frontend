@@ -7,6 +7,8 @@ import Logout from '../../pages/authentication/logout';
 import ManajerDashboard from '../../pages/manajer/dashboard';
 import RegisterPage from '../../pages/manajer/register';
 import profilepage from '../../pages/manajer/profile/profilepage';
+import DaftarGudang from '../../pages/manajer/daftar-gudang';
+import DetailGudang from '../../pages/manajer/detail-gudang';
 
 const Routing = () => {
   return (
@@ -23,8 +25,12 @@ const Routing = () => {
 
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
+            <Route path="/manager-operasional/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
+            <Route path="/manager-operasional/detail-gudang" element={<ProtectedRoutes element={DetailGudang} />} />
 
             <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
+
+//            <Route path="/staf-gudang/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
 
             {/*------Open Routes------*/}
             <Route path="/logout" element={<Logout />} />

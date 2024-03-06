@@ -17,29 +17,28 @@ const Sidebar = (props) => {
             currentNavigation: 2,
             logo: [PiNotebookDuotone, PiNotebookFill],
             title: 'Inventory',
-            urlLink: ''
+            urlLink: '',
             isOpen: false,
             subMenu: [
-                            {
-                                currentNavigation: 2.1,
-                                logo: [PiGearDuotone, PiGearFill],
-                                title: 'Daftar Gudang',
-                                urlLink: '/staf-gudang/daftar-gudang',
-                            },
-                            {
-                                currentNavigation: 2.2,
-                                logo: [PiGearDuotone, PiGearFill],
-                                title: 'Daftar Pabrik',
-                                urlLink: '',
-                            },
-                            {
-                                currentNavigation: 2.3,
-                                logo: [PiGearDuotone, PiGearFill],
-                                title: 'Daftar Barang',
-                                urlLink: '',
-                            },
-                        ],
-
+                {
+                    currentNavigation: 2.1,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Gudang',
+                    urlLink: '/staf-gudang/daftar-gudang',
+                },
+                {
+                    currentNavigation: 2.2,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Pabrik',
+                    urlLink: '',
+                },
+                {
+                    currentNavigation: 2.3,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Barang',
+                    urlLink: '',
+                },
+            ],
         },
         {
             currentNavigation: 3,
@@ -51,7 +50,7 @@ const Sidebar = (props) => {
                 {
                     currentNavigation: 3.1,
                     logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
-                    title: 'Client Integration',
+                    title: 'tes',
                     // urlLink: '/system-admin/client-integration',
                 },
                 {

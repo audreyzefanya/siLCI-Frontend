@@ -18,8 +18,13 @@ const ProtectedRoutes = ({ element: Component }) => {
     const managerOperasionalRoutes = [
         '/manager-operasional/dashboard',
         '/manager-operasional/register',
+        '/manager-operasional/daftar-gudang',
         '/profile',
     ];
+
+//    const stafGudangRoutes = [
+//            '/staf-gudang/daftar-gudang',
+//        ];
 
     if (isAuthenticated) {
         if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {
@@ -27,7 +32,10 @@ const ProtectedRoutes = ({ element: Component }) => {
         }
         else if (userInfo.role === 'Manager Operasional' && canAccessRoute(window.location.pathname, managerOperasionalRoutes)) {
             return <Component />;
-        } 
+        }
+//        else if (userInfo.role === 'Staf Gudang' && canAccessRoute(window.location.pathname, stafGudangRoutes)) {
+//            return <Component />;
+//        }
         else {
             return <Navigate to="/logout" />;
         }
