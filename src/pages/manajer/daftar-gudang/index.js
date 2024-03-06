@@ -4,7 +4,7 @@ import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import Sidebar from '../../../components/sidebar/manajer';
 import Header from '../../../components/header';
 import { fetchDataGudang } from '../../../service/daftargudang/endpoint';
-import PilihButton from '../../../components/button/buttonpilih';
+import { Link } from 'react-router-dom'; // Impor Link dari react-router-dom
 
 const DaftarGudang = (props) => {
   const [gudangData, setGudangData] = useState([]);
@@ -13,8 +13,6 @@ const DaftarGudang = (props) => {
     const fetchData = async () => {
       try {
         const data = await fetchDataGudang();
-        console.log('semangat ya');
-        console.log(data)
         setGudangData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -35,7 +33,7 @@ const DaftarGudang = (props) => {
               <tr>
                 <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama</th>
                 <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Lokasi</th>
-                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}></th>
+                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Aksi</th> {/* Tambah kolom untuk tombol "Pilih" */}
               </tr>
             </thead>
             <tbody>
@@ -44,8 +42,10 @@ const DaftarGudang = (props) => {
                   <td className="border px-4 py-2">{gudang.nama}</td>
                   <td className="border px-4 py-2">{gudang.alamat}</td>
                   <td className="border px-4 py-2 flex justify-center">
-                  <PilihButton onClick={() => console.log('Tombol Pilih ditekan')}></PilihButton>
-                </td>
+                    <Link to={`/manager-operasional/detail-gudang/${gudang.id_gudang}`} className="text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-md">
+                      Pilih
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

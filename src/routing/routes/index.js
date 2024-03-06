@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoutes from '../protectedRoutes';
-
 import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
 import ManajerDashboard from '../../pages/manajer/dashboard';
@@ -22,11 +21,12 @@ const Routing = () => {
             {/* Dashboard */}
             <Route path="/manajer/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manajer/register" element={<ProtectedRoutes element={RegisterPage} />} />
+            <Route path="/manajer/detail-gudang/:idGudang" element={<ProtectedRoutes element={DetailGudang} />} />
 
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
             <Route path="/manager-operasional/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
-            <Route path="/manager-operasional/detail-gudang" element={<ProtectedRoutes element={DetailGudang} />} />
+            <Route path="/manager-operasional/detail-gudang/:idGudang" element={<ProtectedRoutes element={DetailGudang} />} />
 
             <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
 

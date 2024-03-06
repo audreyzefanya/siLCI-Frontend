@@ -13,12 +13,14 @@ const ProtectedRoutes = ({ element: Component }) => {
     const manajerRoutes = [
         '/manajer/dashboard',
         '/manajer/register',
+        '/manajer/detail-gudang/:idGudang',
     ];
 
     const managerOperasionalRoutes = [
         '/manager-operasional/dashboard',
         '/manager-operasional/register',
         '/manager-operasional/daftar-gudang',
+        '/manager-operasional/detail-gudang/:idGudang',
         '/profile',
     ];
 
