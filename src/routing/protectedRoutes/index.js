@@ -19,6 +19,10 @@ const ProtectedRoutes = ({ element: Component }) => {
     const managerOperasionalRoutes = [
         '/manager-operasional/dashboard',
         '/manager-operasional/register',
+        '/profile',
+        '/perusahaan',
+        '/perusahaan/:id_perusahaan',
+        '/perusahaan/:id_perusahaan/add',
         '/manager-operasional/daftar-gudang',
         '/manager-operasional/detail-gudang/:idGudang',
         '/profile',
@@ -38,6 +42,8 @@ const ProtectedRoutes = ({ element: Component }) => {
 //        else if (userInfo.role === 'Staf Gudang' && canAccessRoute(window.location.pathname, stafGudangRoutes)) {
 //            return <Component />;
 //        }
+        }
+
         else {
             return <Navigate to="/logout" />;
         }
