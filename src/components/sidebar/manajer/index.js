@@ -17,18 +17,15 @@ const Sidebar = (props) => {
             currentNavigation: 2,
             logo: [PiNotebookDuotone, PiNotebookFill],
             title: 'Inventory',
-<<<<<<< HEAD
             urlLink: '',
-=======
             // urlLink: '/system-admin/report',
->>>>>>> c488d38b590c0b0e56eb5d2c72bc2c3f45336e6c
             isOpen: false,
             subMenu: [
                 {
                     currentNavigation: 2.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Gudang',
-                    urlLink: '/manager-operasional/daftar-gudang',
+                    urlLink: '/daftar-gudang',
                 },
                 {
                     currentNavigation: 2.2,
@@ -45,15 +42,12 @@ const Sidebar = (props) => {
             ],
         },
         {
-<<<<<<< HEAD
             currentNavigation: 4,
             logo: [PiUserDuotone, PiUserFill],
             title: 'Procurement',
-=======
             currentNavigation: 3,
             logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
             title: 'Sales',
->>>>>>> c488d38b590c0b0e56eb5d2c72bc2c3f45336e6c
             urlLink: '',
             isOpen: false,
             subMenu: [
@@ -72,34 +66,6 @@ const Sidebar = (props) => {
             ],
         },
         {
-            currentNavigation: 5,
-            logo: [PiUserDuotone, PiUserFill],
-<<<<<<< HEAD
-            title: 'Shipment',
-=======
-            title: 'Procurement',
->>>>>>> c488d38b590c0b0e56eb5d2c72bc2c3f45336e6c
-            urlLink: '',
-            isOpen: false,
-            subMenu: [
-                {
-                    currentNavigation: 4.1,
-                    logo: [PiUserDuotone, PiUserFill],
-                    title: 'Client',
-                    // urlLink: '/system-admin/dashboard-client',
-                },
-                {
-                    currentNavigation: 4.2,
-                    logo: [PiUserDuotone, PiUserFill],
-                    title: 'User',
-                    // urlLink: '/system-admin/dashboard-user',
-                },
-            ],
-        },
-
-        {
-<<<<<<< HEAD
-=======
             currentNavigation: 5,
             logo: [PiUserDuotone, PiUserFill],
             title: 'Shipment',
@@ -122,7 +88,28 @@ const Sidebar = (props) => {
         },
 
         {
->>>>>>> c488d38b590c0b0e56eb5d2c72bc2c3f45336e6c
+            currentNavigation: 5,
+            logo: [PiUserDuotone, PiUserFill],
+            title: 'Shipment',
+            urlLink: '',
+            isOpen: false,
+            subMenu: [
+                {
+                    currentNavigation: 4.1,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'Client',
+                    // urlLink: '/system-admin/dashboard-client',
+                },
+                {
+                    currentNavigation: 4.2,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'User',
+                    // urlLink: '/system-admin/dashboard-user',
+                },
+            ],
+        },
+
+        {
             currentNavigation: 6,
             logo: [PiGearDuotone, PiGearFill],
             title: 'Settings',

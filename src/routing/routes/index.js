@@ -28,7 +28,7 @@ const Routing = () => {
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
             <Route path="/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
-            <Route path="/detail-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
+            <Route path="/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
 
             <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
 

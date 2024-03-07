@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { fetchDetailGudang } from '../../../service/gudangmanagement/endpoint';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import Sidebar from '../../../components/sidebar/manajer';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../components/header';
-import DataTable from 'react-data-table-component';
-import { Button } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
+import Sidebar from '../../../components/sidebar/manajer';
+import { fetchDetailGudang } from '../../../service/gudangmanagement/endpoint';
+import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import TabGudang from '../../../components/tabGudang';
 
 const DetailGudang = (props) => {
     const { id_gudang } = useParams();
-    const navigateTo = useNavigate();
+    const navigate = useNavigate();
     const [detailGudang, setDetailGudang] = useState(null);
     const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
         fetchDetail();
-    }, []);
+    }, [id_gudang]);
 
     const fetchDetail = async () => {
         try {
@@ -28,60 +26,53 @@ const DetailGudang = (props) => {
         }
     };
 
+    const handleDetail = (id_gudang) => {
+        navigate(`/daftar-gudang/${id_gudang}`);
+    };
 
     const handleSearch = (e) => {
         setSearchText(e.target.value);
     };
 
-    const columns = [
-        {
-            name: 'Nama Barang',
-            selector: 'nama_barang',
-            sortable: true,
-        },
-        {
-            name: 'Stok',
-            selector: 'stok',
-            sortable: true,
-        },
-    ];
-
-    const filteredData = detailGudang ? detailGudang.barang.filter((item) =>
-        item.nama_barang.toLowerCase().includes(searchText.toLowerCase())
-    ) : [];
-
     return (
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title={detailGudang ? detailGudang.nama_gudang : ''}/>
-                <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
-                    <div className="alamat-gudang">
-                        {detailGudang ? detailGudang.alamat_gudang : ''}
+                <Header title=''/>
+                <div className="text-3xl font-bold ml-10 mt-10">{detailGudang ? detailGudang.nama_gudang : ''}</div>
+                <div className="alamat-gudang mb-4 ml-10">{detailGudang ? detailGudang.alamat_gudang : ''}</div>
+                <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
+                <div className="kapasitas-gudang mb-8 ml-10">Kapasitas: {detailGudang ? detailGudang.kapasitas_gudang : ''}</div>
+                <TabGudang />
+                <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
+                <div className="text-3xl font-bold mt-2 text-center"> Daftar Barang </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            value={searchText}
+                            onChange={handleSearch}
+                            style={{ padding: '5px', border: '2px solid #2C358C', borderRadius: '5px', marginRight: '10px' }}
+                        />
                     </div>
-                    <br></br>
-                    <DataTable
-                        title={
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <span style={{ marginRight: '1075px', color: '#ffffff' }}>Detail Gudang</span>
-
-                            </div>
-                        }
-                        columns={columns}
-                        data={filteredData}
-                        pagination
-                        fixedHeader
-                        subHeader
-                        subHeaderComponent={[
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                value={searchText}
-                                onChange={handleSearch}
-                                style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
-                            />,
-                        ]}
-                    />
+                    <table className="w-full table-auto">
+                        <thead>
+                            <tr>
+                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Barang</th>
+                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Stok</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {detailGudang && detailGudang.barang.filter((barang) =>
+                                barang.nama_barang.toLowerCase().includes(searchText.toLowerCase())
+                            ).map((barang, index) => (
+                                <tr key={index}>
+                                    <td className="border px-4 py-2">{barang.nama_barang}</td>
+                                    <td className="border px-4 py-2">{barang.stok}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

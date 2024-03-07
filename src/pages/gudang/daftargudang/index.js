@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchDataGudang } from '../../../service/gudangmanagement/endpoint';
 import { connect } from 'react-redux';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
@@ -9,23 +9,22 @@ import PrimaryButton from '../../../components/button/buttonpilih';
 
 const DaftarGudang = (props) => {
   const [gudangData, setGudangData] = useState([]);
-  const navigateToDetailGudang = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchDataGudang('nama', 'alamat');
+        setGudangData(response);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const data = await fetchDataGudang();
-      setGudangData(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
   const handleDetailGudang = (id_gudang) => {
-    navigateToDetailGudang(`/detail-gudang/${id_gudang}`);
+    navigate(`/daftar-gudang/${id_gudang}`);
   };
 
   return (
@@ -42,7 +41,7 @@ const DaftarGudang = (props) => {
                   <h3 className="text-lg font-semibold">{gudang.nama}</h3>
                   <p className="text-sm text-gray-600">{gudang.alamat}</p>
                   <div className="mt-4">
-                    <PrimaryButton onClick={() => handleDetailGudang(gudang.id_gudang)}>Pilih</PrimaryButton>
+                    <PrimaryButton onClick={() => handleDetailGudang(gudang.id_gudang)}>Detail</PrimaryButton>
                   </div>
                 </div>
               </div>

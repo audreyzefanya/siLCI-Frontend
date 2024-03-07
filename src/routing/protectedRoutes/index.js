@@ -23,7 +23,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         '/perusahaan/:id_perusahaan',
         '/perusahaan/:id_perusahaan/add',
         '/daftar-gudang',
-        '/detail-gudang/:id_gudang',
+        '/daftar-gudang/:id_gudang',
         '/daftar-gudang/add',
         '/profile',
     ];
