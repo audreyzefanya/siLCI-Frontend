@@ -1,12 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from '../protectedRoutes';
 
 import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
+import DaftarBarang from '../../pages/barang/daftar-barang';
+import DetailBarang from '../../pages/barang/detail-barang';
 import ManajerDashboard from '../../pages/manajer/dashboard';
-import RegisterPage from '../../pages/manajer/register';
 import profilepage from '../../pages/manajer/profile/profilepage';
+import RegisterPage from '../../pages/manajer/register';
 
 const Routing = () => {
   return (
@@ -23,6 +25,8 @@ const Routing = () => {
 
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
+            <Route path="/manager-operasional/daftar-barang" element={<ProtectedRoutes element={DaftarBarang} />} />
+            <Route path="/manager-operasional/daftar-barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
 
             <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
 

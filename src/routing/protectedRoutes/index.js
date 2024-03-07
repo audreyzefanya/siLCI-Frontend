@@ -18,6 +18,8 @@ const ProtectedRoutes = ({ element: Component }) => {
     const managerOperasionalRoutes = [
         '/manager-operasional/dashboard',
         '/manager-operasional/register',
+        '/manager-operasional/daftar-barang',
+        '/manager-operasional/daftar-barang/:id_barang',
         '/profile',
     ];
 
