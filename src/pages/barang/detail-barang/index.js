@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
 import { GetDetailBarang } from '../../../service/daftarbarang/endpoint';
@@ -9,7 +9,7 @@ import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const BarangDetail = (props) => {
     const { id_barang } = useParams();
-    const navigate = useNavigate(); // Use the useNavigate hook
+    const navigate = useNavigate();
     const [barangDetail, setBarangDetail] = useState(null);
 
     useEffect(() => {
@@ -40,26 +40,25 @@ const BarangDetail = (props) => {
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">
                     <div className="flex flex-col items-center w-full max-w-2xl">
-                        {/* Detail Box */}
-                        <div className="bg-white shadow-lg rounded-lg p-6 m-8 w-full">
-                            <h2 className="text-3xl font-bold mb-10">Detail Barang</h2>
+                        <div className="text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#2C358C' }}>Detail Barang</div>
+                        <div className="bg-white shadow-lg rounded-lg p-6 m-8 w-full" style={{ borderColor: '#2C358C', borderWidth: '2px' }}>
                             <p className="mb-2"><span className="font-semibold">ID:</span> {barangDetail.id}</p>
                             <p className="mb-2"><span className="font-semibold">Merk:</span> {barangDetail.merk.nama}</p>
                             <p className="mb-2"><span className="font-semibold">Nama:</span> {barangDetail.nama}</p>
                             <p className="mb-2"><span className="font-semibold">Deskripsi:</span> {barangDetail.deskripsi}</p>
                             <p className="mb-2"><span className="font-semibold">Harga:</span> Rp {barangDetail.harga.toLocaleString()}</p>
                         </div>
-                        {/* Back Button Positioned Below Detail Box */}
                         <Button
-                            variant="primary"
                             onClick={kembaliButton}
                             style={{
                                 borderRadius: '5px',
-                                border: '2px solid #266bff',
-                                backgroundColor: '#266bff',
+                                backgroundColor: '#2C358C', 
                                 color: 'white',
-                                padding: '7px 8px'
+                                padding: '7px 8px',
+                                border: 'none'
                             }}
+                            onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
+                            onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
                         > Kembali </Button>
                     </div>
                 </div>
