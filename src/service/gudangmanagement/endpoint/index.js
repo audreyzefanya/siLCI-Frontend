@@ -1,4 +1,5 @@
 import GudangManagementService from "../gudangmanagementService";
+import axios from 'axios';
 
 export const fetchDataGudang = async (nama, alamat) => {
     try {
@@ -11,13 +12,23 @@ export const fetchDataGudang = async (nama, alamat) => {
         console.log("bs dong")
         throw error;
     }
-   }
+}
 
 export const fetchDetailGudang = async (id_gudang) => {
-  try {
-      const response = await GudangManagementService.get(`api/gudang/barang-gudang/detail/${id_gudang}`);
-      return response.data;
-  } catch (error) {
-      throw error;
-  }
+    try {
+        const response = await GudangManagementService.get(`api/gudang/barang-gudang/detail/${id_gudang}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 }
+
+export const tambahGudang = async (data) => {
+    try {
+        const response = await GudangManagementService.post('/api/gudang/create');
+        return response.data;
+    } catch (error) {
+        console.error('Error adding warehouse:', error);
+        throw error;
+    }
+};

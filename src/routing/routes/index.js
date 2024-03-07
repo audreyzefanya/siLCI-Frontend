@@ -6,6 +6,7 @@ import Logout from '../../pages/authentication/logout';
 import ManajerDashboard from '../../pages/manajer/dashboard';
 import DaftarGudang from '../../pages/gudang/daftargudang';
 import DetailGudang from '../../pages/gudang/detailgudang';
+import TambahGudang from '../../pages/gudang/tambahgudang';
 import DaftarPerusahaan from '../../pages/perusahaan/daftarperusahaan';
 import DaftarBarangPerusahaan from '../../pages/perusahaan/daftarbarang';
 import AddBarangPerusahaan from '../../pages/perusahaan/addbarang';
@@ -29,11 +30,9 @@ const Routing = () => {
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
             <Route path="/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
             <Route path="/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
+            <Route path="/daftar-gudang/add" element={<ProtectedRoutes element={TambahGudang} />} />
 
             <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
-
-//            <Route path="/staf-gudang/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
-
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
 
