@@ -22,70 +22,63 @@ const DetailPabrik = (props) => {
     const [searchText, setSearchText] = useState('');
     const [showFloatingMenu, setShowFloatingMenu] = useState(false);
     const [choosenBarang, setChoosenBarang] = useState('');
+    let columns = []
 
-    const columns = [
-        {
-            name: "Merk",
-            selector: row => row.barang.merk.nama,
-            sortable: true,
-            width: '7.5%' // Set a fixed width for the column
-        },
-        {
-            name: "Nama",
-            selector: row => row.barang.nama,
-            sortable: true,
-            width: '20%' // Set a fixed width for the column
-        },
-        {
-            name: "Deskripsi",
-            selector: row => row.barang.deskripsi,
-            width: '52.5%', // Set a fixed width for the column
-            cell: row => (
-                <div style={{ width: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {row.barang.deskripsi}
-                </div>
-            )
-        },
-        {
-            name: "Stok",
-            selector: row => row.stok,
-            sortable: true,
-            width: '10%' // Set a fixed width for the column
-        },
-        {
-            name: "Detail",
-            cell: (row) => (
-                <Button
-                    variant="primary"
-                    onClick={(e) => addBarangButton(e, row.id)}
-                    style={{
-                        borderRadius: '5px',
-                        marginRight: '5px',
-                        border: '2px #266bff', // Adjust border width and color
-                        backgroundColor: '#266bff', // Fill the border with blue color
-                        color: 'white',
-                        padding: '7px 8px' // Text color
-                    }}
-                > Detail </Button>
-            ),
-            width: '10%' // Set a fixed width for the column
-        },
-    ]
+    if (pabrik.listBarang) {
+        columns = [
+            {
+                name: "Merk",
+                selector: row => row.barang.merk.nama,
+                sortable: true,
+                width: '7.5%' // Set a fixed width for the column
+            },
+            {
+                name: "Nama",
+                selector: row => row.barang.nama,
+                sortable: true,
+                width: '20%' // Set a fixed width for the column
+            },
+            {
+                name: "Deskripsi",
+                selector: row => row.barang.deskripsi,
+                width: '52.5%', // Set a fixed width for the column
+                cell: row => (
+                    <div style={{ width: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {row.barang.deskripsi}
+                    </div>
+                )
+            },
+            {
+                name: "Stok",
+                selector: row => row.stok,
+                sortable: true,
+                width: '10%' // Set a fixed width for the column
+            },
+            {
+                name: "Detail",
+                cell: (row) => (
+                    <Button
+                        variant="primary"
+                        onClick={(e) => addBarangButton(e, row.id)}
+                        style={{
+                            borderRadius: '5px',
+                            marginRight: '5px',
+                            border: '2px #266bff', // Adjust border width and color
+                            backgroundColor: '#266bff', // Fill the border with blue color
+                            color: 'white',
+                            padding: '7px 8px' // Text color
+                        }}
+                    > Detail </Button>
+                ),
+                width: '10%' // Set a fixed width for the column
+            },
+        ];
+    }
 
     useEffect(() => {
         getDetailPabrik()
-        getBarang()
         getAllBarang()
     }, []);
-
-    async function getBarang() {
-        try {
-            const barangData = await GetBarangPabrik(nama_pabrik); 
-            setBarangPabrik(barangData)
-        } catch (error) {
-            console.error('Error fetching pabrik data:', error);
-        }
-    }
 
     async function getDetailPabrik() {
         try {
@@ -120,24 +113,23 @@ const DetailPabrik = (props) => {
                 var response = await PostAddBarangPabrik(choosenBarang, nama_pabrik);
                 setShowFloatingMenu(false)
                 setWarningMessage('')
-                getBarang()
+                getDetailPabrik()
 
             } catch (error) {
                 if (error.request && error.request.status === 404) {
                     setWarningMessage('ID Barang tidak ditemukan')
-                    console.log(error)
                 } else {
                     setWarningMessage(error.response.data.message)
-                    console.log(error)
                 }
             }
         } else {
         }
     }
 
-    const filteredData = daftarBarangPabrik.filter((item) =>
-        item.barang.nama.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const filteredData = pabrik.listBarang ? 
+        pabrik.listBarang.filter((item) =>
+            item.barang.nama.toLowerCase().includes(searchText.toLowerCase())
+    ) : [];
 
     return (
         <div className='flex w-screen h-screen'>
@@ -147,38 +139,42 @@ const DetailPabrik = (props) => {
                 <div className="flex-1 bg-neutral20">
                     <div className={`flex-1 ${showFloatingMenu ? 'blur' : ''}`}>
                         <div className='no-scrollbar overflow-y-auto py-3 px-8'>
-                            <div className="pabrik-deskripsi">
-                                {pabrik.alamat}
-                            </div>
-                            <br></br>
-                            <DataTable
-                                title={
-                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <span style={{ marginRight: '1075px' }}>Daftar Barang</span>
-                                        <button onClick={addBarangButton} style={{ marginLeft: '1px', background: 'none', border: 'none', cursor: 'pointer' }}>
-                                            <FaPlus />
-                                        </button>
+                            {pabrik && (
+                                <>
+                                    <div className="pabrik-deskripsi">
+                                        {pabrik.alamat}
                                     </div>
-                                }
-                                columns={columns}
-                                data={filteredData}
-                                pagination
-                                fixedHeader
-                                subHeader
-                                subHeaderComponent={[
-                                    <input
-                                        type="text"
-                                        placeholder="Search..."
-                                        value={searchText}
-                                        onChange={handleSearch}
-                                        style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
-                                    />,
-                                ]}
-                            />
+                                    <br></br>
+                                    <DataTable
+                                        title={
+                                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                                <span style={{ marginRight: '1075px' }}>Daftar Barang</span>
+                                                <button onClick={addBarangButton} style={{ marginLeft: '1px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                                                    <FaPlus />
+                                                </button>
+                                            </div>
+                                        }
+                                        columns={columns}
+                                        data={filteredData}
+                                        pagination
+                                        fixedHeader
+                                        subHeader
+                                        subHeaderComponent={[
+                                            <input
+                                                type="text"
+                                                placeholder="Search..."
+                                                value={searchText}
+                                                onChange={handleSearch}
+                                                style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
+                                            />,
+                                        ]}
+                                    />
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
-
+    
                 {showFloatingMenu && (
                     <FloatingMenu
                         daftarBarang={daftarBarang}

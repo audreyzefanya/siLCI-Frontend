@@ -31,3 +31,14 @@ export const tambahGudang = async (dataGudang) => {
         throw error;
     }
 };
+
+export const PostAddBarangGudang = async (id_barang, id_gudang) => {
+    try {
+        const response = await GudangManagementService.post('/api/gudang/'+ id_gudang, {
+            'id': id_barang,
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

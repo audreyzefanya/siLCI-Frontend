@@ -88,28 +88,6 @@ const Sidebar = (props) => {
         },
 
         {
-            currentNavigation: 5,
-            logo: [PiUserDuotone, PiUserFill],
-            title: 'Shipment',
-            urlLink: '',
-            isOpen: false,
-            subMenu: [
-                {
-                    currentNavigation: 4.1,
-                    logo: [PiUserDuotone, PiUserFill],
-                    title: 'Client',
-                    // urlLink: '/system-admin/dashboard-client',
-                },
-                {
-                    currentNavigation: 4.2,
-                    logo: [PiUserDuotone, PiUserFill],
-                    title: 'User',
-                    // urlLink: '/system-admin/dashboard-user',
-                },
-            ],
-        },
-
-        {
             currentNavigation: 6,
             logo: [PiGearDuotone, PiGearFill],
             title: 'Settings',

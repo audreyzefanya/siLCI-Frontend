@@ -13,6 +13,7 @@ import AddBarangPerusahaan from '../../pages/perusahaan/addbarang';
 import RegisterPage from '../../pages/manajer/register';
 import profilepage from '../../pages/manajer/profile/profilepage';
 import DetailPabrik from '../../pages/pabrik/detailpabrik';
+import AddBarangGudang from '../../pages/gudang/addbarang';
 
 const Routing = () => {
   return (
@@ -32,6 +33,7 @@ const Routing = () => {
 
             <Route path="/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
             <Route path="/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
+            <Route path="/daftar-gudang/:id_gudang/add" element={<ProtectedRoutes element={AddBarangGudang} />} />
             <Route path="/daftar-gudang/add" element={<ProtectedRoutes element={TambahGudang} />} />
 
             <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
