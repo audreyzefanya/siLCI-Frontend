@@ -18,13 +18,14 @@ const Sidebar = (props) => {
             logo: [PiNotebookDuotone, PiNotebookFill],
             title: 'Inventory',
             urlLink: '',
+            // urlLink: '/system-admin/report',
             isOpen: false,
             subMenu: [
                 {
                     currentNavigation: 2.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Gudang',
-                    urlLink: '/manager-operasional/daftar-gudang',
+                    urlLink: '/daftar-gudang',
                 },
                 {
                     currentNavigation: 2.2,
@@ -44,6 +45,9 @@ const Sidebar = (props) => {
             currentNavigation: 4,
             logo: [PiUserDuotone, PiUserFill],
             title: 'Procurement',
+            currentNavigation: 3,
+            logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+            title: 'Sales',
             urlLink: '',
             isOpen: false,
             subMenu: [
@@ -61,6 +65,28 @@ const Sidebar = (props) => {
                 },
             ],
         },
+        {
+            currentNavigation: 5,
+            logo: [PiUserDuotone, PiUserFill],
+            title: 'Shipment',
+            urlLink: '',
+            isOpen: false,
+            subMenu: [
+                {
+                    currentNavigation: 4.1,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'Client',
+                    // urlLink: '/system-admin/dashboard-client',
+                },
+                {
+                    currentNavigation: 4.2,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'User',
+                    // urlLink: '/system-admin/dashboard-user',
+                },
+            ],
+        },
+
         {
             currentNavigation: 5,
             logo: [PiUserDuotone, PiUserFill],

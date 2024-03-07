@@ -3,7 +3,6 @@ import { Navigate } from 'react-router-dom';
 
 const ProtectedRoutes = ({ element: Component }) => {
     const isAuthenticated = !!localStorage.getItem('token');
-    console.log("veroooo")
     const canAccessRoute = (currentRoute, allowedRoutes) => {
         return allowedRoutes.some((allowedRoute) => currentRoute.startsWith(allowedRoute));
     };
@@ -19,28 +18,30 @@ const ProtectedRoutes = ({ element: Component }) => {
         '/manager-operasional/dashboard',
         '/manager-operasional/register',
         '/profile',
+        '/pabrik',
+        '/pabrik/detail/:nama_pabrik',
         '/perusahaan',
         '/perusahaan/:id_perusahaan',
         '/perusahaan/:id_perusahaan/add',
+        '/daftar-gudang',
+        '/daftar-gudang/:id_gudang',
+        '/daftar-gudang/add',
     ];
 
-//    const stafGudangRoutes = [
-//            '/staf-gudang/daftar-gudang',
-//        ];
 
     if (isAuthenticated) {
-        if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {
-            return <Component />;
+            if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {
+                return <Component />;
+            }
+            else if (userInfo.role === 'Manager Operasional' && canAccessRoute(window.location.pathname, managerOperasionalRoutes)) {
+                return <Component />;
+            }
+            else {
+                return <Navigate to="/logout" />;
+            }
+        } else {
+            return <Navigate to="/login" />;
         }
-        else if (userInfo.role === 'Manager Operasional' && canAccessRoute(window.location.pathname, managerOperasionalRoutes)) {
-            return <Component />;
-        } 
-        else {
-            return <Navigate to="/logout" />;
-        }
-    } else {
-        return <Navigate to="/login" />;
-    }
-};
+    };
 
 export default ProtectedRoutes;
