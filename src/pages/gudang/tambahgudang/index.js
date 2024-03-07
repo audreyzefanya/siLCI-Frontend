@@ -21,6 +21,14 @@ const AddBarangPerusahaan = (props) => {
     const [dataSubtitleModal, setDataSubtitleModal] = useState('');
     const [flagResult, setFlagResult] = useState('success');
     const navigateTo = useNavigate();
+    const brandOptions = [
+        { id: 1, name: 'Bahan Baku' },
+        { id: 2, name: 'Penyimpanan' },
+        { id: 3, name: 'Cross-Docking' },
+        { id: 4, name: 'Produksi' },
+        { id: 5, name: 'Sortir' },
+        { id: 6, name: 'Transhipment' },
+    ];
 
     useEffect(() => {
         fetchDataGudang();
@@ -92,7 +100,7 @@ const AddBarangPerusahaan = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title={`Tambah Gudang - Perusahaan ${id_perusahaan}`}/>
+                <Header title= ' Tambah Gudang' />
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
                     <div className="max-w-md mx-auto">
                         <div className="bg-white rounded-md drop-shadow-md p-4 mb-4">
@@ -117,13 +125,20 @@ const AddBarangPerusahaan = (props) => {
                                 placeholder="Kapasitas Gudang"
                                 className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
                             />
-                            <input
-                                type="text"
-                                value={jenisGudang}
-                                onChange={handleJenisGudangChange}
-                                placeholder="Jenis Gudang"
-                                className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
-                            />
+                            <div className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2">
+                                <select
+                                    value={jenisGudang}
+                                    onChange={handleJenisGudangChange}
+                                    className="w-full border bg-white rounded px-3 py-2 outline-none"
+                                >
+                                    <option value="">Jenis Gudang</option>
+                                    {brandOptions.map((brand) => (
+                                        <option key={brand.id} value={brand.id}>
+                                            {brand.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                             <button
                                 onClick={handleSubmitTambahGudang}
                                 className="bg-primary500 text-white py-2 px-4 rounded-md"
