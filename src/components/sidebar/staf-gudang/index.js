@@ -24,7 +24,7 @@ const Sidebar = (props) => {
                     currentNavigation: 2.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Gudang',
-                    urlLink: '/manager-operasional/daftar-gudang',
+                    urlLink: '/staf-gudang/daftar-gudang',
                 },
                 {
                     currentNavigation: 2.2,
@@ -37,6 +37,27 @@ const Sidebar = (props) => {
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Barang',
                     urlLink: '',
+                },
+            ],
+        },
+        {
+            currentNavigation: 3,
+            logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+            title: 'Sales',
+            urlLink: '',
+            isOpen: false,
+            subMenu: [
+                {
+                    currentNavigation: 3.1,
+                    logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+                    title: 'tes',
+                    // urlLink: '/system-admin/client-integration',
+                },
+                {
+                    currentNavigation: 3.1,
+                    logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+                    title: 'Biller Integration',
+                    // urlLink: '/system-admin/biller-integration',
                 },
             ],
         },

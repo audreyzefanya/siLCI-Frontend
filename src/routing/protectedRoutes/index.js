@@ -24,6 +24,10 @@ const ProtectedRoutes = ({ element: Component }) => {
         '/perusahaan/:id_perusahaan/add',
     ];
 
+//    const stafGudangRoutes = [
+//            '/staf-gudang/daftar-gudang',
+//        ];
+
     if (isAuthenticated) {
         if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {
             return <Component />;

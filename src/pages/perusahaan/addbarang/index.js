@@ -70,7 +70,7 @@ const AddBarangPerusahaan = (props) => {
                 handleToDaftarBarang();
 
             } catch (error) {
-                if (error.request && error.request.status == 404) {
+                if (error.request && error.request.status === 404) {
                     setIsModalOpenLoading(false);
                     handleOpenModalResult("failed", "ID Barang tidak ditemukan");
                 } else {
