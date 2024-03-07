@@ -4,6 +4,7 @@ import ProtectedRoutes from '../protectedRoutes';
 
 import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
+import AddBarang from '../../pages/barang/add-barang';
 import DaftarBarang from '../../pages/barang/daftar-barang';
 import DetailBarang from '../../pages/barang/detail-barang';
 import ManajerDashboard from '../../pages/manajer/dashboard';
@@ -27,6 +28,7 @@ const Routing = () => {
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
             <Route path="/manager-operasional/daftar-barang" element={<ProtectedRoutes element={DaftarBarang} />} />
             <Route path="/manager-operasional/daftar-barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
+            <Route path="/manager-operasional/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
 
             <Route path="/profile" element={<ProtectedRoutes element={profilepage} />} />
 

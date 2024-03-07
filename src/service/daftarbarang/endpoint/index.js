@@ -18,13 +18,12 @@ export const GetDetailBarang = async (id_barang) => {
     }
 }
 
-// export const PostAddBarangImpor = async (id_barang, id_barang) => {
-//     try {
-//         const response = await BarangManagementService.put('api/barang/perusahaan/' + id_barang, {
-//             'id': id_barang,
-//         });
-//         return response.data;
-//     } catch (error) {
-//         throw error;
-//     }
-// }
+export const PostAddBarang = async (dataBarang) => {
+    try {
+        const response = await BarangManagementService.post('api/barang/create', dataBarang);
+        return response.data;
+    } catch (error) {
+        console.error('Error adding warehouse:', error);
+        throw error;
+    }
+}
