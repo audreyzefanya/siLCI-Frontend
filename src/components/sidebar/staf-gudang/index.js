@@ -1,7 +1,7 @@
-import { default as React, useEffect, useState } from 'react';
-import { PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { PiArchiveDuotone, PiArchiveFill, PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiMegaphoneDuotone, PiMegaphoneFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill, PiWalletDuotone, PiWalletFill } from 'react-icons/pi';
 import Menu from '../../menu';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = (props) => {
     const [menu, setMenu] = useState([
@@ -17,14 +17,14 @@ const Sidebar = (props) => {
             currentNavigation: 2,
             logo: [PiNotebookDuotone, PiNotebookFill],
             title: 'Inventory',
-            // urlLink: '/system-admin/report',
+            urlLink: '',
             isOpen: false,
             subMenu: [
                 {
                     currentNavigation: 2.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Gudang',
-                    urlLink: '',
+                    urlLink: '/staf-gudang/daftar-gudang',
                 },
                 {
                     currentNavigation: 2.2,
@@ -36,7 +36,7 @@ const Sidebar = (props) => {
                     currentNavigation: 2.3,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Barang',
-                    urlLink: '/barang',
+                    urlLink: '',
                 },
             ],
         },
@@ -48,22 +48,16 @@ const Sidebar = (props) => {
             isOpen: false,
             subMenu: [
                 {
-                    currentNavigation: 2.1,
-                    logo: [PiGearDuotone, PiGearFill],
-                    title: 'Daftar Gudang',
-                    urlLink: '/manager-operasional/daftar-gudang',
+                    currentNavigation: 3.1,
+                    logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+                    title: 'tes',
+                    // urlLink: '/system-admin/client-integration',
                 },
                 {
-                    currentNavigation: 2.2,
-                    logo: [PiGearDuotone, PiGearFill],
-                    title: 'Daftar Pabrik',
-                    urlLink: '',
-                },
-                {
-                    currentNavigation: 2.3,
-                    logo: [PiGearDuotone, PiGearFill],
-                    title: 'Daftar Barang',
-                    urlLink: '',
+                    currentNavigation: 3.1,
+                    logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+                    title: 'Biller Integration',
+                    // urlLink: '/system-admin/biller-integration',
                 },
             ],
         },

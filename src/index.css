@@ -5,3 +5,7 @@
 .no-scrollbar::-webkit-scrollbar { 
     display: none; 
 }
+
+.blur {
+    backdrop-filter: blur(5px);
+}
