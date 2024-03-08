@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetDetailPerusahaan, PostAddBarangImpor } from '../../../service/perusahaanimpor/endpoint';
 import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import Sidebar from '../../../components/sidebar/manajer';
@@ -9,11 +8,12 @@ import { useParams } from 'react-router-dom';
 import { GetAllBarang } from '../../../service/barang/endpoint';
 import DropdownText from '../../../components/dropdown/dropdownText';
 import ModalResult from '../../../components/modal/modalResult';
+import { PostAddBarangGudang, fetchDetailGudang } from '../../../service/gudangmanagement/endpoint';
 
-const AddBarangPerusahaan = (props) => {
-    const { id_perusahaan } = useParams()
+const AddBarangGudang = (props) => {
+    const { id_gudang } = useParams()
     const [daftarBarang, setBarang] = useState([])
-    const [perusahaan, setPerusahaan] = useState([])
+    const [gudang, setGudang] = useState([])
     const [choosenBarang, setChoosenBarang] = useState("")
     const [isModalOpenResult, setIsModalOpenResult] = useState(false)
     const [dataSubtitleModal, setDataSubtitleModal] = useState("")
@@ -22,7 +22,7 @@ const AddBarangPerusahaan = (props) => {
 
     useEffect(() => {
         getAllBarang()
-        getDetailPerusahaan()
+        getDetailGudang()
     }, [])
 
     async function getAllBarang() {
@@ -34,18 +34,18 @@ const AddBarangPerusahaan = (props) => {
         }
     }
 
-    async function getDetailPerusahaan() {
+    async function getDetailGudang() {
         try {
-            const perusahaanData = await GetDetailPerusahaan(id_perusahaan); 
-            setPerusahaan(perusahaanData)
+            const gudangData = await fetchDetailGudang(id_gudang); 
+            setGudang(gudangData)
         } catch (error) {
-            console.error('Error fetching perusahaan data:', error);
+            console.error('Error fetching gudang data:', error);
         }
     }
 
     function handleToDaftarBarang() {
         setTimeout(() => {
-            navigateTo(`/perusahaan/${id_perusahaan}`);
+            navigateTo(`/daftar-gudang/${id_gudang}`);
         }, 500);
     }   
 
@@ -63,11 +63,12 @@ const AddBarangPerusahaan = (props) => {
     async function handlePostBarang() {
         if (choosenBarang) {
             try {
-                var response = await PostAddBarangImpor(choosenBarang, id_perusahaan);
+                var response = await PostAddBarangGudang(choosenBarang, id_gudang);
                 handleOpenModalResult("success", "Barang berhasil ditambahkan");
                 setTimeout(() => {
                     handleToDaftarBarang()
                 }, 1000);
+
             } catch (error) {
                 if (error.request && error.request.status === 404) {
                     handleOpenModalResult("failed", "ID Barang tidak ditemukan");
@@ -84,7 +85,7 @@ const AddBarangPerusahaan = (props) => {
     <div className='flex w-screen h-screen'>
         <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
         <div className='w-full h-screen flex flex-col'>
-            <Header title={perusahaan.nama}/>
+            <Header title={gudang.nama_gudang}/>
             <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
                 <div className="max-w-md mx-auto">
                     <div className="bg-white rounded-md drop-shadow-md p-4 mb-4">
@@ -110,4 +111,4 @@ const AddBarangPerusahaan = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddBarangPerusahaan);
+export default connect(mapStateToProps, mapDispatchToProps)(AddBarangGudang);

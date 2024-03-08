@@ -4,7 +4,7 @@ import PerusahaanImporService from "../perusahaanimporService";
 // Get Daftar Perusahaan
 export const GetPerusahaan = async () => {
     try {
-        const response = await PerusahaanImporService.get('/api/barang/perusahaan/all');
+        const response = await PerusahaanImporService.get('all');
         return response.data;
     } catch (error) {
         throw error;
@@ -13,7 +13,7 @@ export const GetPerusahaan = async () => {
 
 export const GetBarangPerusahaanImpor = async (id_perusahaan) => {
     try {
-        const response = await PerusahaanImporService.get('api/barang/perusahaan/' + id_perusahaan);
+        const response = await PerusahaanImporService.get(id_perusahaan);
         return response.data;
     } catch (error) {
         throw error;
@@ -22,7 +22,7 @@ export const GetBarangPerusahaanImpor = async (id_perusahaan) => {
 
 export const GetDetailPerusahaan = async (id_perusahaan) => {
     try {
-        const response = await PerusahaanImporService.get('api/barang/perusahaan/detail/' + id_perusahaan);
+        const response = await PerusahaanImporService.get('detail/' + id_perusahaan);
         return response.data;
     } catch (error) {
         throw error;
@@ -31,7 +31,7 @@ export const GetDetailPerusahaan = async (id_perusahaan) => {
 
 export const PostAddBarangImpor = async (id_barang, id_perusahaan) => {
     try {
-        const response = await PerusahaanImporService.put('api/barang/perusahaan/' + id_perusahaan, {
+        const response = await PerusahaanImporService.put(id_perusahaan, {
             'id': id_barang,
         });
         return response.data;

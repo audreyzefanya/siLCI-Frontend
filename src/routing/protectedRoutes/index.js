@@ -3,7 +3,6 @@ import { Navigate } from 'react-router-dom';
 
 const ProtectedRoutes = ({ element: Component }) => {
     const isAuthenticated = !!localStorage.getItem('token');
-    console.log("veroooo")
     const canAccessRoute = (currentRoute, allowedRoutes) => {
         return allowedRoutes.some((allowedRoute) => currentRoute.startsWith(allowedRoute));
     };
@@ -19,13 +18,11 @@ const ProtectedRoutes = ({ element: Component }) => {
         '/manager-operasional/dashboard',
         '/manager-operasional/register',
         '/profile',
+        '/pabrik',
         '/perusahaan',
-        '/perusahaan/:id_perusahaan',
-        '/perusahaan/:id_perusahaan/add',
         '/daftar-gudang',
         '/daftar-gudang/:id_gudang',
         '/daftar-gudang/add',
-        '/profile',
     ];
 
 

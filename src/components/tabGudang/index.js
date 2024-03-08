@@ -16,7 +16,6 @@ const TabNavigation = () => {
   );
 };
 
-
 const TabItem = ({ tabName, isActive, onClick }) => {
   return (
     <div
