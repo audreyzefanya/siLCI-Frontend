@@ -1,19 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from '../protectedRoutes';
 
 import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
-import ManajerDashboard from '../../pages/manajer/dashboard';
-import DaftarPerusahaan from '../../pages/perusahaan/daftarperusahaan';
-import DaftarBarangPerusahaan from '../../pages/perusahaan/daftarbarang';
-import AddBarangPerusahaan from '../../pages/perusahaan/addbarang';
-import DetailGudangPage from '../../pages/manajer/detail-gudang';
-import RegisterPage from '../../pages/manajer/register';
-import profilepage from '../../pages/manajer/profile/profilepage';
 import DaftarGudang from '../../pages/manajer/daftar-gudang';
-import DetailPabrik from '../../pages/pabrik/detailpabrik';
+import ManajerDashboard from '../../pages/manajer/dashboard';
+import DetailGudangPage from '../../pages/manajer/detail-gudang';
+import profilepage from '../../pages/manajer/profile/profilepage';
+import RegisterPage from '../../pages/manajer/register';
+import AddPabrik from '../../pages/pabrik/addpabrik';
 import DaftarPabrik from '../../pages/pabrik/daftarpabrik';
+import DetailPabrik from '../../pages/pabrik/detailpabrik';
+import AddBarangPerusahaan from '../../pages/perusahaan/addbarang';
+import DaftarBarangPerusahaan from '../../pages/perusahaan/daftarbarang';
+import DaftarPerusahaan from '../../pages/perusahaan/daftarperusahaan';
+
 
 const Routing = () => {
   return (
@@ -42,6 +44,7 @@ const Routing = () => {
             <Route path="/pabrik" element={<DaftarPabrik />} />
             <Route path="/pabrik/detail/:nama_pabrik" element={<DetailPabrik />} />
             <Route path="/pabrik/detail/:nama_pabrik/a" element={<DetailPabrik />} />
+            <Route path="/add-pabrik" element={<AddPabrik />} />
 
             <Route path="/staf-gudang/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
 

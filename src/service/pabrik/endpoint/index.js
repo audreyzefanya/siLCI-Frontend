@@ -40,3 +40,13 @@ export const PostAddBarangPabrik = async (id_barang, pabrik_name) => {
         throw error;
     }
 }
+
+export const PostAddPabrik = async (dataPabrik) => {
+    try {
+        const response = await PabrikService.post('api/pabrik/create', dataPabrik);
+        return response.data;
+    } catch (error) {
+        console.error('Error adding warehouse:', error);
+        throw error;
+    }
+}

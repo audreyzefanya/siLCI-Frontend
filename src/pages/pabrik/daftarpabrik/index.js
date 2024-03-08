@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { GetAllPabrik } from '../../../service/pabrik/endpoint';
-import { connect } from 'react-redux';
-import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import Sidebar from '../../../components/sidebar/manajer';
-import Header from '../../../components/header';
-import PrimaryButton from '../../../components/button/buttonpilih';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import PrimaryButton from '../../../components/button/buttonpilih';
+import Header from '../../../components/header';
+import Sidebar from '../../../components/sidebar/manajer';
+import { GetAllPabrik } from '../../../service/pabrik/endpoint';
+import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const DaftarPabrik = (props) => {
   const [pabrikData, setPabrikData] = useState([]);
@@ -30,7 +30,7 @@ const DaftarPabrik = (props) => {
 
   const handleAddPabrik = (event) => {
       event.stopPropagation();
-      navigate();
+      navigate(`/add-pabrik`);
     };
 
 
