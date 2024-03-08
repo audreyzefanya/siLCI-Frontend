@@ -59,12 +59,12 @@ const DaftarGudang = (props) => {
         <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {gudangData.map(gudang => (
-              <div key={gudang.id_gudang} className="bg-white rounded-lg p-6 flex flex-col justify-between">
+              <div key={gudang.id} className="bg-white rounded-lg p-6 flex flex-col justify-between">
                 <div className="mt-4">
                   <h3 className="text-lg font-semibold">{gudang.nama}</h3>
                   <p className="text-sm text-gray-600">{gudang.alamat}</p>
                   <div className="mt-4">
-                    <PrimaryButton onClick={() => handleDetailGudang(gudang.id_gudang)}>Detail</PrimaryButton>
+                    <PrimaryButton onClick={() => handleDetailGudang(gudang.id)}>Detail</PrimaryButton>
                   </div>
                 </div>
               </div>

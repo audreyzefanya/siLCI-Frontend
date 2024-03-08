@@ -9,8 +9,8 @@ import { fetchDataGudang } from '../../../service/gudangmanagement/endpoint';
 import DropdownText from '../../../components/dropdown/dropdownText';
 import ModalResult from '../../../components/modal/modalResult';
 
-const AddBarangPerusahaan = (props) => {
-    const { id_perusahaan } = useParams();
+const AddGudang = (props) => {
+    const { id_gudang } = useParams();
     const [daftarGudang, setDaftarGudang] = useState([]);
     const [namaGudang, setNamaGudang] = useState('');
     const [alamatGudang, setAlamatGudang] = useState('');
@@ -44,7 +44,7 @@ const AddBarangPerusahaan = (props) => {
     }
 
     function handleToDaftarGudang() {
-        navigateTo('/gudang/all');
+        navigateTo('/daftar-gudang');
     }
 
     function handleOpenModalResult(type, subtitle) {
@@ -70,6 +70,9 @@ const AddBarangPerusahaan = (props) => {
             const response = await tambahGudang(dataGudang);
             setIsModalOpenLoading(false);
             handleOpenModalResult('success', 'Gudang berhasil ditambahkan');
+            setTimeout(() => {
+                handleToDaftarGudang(); // Redirect setelah berhasil menambahkan gudang
+            }, 1000);
         } catch (error) {
             setIsModalOpenLoading(false);
             handleOpenModalResult('failed', 'Gagal menambahkan gudang');
@@ -195,4 +198,4 @@ const AddBarangPerusahaan = (props) => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddBarangPerusahaan);
+export default connect(mapStateToProps, mapDispatchToProps)(AddGudang);
