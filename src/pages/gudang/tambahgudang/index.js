@@ -14,7 +14,7 @@ const AddBarangPerusahaan = (props) => {
     const [daftarGudang, setDaftarGudang] = useState([]);
     const [namaGudang, setNamaGudang] = useState('');
     const [alamatGudang, setAlamatGudang] = useState('');
-    const [kapasitasGudang, setKapasitasGudang] = useState('');
+    const [kapasitasGudang, setKapasitasGudang] = useState(0); // Mengubah initial state kapasitas menjadi 0
     const [jenisGudang, setJenisGudang] = useState('');
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const [isModalOpenResult, setIsModalOpenResult] = useState(false);
@@ -44,9 +44,7 @@ const AddBarangPerusahaan = (props) => {
     }
 
     function handleToDaftarGudang() {
-        setTimeout(() => {
-            navigateTo('/gudang/all');
-        }, 500);
+        navigateTo('/gudang/all');
     }
 
     function handleOpenModalResult(type, subtitle) {
@@ -88,50 +86,82 @@ const AddBarangPerusahaan = (props) => {
         setAlamatGudang(e.target.value);
     };
 
-    const handleKapasitasGudangChange = (e) => {
-        setKapasitasGudang(e.target.value);
+    const handleKapasitasGudangIncrement = () => {
+        setKapasitasGudang(prevKapasitas => prevKapasitas + 1);
+    };
+
+    const handleKapasitasGudangDecrement = () => {
+        if (kapasitasGudang > 0) {
+            setKapasitasGudang(prevKapasitas => prevKapasitas - 1);
+        }
     };
 
     const handleJenisGudangChange = (e) => {
         setJenisGudang(e.target.value);
     };
 
+    const handleCancel = () => {
+        navigateTo('/daftar-gudang');
+    };
+
     return (
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title= ' Tambah Gudang' />
-                <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
-                    <div className="max-w-md mx-auto">
-                        <div className="bg-white rounded-md drop-shadow-md p-4 mb-4">
-                            <input
-                                type="text"
-                                value={namaGudang}
-                                onChange={handleNamaGudangChange}
-                                placeholder="Nama Gudang"
-                                className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
-                            />
-                            <input
-                                type="text"
-                                value={alamatGudang}
-                                onChange={handleAlamatGudangChange}
-                                placeholder="Alamat Gudang"
-                                className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
-                            />
-                            <input
-                                type="text"
-                                value={kapasitasGudang}
-                                onChange={handleKapasitasGudangChange}
-                                placeholder="Kapasitas Gudang"
-                                className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
-                            />
-                            <div className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2">
+                <Header title=''/>
+                <div className='flex-1 bg-neutral20 p-8 overflow-y-auto'>
+                    <div className="max-w-md mx-auto my-auto">
+                        <div className="bg-white rounded-md drop-shadow-md p-8">
+                            <div className="text-3xl font-bold mb-8 ">Tambah Gudang</div>
+                            <div className="mb-4">
+                                <label htmlFor="namaGudang" className="block font-semibold mb-2">Nama Gudang</label>
+                                <input
+                                    type="text"
+                                    id="namaGudang"
+                                    value={namaGudang}
+                                    onChange={handleNamaGudangChange}
+                                    placeholder="Nama Gudang"
+                                    className="bg-gray-100 w-full py-2 px-4 rounded-md"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="alamatGudang" className="block font-semibold mb-2">Alamat Gudang</label>
+                                <input
+                                    type="text"
+                                    id="alamatGudang"
+                                    value={alamatGudang}
+                                    onChange={handleAlamatGudangChange}
+                                    placeholder="Alamat Gudang"
+                                    className="bg-gray-100 w-full py-2 px-4 rounded-md"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="kapasitasGudang" className="block font-semibold mb-2">Kapasitas Gudang</label>
+                                <div className="flex items-center">
+                                    <button onClick={handleKapasitasGudangDecrement} className="bg-gray-200 text-gray-600 py-2 px-4 rounded-l-md">
+                                        -
+                                    </button>
+                                    <input
+                                        type="text"
+                                        id="kapasitasGudang"
+                                        value={kapasitasGudang}
+                                        onChange={(e) => setKapasitasGudang(Number(e.target.value))}
+                                        className="bg-gray-100 w-full py-2 px-4 text-center font-semibold"
+                                    />
+                                    <button onClick={handleKapasitasGudangIncrement} className="bg-gray-200 text-gray-600 py-2 px-4 rounded-r-md">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="jenisGudang" className="block font-semibold mb-2">Jenis Gudang</label>
                                 <select
+                                    id="jenisGudang"
                                     value={jenisGudang}
                                     onChange={handleJenisGudangChange}
-                                    className="w-full border bg-white rounded px-3 py-2 outline-none"
+                                    className="w-full border bg-gray-100 rounded px-3 py-2 outline-none"
                                 >
-                                    <option value="">Jenis Gudang</option>
+                                    <option value="">Pilih Jenis Gudang</option>
                                     {brandOptions.map((brand) => (
                                         <option key={brand.id} value={brand.id}>
                                             {brand.name}
@@ -139,12 +169,21 @@ const AddBarangPerusahaan = (props) => {
                                     ))}
                                 </select>
                             </div>
-                            <button
-                                onClick={handleSubmitTambahGudang}
-                                className="bg-primary500 text-white py-2 px-4 rounded-md"
-                            >
-                                Tambah Gudang
-                            </button>
+                            <div className="flex justify-between">
+                                <button
+                                    onClick={handleCancel}
+                                    style={{ backgroundColor: '#DA3732', color: 'white' }}
+                                    className="py-2 px-4 rounded-md w-1/2 mr-2"
+                                >
+                                    Batal
+                                </button>
+                                <button
+                                    onClick={handleSubmitTambahGudang}
+                                    className="bg-primary500 text-white py-2 px-4 rounded-md w-1/2"
+                                >
+                                    Tambah
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
