@@ -4,12 +4,13 @@ import PabrikService from "../pabrikService";
 // Get Daftar Pabrik
 export const GetAllPabrik = async () => {
     try {
-        const response = await PabrikService.get('allpabrik');
+        const response = await PabrikService.get('/api/pabrik/allpabrik');
         return response.data;
-    } catch (error) {
-        throw error;
-    }
-}
+            } catch (error) {
+                console.log("bs dong")
+                throw error;
+            }
+        }
 
 export const GetPabrik = async (pabrik_name) => {
     try {
