@@ -25,11 +25,17 @@ import detailBarang from '../../pages/adminkaryawan/barang/detail-barang';
 import addBarang from '../../pages/adminkaryawan/barang/add-barang';
 
 import daftarPerusahaan from '../../pages/adminperusahaan/perusahaan/daftarperusahaan';
-import daftarBarangPerusahaan from '../../pages/adminperusahaan/perusahaan/daftarbarang';
-import addBarangPerusahaan from '../../pages/adminperusahaan/perusahaan/addbarang';
+import daftarBarangPadaPerusahaan from '../../pages/adminperusahaan/perusahaan/daftarbarang';
+import addBarangPadaPerusahaan from '../../pages/adminperusahaan/perusahaan/addbarang';
+import detailBarangPerusahaan from '../../pages/adminperusahaan/barang/detail-barang';
+import daftarBarangPerusahaan from '../../pages/adminperusahaan/barang/daftar-barang';
+import addBarangPerusahaan from '../../pages/adminperusahaan/barang/add-barang';
 
 import daftarPerusahaanStafPengadaan from '../../pages/stafpengadaan/perusahaan/daftarperusahaan';
 import daftarBarangPerusahaanStafPengadaan from '../../pages/stafpengadaan/perusahaan/daftarbarang';
+import detailBarangPengadaan from '../../pages/stafpengadaan/barang/detail-barang';
+import daftarBarangPengadaan from '../../pages/stafpengadaan/barang/daftar-barang';
+import addBarangPengadaan from '../../pages/stafpengadaan/barang/add-barang';
 
 import daftarGudangStafGudang from '../../pages/stafgudang/gudang/daftargudang';
 import detailGudangStafGudang from '../../pages/stafgudang/gudang/detailgudang';
@@ -87,13 +93,17 @@ const Routing = () => {
             {/*-----Admin Perusahaan Import Routes------*/}
             <Route path="/admin-perusahaan/dashboard" element={<ProtectedRoutes element={dashboardAdminPerusahaan} />} />
             <Route path="/admin-perusahaan/perusahaan" element={<ProtectedRoutes element={daftarPerusahaan} />} />
-            <Route path="/admin-perusahaan/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={daftarBarangPerusahaan} />} />
-            <Route path="/admin-perusahaan/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={addBarangPerusahaan} />} />
+            <Route path="/admin-perusahaan/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={daftarBarangPadaPerusahaan} />} />
+            <Route path="/admin-perusahaan/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={addBarangPadaPerusahaan} />} />
+            <Route path="/admin-perusahaan/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPerusahaan} />} />
+            <Route path="/admin-perusahaan/barang" element={<ProtectedRoutes element={daftarBarangPerusahaan} />} />
 
             {/*-----Staf Pengadaan Routes------*/}
             <Route path="/staf-pengadaan/dashboard" element={<ProtectedRoutes element={dashboardStafPengadaan} />} />
             <Route path="/staf-pengadaan/perusahaan" element={<ProtectedRoutes element={daftarPerusahaanStafPengadaan} />} />
             <Route path="/staf-pengadaan/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={daftarBarangPerusahaanStafPengadaan} />} />
+            <Route path="/staf-pengadaan/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPengadaan} />} />
+            <Route path="/staf-pengadaan/barang" element={<ProtectedRoutes element={daftarBarangPengadaan} />} />
 
             {/*-----Staf Gudang Routes------*/}
             <Route path="/staf-gudang/dashboard" element={<ProtectedRoutes element={dashboardStafGudang} />} />

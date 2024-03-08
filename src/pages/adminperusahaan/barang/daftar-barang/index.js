@@ -5,7 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
-import Sidebar from '../../../../components/sidebar/adminkaryawan';
+import Sidebar from '../../../../components/sidebar/adminperusahaan';
 import { GetDaftarBarang } from '../../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
@@ -28,16 +28,16 @@ const DaftarBarang = (props) => {
 
   const handleDetail = (id_barang, event) => {
     event.stopPropagation();
-    navigate(`/admin-karyawan/barang/${id_barang}`);
+    navigate(`/admin-perusahaan/barang/${id_barang}`);
   };
 
   const handleCardClick = (id_barang) => {
-    navigate(`/admin-karyawan/barang/${id_barang}`);
+    navigate(`/admin-perusahaan/barang/${id_barang}`);
   };
 
   const handleAddBarang = (event) => {
     event.stopPropagation();
-    navigate(`/admin-karyawan/add-barang`);
+    navigate(`/admin-perusahaan/add-barang`);
   };
 
   const handleSearchChange = (event) => {

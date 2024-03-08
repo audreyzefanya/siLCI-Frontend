@@ -42,6 +42,8 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/admin-perusahaan/perusahaan/:id_perusahaan",
         "/admin-perusahaan/perusahaan/:id_perusahaan/add",
         "/admin-perusahaan/profile",
+        "/admin-perusahaan/barang",
+        "/admin-perusahaan/barang/:id_barang",
     ];
 
     const stafPengadaanRoutes = [
@@ -49,6 +51,8 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pengadaan/perusahaan",
         "/staf-pengadaan/perusahaan/:id_perusahaan",
         "/staf-pengadaan/profile",
+        "/staf-pengadaan/barang",
+        "/staf-pengadaan/barang/:id_barang",
     ];
 
     const stafGudangRoutes = [

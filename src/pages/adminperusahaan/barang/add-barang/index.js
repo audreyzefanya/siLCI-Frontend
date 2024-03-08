@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
 import ModalResult from '../../../../components/modal/modalResult';
-import Sidebar from '../../../../components/sidebar/adminkaryawan';
+import Sidebar from '../../../../components/sidebar/adminperusahaan';
 import { PostAddBarang } from '../../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
@@ -41,7 +41,7 @@ const AddBarang = (props) => {
             const response = await PostAddBarang(dataBarang);
             setIsModalOpenLoading(false);
             handleOpenModalResult('success', 'Barang berhasil ditambahkan');
-            navigateTo('/admin-karyawan/barang');
+            navigateTo('/admin-perusahaan/barang');
         } catch (error) {
             setIsModalOpenLoading(false);
             handleOpenModalResult('failed', 'Gagal menambahkan barang');
@@ -60,7 +60,7 @@ const AddBarang = (props) => {
     }
 
     const handleCancel = () => {
-        navigateTo('/admin-karyawan/barang');
+        navigateTo('/admin-perusahaan/barang');
     };
 
     return (
