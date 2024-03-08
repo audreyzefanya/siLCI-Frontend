@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { PiArchiveDuotone, PiArchiveFill, PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiMegaphoneDuotone, PiMegaphoneFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill, PiWalletDuotone, PiWalletFill } from 'react-icons/pi';
-import Menu from '../../menu';
+import React, { useEffect, useState } from 'react';
+import { PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
+import Menu from '../../menu';
 
 const Sidebar = (props) => {
     const [menu, setMenu] = useState([
@@ -17,6 +17,33 @@ const Sidebar = (props) => {
             currentNavigation: 2,
             logo: [PiNotebookDuotone, PiNotebookFill],
             title: 'Inventory',
+            // urlLink: '/system-admin/report',
+            isOpen: false,
+            subMenu: [
+                {
+                    currentNavigation: 2.1,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Gudang',
+                    urlLink: '/daftar-gudang',
+                },
+                {
+                    currentNavigation: 2.2,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Pabrik',
+                    urlLink: '',
+                },
+                {
+                    currentNavigation: 2.3,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Barang',
+                    urlLink: '/barang',
+                },
+            ],
+        },
+        {
+            currentNavigation: 3,
+            logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+            title: 'Sales',
             urlLink: '',
             // urlLink: '/system-admin/report',
             isOpen: false,
