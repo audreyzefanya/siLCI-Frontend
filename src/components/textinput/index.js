@@ -11,7 +11,8 @@ const TextInput = ({
     mode = "default",
     isRequired = true,
     value,
-    onChange
+    onChange,
+    disabled = false
 }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -61,7 +62,7 @@ const TextInput = ({
                         ${leftIcon ? 'pl-10' : 'pl-3'}
                         ${rightIcon ? 'pr-10' : 'pr-3'}`}
                     placeholder={placeholder}
-                    disabled={mode === "disable"}
+                    disabled={mode === "disable" || disabled }
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     onFocus={handleFocus}

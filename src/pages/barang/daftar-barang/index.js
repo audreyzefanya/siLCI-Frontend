@@ -28,16 +28,16 @@ const DaftarBarang = (props) => {
 
   const handleDetail = (id_barang, event) => {
     event.stopPropagation();
-    navigate(`/barang/${id_barang}`);
+    navigate(`/manager-operasional/barang/${id_barang}`);
   };
 
   const handleCardClick = (id_barang) => {
-    navigate(`/barang/${id_barang}`);
+    navigate(`/manager-operasional/barang/${id_barang}`);
   };
 
   const handleAddBarang = (event) => {
     event.stopPropagation();
-    navigate(`/add-barang`);
+    navigate(`/manager-operasional/add-barang`);
   };
 
   const handleSearchChange = (event) => {

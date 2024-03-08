@@ -25,12 +25,12 @@ const DaftarGudang = (props) => {
   }, []);
 
   const handleDetailGudang = (id_gudang) => {
-    navigate(`/daftar-gudang/${id_gudang}`);
+    navigate(`/manager-operasional/daftar-gudang/${id_gudang}`);
   };
 
   const handleAddGudang = (event) => {
       event.stopPropagation();
-      navigate(`/daftar-gudang/add`);
+      navigate(`/manager-operasional/daftar-gudang/add`);
     };
 
 

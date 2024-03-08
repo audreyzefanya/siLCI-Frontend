@@ -45,7 +45,7 @@ const AddBarangPerusahaan = (props) => {
 
     function handleToDaftarBarang() {
         setTimeout(() => {
-            navigateTo(`/perusahaan/${id_perusahaan}`);
+            navigateTo(`/manager-operasional/perusahaan/${id_perusahaan}`);
         }, 500);
     }   
 

@@ -14,6 +14,23 @@ const Header = ({
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     const [balance, setBalance] = useState(0);
 
+    const roleToProfilePath = {
+        "Manajer": "/manajer/profile",
+        "Manager Operasional": "/manager-operasional/profile",
+        "Admin Karyawan": "/admin-karyawan/profile",
+        "Admin Perusahaan Import": "/admin-perusahaan/profile",
+        "Staf Pengadaan": "/staf-pengadaan/profile",
+        "Staf Gudang": "/staf-gudang/profile",
+        "Staf Pabrik": "/staf-pabrik/profile",
+      };
+
+    const profilePath = roleToProfilePath[userInfo?.role] || "/"; // Fallback to home if role not found
+
+    const dataNotification = [
+    { title: "Profile", navigate: profilePath, logo: PiUserCircleDuotone },
+    { title: "Logout", navigate: "/logout", logo: PiDoorOpenDuotone },
+    ];
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -60,12 +77,7 @@ const Header = ({
                         >
                             {isProfileContentVisible && (
                             <div className='w-52 bg-white border border-neutral40 rounded-md shadow-md mt-2'>
-                                <Notification
-                                    dataNotification={[
-                                        { title: "Profile", navigate: "/profile", logo: PiDoorOpenDuotone},
-                                        { title: "Logout", navigate: "/logout", logo: PiDoorOpenDuotone},
-                                    ]}
-                                />
+                                <Notification dataNotification={dataNotification} />
                             </div>
                             )}
                         </div>

@@ -45,7 +45,7 @@ const AddBarangGudang = (props) => {
 
     function handleToDaftarBarang() {
         setTimeout(() => {
-            navigateTo(`/daftar-gudang/${id_gudang}`);
+            navigateTo(`/manager-operasional/daftar-gudang/${id_gudang}`);
         }, 500);
     }   
 

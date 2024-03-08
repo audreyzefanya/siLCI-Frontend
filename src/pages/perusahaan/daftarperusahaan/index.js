@@ -26,7 +26,7 @@ const DaftarPerusahaan = (props) => {
     }
     
     const handleDetail = (id_perusahaan) => {
-        navigateTo(`/perusahaan/${id_perusahaan}`);
+        navigateTo(`/manager-operasional/perusahaan/${id_perusahaan}`);
     };
 
     const filteredPerusahaan = daftarPerusahaan.filter(perusahaan =>

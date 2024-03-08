@@ -25,12 +25,12 @@ const DaftarPabrik = (props) => {
   }, []);
 
   const handleDetailPabrik = (nama_pabrik) => {
-    navigate(`/pabrik/detail/${nama_pabrik}`);
+    navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}`);
   };
 
   const handleAddPabrik = (event) => {
       event.stopPropagation();
-      navigate(`/add-pabrik`);
+      navigate(`/manager-operasional/add-pabrik`);
     };
 
 

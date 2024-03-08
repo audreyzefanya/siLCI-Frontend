@@ -103,7 +103,7 @@ const DetailPabrik = (props) => {
     };
 
     const handleDetailBarang = (barangId) => {
-        navigateTo(`/barang/${barangId}`);
+        navigateTo(`/manager-operasional/barang/${barangId}`);
     };
 
     const addBarangButton = () => {

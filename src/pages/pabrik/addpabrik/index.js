@@ -45,7 +45,7 @@ const AddPabrik = (props) => {
     }
 
     const handleCancel = () => {
-        navigateTo('/pabrik');
+        navigateTo('/manager-operasional/pabrik');
     };
 
     return (

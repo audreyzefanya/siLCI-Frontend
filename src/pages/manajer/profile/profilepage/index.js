@@ -29,6 +29,8 @@ const ProfilePage = (props) => {
   const [resultType, setResultType] = useState('');
   const [resultMessage, setResultMessage] = useState('');
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [isRoleEditable, setIsRoleEditable] = useState(false);
+  const [mode, setMode] = useState("");
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -52,6 +54,7 @@ const ProfilePage = (props) => {
           email: data.email,
           role: data.role
         });
+        setIsRoleEditable(data.role === "Manager Operasional");
       } catch (error) {
         console.error(error);
         setResultType('failed');
@@ -137,13 +140,21 @@ const ProfilePage = (props) => {
                   value={userDetails.email}
                   onChange={(value) => handleChange('email', value)}
                 />
-                <DropdownText
-                  title="Role"
-                  options={roles}
-                  selectedValue={userDetails.role}
-                  onSelect={(value) => handleChange('role', value)}
-                  placeholder={userDetails.role}
-                />
+                {isRoleEditable ? (
+                  <DropdownText
+                    title="Role"
+                    options={roles}
+                    selectedValue={userDetails.role}
+                    onSelect={(value) => handleChange('role', value)}
+                    placeholder={userDetails.role}
+                  />
+                ) : (
+                  <TextInput
+                    title="Role"
+                    value={userDetails.role}
+                    disabled={true}
+                  />
+                )}
                 <div className="mt-4 flex justify-end">
                   <PrimaryButton
                     title="Update Profile"

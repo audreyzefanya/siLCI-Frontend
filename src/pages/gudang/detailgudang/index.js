@@ -27,7 +27,7 @@ const DetailGudang = (props) => {
     };
 
     const handleDetail = (id_gudang) => {
-        navigate(`/daftar-gudang/${id_gudang}`);
+        navigate(`/manager-operasional/daftar-gudang/${id_gudang}`);
     };
 
     const handleSearch = (e) => {

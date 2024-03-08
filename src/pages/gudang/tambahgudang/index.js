@@ -44,7 +44,7 @@ const AddGudang = (props) => {
     }
 
     function handleToDaftarGudang() {
-        navigateTo('/daftar-gudang');
+        navigateTo('/manager-operasional/daftar-gudang');
     }
 
     function handleOpenModalResult(type, subtitle) {
@@ -102,7 +102,7 @@ const AddGudang = (props) => {
     };
 
     const handleCancel = () => {
-        navigateTo('/daftar-gudang');
+        navigateTo('/manager-operasional/daftar-gudang');
     };
 
     return (

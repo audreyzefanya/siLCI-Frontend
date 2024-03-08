@@ -29,6 +29,21 @@ const Login = () => {
             else if (userInfo.role == "Manager Operasional") {
                 navigateTo("/manager-operasional/dashboard")
             }
+            else if (userInfo.role == "Admin Karyawan") {
+                navigateTo("/admin-karyawan/dashboard")
+            }
+            else if (userInfo.role == "Admin Perusahaan Import") {
+                navigateTo("/admin-perusahaan/dashboard")
+            }
+            else if (userInfo.role == "Staf Pabrik") {
+                navigateTo("/staf-pabrik/dashboard")
+            }
+            else if (userInfo.role == "Staf Gudang") {
+                navigateTo("/staf-gudang/dashboard")
+            }
+            else if (userInfo.role == "Staf Pengadaan") {
+                navigateTo("/staf-pengadaan/dashboard")
+            }
             else {
                 navigateTo("/logout")
             }
@@ -48,6 +63,21 @@ const Login = () => {
             }
             else if (userInfo.role == "Manager Operasional") {
                 navigateTo("/manager-operasional/dashboard")
+            }
+            else if (userInfo.role == "Admin Karyawan") {
+                navigateTo("/admin-karyawan/dashboard")
+            }
+            else if (userInfo.role == "Admin Perusahaan Import") {
+                navigateTo("/admin-perusahaan/dashboard")
+            }
+            else if (userInfo.role == "Staf Pabrik") {
+                navigateTo("/staf-pabrik/dashboard")
+            }
+            else if (userInfo.role == "Staf Gudang") {
+                navigateTo("/staf-gudang/dashboard")
+            }
+            else if (userInfo.role == "Staf Pengadaan") {
+                navigateTo("/staf-pengadaan/dashboard")
             }
             else {
                 navigateTo("/login")

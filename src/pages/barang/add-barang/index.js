@@ -60,7 +60,7 @@ const AddBarang = (props) => {
     }
 
     const handleCancel = () => {
-        navigateTo('/barang');
+        navigateTo('/manager-operasional/barang');
     };
 
     return (
