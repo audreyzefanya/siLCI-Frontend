@@ -21,12 +21,11 @@ const BarangDetail = (props) => {
                 console.error('Error fetching detail:', error);
             }
         };
-
         fetchDetail();
     }, [id_barang]);
 
     const kembaliButton = () => {
-        navigate(`/manager-operasional/daftar-barang/`);
+        navigate(`/barang`);
     };
 
     if (!barangDetail) {
@@ -40,22 +39,24 @@ const BarangDetail = (props) => {
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">
                     <div className="flex flex-col items-center w-full max-w-2xl">
-                        <div className="text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#2C358C' }}>Detail Barang</div>
-                        <div className="bg-white shadow-lg rounded-lg p-6 m-8 w-full" style={{ borderColor: '#2C358C', borderWidth: '2px' }}>
-                            <p className="mb-2"><span className="font-semibold">ID:</span> {barangDetail.id}</p>
-                            <p className="mb-2"><span className="font-semibold">Merk:</span> {barangDetail.merk.nama}</p>
-                            <p className="mb-2"><span className="font-semibold">Nama:</span> {barangDetail.nama}</p>
-                            <p className="mb-2"><span className="font-semibold">Deskripsi:</span> {barangDetail.deskripsi}</p>
-                            <p className="mb-2"><span className="font-semibold">Harga:</span> Rp {barangDetail.harga.toLocaleString()}</p>
-                        </div>
+                    <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#2C358C', marginBottom: '20px' }}>Detail Barang</div>
+                    <div className="bg-white shadow-lg rounded-lg p-8 m-8 w-full" style={{ borderColor: '#2C358C', borderWidth: '1px' }}>
+                        <p className="text-lg mb-4"><strong>ID:</strong> {barangDetail.id}</p>
+                        <p className="text-lg mb-4"><strong>Merk:</strong> {barangDetail.merk.nama}</p>
+                        <p className="text-lg mb-4"><strong>Nama:</strong> {barangDetail.nama}</p>
+                        <p className="text-lg mb-4"><strong>Deskripsi:</strong> {barangDetail.deskripsi}</p>
+                        <p className="text-lg mb-4"><strong>Harga:</strong> Rp {barangDetail.harga.toLocaleString()}</p>
+                    </div>
                         <Button
                             onClick={kembaliButton}
                             style={{
-                                borderRadius: '5px',
+                                borderRadius: '20px',
                                 backgroundColor: '#2C358C', 
                                 color: 'white',
-                                padding: '7px 8px',
-                                border: 'none'
+                                padding: '10px 20px',
+                                fontSize: '16px',
+                                transition: 'all 0.3s ease',
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
                             }}
                             onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
                             onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}

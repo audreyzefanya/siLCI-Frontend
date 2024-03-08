@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header';
 import ModalResult from '../../../components/modal/modalResult';
 import Sidebar from '../../../components/sidebar/manajer';
@@ -17,7 +17,6 @@ const AddBarang = (props) => {
     const [merkIdBarang, setMerkIdBarang] = useState('');
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const navigateTo = useNavigate();
-    const { id_barang } = useParams();
     const brandOptions = [
         { id: 1, name: 'STP' },
         { id: 2, name: 'Turtle Wax' },
@@ -29,19 +28,6 @@ const AddBarang = (props) => {
         { id: 8, name: 'AutoGard' },
         { id: 9, name: 'California Scents' },
     ];
-    
-
-
-    function handleOpenModalResult(type, subtitle) {
-        setTimeout(() => {
-            setFlagResult(type);
-            setDataSubtitleModal(subtitle);
-            setIsModalOpenResult(true);
-            setTimeout(() => {
-                setIsModalOpenResult(false);
-            }, 1000);
-        }, 100);
-    }
 
     async function handleSubmitTambahBarang() {
         try {
@@ -61,70 +47,105 @@ const AddBarang = (props) => {
         }
     }
 
-    const handleNamaBarangChange = (e) => {
-        setNamaBarang(e.target.value);
-    };
+    function handleOpenModalResult(type, subtitle) {
+        setTimeout(() => {
+            setFlagResult(type);
+            setDataSubtitleModal(subtitle);
+            setIsModalOpenResult(true);
+            setTimeout(() => {
+                setIsModalOpenResult(false);
+            }, 1000);
+        }, 100);
+    }
 
-    const handleDeskripsiBarangChange = (e) => {
-        setDeskripsiBarang(e.target.value);
-    };
-
-    const handleHargaBarangChange = (e) => {
-        setHargaBarang(e.target.value);
-    };
-
-    const handleMerkIdBarangChange = (e) => {
-        setMerkIdBarang(e.target.value);
+    const handleCancel = () => {
+        navigateTo('/barang');
     };
 
     return (
-        <div className='flex w-screen h-screen'>
+        <div className='flex w-screen h-screen bg-gray-100'>
             <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
-            <div className='w-full h-screen flex flex-col'>
-                <Header title={`Tambah Gudang`}/>
-                <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
-                    <div className="max-w-md mx-auto">
-                        <div className="bg-white rounded-md drop-shadow-md p-4 mb-4">
+            <div className='flex flex-col flex-1 overflow-hidden'>
+            <Header title={<span style={{ fontWeight: 'bold' }}>Tambah Barang</span>}/>
+                <div className='flex-1 overflow-y-auto p-8'>
+                    <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Nama Barang</label>
                             <input
                                 type="text"
                                 value={namaBarang}
-                                onChange={handleNamaBarangChange}
-                                placeholder="Nama Barang"
-                                className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
+                                onChange={(e) => setNamaBarang(e.target.value)}
+                                placeholder="Masukkan Nama Barang"
+                                className="input-field rounded-lg p-2 w-full border border-gray-300"
                             />
-                            <input
-                                type="text"
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Deskripsi Barang</label>
+                            <textarea
                                 value={deskripsiBarang}
-                                onChange={handleDeskripsiBarangChange}
-                                placeholder="Deskripsi Barang"
-                                className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
+                                onChange={(e) => setDeskripsiBarang(e.target.value)}
+                                placeholder="Masukkan Deskripsi Barang"
+                                className="input-field rounded-lg p-2 w-full border border-gray-300"
                             />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Harga Barang</label>
                             <input
                                 type="number"
                                 value={hargaBarang}
-                                onChange={handleHargaBarangChange}
-                                placeholder="Harga Barang"
-                                className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2"
+                                onChange={(e) => setHargaBarang(e.target.value)}
+                                placeholder="Masukkan Harga Barang"
+                                className="input-field rounded-lg p-2 w-full border border-gray-300"
                             />
-                            <div className="bg-gray-100 w-full py-2 px-4 rounded-md mb-2">
-                                <select
-                                    value={merkIdBarang}
-                                    onChange={handleMerkIdBarangChange}
-                                    className="w-full border bg-white rounded px-3 py-2 outline-none"
-                                >
-                                    <option value="">Pilih Merek</option>
-                                    {brandOptions.map((brand) => (
-                                        <option key={brand.id} value={brand.id}>
-                                            {brand.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                        </div>
+                        <div className="mb-6">
+                            <label className="block text-sm font-medium text-gray-700">Merek</label>
+                            <select
+                                value={merkIdBarang}
+                                onChange={(e) => setMerkIdBarang(e.target.value)}
+                                placeholder="Pilih Merek"
+                                className="input-field rounded-lg p-2 w-full border border-gray-300"
+                            >
+                                <option value="">Pilih Merek</option>
+                                {brandOptions.map((brand) => (
+                                    <option key={brand.id} value={brand.id}>{brand.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="flex justify-center">
                             <button
                                 onClick={handleSubmitTambahBarang}
-                                className="bg-primary500 text-white py-2 px-4 rounded-md"
+                                className="btn-tambah-barang mr-4"
+                                style={{
+                                    backgroundColor: '#2C358C',
+                                    color: '#FFFFFF',
+                                    border: 'none',
+                                    padding: '10px 20px',
+                                    borderRadius: '20px',
+                                    cursor: 'pointer',
+                                    transition: 'background-color 0.3s',
+                                }}
+                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                             >
                                 Tambah Barang
+                            </button>
+                            <button
+                                onClick={handleCancel}
+                                className="btn-batal"
+                                style={{
+                                    backgroundColor: '#DA3732',
+                                    color: '#FFFFFF',
+                                    border: 'none',
+                                    padding: '10px 20px',
+                                    borderRadius: '20px',
+                                    cursor: 'pointer',
+                                    transition: 'background-color 0.3s',
+                                }}
+                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                            >
+                                Batal
                             </button>
                         </div>
                     </div>

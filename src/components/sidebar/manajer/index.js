@@ -36,7 +36,7 @@ const Sidebar = (props) => {
                     currentNavigation: 2.3,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Barang',
-                    urlLink: '/manager-operasional/daftar-barang',
+                    urlLink: '/barang',
                 },
             ],
         },
