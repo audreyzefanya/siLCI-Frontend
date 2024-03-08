@@ -131,9 +131,9 @@ const DaftarBarangPerusahaan = (props) => {
                             <br />
                             <DataTable
                                 title={
-                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <span style={{ marginRight: '1075px' }}>Daftar Barang</span>
-                                        <button onClick={addBarangButton} style={{ marginLeft: '1px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <span>Daftar Barang</span>
+                                        <button onClick={addBarangButton} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                                             <FaPlus />
                                         </button>
                                     </div>
