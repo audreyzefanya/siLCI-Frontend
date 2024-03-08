@@ -28,18 +28,18 @@ const DetailPabrik = (props) => {
                 name: "Merk",
                 selector: row => row.barang.merk.nama,
                 sortable: true,
-                width: '7.5%' // Set a fixed width for the column
+                width: '7.5%'
             },
             {
                 name: "Nama",
                 selector: row => row.barang.nama,
                 sortable: true,
-                width: '20%' // Set a fixed width for the column
+                width: '20%' 
             },
             {
                 name: "Deskripsi",
                 selector: row => row.barang.deskripsi,
-                width: '52.5%', // Set a fixed width for the column
+                width: '52.5%', 
                 cell: row => (
                     <div style={{ width: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {row.barang.deskripsi}
@@ -61,10 +61,10 @@ const DetailPabrik = (props) => {
                         style={{
                             borderRadius: '5px',
                             marginRight: '5px',
-                            border: '2px #266bff', // Adjust border width and color
-                            backgroundColor: '#266bff', // Fill the border with blue color
+                            border: '2px #266bff', 
+                            backgroundColor: '#266bff', 
                             color: 'white',
-                            padding: '7px 8px' // Text color
+                            padding: '7px 8px' 
                         }}
                     > Detail </Button>
                 ),
