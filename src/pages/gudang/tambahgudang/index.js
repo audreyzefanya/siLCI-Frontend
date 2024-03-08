@@ -14,7 +14,7 @@ const AddBarangPerusahaan = (props) => {
     const [daftarGudang, setDaftarGudang] = useState([]);
     const [namaGudang, setNamaGudang] = useState('');
     const [alamatGudang, setAlamatGudang] = useState('');
-    const [kapasitasGudang, setKapasitasGudang] = useState(0); // Mengubah initial state kapasitas menjadi 0
+    const [kapasitasGudang, setKapasitasGudang] = useState(0);
     const [jenisGudang, setJenisGudang] = useState('');
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const [isModalOpenResult, setIsModalOpenResult] = useState(false);
@@ -70,11 +70,9 @@ const AddBarangPerusahaan = (props) => {
             const response = await tambahGudang(dataGudang);
             setIsModalOpenLoading(false);
             handleOpenModalResult('success', 'Gudang berhasil ditambahkan');
-            // Tambahkan logika lain yang diperlukan setelah berhasil menambahkan gudang
         } catch (error) {
             setIsModalOpenLoading(false);
             handleOpenModalResult('failed', 'Gagal menambahkan gudang');
-            // Tambahkan logika lain untuk penanganan kesalahan
         }
     }
 
