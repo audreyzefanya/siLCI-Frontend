@@ -77,6 +77,7 @@ const Routing = () => {
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
             <Route path="/manager-operasional/perusahaan" element={<ProtectedRoutes element={DaftarPerusahaan} />} />
             <Route path="/manager-operasional/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={DaftarBarangPerusahaan} />} />
+            <Route path="/manager-operasional/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={AddBarangPerusahaan} />} />
             <Route path="/manager-operasional/pabrik" element={<ProtectedRoutes element={DaftarPabrik} />} />
             <Route path="/manager-operasional/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={DetailPabrik} />} />
             <Route path="/manager-operasional/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
