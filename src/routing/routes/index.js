@@ -33,9 +33,9 @@ const Routing = () => {
 
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
-            <Route path="/manager-operasional/daftar-barang" element={<ProtectedRoutes element={DaftarBarang} />} />
-            <Route path="/manager-operasional/daftar-barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
-            <Route path="/manager-operasional/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
+            <Route path="/barang" element={<ProtectedRoutes element={DaftarBarang} />} />
+            <Route path="/barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
+            <Route path="/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
 
             <Route path="/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
             <Route path="/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
