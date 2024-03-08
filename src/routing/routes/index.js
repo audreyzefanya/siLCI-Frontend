@@ -1,8 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from '../protectedRoutes';
 import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
+import AddBarang from '../../pages/barang/add-barang';
+import DaftarBarang from '../../pages/barang/daftar-barang';
+import DetailBarang from '../../pages/barang/detail-barang';
 import ManajerDashboard from '../../pages/manajer/dashboard';
 import DaftarGudang from '../../pages/gudang/daftargudang';
 import DetailGudang from '../../pages/gudang/detailgudang';
@@ -30,6 +33,9 @@ const Routing = () => {
 
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
+            <Route path="/manager-operasional/daftar-barang" element={<ProtectedRoutes element={DaftarBarang} />} />
+            <Route path="/manager-operasional/daftar-barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
+            <Route path="/manager-operasional/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
 
             <Route path="/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
             <Route path="/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />

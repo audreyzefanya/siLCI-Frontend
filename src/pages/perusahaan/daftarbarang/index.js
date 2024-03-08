@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetBarangPerusahaanImpor, GetDetailPerusahaan } from '../../../service/perusahaanimpor/endpoint';
+import { GetDetailPerusahaan } from '../../../service/perusahaanimpor/endpoint';
 import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import Sidebar from '../../../components/sidebar/manajer';
@@ -52,7 +52,7 @@ const DaftarBarangPerusahaan = (props) => {
                 cell: (row) => (
                     <Button
                         variant="primary"
-                        onClick={(e) => addBarangButton(e, row.id)}
+                        onClick={(e) => handleDetailBarang(row.id)}
                         style={{
                             borderRadius: '5px',
                             marginRight: '5px',
@@ -88,7 +88,7 @@ const DaftarBarangPerusahaan = (props) => {
 
     useEffect(() => {
         getDetailPerusahaan()
-    }, [])
+    })
 
     async function getDetailPerusahaan() {
         try {
@@ -99,6 +99,10 @@ const DaftarBarangPerusahaan = (props) => {
         }
     }
     
+    const handleDetailBarang = (barangId) => {
+        navigateTo(`/manager-operasional/daftar-barang/${barangId}`);
+    };
+
     const addBarangButton = () => {
         console.log(perusahaan)
         navigateTo(`/perusahaan/${id_perusahaan}/add`);
@@ -115,7 +119,7 @@ const DaftarBarangPerusahaan = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={4.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title={perusahaan.nama}/>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>

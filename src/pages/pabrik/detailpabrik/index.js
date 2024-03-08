@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import Sidebar from '../../../components/sidebar/manajer';
 import Header from '../../../components/header';
@@ -20,6 +21,7 @@ const DetailPabrik = (props) => {
     const [showFloatingMenu, setShowFloatingMenu] = useState(false);
     const [choosenBarang, setChoosenBarang] = useState('');
     const [activeTab, setActiveTab] = useState('listBarang');
+    const navigateTo = useNavigate()
     let columns = []
 
     if (pabrik.listBarang) {
@@ -57,7 +59,7 @@ const DetailPabrik = (props) => {
                 cell: (row) => (
                     <Button
                         variant="primary"
-                        onClick={(e) => addBarangButton(e, row.id)}
+                        onClick={(e) => handleDetailBarang(row.barang.id)}
                         style={{
                             borderRadius: '5px',
                             marginRight: '5px',
@@ -76,7 +78,7 @@ const DetailPabrik = (props) => {
     useEffect(() => {
         getDetailPabrik()
         getAllBarang()
-    }, []);
+    }, [nama_pabrik]);
 
     async function getDetailPabrik() {
         try {
@@ -99,6 +101,11 @@ const DetailPabrik = (props) => {
     const handleTabChange = (tabName) => {
         setActiveTab(tabName);
     };
+
+    const handleDetailBarang = (barangId) => {
+        navigateTo(`/manager-operasional/daftar-barang/${barangId}`);
+    };
+
     const addBarangButton = () => {
         setShowFloatingMenu(true);
     };
@@ -134,7 +141,7 @@ const DetailPabrik = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
+            <Sidebar currentNavigation={3.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
             <div className="w-full h-screen flex flex-col">
                 <Header title={pabrik.nama} />
                 <div className="flex-1 bg-neutral20">
@@ -146,7 +153,7 @@ const DetailPabrik = (props) => {
                                         {pabrik.alamat}
                                     </div>
                                     <br />
-                                    <div style={{ marginBottom: '10px' }}>
+                                    <div style={{ marginBottom: '10px', display: 'flex', flexDirection: 'row' }}>
                                         <button
                                             className={`tab-button ${activeTab === 'listBarang' ? 'active-tab' : ''}`}
                                             onClick={() => handleTabChange('listBarang')}

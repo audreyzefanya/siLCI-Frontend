@@ -8,7 +8,6 @@ export const fetchDataGudang = async (nama, alamat) => {
         });
         return response.data;
     } catch (error) {
-        console.log("bs dong")
         throw error;
     }
 }

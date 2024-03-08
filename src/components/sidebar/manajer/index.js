@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { PiArchiveDuotone, PiArchiveFill, PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiMegaphoneDuotone, PiMegaphoneFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill, PiWalletDuotone, PiWalletFill } from 'react-icons/pi';
-import Menu from '../../menu';
+import React, { useEffect, useState } from 'react';
+import { PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
+import Menu from '../../menu';
 
 const Sidebar = (props) => {
     const [menu, setMenu] = useState([
@@ -17,7 +17,6 @@ const Sidebar = (props) => {
             currentNavigation: 2,
             logo: [PiNotebookDuotone, PiNotebookFill],
             title: 'Inventory',
-            urlLink: '',
             // urlLink: '/system-admin/report',
             isOpen: false,
             subMenu: [
@@ -25,10 +24,38 @@ const Sidebar = (props) => {
                     currentNavigation: 2.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Gudang',
-                    urlLink: '/daftar-gudang',
+                    urlLink: '',
                 },
                 {
                     currentNavigation: 2.2,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Pabrik',
+                    urlLink: '',
+                },
+                {
+                    currentNavigation: 2.3,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Barang',
+                    urlLink: '/manager-operasional/daftar-barang',
+                },
+            ],
+        },
+        {
+            currentNavigation: 3,
+            logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
+            title: 'Sales',
+            urlLink: '',
+            // urlLink: '/system-admin/report',
+            isOpen: false,
+            subMenu: [
+                {
+                    currentNavigation: 3.1,
+                    logo: [PiGearDuotone, PiGearFill],
+                    title: 'Daftar Gudang',
+                    urlLink: '/daftar-gudang',
+                },
+                {
+                    currentNavigation: 3.2,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Pabrik',
                     urlLink: '',
@@ -45,57 +72,33 @@ const Sidebar = (props) => {
             currentNavigation: 4,
             logo: [PiUserDuotone, PiUserFill],
             title: 'Procurement',
-            currentNavigation: 3,
-            logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
-            title: 'Sales',
             urlLink: '',
             isOpen: false,
             subMenu: [
                 {
                     currentNavigation: 4.1,
                     logo: [PiUserDuotone, PiUserFill],
-                    title: 'Client',
-                    // urlLink: '/system-admin/dashboard-client',
+                    title: 'Perusahaan Impor',
+                    urlLink: '/perusahaan',
                 },
                 {
                     currentNavigation: 4.2,
                     logo: [PiUserDuotone, PiUserFill],
-                    title: 'User',
-                    // urlLink: '/system-admin/dashboard-user',
-                },
-            ],
-        },
-        {
-            currentNavigation: 5,
-            logo: [PiUserDuotone, PiUserFill],
-            title: 'Shipment',
-            urlLink: '',
-            isOpen: false,
-            subMenu: [
-                {
-                    currentNavigation: 4.1,
-                    logo: [PiUserDuotone, PiUserFill],
-                    title: 'Client',
-                    // urlLink: '/system-admin/dashboard-client',
-                },
-                {
-                    currentNavigation: 4.2,
-                    logo: [PiUserDuotone, PiUserFill],
-                    title: 'User',
+                    title: 'Request Pabrik',
                     // urlLink: '/system-admin/dashboard-user',
                 },
             ],
         },
 
         {
-            currentNavigation: 6,
+            currentNavigation: 5,
             logo: [PiGearDuotone, PiGearFill],
             title: 'Settings',
             urlLink: '',
             isOpen: false,
             subMenu: [
                 {
-                    currentNavigation: 6.1,
+                    currentNavigation: 5.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Register Member',
                     urlLink: '/manager-operasional/register',
