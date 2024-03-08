@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 
+=======
+
+import React, { useState } from 'react';
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
 const PrimaryButton = ({
     title = "Lihat Detail",
     type = "wrap",
@@ -8,6 +13,7 @@ const PrimaryButton = ({
     onClick = () => {}
 }) => {
     const [isPressed, setIsPressed] = useState(false);
+<<<<<<< HEAD
 
     const handleButtonPress = () => {
         setIsPressed(true);
@@ -21,6 +27,17 @@ const PrimaryButton = ({
         onClick();
     };
 
+=======
+    const handleButtonPress = () => {
+        setIsPressed(true);
+    };
+    const handleButtonRelease = () => {
+        setIsPressed(false);
+    };
+    const handleClick = () => {
+        onClick();
+    };
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
     return (
         <button
             className={`
@@ -44,5 +61,9 @@ const PrimaryButton = ({
         </button>
     );
 };
+<<<<<<< HEAD
 
 export default PrimaryButton;
+=======
+export default PrimaryButton;
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02

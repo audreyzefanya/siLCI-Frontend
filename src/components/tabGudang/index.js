@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
 const TabNavigation = () => {
+<<<<<<< HEAD
   const [activeTab, setActiveTab] = useState('Daftar Barang');
+=======
+  const [activeTab, setActiveTab] = useState('');
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -9,8 +13,13 @@ const TabNavigation = () => {
 
   return (
     <div className="flex">
+<<<<<<< HEAD
       <TabItem tabName="Daftar Barang" isActive={activeTab === 'Daftar Barang'} onClick={handleTabClick} />
       <TabItem tabName="Riwayat Barang" isActive={activeTab === 'Riwayat Barang'} onClick={handleTabClick} />
+=======
+      <TabItem tabName="Riwayat Barang" isActive={activeTab === 'Riwayat Barang'} onClick={handleTabClick} />
+      <TabItem tabName="Daftar Barang" isActive={activeTab === 'Daftar Barang'} onClick={handleTabClick} />
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
       <TabItem tabName="Pengiriman Barang" isActive={activeTab === 'Pengiriman Barang'} onClick={handleTabClick} />
     </div>
   );

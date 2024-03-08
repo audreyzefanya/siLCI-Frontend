@@ -26,8 +26,15 @@ const ProtectedRoutes = ({ element: Component }) => {
         '/daftar-gudang',
         '/daftar-gudang/:id_gudang',
         '/daftar-gudang/add',
+        '/perusahaan',
+        '/perusahaan/:id_perusahaan',
+        '/perusahaan/:id_perusahaan/add',
     ];
 
+
+//    const stafGudangRoutes = [
+//            '/staf-gudang/daftar-gudang',
+//        ];
 
     if (isAuthenticated) {
             if (userInfo.role === 'Manajer' && canAccessRoute(window.location.pathname, manajerRoutes)) {

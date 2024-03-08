@@ -5,11 +5,18 @@ import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import Sidebar from '../../../components/sidebar/manajer';
 import Header from '../../../components/header';
+<<<<<<< HEAD
 import { FiSearch } from 'react-icons/fi';
 
 const DaftarPerusahaan = (props) => {
     const [daftarPerusahaan, setPerusahaan] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+=======
+import PrimaryButton from '../../../components/button/primarybutton';
+
+const DaftarPerusahaan = (props) => {
+    const [daftarPerusahaan, setPerusahaan] = useState([]);
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
     const navigateTo = useNavigate()
 
     useEffect(() => {
@@ -29,6 +36,7 @@ const DaftarPerusahaan = (props) => {
         navigateTo(`/perusahaan/${id_perusahaan}`);
     };
 
+<<<<<<< HEAD
     const filteredPerusahaan = daftarPerusahaan.filter(perusahaan =>
         perusahaan.nama.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -54,6 +62,16 @@ const DaftarPerusahaan = (props) => {
                     </div>
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filteredPerusahaan.map(perusahaan => (
+=======
+    return (
+        <div className='flex w-screen h-screen'>
+            <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <div className='w-full h-screen flex flex-col'>
+                <Header title='Daftar Perusahaan Impor'/>
+                <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {daftarPerusahaan.map(perusahaan => (
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
                             <div key={perusahaan.id} className="bg-white rounded-lg p-6 flex flex-col justify-between">
                                 <img src={perusahaan.logo_url} alt={perusahaan.nama} className="h-24 w-24 mx-auto mb-4" />
                                 <div className="mt-4">

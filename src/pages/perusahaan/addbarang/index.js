@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
+=======
+import React, {useState, useEffect, useRef} from 'react';
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
 import { useNavigate } from 'react-router-dom';
 import { GetDetailPerusahaan, PostAddBarangImpor } from '../../../service/perusahaanimpor/endpoint';
 import { connect } from 'react-redux'
@@ -15,6 +19,10 @@ const AddBarangPerusahaan = (props) => {
     const [daftarBarang, setBarang] = useState([])
     const [perusahaan, setPerusahaan] = useState([])
     const [choosenBarang, setChoosenBarang] = useState("")
+<<<<<<< HEAD
+=======
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false)
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
     const [isModalOpenResult, setIsModalOpenResult] = useState(false)
     const [dataSubtitleModal, setDataSubtitleModal] = useState("")
     const [flagResult, setFlagResult] = useState("success")
@@ -23,14 +31,22 @@ const AddBarangPerusahaan = (props) => {
     useEffect(() => {
         getAllBarang()
         getDetailPerusahaan()
+<<<<<<< HEAD
     })
+=======
+    }, [])
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
 
     async function getAllBarang() {
         try {
             const barangData = await GetAllBarang(); 
             setBarang(barangData)
         } catch (error) {
+<<<<<<< HEAD
             console.error('Error fetching barang data:', error);
+=======
+            console.error('Error fetching perusahaan data:', error);
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
         }
     }
 
@@ -63,6 +79,7 @@ const AddBarangPerusahaan = (props) => {
     async function handlePostBarang() {
         if (choosenBarang) {
             try {
+<<<<<<< HEAD
                 var response = await PostAddBarangImpor(choosenBarang, id_perusahaan);
                 handleOpenModalResult("success", "Barang berhasil ditambahkan");
                 setTimeout(() => {
@@ -72,6 +89,19 @@ const AddBarangPerusahaan = (props) => {
                 if (error.request && error.request.status === 404) {
                     handleOpenModalResult("failed", "ID Barang tidak ditemukan");
                 } else {
+=======
+                setIsModalOpenLoading(true);
+                var response = await PostAddBarangImpor(choosenBarang, id_perusahaan);
+                setIsModalOpenLoading(false);
+                handleToDaftarBarang();
+
+            } catch (error) {
+                if (error.request && error.request.status === 404) {
+                    setIsModalOpenLoading(false);
+                    handleOpenModalResult("failed", "ID Barang tidak ditemukan");
+                } else {
+                    setIsModalOpenLoading(false);
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
                     handleOpenModalResult("failed", error.response.data.message);
                 }
             }
@@ -82,7 +112,11 @@ const AddBarangPerusahaan = (props) => {
 
   return (
     <div className='flex w-screen h-screen'>
+<<<<<<< HEAD
         <Sidebar currentNavigation={4.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+=======
+        <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+>>>>>>> 6a45e82d93aa1fafb8c4a155c37d363f117dfe02
         <div className='w-full h-screen flex flex-col'>
             <Header title={perusahaan.nama}/>
             <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { default as React, useEffect, useState } from 'react';
 import { PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 import Menu from '../../menu';
@@ -55,7 +55,7 @@ const Sidebar = (props) => {
                     urlLink: '/daftar-gudang',
                 },
                 {
-                    currentNavigation: 3.2,
+                    currentNavigation: 2.2,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Pabrik',
                     urlLink: '',
