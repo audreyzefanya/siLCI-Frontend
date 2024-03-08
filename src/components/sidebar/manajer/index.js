@@ -24,7 +24,7 @@ const Sidebar = (props) => {
                     currentNavigation: 2.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Gudang',
-                    urlLink: '',
+                    urlLink: '/daftar-gudang',
                 },
                 {
                     currentNavigation: 2.2,
