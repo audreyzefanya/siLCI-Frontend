@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import Sidebar from '../../../components/sidebar/manajer';
@@ -9,19 +8,18 @@ import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import FloatingMenu from '../../../components/floatingmenu';
-import { GetBarangPabrik, GetPabrik, PostAddBarangPabrik } from '../../../service/pabrik/endpoint';
+import { GetPabrik, PostAddBarangPabrik } from '../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../service/barang/endpoint';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
-    const [daftarBarangPabrik, setBarangPabrik] = useState([]);
     const [daftarBarang, setBarang] = useState([]);
     const [pabrik, setPabrik] = useState([]);
     const [warningMessage, setWarningMessage] = useState('');
-    const navigateTo = useNavigate();
     const [searchText, setSearchText] = useState('');
     const [showFloatingMenu, setShowFloatingMenu] = useState(false);
     const [choosenBarang, setChoosenBarang] = useState('');
+    const [activeTab, setActiveTab] = useState('listBarang');
     let columns = []
 
     if (pabrik.listBarang) {
@@ -98,6 +96,9 @@ const DetailPabrik = (props) => {
         }
     }
 
+    const handleTabChange = (tabName) => {
+        setActiveTab(tabName);
+    };
     const addBarangButton = () => {
         setShowFloatingMenu(true);
     };
@@ -144,37 +145,69 @@ const DetailPabrik = (props) => {
                                     <div className="pabrik-deskripsi">
                                         {pabrik.alamat}
                                     </div>
-                                    <br></br>
-                                    <DataTable
-                                        title={
-                                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                <span style={{ marginRight: '1075px' }}>Daftar Barang</span>
-                                                <button onClick={addBarangButton} style={{ marginLeft: '1px', background: 'none', border: 'none', cursor: 'pointer' }}>
-                                                    <FaPlus />
-                                                </button>
-                                            </div>
-                                        }
-                                        columns={columns}
-                                        data={filteredData}
-                                        pagination
-                                        fixedHeader
-                                        subHeader
-                                        subHeaderComponent={[
-                                            <input
-                                                type="text"
-                                                placeholder="Search..."
-                                                value={searchText}
-                                                onChange={handleSearch}
-                                                style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
-                                            />,
-                                        ]}
-                                    />
+                                    <br />
+                                    <div style={{ marginBottom: '10px' }}>
+                                        <button
+                                            className={`tab-button ${activeTab === 'listBarang' ? 'active-tab' : ''}`}
+                                            onClick={() => handleTabChange('listBarang')}
+                                        >
+                                            Daftar Barang
+                                        </button>
+                                        <button
+                                            className={`tab-button ${activeTab === 'batchProduksi' ? 'active-tab' : ''}`}
+                                            onClick={() => handleTabChange('batchProduksi')}
+                                        >
+                                            Batch Produksi
+                                        </button>
+                                        <button
+                                            className={`tab-button ${activeTab === 'permintaanPengiriman' ? 'active-tab' : ''}`}
+                                            onClick={() => handleTabChange('permintaanPengiriman')}
+                                        >
+                                            Permintaan Pengiriman
+                                        </button>
+                                    </div>
+                                    {activeTab === 'listBarang' && (
+                                        <DataTable
+                                            title={
+                                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                                    <span style={{ marginRight: '1075px' }}>Daftar Barang</span>
+                                                    <button onClick={addBarangButton} style={{ marginLeft: '1px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                                                        <FaPlus />
+                                                    </button>
+                                                </div>
+                                            }
+                                            columns={columns}
+                                            data={filteredData}
+                                            pagination
+                                            fixedHeader
+                                            subHeader
+                                            subHeaderComponent={[
+                                                <input
+                                                    key="searchInput"
+                                                    type="text"
+                                                    placeholder="Search..."
+                                                    value={searchText}
+                                                    onChange={handleSearch}
+                                                    style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
+                                                />,
+                                            ]}
+                                        />
+                                    )}
+                                    {activeTab === 'batchProduksi' && (
+                                        <div>
+                                            {/* Render another DataTable or content for the other tab */}
+                                        </div>
+                                    )}
+                                    {activeTab === 'permintaanPengiriman' && (
+                                        <div>
+                                            {/* Render another DataTable or content for the other tab */}
+                                        </div>
+                                    )}
                                 </>
                             )}
                         </div>
                     </div>
                 </div>
-    
                 {showFloatingMenu && (
                     <FloatingMenu
                         daftarBarang={daftarBarang}
