@@ -36,7 +36,7 @@ const DaftarPabrik = (props) => {
 
   return (
     <div className='flex w-screen h-screen'>
-      <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+      <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
       <div className='w-full h-screen flex flex-col'>
         <Header title=''/>
         <div className="text-3xl font-bold mb-10 ml-10 mt-8">Daftar Pabrik</div>
@@ -59,12 +59,12 @@ const DaftarPabrik = (props) => {
         <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {pabrikData.map(pabrik => (
-              <div key={pabrik.id_pabrik} className="bg-white rounded-lg p-6 flex flex-col justify-between">
+              <div key={pabrik.id} className="bg-white rounded-lg p-6 flex flex-col justify-between">
                 <div className="mt-4">
                   <h3 className="text-lg font-semibold">{pabrik.nama}</h3>
                   <p className="text-sm text-gray-600">{pabrik.alamat}</p>
                   <div className="mt-4">
-                    <PrimaryButton onClick={() => handleDetailPabrik(pabrik.id_pabrik)}>Detail</PrimaryButton>
+                    <PrimaryButton onClick={() => handleDetailPabrik(pabrik.nama)}>Detail</PrimaryButton>
                   </div>
                 </div>
               </div>

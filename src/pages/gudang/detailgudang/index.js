@@ -36,7 +36,7 @@ const DetailGudang = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title=''/>
                 <div className="text-3xl font-bold ml-10 mt-8">{detailGudang ? detailGudang.nama_gudang : ''}</div>

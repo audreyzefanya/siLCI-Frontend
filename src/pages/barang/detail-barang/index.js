@@ -34,7 +34,7 @@ const BarangDetail = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full flex flex-col'>
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">

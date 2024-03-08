@@ -35,7 +35,7 @@ const DaftarPerusahaan = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={4.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title='Daftar Perusahaan Impor'/>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-2 px-8'>

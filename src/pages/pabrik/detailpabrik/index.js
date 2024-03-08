@@ -141,7 +141,7 @@ const DetailPabrik = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={3.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
+            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
             <div className="w-full h-screen flex flex-col">
                 <Header title={pabrik.nama} />
                 <div className="flex-1 bg-neutral20">

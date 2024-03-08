@@ -83,7 +83,7 @@ const RegisterPage = (props) => {
 
   return (
     <div className='flex w-screen h-screen'>
-        <Sidebar currentNavigation={6.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+        <Sidebar currentNavigation={4.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
         <div className='w-full h-screen flex flex-col'>
             <Header title='Register Member'/>
             <div className='flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>

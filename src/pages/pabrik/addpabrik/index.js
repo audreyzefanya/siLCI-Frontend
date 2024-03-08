@@ -50,7 +50,7 @@ const AddPabrik = (props) => {
 
     return (
         <div className='flex w-screen h-screen bg-gray-100'>
-            <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='flex flex-col flex-1 overflow-hidden'>
             <Header title={<span style={{ fontWeight: 'bold' }}>Tambah Pabrik</span>}/>
                 <div className='flex-1 overflow-y-auto p-8'>

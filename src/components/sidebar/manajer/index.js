@@ -30,7 +30,7 @@ const Sidebar = (props) => {
                     currentNavigation: 2.2,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Daftar Pabrik',
-                    urlLink: '',
+                    urlLink: '/pabrik',
                 },
                 {
                     currentNavigation: 2.3,
@@ -42,47 +42,19 @@ const Sidebar = (props) => {
         },
         {
             currentNavigation: 3,
-            logo: [PiArrowsClockwiseDuotone, PiArrowsClockwiseFill],
-            title: 'Sales',
-            urlLink: '',
-            // urlLink: '/system-admin/report',
-            isOpen: false,
-            subMenu: [
-                {
-                    currentNavigation: 3.1,
-                    logo: [PiGearDuotone, PiGearFill],
-                    title: 'Daftar Gudang',
-                    urlLink: '/daftar-gudang',
-                },
-                {
-                    currentNavigation: 3.2,
-                    logo: [PiGearDuotone, PiGearFill],
-                    title: 'Daftar Pabrik',
-                    urlLink: '',
-                },
-                {
-                    currentNavigation: 2.3,
-                    logo: [PiGearDuotone, PiGearFill],
-                    title: 'Daftar Barang',
-                    urlLink: '',
-                },
-            ],
-        },
-        {
-            currentNavigation: 4,
             logo: [PiUserDuotone, PiUserFill],
             title: 'Procurement',
             urlLink: '',
             isOpen: false,
             subMenu: [
                 {
-                    currentNavigation: 4.1,
+                    currentNavigation: 3.1,
                     logo: [PiUserDuotone, PiUserFill],
                     title: 'Perusahaan Impor',
                     urlLink: '/perusahaan',
                 },
                 {
-                    currentNavigation: 4.2,
+                    currentNavigation: 3.2,
                     logo: [PiUserDuotone, PiUserFill],
                     title: 'Request Pabrik',
                     // urlLink: '/system-admin/dashboard-user',
@@ -91,14 +63,14 @@ const Sidebar = (props) => {
         },
 
         {
-            currentNavigation: 5,
+            currentNavigation: 4,
             logo: [PiGearDuotone, PiGearFill],
             title: 'Settings',
             urlLink: '',
             isOpen: false,
             subMenu: [
                 {
-                    currentNavigation: 5.1,
+                    currentNavigation: 4.1,
                     logo: [PiGearDuotone, PiGearFill],
                     title: 'Register Member',
                     urlLink: '/manager-operasional/register',
