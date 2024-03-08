@@ -17,6 +17,8 @@ import RegisterPage from '../../pages/manajer/register';
 import profilepage from '../../pages/manajer/profile/profilepage';
 import DetailPabrik from '../../pages/pabrik/detailpabrik';
 import AddBarangGudang from '../../pages/gudang/addbarang';
+import DaftarPabrik from '../../pages/pabrik/daftarpabrik';
+import AddPabrik from '../../pages/pabrik/addpabrik';
 
 const Routing = () => {
   return (
@@ -33,6 +35,7 @@ const Routing = () => {
 
             <Route path="/manager-operasional/dashboard" element={<ProtectedRoutes element={ManajerDashboard} />} />
             <Route path="/manager-operasional/register" element={<ProtectedRoutes element={RegisterPage} />} />
+
             <Route path="/barang" element={<ProtectedRoutes element={DaftarBarang} />} />
             <Route path="/barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
             <Route path="/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
@@ -48,7 +51,9 @@ const Routing = () => {
             <Route path="/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={DaftarBarangPerusahaan} />} />
             <Route path="/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={AddBarangPerusahaan} />} />
 
+            <Route path="/pabrik" element={<ProtectedRoutes element={DaftarPabrik} />} />
             <Route path="/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={DetailPabrik} />} />
+            <Route path="/add-pabrik" element={<ProtectedRoutes element={AddPabrik} />} />
 
             {/*------Open Routes------*/}
             <Route path="/logout" element={<Logout />} />

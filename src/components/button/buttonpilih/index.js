@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 
+import React, { useState } from 'react';
 const PrimaryButton = ({
     title = "Lihat Detail",
     type = "wrap",
@@ -8,19 +8,15 @@ const PrimaryButton = ({
     onClick = () => {}
 }) => {
     const [isPressed, setIsPressed] = useState(false);
-
     const handleButtonPress = () => {
         setIsPressed(true);
     };
-
     const handleButtonRelease = () => {
         setIsPressed(false);
     };
-
     const handleClick = () => {
         onClick();
     };
-
     return (
         <button
             className={`
@@ -44,5 +40,4 @@ const PrimaryButton = ({
         </button>
     );
 };
-
 export default PrimaryButton;

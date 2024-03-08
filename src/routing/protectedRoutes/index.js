@@ -22,6 +22,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         '/add-barang',
         '/profile',
         '/pabrik',
+        '/add-pabrik',
         '/perusahaan',
         '/daftar-gudang',
         '/daftar-gudang/:id_gudang',

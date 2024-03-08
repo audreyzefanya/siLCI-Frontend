@@ -100,7 +100,7 @@ const DaftarBarangPerusahaan = (props) => {
     }
     
     const handleDetailBarang = (barangId) => {
-        navigateTo(`/manager-operasional/daftar-barang/${barangId}`);
+        navigateTo(`/barang/${barangId}`);
     };
 
     const addBarangButton = () => {
