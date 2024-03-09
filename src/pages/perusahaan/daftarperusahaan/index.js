@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { GetPerusahaan } from '../../../service/perusahaanimpor/endpoint';
-import { connect } from 'react-redux'
-import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import Sidebar from '../../../components/sidebar/manajer';
-import Header from '../../../components/header';
 import { FiSearch } from 'react-icons/fi';
+import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../../components/header';
+import Sidebar from '../../../components/sidebar/manajer';
+import { GetPerusahaan } from '../../../service/perusahaanimpor/endpoint';
+import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const DaftarPerusahaan = (props) => {
     const [daftarPerusahaan, setPerusahaan] = useState([]);

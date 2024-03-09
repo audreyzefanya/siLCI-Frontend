@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import Sidebar from '../../../components/sidebar/stafpabrik';
+import { connect } from 'react-redux';
 import Header from '../../../components/header';
+import Sidebar from '../../../components/sidebar/stafpabrik';
 import TabDash from '../../../components/tabDashboard';
+import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const Dashboard = (props) => {
-
+    
   return (
     <div className='flex w-screen h-screen'>
         <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
