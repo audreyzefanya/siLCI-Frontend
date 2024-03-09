@@ -190,9 +190,9 @@ const Login = () => {
 
         <div className='absolute bottom-0 z-20 w-full text-center py-2'>
             <div className='flex justify-center'>
-                <p className='text-neutral300'>© </p>
-                <p className='mx-1'>|</p>
-                <a className='text-primary500 font-medium cursor-pointer' href=''>Help Center</a>
+                <p className='text-white'>© </p>
+                <p className='mx-1 text-white'>|</p>
+                <a className='text-white font-medium' href=''>Propenzy</a>
             </div>
         </div>
 

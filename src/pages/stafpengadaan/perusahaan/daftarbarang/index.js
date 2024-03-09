@@ -121,11 +121,12 @@ const DaftarBarangPerusahaan = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title={perusahaan.nama}/>
+                <Header title=''/>
+                <div className="text-3xl font-bold mb-10 ml-10 mt-8">{perusahaan.nama}</div>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
                     {perusahaan && perusahaan.nama && (
                         <div>
-                            <div className="perusahaan-deskripsi">
+                            <div className="perusahaan-deskripsi mt-2">
                                 {perusahaan.deskripsi}
                             </div>
                             <br />

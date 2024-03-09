@@ -26,7 +26,7 @@ const AddPabrik = (props) => {
             const response = await PostAddPabrik(dataPabrik);
             setIsModalOpenLoading(false);
             handleOpenModalResult('success', 'Pabrik berhasil ditambahkan');
-            navigateTo('/pabrik'); 
+            navigateTo('/staf-gudang/pabrik');
         } catch (error) {
             setIsModalOpenLoading(false);
             handleOpenModalResult('failed', 'Gagal menambahkan pabrik');

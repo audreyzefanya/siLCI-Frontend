@@ -41,7 +41,7 @@ const AddBarang = (props) => {
             const response = await PostAddBarang(dataBarang);
             setIsModalOpenLoading(false);
             handleOpenModalResult('success', 'Barang berhasil ditambahkan');
-            navigateTo('/barang'); 
+            navigateTo('/manager-operasional/barang');
         } catch (error) {
             setIsModalOpenLoading(false);
             handleOpenModalResult('failed', 'Gagal menambahkan barang');
