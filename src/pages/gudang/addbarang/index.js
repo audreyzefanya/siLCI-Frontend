@@ -85,7 +85,12 @@ const AddBarangGudang = (props) => {
     <div className='flex w-screen h-screen'>
         <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
         <div className='w-full h-screen flex flex-col'>
-            <Header title={gudang.nama_gudang}/>
+            <Header title=''/>
+            <div className="text-3xl font-bold ml-10 mt-8">{gudang ? gudang.nama_gudang : ''}</div>
+            <div className="alamat-gudang mb-4 ml-10">{gudang ? gudang.alamat_gudang : ''}</div>
+            <div className="id-gudang ml-10">{gudang ? gudang.id_gudang : ''}</div>
+            <div className="kapasitas-gudang mb-8 ml-10">Kapasitas: {gudang ? gudang.kapasitas_gudang : ''}</div>
+
             <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
                 <div className="max-w-md mx-auto">
                     <div className="bg-white rounded-md drop-shadow-md p-4 mb-4">

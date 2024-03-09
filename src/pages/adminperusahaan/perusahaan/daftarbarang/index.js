@@ -88,7 +88,7 @@ const DaftarBarangPerusahaan = (props) => {
 
     useEffect(() => {
         getDetailPerusahaan()
-    })
+    }, [])
 
     async function getDetailPerusahaan() {
         try {

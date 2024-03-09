@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { GetPerusahaan } from '../../../service/perusahaanimpor/endpoint';
 import { connect } from 'react-redux'
@@ -37,7 +38,10 @@ const DaftarPerusahaan = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title='Daftar Perusahaan Impor'/>
+                <Header title=''/>
+                <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
+                    <span style={{ marginRight: '20px' }}>Daftar Perusahaan</span>
+                </div>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-2 px-8'>
                     <div className="mt-2 flex justify-center items-center">
                         <div className="relative">
@@ -57,9 +61,22 @@ const DaftarPerusahaan = (props) => {
                             <div key={perusahaan.id} className="bg-white rounded-lg p-6 flex flex-col justify-between">
                                 <img src={perusahaan.logo_url} alt={perusahaan.nama} className="h-24 w-24 mx-auto mb-4" />
                                 <div className="mt-4">
-                                    <h3 className="text-lg font-semibold">{perusahaan.nama}</h3>
-                                    <p className="text-sm text-gray-600">{perusahaan.deskripsi}</p>
-                                    <button onClick={() => handleDetail(perusahaan.id)} className="block text-center text-blue-500 hover:text-blue-700 mt-2 mx-auto">View Details</button>
+                                    <h3 className="text-xl font-semibold mb-2" style={{ color: '#2C358C' }}>{perusahaan.nama}</h3>
+                                    <p className="mb-4 text-gray-700">{perusahaan.deskripsi}</p>
+                                    <Button
+                                        onClick={(e) => handleDetail(perusahaan.id)}
+                                        style={{
+                                        borderRadius: '5px',
+                                        backgroundColor: '#2C358C',
+                                        borderColor: '#2C358C',
+                                        color: 'white',
+                                        padding: '7px 10px',
+                                        fontSize: '0.875rem',
+                                        transition: 'background-color 0.2s',
+                                        }}
+                                        onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
+                                        onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
+                                    > View Details </Button>
                                 </div>
                             </div>
                         ))}

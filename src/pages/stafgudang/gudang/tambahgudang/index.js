@@ -71,7 +71,7 @@ const AddGudang = (props) => {
             setIsModalOpenLoading(false);
             handleOpenModalResult('success', 'Gudang berhasil ditambahkan');
             setTimeout(() => {
-                handleToDaftarGudang(); // Redirect setelah berhasil menambahkan gudang
+                handleToDaftarGudang();
             }, 1000);
         } catch (error) {
             setIsModalOpenLoading(false);
@@ -102,7 +102,7 @@ const AddGudang = (props) => {
     };
 
     const handleCancel = () => {
-        navigateTo('/daftar-gudang');
+        navigateTo('/staf-gudang/daftar-gudang');
     };
 
     return (

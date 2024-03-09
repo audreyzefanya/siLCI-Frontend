@@ -88,7 +88,7 @@ const DaftarBarangPerusahaan = (props) => {
 
     useEffect(() => {
         getDetailPerusahaan()
-    })
+    }, [])
 
     async function getDetailPerusahaan() {
         try {
@@ -133,9 +133,6 @@ const DaftarBarangPerusahaan = (props) => {
                                 title={
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                         <span>Daftar Barang</span>
-                                        <button onClick={addBarangButton} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                                            <FaPlus />
-                                        </button>
                                     </div>
                                 }
                                 columns={columns}
