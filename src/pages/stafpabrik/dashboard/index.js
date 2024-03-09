@@ -6,7 +6,7 @@ import TabDash from '../../../components/tabDashboard';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const Dashboard = (props) => {
-    
+
   return (
     <div className='flex w-screen h-screen'>
         <Sidebar currentNavigation={1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
