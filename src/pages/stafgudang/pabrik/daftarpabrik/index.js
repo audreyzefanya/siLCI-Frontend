@@ -29,9 +29,9 @@ const DaftarPabrik = (props) => {
   };
 
   const handleAddPabrik = (event) => {
-      event.stopPropagation();
-      navigate(`/staf-gudang/add-pabrik`);
-    };
+    event.stopPropagation();
+    navigate(`/staf-gudang/add-pabrik`);
+  };
 
 
   return (

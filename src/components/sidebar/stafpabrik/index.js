@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 import Menu from '../../menu';
+import Logo from '../../../assets/images/Logo_LC.png';
 
 const Sidebar = (props) => {
     const [menu, setMenu] = useState([
@@ -68,13 +69,13 @@ const Sidebar = (props) => {
     >
         <div
             className={`${
-            props.isExpand ? 'px-10' : ''
+                props.isExpand ? 'px-10' : ''
             } flex justify-center items-center py-4 h-16 border-b border-neutral40`}
         >
             {props.isExpand ? (
-                <img src="" alt="Logo" />
+                <img src={Logo} alt="Logo" style={{ width: '75px', height: 'auto' }} />
             ) : (
-                <img src="" alt="Logo" />
+                <img src={Logo} alt="Logo" style={{ width: '60px', height: 'auto' }} />
             )}
         </div>
         <div className='flex items-center justify-center border-b border-neutral40 py-3.5 px-2 cursor-pointer' onClick={props.onClick}>

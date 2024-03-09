@@ -23,7 +23,7 @@ const AddBarangPerusahaan = (props) => {
     useEffect(() => {
         getAllBarang()
         getDetailPerusahaan()
-    })
+    }, [])
 
     async function getAllBarang() {
         try {

@@ -36,12 +36,12 @@ const DetailPabrik = (props) => {
                 name: "Nama",
                 selector: row => row.barang.nama,
                 sortable: true,
-                width: '20%' 
+                width: '20%'
             },
             {
                 name: "Deskripsi",
                 selector: row => row.barang.deskripsi,
-                width: '52.5%', 
+                width: '52.5%',
                 cell: row => (
                     <div style={{ width: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {row.barang.deskripsi}
@@ -63,10 +63,10 @@ const DetailPabrik = (props) => {
                         style={{
                             borderRadius: '5px',
                             marginRight: '5px',
-                            border: '2px #266bff', 
-                            backgroundColor: '#266bff', 
+                            border: '2px #266bff',
+                            backgroundColor: '#266bff',
                             color: 'white',
-                            padding: '7px 8px' 
+                            padding: '7px 8px'
                         }}
                     > Detail </Button>
                 ),
@@ -82,16 +82,16 @@ const DetailPabrik = (props) => {
 
     async function getDetailPabrik() {
         try {
-            const pabrikData = await GetPabrik(nama_pabrik); 
+            const pabrikData = await GetPabrik(nama_pabrik);
             setPabrik(pabrikData)
         } catch (error) {
             console.error('Error fetching pabrik data:', error);
         }
     }
-    
+
     async function getAllBarang() {
         try {
-            const barangData = await GetAllBarang(); 
+            const barangData = await GetAllBarang();
             setBarang(barangData)
         } catch (error) {
             console.error('Error fetching perusahaan data:', error);
@@ -134,7 +134,7 @@ const DetailPabrik = (props) => {
         }
     }
 
-    const filteredData = pabrik.listBarang ? 
+    const filteredData = pabrik.listBarang ?
         pabrik.listBarang.filter((item) =>
             item.barang.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];
@@ -176,9 +176,9 @@ const DetailPabrik = (props) => {
                                     {activeTab === 'listBarang' && (
                                         <DataTable
                                             title={
-                                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                    <span style={{ marginRight: '1075px' }}>Daftar Barang</span>
-                                                    <button onClick={addBarangButton} style={{ marginLeft: '1px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                    <span>Daftar Barang</span>
+                                                    <button onClick={addBarangButton} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                                                         <FaPlus />
                                                     </button>
                                                 </div>

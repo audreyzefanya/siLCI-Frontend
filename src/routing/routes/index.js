@@ -43,10 +43,12 @@ import addBarangStafGudang from '../../pages/stafgudang/gudang/addbarang';
 import tambahGudangStafGudang from '../../pages/stafgudang/gudang/tambahgudang';
 import daftarPabrikStafGudang from '../../pages/stafgudang/pabrik/daftarpabrik';
 import detailPabrikStafGudang from '../../pages/stafgudang/pabrik/detailpabrik';
+import addPabrikStafGudang from '../../pages/stafgudang/pabrik/addpabrik';
 
 import daftarPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarpabrik';
 import detailPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
 import addPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addpabrik';
+//import detailBarangPabrik from '../../pages/stafpabrik/barang/detail-barang';
 
 import dashboardAdminKaryawan from '../../pages/adminkaryawan/dashboard';
 import dashboardAdminPerusahaan from '../../pages/adminperusahaan/dashboard';
@@ -84,6 +86,9 @@ const Routing = () => {
             <Route path="/manager-operasional/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
             <Route path="/manager-operasional/barang" element={<ProtectedRoutes element={DaftarBarang} />} />
             <Route path="/manager-operasional/barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
+            <Route path="/manager-operasional/daftar-gudang/add" element={<ProtectedRoutes element={TambahGudang} />} />
+            <Route path="/manager-operasional/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
+            <Route path="/manager-operasional/add-pabrik" element={<ProtectedRoutes element={AddPabrik} />} />
 
             {/*-----Admin Karyawan Routes------*/}
             <Route path="/admin-karyawan/dashboard" element={<ProtectedRoutes element={dashboardAdminKaryawan} />} />
@@ -114,6 +119,8 @@ const Routing = () => {
             <Route path="/staf-gudang/daftar-gudang/add" element={<ProtectedRoutes element={tambahGudangStafGudang} />} />
             <Route path="/staf-gudang/pabrik" element={<ProtectedRoutes element={daftarPabrikStafGudang} />} />
             <Route path="/staf-gudang/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={detailPabrikStafGudang} />} />
+            <Route path="/staf-gudang/add-pabrik" element={<ProtectedRoutes element={addPabrikStafGudang} />} />
+            <Route path="/staf-gudang/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPerusahaan} />} />
 
              {/*-----Staf Pabrik Routes------*/}
             <Route path="/staf-pabrik/dashboard" element={<ProtectedRoutes element={dashboardStafPabrik} />} />

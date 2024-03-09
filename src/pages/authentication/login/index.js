@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import PrimaryButton from '../../../components/button/primarybutton';
+import PrimaryButton from '../../../components/button/buttonpilih';
 import TextInput from '../../../components/textinput';
 import ModalLoading from '../../../components/modal/modalLoading';
 import ModalResult from '../../../components/modal/modalResult';
 import { PostLoginUser } from '../../../service/usermanagement/endpoint';
+import Logo from '../../../assets/images/Logo_LC.png';
 
 const Login = () => {
     const [username, setUsername] = useState("")
@@ -109,18 +110,18 @@ const Login = () => {
                     console.log(localStorage.token)
                     localStorage.setItem('userInfo', JSON.stringify({
                         "id": response.data.id,
-                        "username": response.data.username, 
+                        "username": response.data.username,
                         "email": response.data.email,
                         "role": response.data.role
                     }));
                     setIsModalOpenLoading(false);
                     console.log()
                     handleNavigateToDashboard();
-    
+
                     // try {
                     //     var responseUser = await GetDetailUserByID(response.data.userId);
                     //     localStorage.setItem('userInfo', JSON.stringify({
-                    //         "userId": response.data.userId, 
+                    //         "userId": response.data.userId,
                     //         "username": responseUser.username,
                     //         "roleName": responseUser.roleName
                     //     }));
@@ -135,7 +136,7 @@ const Login = () => {
                     //         handleOpenModalResult("failed", "Sorry, unable to retrieve user details at the moment. Please try again.");
                     //     }
                     // }
-    
+
                 } else if (response.code == 401) {
                     setIsModalOpenLoading(false);
                     handleOpenModalResult("failed", "Incorrect password. Double-check and try again or use 'Forgot Password' to reset.");
@@ -156,18 +157,14 @@ const Login = () => {
             handleOpenModalResult("failed", "Please fill in all fields to log in.");
         }
     }
-    
-    
-  return (
-    <div className='h-screen flex flex-col justify-center items-center relative overflow-hidden bg-neutral20'>
-        <div className="bg-primary50 h-1/2 w-full absolute bottom-0 transform -skew-y-6"></div>
-        <div className="bg-primary50 h-1/4 w-full absolute bottom-0"></div>
 
+    return (
+      <div className='h-screen flex flex-col justify-center items-center relative overflow-hidden' style={{background: '#2C358C'}}>
         <div className="bg-white rounded-md drop-shadow-md z-10">
-            <div className='mt-8 mx-6 flex justify-center'>
-                <img src="" alt="Logo" />
+            <div className='mt-8 mx-6 flex justify-center items-center' style={{ height: '150px' }}>
+                <img src={Logo} alt="Logo" style={{ width: '150px', height: 'auto' }} />
             </div>
-            <div className='mt-6 mx-6'>
+            <div className='mx-6'>
                 <p className='font-semibold text-black text-2xl'>Sign In</p>
                 <p className='font-normal text-neutral500 text-sm mt-2'>
                     Please enter your username and password
@@ -184,17 +181,18 @@ const Login = () => {
             <div className='my-4 mx-6 flex justify-end'>
             </div>
             <div className='mx-6'>
-                <PrimaryButton type='full' title='Sign in' size='large' onClick={handlePostLogin}/>
+                <PrimaryButton type='full' title='Sign in' size='large' onClick={handlePostLogin} style={{ backgroundColor: '#DA3732' }} />
             </div>
+
             <div className='flex justify-center mx-6 mt-8 mb-10'>
             </div>
         </div>
 
         <div className='absolute bottom-0 z-20 w-full text-center py-2'>
             <div className='flex justify-center'>
-                <p className='text-neutral300'>© </p>
-                <p className='mx-1'>|</p>
-                <a className='text-primary500 font-medium cursor-pointer' href=''>Help Center</a>
+                <p className='text-white'>© </p>
+                <p className='mx-1 text-white'>|</p>
+                <a className='text-white font-medium' href=''>Propenzy</a>
             </div>
         </div>
 
@@ -210,7 +208,7 @@ const Login = () => {
             isOpen={isModalOpenResult}
         />
     </div>
-  );
-};
+    );
+  };
 
-export default Login;
+  export default Login;

@@ -26,7 +26,7 @@ const AddPabrik = (props) => {
             const response = await PostAddPabrik(dataPabrik);
             setIsModalOpenLoading(false);
             handleOpenModalResult('success', 'Pabrik berhasil ditambahkan');
-            navigateTo('/pabrik'); 
+            navigateTo('/manager-operasional/pabrik');
         } catch (error) {
             setIsModalOpenLoading(false);
             handleOpenModalResult('failed', 'Gagal menambahkan pabrik');
@@ -75,40 +75,40 @@ const AddPabrik = (props) => {
                             />
                         </div>
                         <div className="flex justify-center">
-                            <button
-                                onClick={handleSubmitTambahPabrik}
-                                className="btn-tambah-pabrik mr-4"
-                                style={{
-                                    backgroundColor: '#2C358C',
-                                    color: '#FFFFFF',
-                                    border: 'none',
-                                    padding: '10px 20px',
-                                    borderRadius: '20px',
-                                    cursor: 'pointer',
-                                    transition: 'background-color 0.3s',
-                                }}
-                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                            >
-                                Tambah Pabrik
-                            </button>
-                            <button
-                                onClick={handleCancel}
-                                className="btn-batal"
-                                style={{
-                                    backgroundColor: '#DA3732',
-                                    color: '#FFFFFF',
-                                    border: 'none',
-                                    padding: '10px 20px',
-                                    borderRadius: '20px',
-                                    cursor: 'pointer',
-                                    transition: 'background-color 0.3s',
-                                }}
-                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                            >
-                                Batal
-                            </button>
+                        <button
+                            onClick={handleCancel}
+                            className="btn-batal"
+                            style={{
+                                backgroundColor: '#DA3732',
+                                color: '#FFFFFF',
+                                border: 'none',
+                                padding: '10px 20px',
+                                borderRadius: '20px',
+                                cursor: 'pointer',
+                                transition: 'background-color 0.3s',
+                            }}
+                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                        >
+                            Batal
+                        </button>
+                        <button
+                            onClick={handleSubmitTambahPabrik}
+                            className="btn-tambah-pabrik mr-4"
+                            style={{
+                                backgroundColor: '#2C358C',
+                                color: '#FFFFFF',
+                                border: 'none',
+                                padding: '10px 20px',
+                                borderRadius: '20px',
+                                cursor: 'pointer',
+                                transition: 'background-color 0.3s',
+                            }}
+                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                        >
+                            Tambah Pabrik
+                        </button>
                         </div>
                     </div>
                 </div>
