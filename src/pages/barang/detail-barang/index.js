@@ -39,7 +39,7 @@ const BarangDetail = (props) => {
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">
                     <div className="flex flex-col items-center w-full max-w-2xl">
-                    <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#2C358C', marginBottom: '20px' }}>Detail Barang</div>
+                    <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#000000', marginBottom: '20px' }}>Detail Barang</div>
                     <div className="bg-white shadow-lg rounded-lg p-8 m-8 w-full" style={{ borderColor: '#2C358C', borderWidth: '1px' }}>
                         <p className="text-lg mb-4"><strong>ID:</strong> {barangDetail.id}</p>
                         <p className="text-lg mb-4"><strong>Merk:</strong> {barangDetail.merk.nama}</p>

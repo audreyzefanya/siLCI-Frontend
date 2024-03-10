@@ -52,9 +52,10 @@ const AddPabrik = (props) => {
         <div className='flex w-screen h-screen bg-gray-100'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='flex flex-col flex-1 overflow-hidden'>
-            <Header title={<span style={{ fontWeight: 'bold' }}>Tambah Pabrik</span>}/>
+            <Header title={<span style={{ fontWeight: 'bold' }}></span>}/>
                 <div className='flex-1 overflow-y-auto p-8'>
                     <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
+                    <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#000000', marginBottom: '20px' }}>Tambah Pabrik</div>
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Nama Pabrik</label>
                             <input
