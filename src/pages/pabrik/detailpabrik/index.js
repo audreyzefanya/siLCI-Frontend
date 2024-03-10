@@ -134,9 +134,9 @@ const DetailPabrik = (props) => {
         }
     }
 
-    const filteredData = pabrik.listBarang ? 
-        pabrik.listBarang.filter((item) =>
-            item.barang.nama.toLowerCase().includes(searchText.toLowerCase())
+    const filteredData = pabrik.listBarang ? pabrik.listBarang.filter((item) =>
+        item.barang.nama.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.barang.merk.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];
 
     return (
@@ -150,7 +150,7 @@ const DetailPabrik = (props) => {
                             {pabrik && (
                                 <>
                                     <div className="pabrik-deskripsi">
-                                        {pabrik.alamat}
+                                        <b>Alamat:</b> {pabrik.alamat}
                                     </div>
                                     <br />
                                     <div style={{ marginBottom: '10px', display: 'flex', flexDirection: 'row' }}>

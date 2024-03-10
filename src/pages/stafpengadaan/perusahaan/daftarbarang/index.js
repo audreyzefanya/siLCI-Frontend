@@ -112,17 +112,16 @@ const DaftarBarangPerusahaan = (props) => {
         setSearchText(e.target.value); 
     };
 
-    const filteredData = perusahaan.listBarang ? 
-        perusahaan.listBarang.filter((item) =>
-            item.nama.toLowerCase().includes(searchText.toLowerCase())
+    const filteredData = perusahaan.listBarang ? perusahaan.listBarang.filter((item) =>
+        item.nama.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.merk.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];
 
     return (
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title=''/>
-                <div className="text-3xl font-bold mb-10 ml-10 mt-8">{perusahaan.nama}</div>
+                <Header title={perusahaan.nama}/>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
                     {perusahaan && perusahaan.nama && (
                         <div>
@@ -133,7 +132,9 @@ const DaftarBarangPerusahaan = (props) => {
                             <DataTable
                                 title={
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                        <span>Daftar Barang</span>
+                                        <div className="daftar-barang">
+                                            Daftar Barang
+                                        </div>
                                     </div>
                                 }
                                 columns={columns}

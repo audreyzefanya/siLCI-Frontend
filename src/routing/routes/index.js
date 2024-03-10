@@ -127,6 +127,7 @@ const Routing = () => {
             <Route path="/staf-pabrik/pabrik" element={<ProtectedRoutes element={daftarPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={detailPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/add-pabrik" element={<ProtectedRoutes element={addPabrikStafPabrik} />} />
+            <Route path="/staf-pabrik/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPerusahaan} />} />
 
 
             <Route path="/staf-pabrik/profile" element={<ProtectedRoutes element={profileStafPabrik} />} />
