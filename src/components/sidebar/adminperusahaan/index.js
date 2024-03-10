@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
+import { PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../../assets/images/Logo_LC.png';
 import Menu from '../../menu';
+
 
 const Sidebar = (props) => {
     const [menu, setMenu] = useState([
@@ -78,9 +80,9 @@ const Sidebar = (props) => {
             } flex justify-center items-center py-4 h-16 border-b border-neutral40`}
         >
             {props.isExpand ? (
-                <img src="" alt="Logo" />
-            ) : (
-                <img src="" alt="Logo" />
+                <img src={Logo} alt="Logo" style={{ width: '75px', height: 'auto' }} />
+                ) : (
+                    <img src={Logo} alt="Logo" style={{ width: '60px', height: 'auto' }} />
             )}
         </div>
         <div className='flex items-center justify-center border-b border-neutral40 py-3.5 px-2 cursor-pointer' onClick={props.onClick}>

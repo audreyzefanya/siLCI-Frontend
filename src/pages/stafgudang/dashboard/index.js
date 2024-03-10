@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import Sidebar from '../../../components/sidebar/stafgudang';
+import { connect } from 'react-redux';
 import Header from '../../../components/header';
+import Sidebar from '../../../components/sidebar/stafgudang';
 import TabDash from '../../../components/tabDashboard';
+import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const Dashboard = (props) => {
 
