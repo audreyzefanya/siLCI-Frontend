@@ -8,7 +8,6 @@ import Header from '../../../../components/header';
 import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
 
 const DaftarBarangPerusahaan = (props) => {
     const { id_perusahaan } = useParams();
@@ -104,7 +103,6 @@ const DaftarBarangPerusahaan = (props) => {
     };
 
     const addBarangButton = () => {
-        console.log(perusahaan)
         navigateTo(`/admin-perusahaan/perusahaan/${id_perusahaan}/add`);
     };
     
@@ -112,9 +110,9 @@ const DaftarBarangPerusahaan = (props) => {
         setSearchText(e.target.value); 
     };
 
-    const filteredData = perusahaan.listBarang ? 
-        perusahaan.listBarang.filter((item) =>
-            item.nama.toLowerCase().includes(searchText.toLowerCase())
+    const filteredData = perusahaan.listBarang ? perusahaan.listBarang.filter((item) =>
+        item.nama.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.merk.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];
 
     return (
@@ -132,10 +130,27 @@ const DaftarBarangPerusahaan = (props) => {
                             <DataTable
                                 title={
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                        <span>Daftar Barang</span>
-                                        <button onClick={addBarangButton} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                                            <FaPlus />
-                                        </button>
+                                        <div className="daftar-barang">
+                                            Daftar Barang
+                                        </div>
+                                        <Button
+                                            size="sm"
+                                            onClick={addBarangButton}
+                                            style={{
+                                            borderRadius: '20px',
+                                            backgroundColor: '#DA3732',
+                                            borderColor: '#DA3732',
+                                            color: 'white',
+                                            padding: '5px 15px',
+                                            fontSize: '1rem',
+                                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                            transition: 'transform 0.2s ease-in-out',
+                                            }}
+                                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                                        >
+                                            + Tambah Barang
+                                        </Button>
                                     </div>
                                 }
                                 columns={columns}

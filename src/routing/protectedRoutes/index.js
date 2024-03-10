@@ -68,6 +68,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-gudang/add-pabrik",
         "/staf-gudang/pabrik/detail/:nama_pabrik",
         "/staf-gudang/profile",
+        '/staf-gudang/barang'
         
     ];
 
@@ -77,7 +78,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pabrik/pabrik/detail/:nama_pabrik",
         "/staf-pabrik/add-pabrik",
         "/staf-pabrik/profile",
-//        "/staf-pabrik/barang/:id_barang",
+        "/staf-pabrik/barang",
     ];
 
 
