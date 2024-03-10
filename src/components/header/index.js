@@ -53,7 +53,7 @@ const Header = ({
     return (
         <div style={{ backgroundColor: '#2C358C' }} className='w-full h-16 flex items-center border-b border-neutral40 px-8'>
             <div className='flex w-full justify-between items-center'>
-                <p className='text-2xl font-semibold'>{title}</p>
+                <p className='text-2xl font-semibold text-white'>{title}</p>
                 <div className='flex'>
                     {isVisibleBalance && (
                         <div className='flex items-center justify-center'>

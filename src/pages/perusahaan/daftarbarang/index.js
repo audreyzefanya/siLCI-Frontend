@@ -112,11 +112,11 @@ const DaftarBarangPerusahaan = (props) => {
         setSearchText(e.target.value); 
     };
 
-    const filteredData = perusahaan.listBarang ? 
-        perusahaan.listBarang.filter((item) =>
-            item.nama.toLowerCase().includes(searchText.toLowerCase())
+    const filteredData = perusahaan.listBarang ? perusahaan.listBarang.filter((item) =>
+        item.nama.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.merk.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];
-
+    
     return (
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
