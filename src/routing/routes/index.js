@@ -13,10 +13,10 @@ import TambahGudang from '../../pages/gudang/tambahgudang';
 import DaftarPerusahaan from '../../pages/perusahaan/daftarperusahaan';
 import DaftarBarangPerusahaan from '../../pages/perusahaan/daftarbarang';
 import AddBarangPerusahaan from '../../pages/perusahaan/addbarang';
+import CreatePerusahaan from '../../pages/perusahaan/createperusahaan';
 import RegisterPage from '../../pages/manajer/register';
 import profilepage from '../../pages/manajer/profile/profilepage';
 import DetailPabrik from '../../pages/pabrik/detailpabrik';
-import AddBarangGudang from '../../pages/gudang/addbarang';
 import DaftarPabrik from '../../pages/pabrik/daftarpabrik';
 import AddPabrik from '../../pages/pabrik/addpabrik';
 
@@ -29,13 +29,11 @@ import daftarBarangPadaPerusahaan from '../../pages/adminperusahaan/perusahaan/d
 import addBarangPadaPerusahaan from '../../pages/adminperusahaan/perusahaan/addbarang';
 import detailBarangPerusahaan from '../../pages/adminperusahaan/barang/detail-barang';
 import daftarBarangPerusahaan from '../../pages/adminperusahaan/barang/daftar-barang';
-import addBarangPerusahaan from '../../pages/adminperusahaan/barang/add-barang';
 
 import daftarPerusahaanStafPengadaan from '../../pages/stafpengadaan/perusahaan/daftarperusahaan';
 import daftarBarangPerusahaanStafPengadaan from '../../pages/stafpengadaan/perusahaan/daftarbarang';
 import detailBarangPengadaan from '../../pages/stafpengadaan/barang/detail-barang';
 import daftarBarangPengadaan from '../../pages/stafpengadaan/barang/daftar-barang';
-import addBarangPengadaan from '../../pages/stafpengadaan/barang/add-barang';
 
 import daftarGudangStafGudang from '../../pages/stafgudang/gudang/daftargudang';
 import detailGudangStafGudang from '../../pages/stafgudang/gudang/detailgudang';
@@ -81,6 +79,7 @@ const Routing = () => {
             <Route path="/manager-operasional/perusahaan" element={<ProtectedRoutes element={DaftarPerusahaan} />} />
             <Route path="/manager-operasional/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={DaftarBarangPerusahaan} />} />
             <Route path="/manager-operasional/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={AddBarangPerusahaan} />} />
+            <Route path="/manager-operasional/perusahaan/create" element={<ProtectedRoutes element={CreatePerusahaan} />} />
             <Route path="/manager-operasional/pabrik" element={<ProtectedRoutes element={DaftarPabrik} />} />
             <Route path="/manager-operasional/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={DetailPabrik} />} />
             <Route path="/manager-operasional/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
