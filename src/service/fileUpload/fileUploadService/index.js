@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const PerusahaanImporService = axios.create({
+const FileUploadService = axios.create({
     // baseURL: process.env.REACT_APP_USER_MANAGEMENT_API_BASE_URL,
-    baseURL: "https://propensi-a08-be-production.up.railway.app/api/barang/perusahaan/",
+    baseURL: "https://propensi-a08-be-production.up.railway.app/api/",
     timeout: 10000,
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
     },
 });
 
-PerusahaanImporService.interceptors.request.use(
+FileUploadService.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -23,7 +23,7 @@ PerusahaanImporService.interceptors.request.use(
     }
 );
 
-PerusahaanImporService.interceptors.response.use(
+FileUploadService.interceptors.response.use(
     (response) => {
         return response;
     },
@@ -38,4 +38,4 @@ PerusahaanImporService.interceptors.response.use(
     }
 );
 
-export default PerusahaanImporService;
+export default FileUploadService;

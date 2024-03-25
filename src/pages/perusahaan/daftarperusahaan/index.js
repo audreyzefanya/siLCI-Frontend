@@ -30,6 +30,11 @@ const DaftarPerusahaan = (props) => {
         navigateTo(`/manager-operasional/perusahaan/${id_perusahaan}`);
     };
 
+    const handleAddPerusahaan = (event) => {
+        event.stopPropagation();
+        navigateTo(`/manager-operasional/perusahaan/create`);
+      };
+
     const filteredPerusahaan = daftarPerusahaan.filter(perusahaan =>
         perusahaan.nama.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -41,6 +46,24 @@ const DaftarPerusahaan = (props) => {
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>Daftar Perusahaan</span>
+                    <Button
+                        size="sm"
+                        onClick={handleAddPerusahaan}
+                        style={{
+                        borderRadius: '20px',
+                        backgroundColor: '#DA3732',
+                        borderColor: '#DA3732',
+                        color: 'white',
+                        padding: '5px 15px',
+                        fontSize: '1rem',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.2s ease-in-out',
+                        }}
+                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                    >
+                        + Tambah Perusahaan
+                    </Button>
                 </div>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-2 px-8'>
                     <div className="mt-2 flex justify-center items-center">
@@ -59,10 +82,10 @@ const DaftarPerusahaan = (props) => {
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filteredPerusahaan.map(perusahaan => (
                             <div key={perusahaan.id} className="bg-white rounded-lg p-6 flex flex-col justify-between">
-                                <img src={perusahaan.logo_url} alt={perusahaan.nama} className="h-24 w-24 mx-auto mb-4" />
+                                <img src={perusahaan.logo} alt={perusahaan.nama} className="h-24 w-24 mx-auto mb-4" />
                                 <div className="mt-4">
                                     <h3 className="text-xl font-semibold mb-2" style={{ color: '#2C358C' }}>{perusahaan.nama}</h3>
-                                    <p className="mb-4 text-gray-700">{perusahaan.deskripsi}</p>
+                                    <p className="mb-4 text-gray-700">{perusahaan.deskripsi.length > 100 ? perusahaan.deskripsi.substring(0, 100) + '...' : perusahaan.deskripsi}</p>
                                     <Button
                                         onClick={(e) => handleDetail(perusahaan.id)}
                                         style={{
