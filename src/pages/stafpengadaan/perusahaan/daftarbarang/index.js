@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetDetailPerusahaan } from '../../../../service/perusahaanimpor/endpoint';
+import { GetDetailPerusahaan, GetBarangPerusahaanImpor } from '../../../../service/perusahaanimpor/endpoint';
 import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import Sidebar from '../../../../components/sidebar/stafpengadaan';
@@ -13,11 +13,12 @@ import { FaPlus } from 'react-icons/fa';
 const DaftarBarangPerusahaan = (props) => {
     const { id_perusahaan } = useParams();
     const [perusahaan, setPerusahaan] = useState([]);
+    const [barang, setBarang] = useState([]);
     const navigateTo = useNavigate();
     const [searchText, setSearchText] = useState('');
     var columns = [];
 
-    if (perusahaan.listBarang) {
+    if (barang) {
         columns = [
             {
                 name: "Merk",
@@ -88,6 +89,7 @@ const DaftarBarangPerusahaan = (props) => {
 
     useEffect(() => {
         getDetailPerusahaan()
+        getBarangPerusahaanImpor()
     }, [])
 
     async function getDetailPerusahaan() {
@@ -99,20 +101,24 @@ const DaftarBarangPerusahaan = (props) => {
         }
     }
     
+    async function getBarangPerusahaanImpor() {
+        try {
+            const barangData = await GetBarangPerusahaanImpor(id_perusahaan);
+            setBarang(barangData);
+        } catch (error) {
+            console.error('Error fetching Barang data: ', error);
+        }
+    }
+
     const handleDetailBarang = (barangId) => {
         navigateTo(`/staf-pengadaan/barang/${barangId}`);
-    };
-
-    const addBarangButton = () => {
-        console.log(perusahaan)
-        navigateTo(`/staf-pengadaan/perusahaan/${id_perusahaan}/add`);
     };
     
     const handleSearch = (e) => {
         setSearchText(e.target.value); 
     };
 
-    const filteredData = perusahaan.listBarang ? perusahaan.listBarang.filter((item) =>
+    const filteredData = barang ? barang.filter((item) =>
         item.nama.toLowerCase().includes(searchText.toLowerCase()) ||
         item.merk.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];

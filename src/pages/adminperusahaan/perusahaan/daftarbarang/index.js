@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetDetailPerusahaan } from '../../../../service/perusahaanimpor/endpoint';
+import { GetDetailPerusahaan, GetBarangPerusahaanImpor } from '../../../../service/perusahaanimpor/endpoint';
 import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import Sidebar from '../../../../components/sidebar/adminperusahaan';
@@ -12,11 +12,12 @@ import { Button } from 'react-bootstrap';
 const DaftarBarangPerusahaan = (props) => {
     const { id_perusahaan } = useParams();
     const [perusahaan, setPerusahaan] = useState([]);
+    const [barang, setBarang] = useState([]);
     const navigateTo = useNavigate();
     const [searchText, setSearchText] = useState('');
     var columns = [];
 
-    if (perusahaan.listBarang) {
+    if (barang) {
         columns = [
             {
                 name: "Merk",
@@ -33,7 +34,7 @@ const DaftarBarangPerusahaan = (props) => {
             {
                 name: "Deskripsi",
                 selector: row => row.deskripsi,
-                width: '42.5%', // Set a fixed width for the column
+                width: '47.5%', // Set a fixed width for the column
                 cell: row => (
                     <div style={{ width: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {row.deskripsi}
@@ -62,31 +63,14 @@ const DaftarBarangPerusahaan = (props) => {
                         }}
                     > Detail </Button>
                 ),
-                width: '10%' // Set a fixed width for the column
-            },
-            {
-                name: "Request",
-                cell: (row) => (
-                    <button
-                    style={{
-                        borderRadius: '5px',
-                        marginRight: '5px',
-                        border: '2px solid green', // Adjust border width and color
-                        backgroundColor: 'green', // Fill the border with blue color
-                        color: 'white',
-                        padding: '6px 8px' // Text color
-                    }}
-                    >
-                        Request
-                    </button>
-                ),
-                width: '10%' // Set a fixed width for the column
+                width: '15%' // Set a fixed width for the column
             }
         ];
     }
 
     useEffect(() => {
         getDetailPerusahaan()
+        getBarangPerusahaanImpor()
     }, [])
 
     async function getDetailPerusahaan() {
@@ -95,6 +79,15 @@ const DaftarBarangPerusahaan = (props) => {
             setPerusahaan(perusahaanData)
         } catch (error) {
             console.error('Error fetching perusahaan data:', error);
+        }
+    }
+
+    async function getBarangPerusahaanImpor() {
+        try {
+            const barangData = await GetBarangPerusahaanImpor(id_perusahaan);
+            setBarang(barangData);
+        } catch (error) {
+            console.error('Error fetching Barang data: ', error);
         }
     }
     
@@ -110,7 +103,7 @@ const DaftarBarangPerusahaan = (props) => {
         setSearchText(e.target.value); 
     };
 
-    const filteredData = perusahaan.listBarang ? perusahaan.listBarang.filter((item) =>
+    const filteredData = barang ? barang.filter((item) =>
         item.nama.toLowerCase().includes(searchText.toLowerCase()) ||
         item.merk.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];

@@ -52,3 +52,13 @@ export const PutEditUserDetails = async (id, username, email, role) => {
         throw error;
     }
 }
+
+// Get All Admin Impor
+export const GetAdminImport = async () => {
+    try {
+        const response = await UserManagementService.get(`/api/user/admin-import/`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
