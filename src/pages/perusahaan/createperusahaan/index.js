@@ -7,6 +7,7 @@ import Sidebar from '../../../components/sidebar/manajer';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import { CreatePerusahaanImpor } from '../../../service/fileUpload/endpoint';
 import { GetAdminImport } from '../../../service/usermanagement/endpoint';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const CreatePerusahaan = (props) => {
     const [isModalOpenResult, setIsModalOpenResult] = useState(false);
@@ -17,8 +18,7 @@ const CreatePerusahaan = (props) => {
     const [adminPerusahaan, setAdminPerusahaan] = useState("");
     const [daftarAdmin, setDaftarAdmin] = useState([]);
     const [logoPerusahaan, setLogoPerusahaan] = useState(null)
-    const [hargaBarang, setHargaBarang] = useState('');
-    const [merkIdBarang, setMerkIdBarang] = useState('');
+
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const navigateTo = useNavigate();
 
@@ -105,18 +105,17 @@ const CreatePerusahaan = (props) => {
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="imageUpload" className="block text-sm font-medium text-gray-700">Upload Image</label>
-                                <input type="file" id="imageUpload" accept="image/*" className="input-field rounded-lg p-2 w-full border border-gray-300" onChange={handleUploadLogo}/>
+                                <input type="file" id="imageUpload" accept="image/*" className="input-field rounded-lg p-2 w-full border border-gray-300" onChange={handleUploadLogo} required />
                             </div>
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-gray-700">Admin Perusahaan Import</label>
                                 <select
                                     value={adminPerusahaan}
                                     onChange={(e) => setAdminPerusahaan(e.target.value)}
-                                    placeholder="Pilih Admin Perusahaan Import"
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
                                     required  
                                 >
-                                    <option value="">Pilih Email Admin</option>
+                                    <option value="" disabled hidden>Pilih Admin Perusahaan Import</option>
                                     {daftarAdmin.map((admin) => (
                                         <option key={admin.id} value={admin.id}>{admin.email}</option>
                                     ))}
@@ -162,6 +161,17 @@ const CreatePerusahaan = (props) => {
                     </form>
                 </div>
             </div>
+            <ModalLoading
+                title="Loading..."
+                subtitle="Please wait a moment"
+                isOpen={isModalOpenLoading}
+            />
+
+            <ModalResult
+                subtitle={dataSubtitleModal}
+                type={flagResult}
+                isOpen={isModalOpenResult}
+            />
         </div>
     );
 };

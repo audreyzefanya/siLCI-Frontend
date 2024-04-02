@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const UserManagementService = axios.create({
     // baseURL: process.env.REACT_APP_USER_MANAGEMENT_API_BASE_URL,
-    baseURL: "https://propensi-a08-be-production.up.railway.app/",
+    baseURL: "http://localhost:8000/",
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

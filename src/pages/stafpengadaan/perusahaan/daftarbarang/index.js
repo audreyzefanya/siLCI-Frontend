@@ -8,7 +8,6 @@ import Header from '../../../../components/header';
 import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
 
 const DaftarBarangPerusahaan = (props) => {
     const { id_perusahaan } = useParams();
@@ -70,14 +69,15 @@ const DaftarBarangPerusahaan = (props) => {
                 name: "Request",
                 cell: (row) => (
                     <button
-                    style={{
-                        borderRadius: '5px',
-                        marginRight: '5px',
-                        border: '2px solid green', // Adjust border width and color
-                        backgroundColor: 'green', // Fill the border with blue color
-                        color: 'white',
-                        padding: '6px 8px' // Text color
-                    }}
+                        style={{
+                            borderRadius: '5px',
+                            marginRight: '5px',
+                            border: '2px solid green', // Adjust border width and color
+                            backgroundColor: 'green', // Fill the border with blue color
+                            color: 'white',
+                            padding: '6px 8px' // Text color
+                        }}
+                        onClick={() => handleRequestBarang(row.id)}
                     >
                         Request
                     </button>
@@ -114,6 +114,10 @@ const DaftarBarangPerusahaan = (props) => {
         navigateTo(`/staf-pengadaan/barang/${barangId}`);
     };
     
+    const handleRequestBarang = (barangId) => {
+        navigateTo(`/staf-pengadaan/perusahaan/${id_perusahaan}/request/${barangId}`);
+    };
+
     const handleSearch = (e) => {
         setSearchText(e.target.value); 
     };

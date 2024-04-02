@@ -60,6 +60,7 @@ import profileAdminPerusahaan from '../../pages/adminperusahaan/profile';
 import profileStafGudang from '../../pages/stafgudang/profile';
 import profileStafPabrik from '../../pages/stafpabrik/profile';
 import profileStafPengadaan from '../../pages/stafpengadaan/profile';
+import requestPengadaan from '../../pages/stafpengadaan/perusahaan/requestPengadaan';
 
 
 const Routing = () => {
@@ -110,6 +111,7 @@ const Routing = () => {
             <Route path="/staf-pengadaan/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={daftarBarangPerusahaanStafPengadaan} />} />
             <Route path="/staf-pengadaan/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPengadaan} />} />
             <Route path="/staf-pengadaan/barang" element={<ProtectedRoutes element={daftarBarangPengadaan} />} />
+            <Route path="/staf-pengadaan/perusahaan/:id_perusahaan/request/:id_barang" element={<ProtectedRoutes element={requestPengadaan} />} />
 
             {/*-----Staf Gudang Routes------*/}
             <Route path="/staf-gudang/dashboard" element={<ProtectedRoutes element={dashboardStafGudang} />} />

@@ -39,3 +39,12 @@ export const PostAddBarangImpor = async (id_barang, id_perusahaan) => {
         throw error;
     }
 }
+
+export const PostCreatePengadaan = async (dataPengadaan) => {
+    try {
+        const response = await PerusahaanImporService.post('barang/request', dataPengadaan);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
