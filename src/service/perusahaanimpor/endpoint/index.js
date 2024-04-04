@@ -48,3 +48,23 @@ export const PostCreatePengadaan = async (dataPengadaan) => {
         throw error;
     }
 }
+
+// Increase Status of Pengadaan
+export const IncreaseStatusPengadaan = async (pengadaan_id) => {
+    try {
+        const response = await PerusahaanImporService.put(`request/${pengadaan_id}/status`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+// Get Detail Pengadaan
+export const GetDetailPengadaan = async (pengadaan_id) => {
+    try {
+        const response = await PerusahaanImporService.get(`request/detail/${pengadaan_id}/`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

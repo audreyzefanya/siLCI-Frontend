@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from '../protectedRoutes';
+
+
+
 import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
 import AddBarang from '../../pages/barang/add-barang';
@@ -62,6 +65,10 @@ import profileStafPabrik from '../../pages/stafpabrik/profile';
 import profileStafPengadaan from '../../pages/stafpengadaan/profile';
 import requestPengadaan from '../../pages/stafpengadaan/perusahaan/requestPengadaan';
 
+import PengadaanDetail from '../../pages/stafpengadaan/perusahaan/detailpengadaan';
+
+
+
 
 const Routing = () => {
   return (
@@ -90,6 +97,8 @@ const Routing = () => {
             <Route path="/manager-operasional/daftar-gudang/add" element={<ProtectedRoutes element={TambahGudang} />} />
             <Route path="/manager-operasional/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
             <Route path="/manager-operasional/add-pabrik" element={<ProtectedRoutes element={AddPabrik} />} />
+            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetail} />} />
+
 
             {/*-----Admin Karyawan Routes------*/}
             <Route path="/admin-karyawan/dashboard" element={<ProtectedRoutes element={dashboardAdminKaryawan} />} />
@@ -104,6 +113,8 @@ const Routing = () => {
             <Route path="/admin-perusahaan/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={addBarangPadaPerusahaan} />} />
             <Route path="/admin-perusahaan/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPerusahaan} />} />
             <Route path="/admin-perusahaan/barang" element={<ProtectedRoutes element={daftarBarangPerusahaan} />} />
+            <Route path="/admin-perusahaan/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetail} />} />
+
 
             {/*-----Staf Pengadaan Routes------*/}
             <Route path="/staf-pengadaan/dashboard" element={<ProtectedRoutes element={dashboardStafPengadaan} />} />
@@ -112,6 +123,8 @@ const Routing = () => {
             <Route path="/staf-pengadaan/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPengadaan} />} />
             <Route path="/staf-pengadaan/barang" element={<ProtectedRoutes element={daftarBarangPengadaan} />} />
             <Route path="/staf-pengadaan/perusahaan/:id_perusahaan/request/:id_barang" element={<ProtectedRoutes element={requestPengadaan} />} />
+            <Route path="/staf-pengadaan/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetail} />} />
+
 
             {/*-----Staf Gudang Routes------*/}
             <Route path="/staf-gudang/dashboard" element={<ProtectedRoutes element={dashboardStafGudang} />} />
