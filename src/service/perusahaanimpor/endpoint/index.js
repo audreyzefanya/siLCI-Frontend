@@ -68,3 +68,13 @@ export const GetDetailPengadaan = async (pengadaan_id) => {
         throw error;
     }
 }
+
+// Reject Pengadaan
+export const RejectPengadaan = async (pengadaan_id) => {
+    try {
+        const response = await PerusahaanImporService.put(`request/${pengadaan_id}/reject`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

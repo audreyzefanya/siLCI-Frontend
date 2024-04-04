@@ -50,3 +50,12 @@ export const fetchAllGudang = async () => {
         throw error;
     }
 }
+
+export const addStokGudang = async (dataTambah) => {
+    try {
+        const response = await GudangManagementService.put('/api/gudang/barang-gudang/update/stok', dataTambah);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

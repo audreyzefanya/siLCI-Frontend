@@ -20,6 +20,7 @@ const RequestPengadaan = (props) => {
     const [jumlah, setJumlah] = useState();
     const [perusahaan, setPerusahaan] = useState([]);
     const [barang, setBarang] = useState([]);
+    const [totalHarga, setTotalHarga] = useState();
     const [daftarGudang, setDaftarGudang] = useState([]);
     const navigateTo = useNavigate();
 
@@ -96,6 +97,15 @@ const RequestPengadaan = (props) => {
         navigateTo(`/staf-pengadaan/perusahaan/${id_perusahaan}`);
     };
 
+    const handleSetJumlah = (jumlah) => {
+        if (barang) {
+            setJumlah(jumlah);
+            setTotalHarga(jumlah * barang.harga);
+        } else {
+            setJumlah(jumlah);
+        }
+    };
+
     return (
         <div className='flex w-screen h-screen bg-gray-100'>
             <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
@@ -115,7 +125,7 @@ const RequestPengadaan = (props) => {
                                 <input
                                     type="text"
                                     value={jumlah}
-                                    onChange={(e) => setJumlah(e.target.value)}
+                                    onChange={(e) => handleSetJumlah(e.target.value)}
                                     placeholder="Masukkan Jumlah Barang Yang Ingin Dipesan"
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
                                     required 
@@ -136,6 +146,11 @@ const RequestPengadaan = (props) => {
                                     ))}
                                 </select>
                             </div>
+                            {!isNaN(totalHarga) && totalHarga > 0 && (
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <p className="text-sm mb-4"><strong>Total Harga:</strong> Rp {totalHarga.toLocaleString()}</p>
+                                </div>
+                            )}
                             <div className="flex justify-center">
                                 <button
                                     type="submit"  

@@ -6,11 +6,12 @@ import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/manajer';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
-import { addStokGudang, fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
+import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
 import { GetDetailBarang } from '../../../../service/daftarbarang/endpoint';
 import { GetDetailPengadaan, IncreaseStatusPengadaan } from '../../../../service/perusahaanimpor/endpoint';
 import { GetDetailPerusahaan } from '../../../../service/perusahaanimpor/endpoint';
-import { uploadPayment } from '../../../../service/fileUpload/endpoint';
+import { RejectPengadaan } from '../../../../service/perusahaanimpor/endpoint';
+import { uploadInvoice } from '../../../../service/fileUpload/endpoint';
 import { changePengadaanStatus } from '../../../../service/fileUpload/endpoint';
 import ModalLoading from '../../../../components/modal/modalLoading';
 import ModalConfirm from '../../../../components/modal/modalConfirm';
@@ -23,7 +24,7 @@ const PengadaanDetail = (props) => {
     const [barangName, setBarangName] = useState('');
     const [gudangName, setGudangName] = useState('');
     const [perusahaanName, setPerusahaanName] = useState('');
-    const [isPaymentUploaded, setIsPaymentUploaded] = useState(false);
+    const [isInvoiceUploaded, setIsInvoiceUploaded] = useState(false); // Initialize based on the pengadaanDetail state
     const [userInfo, setUserInfo] = useState(null);
     const [isModalLoadingOpen, setModalLoadingOpen] = useState(false);
     const [isModalConfirmOpen, setModalConfirmOpen] = useState(false);
@@ -49,8 +50,8 @@ const PengadaanDetail = (props) => {
                 setPerusahaanName(perusahaanResponse.nama);
             }
 
-            // Update payment upload status based on the response
-            setIsPaymentUploaded(!!response.filePayment);
+            // Update invoice upload status based on the response
+            setIsInvoiceUploaded(!!response.fileInvoice);
         } catch (error) {
             console.error('Error fetching pengadaan details:', error);
         }
@@ -71,21 +72,38 @@ const PengadaanDetail = (props) => {
       }, []);
 
     useEffect(() => {
-      if (pengadaanDetail) {
-          const statusMap = new Map([
-              ['Permintaan Ditolak', 0],
-              ['Penawaran Dikirim', 1],
-              ['Menunggu Pembayaran', 2],
-              ['Pembayaran Dikirim', 3],
-              ['Pembayaran Diverifikasi', 4],
-              ['Barang Dalam Perjalanan', 5],
-              ['Barang Diterima', 6]
-          ]);
-  
-          const statusInt = statusMap.get(pengadaanDetail.status);
-          setStatusInt(statusInt !== undefined ? statusInt : null);
-      }
+        if (pengadaanDetail && pengadaanDetail.status) {
+            const statusMap = new Map([
+                ['Permintaan Ditolak', 0],
+                ['Penawaran Dikirim', 1],
+                ['Menunggu Pembayaran', 2],
+                ['Pembayaran Dikirim', 3],
+                ['Pembayaran Diverifikasi', 4],
+                ['Barang Dalam Perjalanan', 5],
+                ['Barang Diterima', 6]
+            ]);
+    
+            const statusInt = statusMap.get(pengadaanDetail.status);
+            setStatusInt(statusInt !== undefined ? statusInt : null);
+        }
     }, [pengadaanDetail]);
+
+    const handleUploadInvoice = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        try {
+            const formData = new FormData();
+            formData.append('fileInvoice', file);
+            await uploadInvoice(pengadaan_id, formData);
+            alert('Invoice uploaded successfully.');
+            setIsInvoiceUploaded(true);
+            fetchDetails();
+        } catch (error) {
+            console.error('Error uploading invoice:', error);
+            alert('Error uploading invoice.');
+        }
+    };
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -107,16 +125,16 @@ const PengadaanDetail = (props) => {
         try {
           // Create the form data and append the file to be uploaded
           const formData = new FormData();
-          formData.append('filePayment', fileToUpload);
+          formData.append('fileInvoice', fileToUpload);
       
           // Call the upload service
-          await uploadPayment(pengadaan_id, formData);
+          await uploadInvoice(pengadaan_id, formData);
           
           // If the upload was successful, update the pengadaan status
           await changePengadaanStatus(pengadaan_id);
       
           // Update the state to reflect that the invoice has been uploaded
-          setIsPaymentUploaded(true);
+          setIsInvoiceUploaded(true);
       
           // Re-fetch pengadaan details to reflect the newly uploaded invoice
           await fetchDetails();
@@ -126,11 +144,11 @@ const PengadaanDetail = (props) => {
           setModalResult({
             isOpen: true,
             type: 'success',
-            subtitle: 'Payment uploaded and status updated successfully!',
+            subtitle: 'Invoice uploaded and status updated successfully!',
           });
 
           setTimeout(() => {
-            setModalResult({ isOpen: false, type: 'success', subtitle: 'Payment uploaded and status updated successfully!' });
+            setModalResult({ isOpen: false, type: 'success', subtitle: 'Invoice uploaded and status updated successfully!' });
           }, 1500);
       
           setFilePreview(null);
@@ -142,11 +160,11 @@ const PengadaanDetail = (props) => {
           setModalResult({
             isOpen: true,
             type: 'failed',
-            subtitle: 'Failed to upload payment. Please try again.',
+            subtitle: 'Failed to upload invoice. Please try again.',
           });
 
           setTimeout(() => {
-            setModalResult({ isOpen: false, type: 'failed', subtitle: 'Failed to upload payment. Please try again.' });
+            setModalResult({ isOpen: false, type: 'failed', subtitle: 'Failed to upload invoice. Please try again.' });
           }, 1500);
         }
       };
@@ -159,83 +177,81 @@ const PengadaanDetail = (props) => {
         navigate(-1);
     };
 
-    const finishPengadaanButton = async () => {
-
-      const dataTambah = {
-          gudang: pengadaanDetail.gudangTujuan,
-          barang: pengadaanDetail.barang,
-          stok: pengadaanDetail.jumlahBarang,
-      };
-      await addStokGudang(dataTambah);
-      await IncreaseStatusPengadaan(pengadaan_id);
-      window.location.reload();
+    const tolakButton = async () => {
+        await RejectPengadaan(pengadaan_id);
+        window.location.reload();
     };
 
-    const invoiceSection = pengadaanDetail.fileInvoice ? (
+    const increaseStatusButton = async () => {
+        await IncreaseStatusPengadaan(pengadaan_id);
+        window.location.reload();
+    };
+
+    const invoiceSection = userInfo && userInfo.role === 'Admin Perusahaan Import' ? (
+        <>
+          {!pengadaanDetail.fileInvoice && (
+            <>
+              {filePreview ? (
+                <div>
+                  <a href={filePreview} target="_blank" rel="noopener noreferrer">
+                    <img src={filePreview} alt="Preview" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+                  </a>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+                    <Button onClick={handleConfirmUpload} style={{
+                                        borderRadius: '20px',
+                                        backgroundColor: '#2C358C',
+                                        color: 'white',
+                                        padding: '10px 20px',
+                                        fontSize: '16px',
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
+                                    }}
+                                    onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
+                                    onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}>Confirm Upload</Button>
+                    <Button onClick={() => { setFilePreview(null); setFileToUpload(null); }} style={{
+                                        borderRadius: '20px',
+                                        backgroundColor: 'red',
+                                        color: 'white',
+                                        padding: '10px 20px',
+                                        fontSize: '16px',
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
+                                    }}
+                                    >Remove File</Button>
+                  </div>
+                </div>
+              ) : (
+                <input type="file" id="invoiceUpload" accept="image/*,application/pdf" onChange={handleFileChange} />
+              )}
+            </>
+          )}
+          {pengadaanDetail.fileInvoice && (
+            <a href={pengadaanDetail.fileInvoice} target="_blank" rel="noopener noreferrer">
+              <img src={pengadaanDetail.fileInvoice} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+            </a>
+          )}
+        </>
+      ) : (
+        pengadaanDetail.fileInvoice ? (
           <a href={pengadaanDetail.fileInvoice} target="_blank" rel="noopener noreferrer">
             <img src={pengadaanDetail.fileInvoice} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
           </a>
         ) : (
           <p>No Invoice has been uploaded</p>
-    );
+        )
+      );
 
-    const paymentSection = userInfo && userInfo.role === 'Staf Pengadaan' ? (
-      <>
-        {!pengadaanDetail.filePayment && (
-          <>
-            {filePreview ? (
-              <div>
-                <a href={filePreview} target="_blank" rel="noopener noreferrer">
-                  <img src={filePreview} alt="Preview" style={{ maxHeight: '200px', marginBottom: '10px' }} />
-                </a>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
-                  <Button onClick={handleConfirmUpload} style={{
-                                      borderRadius: '20px',
-                                      backgroundColor: '#2C358C',
-                                      color: 'white',
-                                      padding: '10px 20px',
-                                      fontSize: '16px',
-                                      transition: 'all 0.3s ease',
-                                      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
-                                  }}
-                                  onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
-                                  onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}>Confirm Upload</Button>
-                  <Button onClick={() => { setFilePreview(null); setFileToUpload(null); }} style={{
-                                      borderRadius: '20px',
-                                      backgroundColor: 'red',
-                                      color: 'white',
-                                      padding: '10px 20px',
-                                      fontSize: '16px',
-                                      transition: 'all 0.3s ease',
-                                      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
-                                  }}
-                                  >Remove File</Button>
-                </div>
-              </div>
-            ) : (
-              <input type="file" id="paymentUpload" accept="image/*,application/pdf" onChange={handleFileChange} />
-            )}
-          </>
-        )}
-        {pengadaanDetail.filePayment && (
-          <a href={pengadaanDetail.filePayment} target="_blank" rel="noopener noreferrer">
-            <img src={pengadaanDetail.filePayment} alt="Payment" style={{ maxHeight: '200px', marginBottom: '10px' }} />
-          </a>
-        )}
-      </>
-    ) : (
-      pengadaanDetail.filePayment ? (
+    const paymentSection = pengadaanDetail.filePayment ? (
         <a href={pengadaanDetail.filePayment} target="_blank" rel="noopener noreferrer">
-          <img src={pengadaanDetail.filePayment} alt="Payment" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+          <img src={pengadaanDetail.filePayment} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
         </a>
       ) : (
         <p>No Payment has been uploaded</p>
-      )
-    );
+      );
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full flex flex-col'>
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">
@@ -251,21 +267,21 @@ const PengadaanDetail = (props) => {
                             <p className="text-lg mb-4"><strong>Barang:</strong> {barangName}</p>
                             <p className="text-lg mb-4"><strong>Gudang Tujuan:</strong> {gudangName}</p>
                             <p className="text-lg mb-4"><strong>Perusahaan:</strong> {perusahaanName}</p>
-                
+                            
                             {statusInt >= 1 && (
                                 <div className="invoice-container flex flex-col items-center justify-center p-8 m-8 w-full" style={{ borderColor: '#2C358C', borderWidth: '1px', borderStyle: 'solid', maxWidth: '600px', margin: '0 auto', marginBottom: '20px' }}>
-                                  <h3 className="text-xl font-bold mb-3">File Invoice</h3>
-                                  {invoiceSection}
+                                    <h3 className="text-xl font-bold mb-3">File Invoice</h3>
+                                    {invoiceSection}
                                 </div>
                             )}
                             {statusInt >= 2 && (
                                 <div className="payment-container flex flex-col items-center justify-center p-8 m-8 w-full" style={{ borderColor: '#2C358C', borderWidth: '1px', borderStyle: 'solid', maxWidth: '600px', margin: '0 auto' }}>
-                                  <h3 className="text-xl font-bold mb-3">File Payment</h3>
-                                  {paymentSection}
+                                    <h3 className="text-xl font-bold mb-3">File Payment</h3>
+                                    {paymentSection}
                                 </div>
                             )}
                         </div>
-                        <div className="button-container" style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
+                        <div className="button-container" style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
                             <Button
                                 onClick={kembaliButton}
                                 style={{
@@ -283,9 +299,28 @@ const PengadaanDetail = (props) => {
                                 Kembali
                             </Button>
 
-                            {statusInt === 5 && (
+                            {statusInt === 1 && (
                                 <Button
-                                    onClick={finishPengadaanButton}
+                                    onClick={tolakButton}
+                                    style={{
+                                        borderRadius: '20px',
+                                        backgroundColor: '#DA3732', 
+                                        color: 'white',
+                                        padding: '10px 20px',
+                                        fontSize: '16px',
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
+                                    }}
+                                    onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
+                                    onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
+                                >
+                                    Tolak Pengadaan
+                                </Button>
+                            )}
+
+                            {statusInt === 3 && (
+                                <Button
+                                    onClick={increaseStatusButton}
                                     style={{
                                         borderRadius: '20px',
                                         backgroundColor: 'green', 
@@ -298,7 +333,26 @@ const PengadaanDetail = (props) => {
                                     onMouseOver={(e) => e.target.style.backgroundColor = 'green'}
                                     onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
                                 >
-                                    Barang Diterima
+                                    Verifikasi Pembayaran
+                                </Button>
+                            )}
+
+                            {statusInt === 4 && (
+                                <Button
+                                    onClick={increaseStatusButton}
+                                    style={{
+                                        borderRadius: '20px',
+                                        backgroundColor: 'green', 
+                                        color: 'white',
+                                        padding: '10px 20px',
+                                        fontSize: '16px',
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
+                                    }}
+                                    onMouseOver={(e) => e.target.style.backgroundColor = 'green'}
+                                    onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
+                                >
+                                    Barang Terkirim
                                 </Button>
                             )}
 
@@ -308,7 +362,7 @@ const PengadaanDetail = (props) => {
                             <ModalConfirm
                                 isOpen={isModalConfirmOpen}
                                 title="Confirm Upload"
-                                message="Are you sure you want to upload this payment?"
+                                message="Are you sure you want to upload this invoice?"
                                 onClose={() => setModalConfirmOpen(false)}
                                 onConfirm={proceedWithUpload}
                             />
