@@ -19,6 +19,7 @@ import profilepage from '../../pages/manajer/profile/profilepage';
 import DetailPabrik from '../../pages/pabrik/detailpabrik';
 import DaftarPabrik from '../../pages/pabrik/daftarpabrik';
 import AddPabrik from '../../pages/pabrik/addpabrik';
+import daftarPengiriman from '../../pages/pabrik/daftarpengiriman';
 
 import daftarBarang from '../../pages/adminkaryawan/barang/daftar-barang';
 import detailBarang from '../../pages/adminkaryawan/barang/detail-barang';
@@ -48,6 +49,7 @@ import daftarPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarpabrik';
 import detailPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
 import addPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addpabrik';
 import detailBarangPabrik from '../../pages/stafpabrik/barang/detail-barang';
+import daftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
 
 import dashboardAdminKaryawan from '../../pages/adminkaryawan/dashboard';
 import dashboardAdminPerusahaan from '../../pages/adminperusahaan/dashboard';
@@ -89,6 +91,7 @@ const Routing = () => {
             <Route path="/manager-operasional/daftar-gudang/add" element={<ProtectedRoutes element={TambahGudang} />} />
             <Route path="/manager-operasional/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
             <Route path="/manager-operasional/add-pabrik" element={<ProtectedRoutes element={AddPabrik} />} />
+            <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
 
             {/*-----Admin Karyawan Routes------*/}
             <Route path="/admin-karyawan/dashboard" element={<ProtectedRoutes element={dashboardAdminKaryawan} />} />
@@ -128,7 +131,7 @@ const Routing = () => {
             <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={detailPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/add-pabrik" element={<ProtectedRoutes element={addPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPabrik} />} />
-
+            <Route path="/staf-pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengirimanStafPabrik} />} />
 
             <Route path="/staf-pabrik/profile" element={<ProtectedRoutes element={profileStafPabrik} />} />
             <Route path="/staf-gudang/profile" element={<ProtectedRoutes element={profileStafGudang} />} />

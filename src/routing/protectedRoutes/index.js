@@ -29,6 +29,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/profile",
         "/manager-operasional/add-barang",
         "/manager-operasional/add-pabrik",
+        "/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik",
     ];
 
     const adminKaryawanRoutes = [
@@ -79,6 +80,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pabrik/add-pabrik",
         "/staf-pabrik/profile",
         "/staf-pabrik/barang",
+        "/staf-pabrik/permintaan-pengiriman/:nama_pabrik",
     ];
 
 

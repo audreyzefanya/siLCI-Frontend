@@ -50,3 +50,27 @@ export const PostAddPabrik = async (dataPabrik) => {
         throw error;
     }
 }
+
+export const getDaftarPengiriman = async (pabrik_name) => {
+  try {
+    const response = await PabrikService.get('permintaanpengiriman/' + pabrik_name );
+    return response.data;
+  } catch (error) {
+         console.error('Terjadi kesalahan saat mengambil data:', error);
+         throw error;
+  }
+};
+
+export const updateStatusPengiriman = async (kodePermintaan, newData) => {
+    try {
+        const response = await PabrikService.put(`statuspengiriman/${kodePermintaan}`, newData);
+        if (response && response.data) {
+            return response.data;
+        } else {
+            throw new Error('Gagal memperbarui status pengiriman: Data tidak ditemukan dalam respons');
+        }
+    } catch (error) {
+        console.error('Error updating status:', error);
+        throw error;
+    }
+};
