@@ -41,3 +41,21 @@ export const PostAddBarangGudang = async (id_barang, id_gudang) => {
         throw error;
     }
 }
+
+export const fetchAllGudang = async () => {
+    try {
+        const response = await GudangManagementService.get('/api/gudang/all');
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const addStokGudang = async (dataTambah) => {
+    try {
+        const response = await GudangManagementService.put('/api/gudang/barang-gudang/update/stok', dataTambah);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

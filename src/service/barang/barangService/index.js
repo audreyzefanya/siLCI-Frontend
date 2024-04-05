@@ -10,9 +10,13 @@ const BarangService = axios.create({
     },
 });
 
-BarangService.interceptors.response.use(
-    (response) => {
-        return response;
+BarangService.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `${token}`;
+        }
+        return config;
     },
     (error) => {
         return Promise.reject(error);
@@ -24,6 +28,12 @@ BarangService.interceptors.response.use(
         return response;
     },
     (error) => {
+        if (error.response.data.code === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userInfo');
+            const navigateTo = useNavigate();
+            navigateTo("/login")
+        }
         return Promise.reject(error);
     }
 );
