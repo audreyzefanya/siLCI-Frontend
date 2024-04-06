@@ -80,7 +80,9 @@ const DaftarPengiriman = (props) => {
                         />
                     </div>
                 </div>
-                <TabPabrik />
+                <TabPabrik 
+                    tabAktif={"Pengiriman Barang"}
+                />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
                     <div className="text-3xl font-bold mb-6 ml-2 mt-2 text-center"> {nama_pabrik} </div>
                     <table className="w-full table-auto">

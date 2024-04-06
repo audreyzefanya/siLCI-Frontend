@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const TabNavigation = () => {
-  const [activeTab, setActiveTab] = useState('Daftar Barang');
+const TabNavigation = ( {tabAktif} ) => {
+  const [activeTab, setActiveTab] = useState(tabAktif);
   const navigate = useNavigate();
   const { nama_pabrik } = useParams();
 
