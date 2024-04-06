@@ -11,6 +11,7 @@ import { FaPlus } from 'react-icons/fa';
 import FloatingMenu from '../../../components/floatingmenu';
 import { GetPabrik, PostAddBarangPabrik } from '../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../service/barang/endpoint';
+import TabPabrik from '../../../components/tabPabrik';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
@@ -157,26 +158,7 @@ const DetailPabrik = (props) => {
                                         <b>Alamat:</b> {pabrik.alamat}
                                     </div>
                                     <br />
-                                    <div style={{ marginBottom: '10px', display: 'flex', flexDirection: 'row' }}>
-                                        <button
-                                            className={`tab-button ${activeTab === 'listBarang' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('listBarang')}
-                                        >
-                                            Daftar Barang
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'batchProduksi' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('batchProduksi')}
-                                        >
-                                            Batch Produksi
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'permintaanPengiriman' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('permintaanPengiriman')}
-                                        >
-                                            Permintaan Pengiriman
-                                        </button>
-                                    </div>
+                                    <TabPabrik />
                                     {activeTab === 'listBarang' && (
                                         <DataTable
                                             title={

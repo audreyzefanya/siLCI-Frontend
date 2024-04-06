@@ -14,9 +14,9 @@ const TabNavigation = () => {
     if (tabName === 'Batch Produksi') {
       navigate('');
     } else if (tabName === 'Pengiriman Barang') {
-      navigate(`/manager-operasional/pabrik/permintaan-pengiriman/${nama_pabrik}`);
+      navigate(`/staf-pabrik/pabrik/permintaan-pengiriman/${nama_pabrik}`);
     } else if (tabName === 'Daftar Barang') {
-      navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}`);
+      navigate(`/staf-pabrik/pabrik/detail/${nama_pabrik}`);
     }
   };
 

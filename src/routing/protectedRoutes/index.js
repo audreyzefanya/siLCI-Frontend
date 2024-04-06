@@ -80,7 +80,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pabrik/add-pabrik",
         "/staf-pabrik/profile",
         "/staf-pabrik/barang",
-        "/staf-pabrik/permintaan-pengiriman/:nama_pabrik",
+        "/staf-pabrik/pabrik/permintaan-pengiriman/:nama_pabrik",
     ];
 
 

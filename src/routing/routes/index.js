@@ -49,7 +49,7 @@ import daftarPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarpabrik';
 import detailPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
 import addPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addpabrik';
 import detailBarangPabrik from '../../pages/stafpabrik/barang/detail-barang';
-import daftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
+import DaftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
 
 import dashboardAdminKaryawan from '../../pages/adminkaryawan/dashboard';
 import dashboardAdminPerusahaan from '../../pages/adminperusahaan/dashboard';
@@ -131,7 +131,7 @@ const Routing = () => {
             <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={detailPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/add-pabrik" element={<ProtectedRoutes element={addPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPabrik} />} />
-            <Route path="/staf-pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengirimanStafPabrik} />} />
+            <Route path="/staf-pabrik/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={DaftarPengirimanStafPabrik} />} />
 
             <Route path="/staf-pabrik/profile" element={<ProtectedRoutes element={profileStafPabrik} />} />
             <Route path="/staf-gudang/profile" element={<ProtectedRoutes element={profileStafGudang} />} />

@@ -2,14 +2,16 @@ import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import Sidebar from '../../../../components/sidebar/stafpabrik';
+import Sidebar from '../../../../components/sidebar/manajer';
 import Header from '../../../../components/header';
 import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
+import { FaPlus } from 'react-icons/fa';
 import FloatingMenu from '../../../../components/floatingmenu';
 import { GetPabrik, PostAddBarangPabrik } from '../../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
+import TabPabrik from '../../../../components/tabPabrikGudang';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
@@ -77,7 +79,7 @@ const DetailPabrik = (props) => {
     useEffect(() => {
         getDetailPabrik()
         getAllBarang()
-    }, []);
+    }, [nama_pabrik]);
 
     async function getDetailPabrik() {
         try {
@@ -98,11 +100,15 @@ const DetailPabrik = (props) => {
     }
 
     const handleTabChange = (tabName) => {
-        setActiveTab(tabName);
-    };
+            if (tabName === 'permintaanPengiriman') {
+                navigateTo(`/manager-operasional/pabrik/permintaan-pengiriman/${nama_pabrik}`)
+            } else {
+                setActiveTab(tabName);
+            }
+        };
 
     const handleDetailBarang = (barangId) => {
-        navigateTo(`/staf-pabrik/barang/${barangId}`);
+        navigateTo(`/manager-operasional/barang/${barangId}`);
     };
 
     const addBarangButton = () => {
@@ -142,7 +148,7 @@ const DetailPabrik = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
             <div className="w-full h-screen flex flex-col">
-                <Header title={pabrik.nama} style={{ color: 'white' }} />
+                <Header title={pabrik.nama} />
                 <div className="flex-1 bg-neutral20">
                     <div className={`flex-1 ${showFloatingMenu ? 'blur' : ''}`}>
                         <div className='no-scrollbar overflow-y-auto py-3 px-8'>
@@ -152,51 +158,12 @@ const DetailPabrik = (props) => {
                                         <b>Alamat:</b> {pabrik.alamat}
                                     </div>
                                     <br />
-                                    <div style={{ marginBottom: '10px', display: 'flex', flexDirection: 'row' }}>
-                                        <button
-                                            className={`tab-button ${activeTab === 'listBarang' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('listBarang')}
-                                        >
-                                            Daftar Barang
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'batchProduksi' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('batchProduksi')}
-                                        >
-                                            Batch Produksi
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'permintaanPengiriman' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('permintaanPengiriman')}
-                                        >
-                                            Permintaan Pengiriman
-                                        </button>
-                                    </div>
+                                    <TabPabrik />
                                     {activeTab === 'listBarang' && (
                                         <DataTable
                                             title={
                                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                    <div className="daftar-barang">
-                                                        Daftar Barang
-                                                    </div>
-                                                    <Button
-                                                        size="sm"
-                                                        onClick={addBarangButton}
-                                                        style={{
-                                                        borderRadius: '20px',
-                                                        backgroundColor: '#DA3732',
-                                                        borderColor: '#DA3732',
-                                                        color: 'white',
-                                                        padding: '5px 15px',
-                                                        fontSize: '1rem',
-                                                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                                                        transition: 'transform 0.2s ease-in-out',
-                                                        }}
-                                                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                                                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                                                    >
-                                                        + Tambah Barang
-                                                    </Button>
+                                                    <span>Daftar Barang</span>
                                                 </div>
                                             }
                                             columns={columns}
