@@ -20,6 +20,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/perusahaan",
         "/manager-operasional/perusahaan/:id_perusahaan",
         "/manager-operasional/pabrik",
+        "/manager-operasional/pabrik/detail/:nama_pabrik/batch",
         "/manager-operasional/pabrik/detail/:nama_pabrik",
         "/manager-operasional/daftar-gudang",
         "/manager-operasional/daftar-gudang/:id_gudang",

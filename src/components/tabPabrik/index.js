@@ -12,7 +12,7 @@ const TabNavigation = ( {tabAktif} ) => {
 
   const handleNavigate = (tabName) => {
     if (tabName === 'Batch Produksi') {
-      navigate('');
+      navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}/batch`);
     } else if (tabName === 'Pengiriman Barang') {
       navigate(`/manager-operasional/pabrik/permintaan-pengiriman/${nama_pabrik}`);
     } else if (tabName === 'Daftar Barang') {
