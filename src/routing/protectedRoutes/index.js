@@ -20,6 +20,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/perusahaan",
         "/manager-operasional/perusahaan/:id_perusahaan",
         "/manager-operasional/pabrik",
+        "/manager-operasional/pabrik/detail/:nama_pabrik/batch",
         "/manager-operasional/pabrik/detail/:nama_pabrik",
         "/manager-operasional/daftar-gudang",
         "/manager-operasional/daftar-gudang/:id_gudang",
@@ -29,6 +30,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/profile",
         "/manager-operasional/add-barang",
         "/manager-operasional/add-pabrik",
+        "/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik",
         "/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id",
     ];
 
@@ -82,6 +84,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pabrik/add-pabrik",
         "/staf-pabrik/profile",
         "/staf-pabrik/barang",
+        "/staf-pabrik/pabrik/permintaan-pengiriman/:nama_pabrik",
     ];
 
 

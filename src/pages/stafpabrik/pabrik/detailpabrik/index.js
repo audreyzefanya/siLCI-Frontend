@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import FloatingMenu from '../../../../components/floatingmenu';
 import { GetPabrik, PostAddBarangPabrik } from '../../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
+import TabPabrik from '../../../../components/tabPabrikGudang';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
@@ -77,7 +78,7 @@ const DetailPabrik = (props) => {
     useEffect(() => {
         getDetailPabrik()
         getAllBarang()
-    }, []);
+    }, [nama_pabrik]);
 
     async function getDetailPabrik() {
         try {
@@ -152,80 +153,51 @@ const DetailPabrik = (props) => {
                                         <b>Alamat:</b> {pabrik.alamat}
                                     </div>
                                     <br />
-                                    <div style={{ marginBottom: '10px', display: 'flex', flexDirection: 'row' }}>
-                                        <button
-                                            className={`tab-button ${activeTab === 'listBarang' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('listBarang')}
-                                        >
-                                            Daftar Barang
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'batchProduksi' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('batchProduksi')}
-                                        >
-                                            Batch Produksi
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'permintaanPengiriman' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('permintaanPengiriman')}
-                                        >
-                                            Permintaan Pengiriman
-                                        </button>
-                                    </div>
-                                    {activeTab === 'listBarang' && (
-                                        <DataTable
-                                            title={
-                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                    <div className="daftar-barang">
-                                                        Daftar Barang
-                                                    </div>
-                                                    <Button
-                                                        size="sm"
-                                                        onClick={addBarangButton}
-                                                        style={{
-                                                        borderRadius: '20px',
-                                                        backgroundColor: '#DA3732',
-                                                        borderColor: '#DA3732',
-                                                        color: 'white',
-                                                        padding: '5px 15px',
-                                                        fontSize: '1rem',
-                                                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                                                        transition: 'transform 0.2s ease-in-out',
-                                                        }}
-                                                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                                                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                                                    >
-                                                        + Tambah Barang
-                                                    </Button>
+                                    <TabPabrik
+                                        tabAktif={"Daftar Barang"}
+                                    />
+                                    <DataTable
+                                        title={
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                <div className="daftar-barang">
+                                                    Daftar Barang
                                                 </div>
-                                            }
-                                            columns={columns}
-                                            data={filteredData}
-                                            pagination
-                                            fixedHeader
-                                            subHeader
-                                            subHeaderComponent={[
-                                                <input
-                                                    key="searchInput"
-                                                    type="text"
-                                                    placeholder="Search..."
-                                                    value={searchText}
-                                                    onChange={handleSearch}
-                                                    style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
-                                                />,
-                                            ]}
-                                        />
-                                    )}
-                                    {activeTab === 'batchProduksi' && (
-                                        <div>
-                                            {/* Render another DataTable or content for the other tab */}
-                                        </div>
-                                    )}
-                                    {activeTab === 'permintaanPengiriman' && (
-                                        <div>
-                                            {/* Render another DataTable or content for the other tab */}
-                                        </div>
-                                    )}
+                                                <Button
+                                                    size="sm"
+                                                    onClick={addBarangButton}
+                                                    style={{
+                                                    borderRadius: '20px',
+                                                    backgroundColor: '#DA3732',
+                                                    borderColor: '#DA3732',
+                                                    color: 'white',
+                                                    padding: '5px 15px',
+                                                    fontSize: '1rem',
+                                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                                    transition: 'transform 0.2s ease-in-out',
+                                                    }}
+                                                    onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                                    onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                                                >
+                                                    + Tambah Barang
+                                                </Button>
+                                            </div>
+                                        }
+                                        columns={columns}
+                                        data={filteredData}
+                                        pagination
+                                        fixedHeader
+                                        subHeader
+                                        subHeaderComponent={[
+                                            <input
+                                                key="searchInput"
+                                                type="text"
+                                                placeholder="Search..."
+                                                value={searchText}
+                                                onChange={handleSearch}
+                                                style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
+                                            />,
+                                        ]}
+                                    />
                                 </>
                             )}
                         </div>
