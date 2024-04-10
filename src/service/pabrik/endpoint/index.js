@@ -31,7 +31,7 @@ export const getAllBatchProduksi = async (pabrik_name) => {
     }
 };
 
-export const GetBatchProduksi = async (pabrik_name, batch_code) => {
+export const getBatchProduksi = async (pabrik_name, batch_code) => {
     try {
         const response = await PabrikService.get('batch/' + `${pabrik_name}/` + batch_code);
         return response.data;

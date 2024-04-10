@@ -11,10 +11,16 @@ import TabPabrik from '../../../components/tabPabrik';
 
 const getStatusString = (status) => {
     switch (status) {
-        case 2:
+        case 1:
             return 'Sedang Diproses';
+        case 2:
+            return 'Menunggu QC ';
         case 3:
-            return 'Telah Dikirim';
+            return 'Selesai dan menunggu dikirim';
+        case 4:
+            return 'Terkirim';
+        case 5:
+            return 'Gagal';
         default:
             return 'Status Tidak Dikenal';
     }
@@ -108,7 +114,7 @@ const DaftarBatch = (props) => {
                                     <td className="border px-4 py-2">
                                     <Button
                                     size="sm"
-                                    onClick={() => navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}/batch/${produksi.kode_produksi}`)}
+                                    onClick={() => navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}/${produksi.kode_produksi}`)}
                                     style={{
                                         borderRadius: '10px',
                                         backgroundColor: '#2C358C',
