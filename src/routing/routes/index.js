@@ -15,13 +15,14 @@ import DetailGudang from '../../pages/gudang/detailgudang';
 import TambahGudang from '../../pages/gudang/tambahgudang';
 import DaftarPerusahaan from '../../pages/perusahaan/daftarperusahaan';
 import DaftarBarangPerusahaan from '../../pages/perusahaan/daftarbarang';
-import DaftarBatchProduksiPabrik from '../../pages/pabrik/daftarbatchproduksi';
 import AddBarangPerusahaan from '../../pages/perusahaan/addbarang';
 import CreatePerusahaan from '../../pages/perusahaan/createperusahaan';
 import RegisterPage from '../../pages/manajer/register';
 import profilepage from '../../pages/manajer/profile/profilepage';
-import DetailPabrik from '../../pages/pabrik/detailpabrik';
-import DaftarPabrik from '../../pages/pabrik/daftarpabrik';
+import daftarBatchProduksiPabrik from '../../pages/pabrik/daftarbatchproduksi';
+import detailBatchProduksiPabrik from '../../pages/pabrik/detailbatchproduksi';
+import detailPabrik from '../../pages/pabrik/detailpabrik';
+import daftarPabrik from '../../pages/pabrik/daftarpabrik';
 import AddPabrik from '../../pages/pabrik/addpabrik';
 import daftarPengiriman from '../../pages/pabrik/daftarpengiriman';
 
@@ -49,9 +50,10 @@ import detailPabrikStafGudang from '../../pages/stafgudang/pabrik/detailpabrik';
 import addPabrikStafGudang from '../../pages/stafgudang/pabrik/addpabrik';
 import detailBarangGudang from '../../pages/stafgudang/barang/detail-barang';
 
+import daftarBatchProduksiPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarbatchproduksi';
+import detailBatchProduksiPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailbatchproduksi';
 import daftarPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarpabrik';
 import detailPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
-import detailBatchProduksiPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
 import addPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addpabrik';
 import detailBarangPabrik from '../../pages/stafpabrik/barang/detail-barang';
 import DaftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
@@ -93,9 +95,10 @@ const Routing = () => {
             <Route path="/manager-operasional/perusahaan/:id_perusahaan" element={<ProtectedRoutes element={DaftarBarangPerusahaan} />} />
             <Route path="/manager-operasional/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={AddBarangPerusahaan} />} />
             <Route path="/manager-operasional/perusahaan/create" element={<ProtectedRoutes element={CreatePerusahaan} />} />
-            <Route path="/manager-operasional/pabrik" element={<ProtectedRoutes element={DaftarPabrik} />} />
-            <Route path="/manager-operasional/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={DetailPabrik} />} />
-            <Route path="/manager-operasional/pabrik/detail/:nama_pabrik/batch" element={<ProtectedRoutes element={DaftarBatchProduksiPabrik} />} />
+            <Route path="/manager-operasional/pabrik" element={<ProtectedRoutes element={daftarPabrik} />} />
+            <Route path="/manager-operasional/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={detailPabrik} />} />
+            <Route path="/manager-operasional/pabrik/detail/:nama_pabrik/batch" element={<ProtectedRoutes element={daftarBatchProduksiPabrik} />} />
+            <Route path="/manager-operasional/pabrik/detail/:nama_pabrik/:kode_batch" element={<ProtectedRoutes element={detailBatchProduksiPabrik} />} />
             <Route path="/manager-operasional/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
             <Route path="/manager-operasional/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
             <Route path="/manager-operasional/barang" element={<ProtectedRoutes element={DaftarBarang} />} />
@@ -151,7 +154,8 @@ const Routing = () => {
             <Route path="/staf-pabrik/add-pabrik" element={<ProtectedRoutes element={addPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPabrik} />} />
             <Route path="/staf-pabrik/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={DaftarPengirimanStafPabrik} />} />
-//            <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch" element={<ProtectedRoutes element={detailPabrikStafPabrik} />} />
+            <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik/batch" element={<ProtectedRoutes element={daftarBatchProduksiPabrikStafPabrik} />} />
+            <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch" element={<ProtectedRoutes element={detailBatchProduksiPabrikStafPabrik} />} />
 
             <Route path="/staf-pabrik/profile" element={<ProtectedRoutes element={profileStafPabrik} />} />
             <Route path="/staf-gudang/profile" element={<ProtectedRoutes element={profileStafGudang} />} />
@@ -159,7 +163,7 @@ const Routing = () => {
             <Route path="/admin-perusahaan/profile" element={<ProtectedRoutes element={profileAdminPerusahaan} />} />
             <Route path="/admin-karyawan/profile" element={<ProtectedRoutes element={profileAdminKaryawan} />} />
             <Route path="/manager-operasional/profile" element={<ProtectedRoutes element={profilepage} />} />
-{/* 
+{/*
             <Route path="/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />/manager-operasional
             <Route path="/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
             <Route path="/daftar-gudang/:id_gudang/add" element={<ProtectedRoutes element={AddBarangGudang} />} />
