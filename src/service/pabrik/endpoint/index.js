@@ -40,6 +40,16 @@ export const getBatchProduksi = async (pabrik_name, batch_code) => {
     }
 };
 
+export const postBatchProduksi = async (dataBatch, nama_pabrik) => {
+    try {
+        const response = await PabrikService.post(`batch/${nama_pabrik}`, dataBatch);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const GetBarangPabrik = async (pabrik_name) => {
     try {
         const response = await PabrikService.get('barang/' + pabrik_name);

@@ -21,6 +21,7 @@ import RegisterPage from '../../pages/manajer/register';
 import profilepage from '../../pages/manajer/profile/profilepage';
 import daftarBatchProduksiPabrik from '../../pages/pabrik/daftarbatchproduksi';
 import detailBatchProduksiPabrik from '../../pages/pabrik/detailbatchproduksi';
+import formAddBatchProduksiPabrik from '../../pages/pabrik/addbatchproduksi';
 import detailPabrik from '../../pages/pabrik/detailpabrik';
 import daftarPabrik from '../../pages/pabrik/daftarpabrik';
 import AddPabrik from '../../pages/pabrik/addpabrik';
@@ -52,6 +53,7 @@ import detailBarangGudang from '../../pages/stafgudang/barang/detail-barang';
 
 import daftarBatchProduksiPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarbatchproduksi';
 import detailBatchProduksiPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailbatchproduksi';
+import formAddBatchProduksiPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addbatchproduksi';
 import daftarPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarpabrik';
 import detailPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
 import addPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addpabrik';
@@ -98,6 +100,7 @@ const Routing = () => {
             <Route path="/manager-operasional/pabrik" element={<ProtectedRoutes element={daftarPabrik} />} />
             <Route path="/manager-operasional/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={detailPabrik} />} />
             <Route path="/manager-operasional/pabrik/detail/:nama_pabrik/batch" element={<ProtectedRoutes element={daftarBatchProduksiPabrik} />} />
+            <Route path="/manager-operasional/pabrik/detail/:nama_pabrik/batch/add" element={<ProtectedRoutes element={formAddBatchProduksiPabrik} />} />
             <Route path="/manager-operasional/pabrik/detail/:nama_pabrik/:kode_batch" element={<ProtectedRoutes element={detailBatchProduksiPabrik} />} />
             <Route path="/manager-operasional/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />
             <Route path="/manager-operasional/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
@@ -155,6 +158,7 @@ const Routing = () => {
             <Route path="/staf-pabrik/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPabrik} />} />
             <Route path="/staf-pabrik/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={DaftarPengirimanStafPabrik} />} />
             <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik/batch" element={<ProtectedRoutes element={daftarBatchProduksiPabrikStafPabrik} />} />
+            <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik/batch/add" element={<ProtectedRoutes element={formAddBatchProduksiPabrikStafPabrik} />} />
             <Route path="/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch" element={<ProtectedRoutes element={detailBatchProduksiPabrikStafPabrik} />} />
 
             <Route path="/staf-pabrik/profile" element={<ProtectedRoutes element={profileStafPabrik} />} />
