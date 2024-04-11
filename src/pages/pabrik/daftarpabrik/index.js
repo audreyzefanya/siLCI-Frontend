@@ -8,6 +8,7 @@ import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
 import { GetAllPabrik } from '../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import TabPabrik from '../../../components/tabPabrik';
 
 const DaftarPabrik = (props) => {
   const [pabrikData, setPabrikData] = useState([]);

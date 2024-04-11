@@ -8,6 +8,7 @@ import Sidebar from '../../../components/sidebar/manajer';
 import { CreatePerusahaanImpor } from '../../../service/fileUpload/endpoint';
 import { GetAdminImport } from '../../../service/usermanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const CreatePerusahaan = (props) => {
     const [isModalOpenResult, setIsModalOpenResult] = useState(false);
