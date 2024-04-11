@@ -10,7 +10,6 @@ import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 const DaftarPermintaanPengiriman = (props) => {
     const [pengadaanList, setPengadaanList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const adminUserId = props.adminUserId; 
@@ -23,10 +22,8 @@ const DaftarPermintaanPengiriman = (props) => {
                 const filteredPengadaan = allPengadaan.filter(pengadaan => pengadaan.adminUserId === adminUserId);
 
                 setPengadaanList(filteredPengadaan);
-                setIsLoading(false);
             } catch (error) {
                 setError(error.toString());
-                setIsLoading(false);
             }
         };
 

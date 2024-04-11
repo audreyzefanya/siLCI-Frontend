@@ -19,10 +19,8 @@ const DaftarPermintaanPengiriman = (props) => {
             try {
                 const data = await GetAllPengadaan();
                 setPengadaanList(data);
-                setIsLoading(false);
             } catch (error) {
                 setError(error.toString());
-                setIsLoading(false);
             }
         };
 

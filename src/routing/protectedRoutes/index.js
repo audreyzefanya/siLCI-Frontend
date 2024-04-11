@@ -26,6 +26,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/daftar-gudang/add",
         "/manager-operasional/barang",
         "/manager-operasional/barang/:id_barang",
+        "/manager-operasional/barang/update/:id_barang",
         "/manager-operasional/profile",
         "/manager-operasional/add-barang",
         "/manager-operasional/add-pabrik",
@@ -37,6 +38,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/admin-karyawan/barang",
         "/admin-karyawan/barang/:id_barang",
         "/admin-karyawan/add-barang",
+        "/admin-karyawan/barang/update/:id_barang",
         "/admin-karyawan/profile",
     ];
 
