@@ -180,7 +180,7 @@ const DetailBatch = (props) => {
                                 <br />
                                 <Button
                                     size="sm"
-                                    onClick={() => navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}/${batchProduksi.kode_produksi}`)}
+                                    onClick={() => navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}/${batchProduksi.kode_produksi}/update`)}
                                     style={{
                                     borderRadius: '10px',
                                     backgroundColor: '#2C358C',

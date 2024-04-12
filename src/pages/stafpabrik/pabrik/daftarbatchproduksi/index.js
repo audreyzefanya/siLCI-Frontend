@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import Header from '../../../../components/header';
-import Sidebar from '../../../../components/sidebar/manajer';
+import Sidebar from '../../../../components/sidebar/stafpabrik';
 import { getAllBatchProduksi } from '../../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

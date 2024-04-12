@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header';
-import ModalLoading from '../../../components/modal/modalLoading';
 import ModalResult from '../../../components/modal/modalResult';
 import Sidebar from '../../../components/sidebar/manajer';
 import { CreatePerusahaanImpor } from '../../../service/fileUpload/endpoint';
