@@ -4,12 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
 import ModalResult from '../../../../components/modal/modalResult';
 import Sidebar from '../../../../components/sidebar/stafpabrik';
-import { postBatchProduksi } from '../../../../service/pabrik/endpoint';
+import { updateBatchProduksi } from '../../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 const AddBatch = (props) => {
-    const { nama_pabrik } = useParams();
+    const { nama_pabrik, kode_batch } = useParams();
     const [isModalOpenResult, setIsModalOpenResult] = useState(false);
     const [dataSubtitleModal, setDataSubtitleModal] = useState('');
     const [flagResult, setFlagResult] = useState('success');
@@ -21,36 +21,34 @@ const AddBatch = (props) => {
     const navigateTo = useNavigate();
 
     useEffect(() => {
-        fetchDataBarang();
+//        fetchDataBarang();
         if (statusBatch === '') {
             setStatusBatch(1);
         }
     }, []);
 
-    async function fetchDataBarang() {
-        try {
-            const dataBarang = await GetAllBarang();
-            setDaftarBarang(dataBarang);
-        } catch (error) {
-            console.error('Error fetching data barang:', error);
-        }
-    }
+//    async function fetchDataBarang() {
+//        try {
+//            const dataBarang = await GetAllBarang();
+//            setDaftarBarang(dataBarang);
+//        } catch (error) {
+//            console.error('Error fetching data barang:', error);
+//        }
+//    }
 
-    async function handleSubmitTambahBatch() {
+    async function handleSubmitUpdateBatch() {
         try {
             setIsModalOpenLoading(true);
             const dataBatch = {
-                barang_id: kodeBarang,
-                jumlah: jumlahBarang,
                 status: statusBatch
             };
-            const response = await postBatchProduksi(dataBatch, nama_pabrik);
+            const response = await updateBatchProduksi(dataBatch, nama_pabrik, kode_batch);
             setIsModalOpenLoading(false);
-            handleOpenModalResult('success', 'Batch berhasil ditambahkan');
-            navigateTo(`/staf-pabrik/pabrik/detail/${nama_pabrik}/batch`);
+            handleOpenModalResult('success', 'Status batch berhasil dirubah');
+            navigateTo(`/staf-pabrik/pabrik/detail/${nama_pabrik}/${kode_batch}`);
         } catch (error) {
             setIsModalOpenLoading(false);
-            handleOpenModalResult('failed', 'Gagal menambahkan batch');
+            handleOpenModalResult('failed', 'Gagal mengubah status batch produksi');
         }
     }
 
@@ -66,7 +64,7 @@ const AddBatch = (props) => {
     }
 
     const handleCancel = () => {
-        navigateTo(`/staf-pabrik/pabrik/detail/${nama_pabrik}/batch`);
+        navigateTo(`/staf-pabrik/pabrik/detail/${nama_pabrik}/${kode_batch}`);
     };
 
     const handleStatusChange = (e) => {
@@ -80,30 +78,10 @@ const AddBatch = (props) => {
             <Header title={<span style={{ fontWeight: 'bold' }}></span>}/>
                 <div className='flex-1 overflow-y-auto p-8'>
                     <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
-                    <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#000000', marginBottom: '20px' }}>Tambah Batch Produksi</div>
-                        <div className="mb-4">
-                            <select
-                                value={kodeBarang}
-                                onChange={(e) => setKodeBarang(e.target.value)}
-                                className="input-field rounded-lg p-2 w-full border border-gray-300"
-                                >
-                                <option value="">Pilih Barang</option>
-                                {daftarBarang.map(barang => (
-                                <option key={barang.id} value={barang.id}>{barang.nama}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Jumlah Stok Barang</label>
-                            <textarea
-                                value={jumlahBarang}
-                                onChange={(e) => setJumlahBarang(e.target.value)}
-                                placeholder="Masukkan Jumlah Barang"
-                                className="input-field rounded-lg p-2 w-full border border-gray-300"
-                            />
-                        </div>
+                    <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#000000', marginBottom: '20px' }}>Update Status Batch Produksi</div>
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Status Batch</label>
+                            <p className="text-sm text-gray-500">Pilih status batch baru ketika ada pembaharuan dalam batch!</p>
                             <select
                                 value={statusBatch}
                                 onChange={handleStatusChange}
@@ -135,7 +113,7 @@ const AddBatch = (props) => {
                             Batal
                         </button>
                         <button
-                            onClick={handleSubmitTambahBatch}
+                            onClick={handleSubmitUpdateBatch}
                             className="btn-tambah-batch mr-4"
                             style={{
                                 backgroundColor: '#2C358C',
@@ -149,7 +127,7 @@ const AddBatch = (props) => {
                             onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                             onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                         >
-                            Tambah Batch Produksi
+                            Update Status
                         </button>
                         </div>
                     </div>

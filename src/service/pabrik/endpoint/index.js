@@ -50,6 +50,20 @@ export const postBatchProduksi = async (dataBatch, nama_pabrik) => {
     }
 };
 
+export const updateBatchProduksi = async (dataBatch, pabrik_name, batch_code) => {
+    try {
+        const response = await PabrikService.put('batch/' + `${pabrik_name}/` + batch_code, dataBatch);
+        if (response && response.data) {
+            return response.data;
+        } else {
+            throw new Error('Gagal memperbarui batch produksi: Data tidak ditemukan dalam respons');
+        }
+    } catch (error) {
+        console.error('Error updating status:', error);
+        throw error;
+    }
+};
+
 export const GetBarangPabrik = async (pabrik_name) => {
     try {
         const response = await PabrikService.get('barang/' + pabrik_name);
@@ -69,15 +83,6 @@ export const PostAddBarangPabrik = async (id_barang, pabrik_name) => {
         throw error;
     }
 };
-
-//export const PostAddBatchProduksiPabrik = async (pabrik_name) => {
-//    try {
-//        const response = await PabrikService.post('batch/' + pabrik_name);
-//        return response.data;
-//    } catch (error) {
-//        throw error;
-//    }
-//};
 
 //export const UpdateAddBatchProduksiPabrik = async (pabrik_name, batch_code) => {
 //    try {

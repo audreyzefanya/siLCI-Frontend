@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import Sidebar from '../../../../components/sidebar/manajer';
+import Sidebar from '../../../../components/sidebar/stafpabrik';
 import Header from '../../../../components/header';
 import { getBatchProduksi } from '../../../../service/pabrik/endpoint';
 import TabPabrikGudang from '../../../../components/tabPabrikGudang';
@@ -180,7 +180,7 @@ const DetailBatch = (props) => {
                                 <br />
                                 <Button
                                     size="sm"
-                                    onClick={() => navigate(`/staf-pabrik/pabrik/detail/${nama_pabrik}/${batchProduksi.kode_produksi}`)}
+                                    onClick={() => navigate(`/staf-pabrik/pabrik/detail/${nama_pabrik}/${batchProduksi.kode_produksi}/update`)}
                                     style={{
                                     borderRadius: '10px',
                                     backgroundColor: '#2C358C',
