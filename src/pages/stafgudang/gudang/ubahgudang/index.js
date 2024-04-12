@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/stafgudang';
-import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
+import { fetchDetailGudang, updateDetailGudang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { Button } from 'react-bootstrap';
 import TabGudang from '../../../../components/tabGudang';
@@ -12,7 +12,9 @@ const DetailGudang = (props) => {
     const { id_gudang } = useParams();
     const navigate = useNavigate();
     const [detailGudang, setDetailGudang] = useState(null);
-    const [searchText, setSearchText] = useState('');
+    const [nama, setNama] = useState('');
+    const [alamat, setAlamat] = useState('');
+    const [kapasitas, setKapasitas] = useState('');
 
     useEffect(() => {
         fetchDetail();
@@ -22,25 +24,22 @@ const DetailGudang = (props) => {
         try {
             const data = await fetchDetailGudang(id_gudang);
             setDetailGudang(data);
+            setNama(data.nama_gudang);
+            setAlamat(data.alamat_gudang);
+            setKapasitas(data.kapasitas_gudang);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
 
-    const addBarangButton = () => {
-        navigate(`/staf-gudang/daftar-gudang/${id_gudang}/add`);
-    };
-
-    const handleDetail = (id_gudang) => {
-        navigate(`/staf-gudang/daftar-gudang/${id_gudang}`);
-    };
-
-    const handleSearch = (e) => {
-        setSearchText(e.target.value);
-    };
-
-    const handleEdit = () => {
-        navigate(`/staf-gudang/daftar-gudang/ubah/${id_gudang}`);
+    const handleSave = async () => {
+        try {
+            await updateDetailGudang(id_gudang, { nama_gudang: nama, alamat_gudang: alamat, kapasitas_gudang: kapasitas });
+            alert('Data berhasil disimpan');
+            navigate(-1);
+        } catch (error) {
+            console.error('Error saving data:', error);
+        }
     };
 
     return (
@@ -52,69 +51,43 @@ const DetailGudang = (props) => {
                     <span style={{ marginRight: '20px' }}>{detailGudang ? detailGudang.nama_gudang : ''}</span>
                     <Button
                         size="sm"
-                        onClick={addBarangButton}
-                        style={{
-                        borderRadius: '20px',
-                        backgroundColor: '#DA3732',
-                        borderColor: '#DA3732',
-                        color: 'white',
-                        padding: '5px 15px',
-                        fontSize: '1rem',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                        transition: 'transform 0.2s ease-in-out',
-                        }}
-                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                    >
-                        + Tambah Barang
-                    </Button>
-                    <Button
-                        size="sm"
-                        onClick={handleEdit}
+                        onClick={handleSave}
                         style={{
                             borderRadius: '20px',
-                            backgroundColor: '#2C358C',
-                            borderColor: '#2C358C',
+                            backgroundColor: '#DA3732',
+                            borderColor: '#DA3732',
                             color: 'white',
                             padding: '5px 15px',
                             fontSize: '1rem',
                             boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
                             transition: 'transform 0.2s ease-in-out',
-                            marginLeft: '10px',
                         }}
                         onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                         onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
-                        Ubah Detail
+                        Simpan
                     </Button>
                 </div>
                 <div className="alamat-gudang mb-4 ml-10">
                     <input
                         type="text"
-                        value={detailGudang ? detailGudang.alamat_gudang : ''}
-                        readOnly
+                        value={alamat}
+                        onChange={(e) => setAlamat(e.target.value)}
+                        style={{ backgroundColor: '#fff' }}
                     />
                 </div>
                 <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
                 <div className="kapasitas-gudang mb-8 ml-10">
                     <input
                         type="text"
-                        value={detailGudang ? detailGudang.kapasitas_gudang : ''}
-                        readOnly
+                        value={kapasitas}
+                        onChange={(e) => setKapasitas(e.target.value)}
+                        style={{ backgroundColor: '#fff' }}
                     />
                 </div>
                 <TabGudang />
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
-                    <div className="text-3xl font-bold mt-2 text-center"> Daftar Barang </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            value={searchText}
-                            onChange={handleSearch}
-                            style={{ padding: '5px', border: '2px solid #2C358C', borderRadius: '5px', marginRight: '10px' }}
-                        />
-                    </div>
+                    <div className="text-3xl font-bold mt-2 mb-6 text-center"> Daftar Barang </div>
                     <table className="w-full table-auto">
                         <thead>
                             <tr>
@@ -124,7 +97,7 @@ const DetailGudang = (props) => {
                         </thead>
                         <tbody>
                             {detailGudang && detailGudang.barang.filter((barang) =>
-                                barang.nama_barang.toLowerCase().includes(searchText.toLowerCase())
+                                barang.nama_barang.toLowerCase().includes(''.toLowerCase())
                             ).map((barang, index) => (
                                 <tr key={index}>
                                     <td className="border px-4 py-2">{barang.nama_barang}</td>

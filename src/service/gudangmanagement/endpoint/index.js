@@ -59,3 +59,36 @@ export const addStokGudang = async (dataTambah) => {
         throw error;
     }
 }
+
+export const getDaftarPengiriman = async (id_gudang) => {
+  try {
+    const response = await GudangManagementService.get('/api/gudang/permintaanpengiriman/' + id_gudang );
+    return response.data;
+  } catch (error) {
+         console.error('Terjadi kesalahan saat mengambil data:', error);
+         throw error;
+  }
+};
+
+export const updateStatusPengiriman = async (kodePermintaan, newData) => {
+    try {
+        const response = await GudangManagementService.put(`/api/gudang/statuspengiriman/${kodePermintaan}`, newData);
+        if (response && response.data) {
+            return response.data;
+        } else {
+            throw new Error('Gagal memperbarui status pengiriman: Data tidak ditemukan dalam respons');
+        }
+    } catch (error) {
+        console.error('Error updating status:', error);
+        throw error;
+    }
+};
+
+export const updateDetailGudang = async (id_gudang, newData) => {
+    try {
+        const response = await GudangManagementService.put('/api/gudang/barang-gudang/update/' + id_gudang + '/', newData);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
