@@ -76,8 +76,23 @@ const DaftarPengiriman = (props) => {
             <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title=''/>
-                <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
+                <div className="flex items-center text-3xl font-bold ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>{detailGudang ? detailGudang.nama_gudang : ''}</span>
+                </div>
+                <div className="alamat-gudang mb-4 ml-10">
+                    <input
+                        type="text"
+                        value={detailGudang ? detailGudang.alamat_gudang : ''}
+                        readOnly
+                    />
+                </div>
+                <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
+                <div className="kapasitas-gudang mb-8 ml-10">
+                    <input
+                        type="text"
+                        value={detailGudang ? detailGudang.kapasitas_gudang : ''}
+                        readOnly
+                    />
                 </div>
                 <div className="ml-10 mb-4">
                     <div style={{ position: 'relative' }}>
