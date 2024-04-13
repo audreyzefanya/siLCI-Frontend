@@ -7,20 +7,13 @@ import Header from '../../../components/header';
 import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
-import { FaPlus } from 'react-icons/fa';
-import FloatingMenu from '../../../components/floatingmenu';
-import { GetPabrik, PostAddBarangPabrik } from '../../../service/pabrik/endpoint';
-import { GetAllBarang } from '../../../service/barang/endpoint';
+import { GetPabrik } from '../../../service/pabrik/endpoint';
+import TabPabrik from '../../../components/tabPabrik';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
-    const [daftarBarang, setBarang] = useState([]);
     const [pabrik, setPabrik] = useState([]);
-    const [warningMessage, setWarningMessage] = useState('');
     const [searchText, setSearchText] = useState('');
-    const [showFloatingMenu, setShowFloatingMenu] = useState(false);
-    const [choosenBarang, setChoosenBarang] = useState('');
-    const [activeTab, setActiveTab] = useState('listBarang');
     const navigateTo = useNavigate()
     let columns = []
 
@@ -36,12 +29,12 @@ const DetailPabrik = (props) => {
                 name: "Nama",
                 selector: row => row.barang.nama,
                 sortable: true,
-                width: '20%' 
+                width: '20%'
             },
             {
                 name: "Deskripsi",
                 selector: row => row.barang.deskripsi,
-                width: '52.5%', 
+                width: '52.5%',
                 cell: row => (
                     <div style={{ width: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {row.barang.deskripsi}
@@ -63,10 +56,10 @@ const DetailPabrik = (props) => {
                         style={{
                             borderRadius: '5px',
                             marginRight: '5px',
-                            border: '2px #266bff', 
-                            backgroundColor: '#266bff', 
+                            border: '2px #266bff',
+                            backgroundColor: '#266bff',
                             color: 'white',
-                            padding: '7px 8px' 
+                            padding: '7px 8px'
                         }}
                     > Detail </Button>
                 ),
@@ -77,62 +70,24 @@ const DetailPabrik = (props) => {
 
     useEffect(() => {
         getDetailPabrik()
-        getAllBarang()
     }, [nama_pabrik]);
 
     async function getDetailPabrik() {
         try {
-            const pabrikData = await GetPabrik(nama_pabrik); 
+            const pabrikData = await GetPabrik(nama_pabrik);
             setPabrik(pabrikData)
         } catch (error) {
             console.error('Error fetching pabrik data:', error);
         }
     }
-    
-    async function getAllBarang() {
-        try {
-            const barangData = await GetAllBarang(); 
-            setBarang(barangData)
-        } catch (error) {
-            console.error('Error fetching perusahaan data:', error);
-        }
-    }
-
-    const handleTabChange = (tabName) => {
-        setActiveTab(tabName);
-    };
 
     const handleDetailBarang = (barangId) => {
         navigateTo(`/manager-operasional/barang/${barangId}`);
     };
 
-    const addBarangButton = () => {
-        setShowFloatingMenu(true);
-    };
-
     const handleSearch = (e) => {
         setSearchText(e.target.value);
     };
-
-    async function handlePostBarang() {
-        if (choosenBarang) {
-            try {
-                console.log(choosenBarang)
-                var response = await PostAddBarangPabrik(choosenBarang, nama_pabrik);
-                setShowFloatingMenu(false)
-                setWarningMessage('')
-                getDetailPabrik()
-
-            } catch (error) {
-                if (error.request && error.request.status === 404) {
-                    setWarningMessage('ID Barang tidak ditemukan')
-                } else {
-                    setWarningMessage(error.response.data.message)
-                }
-            }
-        } else {
-        }
-    }
 
     const filteredData = pabrik.listBarang ? pabrik.listBarang.filter((item) =>
         item.barang.nama.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -145,82 +100,42 @@ const DetailPabrik = (props) => {
             <div className="w-full h-screen flex flex-col">
                 <Header title={pabrik.nama} />
                 <div className="flex-1 bg-neutral20">
-                    <div className={`flex-1 ${showFloatingMenu ? 'blur' : ''}`}>
-                        <div className='no-scrollbar overflow-y-auto py-3 px-8'>
-                            {pabrik && (
-                                <>
-                                    <div className="pabrik-deskripsi">
-                                        <b>Alamat:</b> {pabrik.alamat}
-                                    </div>
-                                    <br />
-                                    <div style={{ marginBottom: '10px', display: 'flex', flexDirection: 'row' }}>
-                                        <button
-                                            className={`tab-button ${activeTab === 'listBarang' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('listBarang')}
-                                        >
-                                            Daftar Barang
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'batchProduksi' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('batchProduksi')}
-                                        >
-                                            Batch Produksi
-                                        </button>
-                                        <button
-                                            className={`tab-button ${activeTab === 'permintaanPengiriman' ? 'active-tab' : ''}`}
-                                            onClick={() => handleTabChange('permintaanPengiriman')}
-                                        >
-                                            Permintaan Pengiriman
-                                        </button>
-                                    </div>
-                                    {activeTab === 'listBarang' && (
-                                        <DataTable
-                                            title={
-                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                    <span>Daftar Barang</span>
-                                                </div>
-                                            }
-                                            columns={columns}
-                                            data={filteredData}
-                                            pagination
-                                            fixedHeader
-                                            subHeader
-                                            subHeaderComponent={[
-                                                <input
-                                                    key="searchInput"
-                                                    type="text"
-                                                    placeholder="Search..."
-                                                    value={searchText}
-                                                    onChange={handleSearch}
-                                                    style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
-                                                />,
-                                            ]}
-                                        />
-                                    )}
-                                    {activeTab === 'batchProduksi' && (
-                                        <div>
-                                            {/* Render another DataTable or content for the other tab */}
+                    <div className='no-scrollbar overflow-y-auto py-3 px-8'>
+                        {pabrik && (
+                            <>
+                                <div className="pabrik-deskripsi">
+                                    <b>Alamat:</b> {pabrik.alamat}
+                                </div>
+                                <br />
+                                <TabPabrik 
+                                    tabAktif={"Daftar Barang"}
+                                />
+                                <DataTable
+                                    title={
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                            <span>Daftar Barang</span>
                                         </div>
-                                    )}
-                                    {activeTab === 'permintaanPengiriman' && (
-                                        <div>
-                                            {/* Render another DataTable or content for the other tab */}
-                                        </div>
-                                    )}
-                                </>
-                            )}
-                        </div>
+                                    }
+                                    columns={columns}
+                                    data={filteredData}
+                                    pagination
+                                    fixedHeader
+                                    subHeader
+                                    subHeaderComponent={[
+                                        <input
+                                            key="searchInput"
+                                            type="text"
+                                            placeholder="Search..."
+                                            value={searchText}
+                                            onChange={handleSearch}
+                                            style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
+                                        />,
+                                    ]}
+                                />
+                            </>
+                        )}
                     </div>
                 </div>
-                {showFloatingMenu && (
-                    <FloatingMenu
-                        daftarBarang={daftarBarang}
-                        setChoosenBarang={setChoosenBarang}
-                        handlePostBarang={handlePostBarang}
-                        setShowFloatingMenu={setShowFloatingMenu}
-                        warningMessage={warningMessage}
-                    />
-                )}
             </div>
         </div>
     );

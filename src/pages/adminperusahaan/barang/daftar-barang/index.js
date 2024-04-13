@@ -2,6 +2,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import DataTable from 'react-data-table-component';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
@@ -26,12 +27,11 @@ const DaftarBarang = (props) => {
     fetchData();
   }, []);
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
   const handleDetail = (id_barang, event) => {
     event.stopPropagation();
-    navigate(`/admin-perusahaan/barang/${id_barang}`);
-  };
-
-  const handleCardClick = (id_barang) => {
     navigate(`/admin-perusahaan/barang/${id_barang}`);
   };
 
@@ -40,19 +40,88 @@ const DaftarBarang = (props) => {
     navigate(`/admin-perusahaan/add-barang`);
   };
 
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
   const filteredBarangData = barangData.filter(barang =>
     barang.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
     barang.deskripsi.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const columns = [
+    {
+      name: 'Nama Barang',
+      selector: row => row.nama,
+      sortable: true,
+      compact: true,
+      width: '35%',
+    },
+    {
+      name: 'Deskripsi',
+      selector: row => row.deskripsi,
+      sortable: true,
+      compact: true,
+      width: '35%',
+    },
+    {
+      cell: (row) => (
+        <div style={{ display: 'flex', justifyContent: 'start', gap: '8px' }}>
+          <Button
+            onClick={(e) => handleDetail(row.id, e)}
+            style={{
+              borderRadius: '5px',
+              backgroundColor: '#2C358C',
+              borderColor: '#2C358C',
+              color: 'white',
+              padding: '0.375rem 0.75rem',
+              fontSize: '0.8rem',
+            }}
+          >
+            View Details
+          </Button>
+        </div>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+      width: '30%',
+    },
+  ];
+
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: '72px',
+      },
+    },
+    headCells: {
+      style: {
+        color: '#202124',
+        fontSize: '16px',
+      },
+    },
+    cells: {
+      style: {
+        color: '#202124',
+        fontSize: '14px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingLeft: '16px',
+        paddingRight: '16px',
+      },
+    },
+    table: {
+      style: {
+        width: '100%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+    },
+  };
+
   return (
     <div className='flex w-screen h-screen'>
-      <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
-      <div className='w-full h-screen flex flex-col'>
+      <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+      <div className='flex flex-col w-full h-screen'>
         <Header title=''/>
         <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
           <span style={{ marginRight: '20px' }}>Daftar Barang</span>
@@ -87,34 +156,15 @@ const DaftarBarang = (props) => {
             <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
           </Form.Group>
         </div>
-        <div className='flex-1 overflow-y-auto py-6 px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' style={{ backgroundColor: '#F9FAFB' }}>
-          {filteredBarangData.map((barang) => (
-            <div
-              key={barang.id}
-              onClick={() => handleCardClick(barang.id)}
-              className="bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all duration-200 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"
-              style={{
-                borderLeft: `4px solid #2C358C`
-              }}
-            >
-              <h3 className="text-xl font-semibold mb-2" style={{ color: '#2C358C' }}>{barang.nama}</h3>
-              <p className="mb-4 text-gray-700">{barang.deskripsi}</p>
-              <Button
-                onClick={(e) => handleDetail(barang.id, e)}
-                style={{
-                  borderRadius: '5px',
-                  backgroundColor: '#2C358C',
-                  borderColor: '#2C358C',
-                  color: 'white',
-                  padding: '7px 10px',
-                  fontSize: '0.875rem',
-                  transition: 'background-color 0.2s',
-                }}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
-                onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
-              > View Details </Button>
-            </div>
-          ))}
+        <div style={{ padding: '20px' }}>
+          <DataTable
+            columns={columns}
+            data={filteredBarangData}
+            customStyles={customStyles}
+            highlightOnHover
+            pointerOnHover
+            pagination
+          />
         </div>
       </div>
     </div>
