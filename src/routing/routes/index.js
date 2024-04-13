@@ -124,6 +124,8 @@ const Routing = () => {
             <Route path="/manager-operasional/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanStaf} />} />
             <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
+            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
+            <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
 //            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={daftarPengirimanGudang} />} />
 
