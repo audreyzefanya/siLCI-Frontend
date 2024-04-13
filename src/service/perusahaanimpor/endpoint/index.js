@@ -78,3 +78,14 @@ export const RejectPengadaan = async (pengadaan_id) => {
         throw error;
     }
 }
+
+// Get All Pengadaan
+export const GetAllPengadaan = async () => {
+    try {
+        const response = await PerusahaanImporService.get(`request/all/`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+} 
+

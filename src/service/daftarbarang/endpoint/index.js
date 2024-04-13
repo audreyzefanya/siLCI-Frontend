@@ -27,3 +27,27 @@ export const PostAddBarang = async (dataBarang) => {
         throw error;
     }
 }
+
+// export const UpdateBarang = async (id_barang) => {
+//     try {
+//         const response = await BarangManagementService.put('/api/barang/update/'+ id_barang);
+//         return response.data;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
+
+export const UpdateBarang = async (id_barang, updateData) => {
+    try {
+        const response = await BarangManagementService.put('/api/barang/update/'+ id_barang, updateData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        // Melakukan re-throw error agar bisa ditangkap dan dihandle di komponen
+        throw error;
+    }
+}
+
