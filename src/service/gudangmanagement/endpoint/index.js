@@ -86,13 +86,21 @@ export const updateStatusPengiriman = async (kodePermintaan, newData) => {
 
 export const updateDetailGudang = async (id_gudang, newData) => {
     try {
-        const response = await GudangManagementService.put('/api/barang/update/'+ id_gudang, newData, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        return response.data;
+        console.log('Sending data:', newData); // Tambahkan ini untuk melihat data yang dikirim
+        const response = await GudangManagementService.put('/api/gudang/barang-gudang/update/' + id_gudang + '/', newData);
+        if (response && response.data) {
+            return response.data;
+        } else {
+            throw new Error('Gagal memperbarui data gudang.');
+        }
     } catch (error) {
+        console.error('Error updating status:', error);
+        if (error.response && error.response.data) {
+            console.error('Error details:', error.response.data);
+            alert('Error updating gudang: ' + (error.response.data.detail || error.message));
+        } else {
+            alert('Error updating gudang: ' + error.message);
+        }
         throw error;
     }
 }
