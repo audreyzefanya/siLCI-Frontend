@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from '../protectedRoutes';
 
-
-
 import Login from '../../pages/authentication/login';
 import Logout from '../../pages/authentication/logout';
 import AddBarang from '../../pages/barang/add-barang';
@@ -30,6 +28,7 @@ import detailPabrik from '../../pages/pabrik/detailpabrik';
 import daftarPabrik from '../../pages/pabrik/daftarpabrik';
 import AddPabrik from '../../pages/pabrik/addpabrik';
 import daftarPengiriman from '../../pages/pabrik/daftarpengiriman';
+import daftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
 
 import addBarang from '../../pages/adminkaryawan/barang/add-barang';
 import daftarBarang from '../../pages/adminkaryawan/barang/daftar-barang';
@@ -55,6 +54,10 @@ import tambahGudangStafGudang from '../../pages/stafgudang/gudang/tambahgudang';
 import addPabrikStafGudang from '../../pages/stafgudang/pabrik/addpabrik';
 import daftarPabrikStafGudang from '../../pages/stafgudang/pabrik/daftarpabrik';
 import detailPabrikStafGudang from '../../pages/stafgudang/pabrik/detailpabrik';
+import addPabrikStafGudang from '../../pages/stafgudang/pabrik/addpabrik';
+import detailBarangGudang from '../../pages/stafgudang/barang/detail-barang';
+import daftarPengirimanStafGudang from '../../pages/stafgudang/gudang/daftarpengiriman';
+import ubahDetailGudang from '../../pages/stafgudang/gudang/ubahgudang';
 
 import daftarBatchProduksiPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarbatchproduksi';
 import detailBatchProduksiPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailbatchproduksi';
@@ -64,7 +67,7 @@ import daftarPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarpabrik';
 import detailPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
 import addPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addpabrik';
 import detailBarangPabrik from '../../pages/stafpabrik/barang/detail-barang';
-import DaftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
+import daftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
 
 import dashboardAdminKaryawan from '../../pages/adminkaryawan/dashboard';
 import dashboardAdminPerusahaan from '../../pages/adminperusahaan/dashboard';
@@ -73,7 +76,7 @@ import dashboardStafPabrik from '../../pages/stafpabrik/dashboard';
 import dashboardStafPengadaan from '../../pages/stafpengadaan/dashboard';
 
 import profileAdminKaryawan from '../../pages/adminkaryawan/profile';
-import profileAdminPerusahaan from '../../pages/adminperu\sahaan/profile';
+import profileAdminPerusahaan from '../../pages/adminperusahaan/profile';
 import profileStafGudang from '../../pages/stafgudang/profile';
 import profileStafPabrik from '../../pages/stafpabrik/profile';
 import profileStafPengadaan from '../../pages/stafpengadaan/profile';
@@ -124,6 +127,7 @@ const Routing = () => {
             <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
             <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
+            <Route path="/manager-operasional/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={daftarPengirimanGudang} />} />
 
             {/*-----Admin Karyawan Routes------*/}
             <Route path="/admin-karyawan/dashboard" element={<ProtectedRoutes element={dashboardAdminKaryawan} />} />
@@ -164,6 +168,8 @@ const Routing = () => {
             <Route path="/staf-gudang/pabrik/detail/:nama_pabrik" element={<ProtectedRoutes element={detailPabrikStafGudang} />} />
             <Route path="/staf-gudang/add-pabrik" element={<ProtectedRoutes element={addPabrikStafGudang} />} />
             <Route path="/staf-gudang/barang/:id_barang" element={<ProtectedRoutes element={detailBarangGudang} />} />
+            <Route path="/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={daftarPengirimanStafGudang} />} />
+            <Route path="/staf-gudang/daftar-gudang/ubah/:id_gudang" element={<ProtectedRoutes element={ubahDetailGudang} />} />
 
              {/*-----Staf Pabrik Routes------*/}
             <Route path="/staf-pabrik/dashboard" element={<ProtectedRoutes element={dashboardStafPabrik} />} />

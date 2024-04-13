@@ -39,6 +39,10 @@ const DetailGudang = (props) => {
         setSearchText(e.target.value);
     };
 
+    const handleEdit = () => {
+        navigate(`/staf-gudang/daftar-gudang/ubah/${id_gudang}`);
+    };
+
     return (
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
@@ -64,13 +68,44 @@ const DetailGudang = (props) => {
                     >
                         + Tambah Barang
                     </Button>
+                    <Button
+                        size="sm"
+                        onClick={handleEdit}
+                        style={{
+                            borderRadius: '20px',
+                            backgroundColor: '#2C358C',
+                            borderColor: '#2C358C',
+                            color: 'white',
+                            padding: '5px 15px',
+                            fontSize: '1rem',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            transition: 'transform 0.2s ease-in-out',
+                            marginLeft: '10px',
+                        }}
+                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                    >
+                        Ubah Detail
+                    </Button>
                 </div>
-                <div className="alamat-gudang mb-4 ml-10">{detailGudang ? detailGudang.alamat_gudang : ''}</div>
+                <div className="alamat-gudang mb-4 ml-10">
+                    <input
+                        type="text"
+                        value={detailGudang ? detailGudang.alamat_gudang : ''}
+                        readOnly
+                    />
+                </div>
                 <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
-                <div className="kapasitas-gudang mb-8 ml-10">Kapasitas: {detailGudang ? detailGudang.kapasitas_gudang : ''}</div>
+                <div className="kapasitas-gudang mb-8 ml-10">
+                    <input
+                        type="text"
+                        value={detailGudang ? detailGudang.kapasitas_gudang : ''}
+                        readOnly
+                    />
+                </div>
                 <TabGudang />
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
-                <div className="text-3xl font-bold mt-2 text-center"> Daftar Barang </div>
+                    <div className="text-3xl font-bold mt-2 text-center"> Daftar Barang </div>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
                         <input
                             type="text"
