@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/stafgudang';
-import { fetchDetailGudang, updateDetailGudang } from '../../../../service/gudangmanagement/endpoint';
+import { fetchDataGudang, updateDetailGudang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 const GudangUpdate = (props) => {
@@ -14,28 +14,28 @@ const GudangUpdate = (props) => {
     const [kapasitasGudang, setKapasitasGudang] = useState('');
 
     useEffect(() => {
-        const fetchDetail = async () => {
+        const fetchGudangDetail = async () => {
             try {
-                const response = await fetchDetailGudang(id_gudang);
+                const response = await fetchDataGudang(id_gudang);
                 if (response) {
-                    setNamaGudang(response.nama_gudang);
-                    setAlamatGudang(response.alamat_gudang);
-                    setKapasitasGudang(response.kapasitas_gudang);
+                    setNamaGudang(response.nama);
+                    setAlamatGudang(response.alamat);
+                    setKapasitasGudang(response.kapasitas);
                 }
             } catch (error) {
                 console.error('Error fetching details:', error);
             }
         };
-        fetchDetail();
+        fetchGudangDetail();
     }, [id_gudang]);
 
     const handleSubmitUpdateGudang = async (event) => {
         event.preventDefault();
         try {
             const newData = {
-                nama_gudang: namaGudang,
-                alamat_gudang: alamatGudang,
-                kapasitas_gudang: kapasitasGudang
+                nama: namaGudang,
+                alamat: alamatGudang,
+                kapasitas: kapasitasGudang
             };
             await updateDetailGudang(id_gudang, newData);
             alert('Data gudang berhasil diperbarui');
@@ -54,7 +54,7 @@ const GudangUpdate = (props) => {
         <div className='flex w-screen h-screen bg-gray-100'>
             <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='flex flex-col flex-1 overflow-hidden'>
-                <Header title={<span style={{ fontWeight: 'bold' }}></span>}/>
+                <Header title={<span style={{ fontWeight: 'bold' }}>Update Gudang</span>}/>
                 <div className='flex-1 overflow-y-auto p-8'>
                     <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
                         <h2 className="text-2xl font-bold text-center mb-6">Update Gudang</h2>
@@ -106,7 +106,7 @@ const GudangUpdate = (props) => {
                                     Update Gudang
                                 </button>
                                 <button
-                                    type="button" // Ubah ini untuk mencegah button bertindak sebagai submit
+                                    type="button"
                                     onClick={handleCancel}
                                     className="btn-batal"
                                     style={{

@@ -86,7 +86,7 @@ export const updateStatusPengiriman = async (kodePermintaan, newData) => {
 
 export const updateDetailGudang = async (id_gudang, newData) => {
     try {
-        const response = await GudangManagementService.put('/api/barang/update/'+ id_gudang, newData, {
+        const response = await GudangManagementService.put('/api/gudang/barang-gudang/update/'+ id_gudang + '/', newData, {
             headers: {
                 'Content-Type': 'application/json'
             }

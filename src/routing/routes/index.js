@@ -54,8 +54,6 @@ import tambahGudangStafGudang from '../../pages/stafgudang/gudang/tambahgudang';
 import addPabrikStafGudang from '../../pages/stafgudang/pabrik/addpabrik';
 import daftarPabrikStafGudang from '../../pages/stafgudang/pabrik/daftarpabrik';
 import detailPabrikStafGudang from '../../pages/stafgudang/pabrik/detailpabrik';
-import addPabrikStafGudang from '../../pages/stafgudang/pabrik/addpabrik';
-import detailBarangGudang from '../../pages/stafgudang/barang/detail-barang';
 import daftarPengirimanStafGudang from '../../pages/stafgudang/gudang/daftarpengiriman';
 import ubahDetailGudang from '../../pages/stafgudang/gudang/ubahgudang';
 
@@ -67,7 +65,7 @@ import daftarPabrikStafPabrik from '../../pages/stafpabrik/pabrik/daftarpabrik';
 import detailPabrikStafPabrik from '../../pages/stafpabrik/pabrik/detailpabrik';
 import addPabrikStafPabrik from '../../pages/stafpabrik/pabrik/addpabrik';
 import detailBarangPabrik from '../../pages/stafpabrik/barang/detail-barang';
-import daftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
+import DaftarPengirimanStafPabrik from '../../pages/stafpabrik/pabrik/daftarpengiriman';
 
 import dashboardAdminKaryawan from '../../pages/adminkaryawan/dashboard';
 import dashboardAdminPerusahaan from '../../pages/adminperusahaan/dashboard';
@@ -126,7 +124,7 @@ const Routing = () => {
             <Route path="/manager-operasional/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanStaf} />} />
             <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
-            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
+//            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={daftarPengirimanGudang} />} />
 
             {/*-----Admin Karyawan Routes------*/}
