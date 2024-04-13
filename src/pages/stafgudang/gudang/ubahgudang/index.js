@@ -12,15 +12,17 @@ const GudangUpdate = (props) => {
     const [namaGudang, setNamaGudang] = useState('');
     const [alamatGudang, setAlamatGudang] = useState('');
     const [kapasitasGudang, setKapasitasGudang] = useState('');
+    const [jenisGudang, setJenisGudang] = useState('');
 
     useEffect(() => {
         const fetchGudangDetail = async () => {
             try {
                 const response = await fetchDataGudang(id_gudang);
                 if (response) {
-                    setNamaGudang(response.nama);
-                    setAlamatGudang(response.alamat);
-                    setKapasitasGudang(response.kapasitas);
+                    setNamaGudang(response.nama || '');
+                    setAlamatGudang(response.alamat || '');
+                    setKapasitasGudang(response.kapasitas ? response.kapasitas.toString() : '');
+                    setJenisGudang(response.jenis || '');
                 }
             } catch (error) {
                 console.error('Error fetching details:', error);
@@ -31,15 +33,16 @@ const GudangUpdate = (props) => {
 
     const handleSubmitUpdateGudang = async (event) => {
         event.preventDefault();
+        const newData = {
+            nama: namaGudang,
+            alamat: alamatGudang,
+            kapasitas: parseInt(kapasitasGudang, 10),
+            jenis: parseInt(jenisGudang, 10)
+        };
         try {
-            const newData = {
-                nama: namaGudang,
-                alamat: alamatGudang,
-                kapasitas: kapasitasGudang
-            };
             await updateDetailGudang(id_gudang, newData);
             alert('Data gudang berhasil diperbarui');
-            navigate('/staf-gudang/daftar-gudang');
+            navigate(`/staf-gudang/daftar-gudang/${id_gudang}`);
         } catch (error) {
             console.error('Error updating gudang:', error);
             alert('Error updating gudang: ' + error.message);
@@ -47,12 +50,12 @@ const GudangUpdate = (props) => {
     };
 
     const handleCancel = () => {
-        navigate('/staf-gudang/daftar-gudang');
+        navigate(`/staf-gudang/daftar-gudang/${id_gudang}`);
     };
 
     return (
         <div className='flex w-screen h-screen bg-gray-100'>
-            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='flex flex-col flex-1 overflow-hidden'>
                 <Header title={<span style={{ fontWeight: 'bold' }}>Update Gudang</span>}/>
                 <div className='flex-1 overflow-y-auto p-8'>
@@ -65,8 +68,8 @@ const GudangUpdate = (props) => {
                                     type="text"
                                     value={namaGudang}
                                     onChange={(e) => setNamaGudang(e.target.value)}
-                                    placeholder="Masukkan Nama Gudang"
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
+                                    placeholder="Masukkan Nama Gudang"
                                 />
                             </div>
                             <div className="mb-4">
@@ -75,19 +78,36 @@ const GudangUpdate = (props) => {
                                     type="text"
                                     value={alamatGudang}
                                     onChange={(e) => setAlamatGudang(e.target.value)}
-                                    placeholder="Masukkan Alamat Gudang"
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
+                                    placeholder="Masukkan Alamat Gudang"
                                 />
                             </div>
                             <div className="mb-4">
                                 <label className="block text-sm font-medium text-gray-700">Kapasitas Gudang</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     value={kapasitasGudang}
                                     onChange={(e) => setKapasitasGudang(e.target.value)}
-                                    placeholder="Masukkan Kapasitas Gudang"
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
+                                    placeholder="Masukkan Kapasitas Gudang"
+                                    min="0"
                                 />
+                            </div>
+                            <div className="mb-6">
+                                <label className="block text-sm font-medium text-gray-700">Jenis Gudang</label>
+                                <select
+                                    value={jenisGudang}
+                                    onChange={(e) => setJenisGudang(e.target.value)}
+                                    className="input-field rounded-lg p-2 w-full border border-gray-300"
+                                >
+                                    <option value="">Pilih Jenis Gudang</option>
+                                    <option value="1">Bahan Baku</option>
+                                    <option value="2">Penyimpanan</option>
+                                    <option value="3">Cross-Docking</option>
+                                    <option value="4">Produksi</option>
+                                    <option value="5">Sortir</option>
+                                    <option value="6">Transhipment</option>
+                                </select>
                             </div>
                             <div className="flex justify-center space-x-4">
                                 <button
