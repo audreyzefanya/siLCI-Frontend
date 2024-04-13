@@ -28,6 +28,12 @@ BarangService.interceptors.response.use(
         return response;
     },
     (error) => {
+        if (error.response.data.code === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userInfo');
+            const navigateTo = useNavigate();
+            navigateTo("/login")
+        }
         return Promise.reject(error);
     }
 );
