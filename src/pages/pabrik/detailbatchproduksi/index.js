@@ -182,18 +182,19 @@ const DetailBatch = (props) => {
                                     size="sm"
                                     onClick={() => navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}/${batchProduksi.kode_produksi}/update`)}
                                     style={{
-                                    borderRadius: '10px',
-                                    backgroundColor: '#2C358C',
-                                    borderColor: '#2C358C',
-                                    color: 'white',
-                                    padding: '15px 30px',
-                                    fontSize: '1.1rem',
-                                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                                    transition: 'transform 0.2s ease-in-out',
+                                        borderRadius: '10px',
+                                        backgroundColor: '#2C358C',
+                                        borderColor: '#2C358C',
+                                        color: 'white',
+                                        padding: '15px 30px',
+                                        fontSize: '1.1rem',
+                                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                                        transition: 'transform 0.2s ease-in-out',
+                                        display: batchProduksi && batchProduksi.status !== 4 && batchProduksi.status !== 5 ? 'block' : 'none', // Hide button when status is 4 or 5
                                     }}
                                     onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                                     onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                                    >
+                                >
                                     Ubah Status
                                 </Button>
                             </>
