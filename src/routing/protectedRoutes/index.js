@@ -36,6 +36,8 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik",
         "/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id",
         "/manager-operasional/permintaanpengiriman/:id_gudang",
+        "/manager-operasional/permintaanpengiriman/:id_gudang/add",
+
     ];
 
     const adminKaryawanRoutes = [
@@ -82,6 +84,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-gudang/profile",
         "/staf-gudang/barang",
         "/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang",
+        "/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang/add",
         "/staf-gudang/daftar-gudang/ubah/:id_gudang",
     ];
 

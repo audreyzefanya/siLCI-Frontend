@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const FileUploadService = axios.create({
     // baseURL: process.env.REACT_APP_USER_MANAGEMENT_API_BASE_URL,
