@@ -113,8 +113,8 @@ const DaftarPengiriman = (props) => {
                                     <td className="border px-4 py-2">
                                         <select value={pengiriman.status} onChange={(e) => handleStatusChange(pengiriman.kode_permintaan, parseInt(e.target.value))}>
                                             <option value={1} disabled>Menunggu Konfirmasi</option>
-                                            <option value={2}>Sedang Diproses</option>
-                                            <option value={3}>Telah Dikirim</option>
+                                            <option value={2} disabled>Sedang Diproses</option>
+                                            <option value={3} disabled>Telah Dikirim</option>
                                             <option value={4} disabled>Telah Diterima</option>
                                         </select>
                                     </td>
