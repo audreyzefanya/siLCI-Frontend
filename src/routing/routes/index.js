@@ -13,6 +13,7 @@ import DaftarGudang from '../../pages/gudang/daftargudang';
 import daftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
 import DetailGudang from '../../pages/gudang/detailgudang';
 import TambahGudang from '../../pages/gudang/tambahgudang';
+import DaftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
 import ManajerDashboard from '../../pages/manajer/dashboard';
 import profilepage from '../../pages/manajer/profile/profilepage';
 import RegisterPage from '../../pages/manajer/register';
@@ -126,8 +127,7 @@ const Routing = () => {
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
             <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
-//            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
-            <Route path="/manager-operasional/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={daftarPengirimanGudang} />} />
+            <Route path="/manager-operasional/daftar-gudang/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={DaftarPengirimanGudang} />} />
             <Route path="/manager-operasional/permintaanpengiriman/:id_gudang/add" element={<ProtectedRoutes element={AddPermintaanPengirimanManager} />} />
 
             {/*-----Admin Karyawan Routes------*/}

@@ -103,7 +103,9 @@ const DetailGudang = (props) => {
                         readOnly
                     />
                 </div>
-                <TabGudang />
+                <TabGudang
+                    tabAktif={"Daftar Barang"}
+                />
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
                     <div className="text-3xl font-bold mt-2 text-center"> Daftar Barang </div>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
