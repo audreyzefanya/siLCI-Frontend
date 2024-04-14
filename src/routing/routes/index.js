@@ -10,6 +10,7 @@ import DetailBarang from '../../pages/barang/detail-barang';
 import BarangUpdate from '../../pages/barang/update-barang';
 import AddPermintaanPengirimanManager from '../../pages/gudang/addpermintaanpengiriman';
 import DaftarGudang from '../../pages/gudang/daftargudang';
+import daftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
 import DetailGudang from '../../pages/gudang/detailgudang';
 import TambahGudang from '../../pages/gudang/tambahgudang';
 import DaftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
