@@ -35,7 +35,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/add-pabrik",
         "/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik",
         "/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id",
-        "/manager-operasional/permintaanpengiriman/:id_gudang",
+        "/manager-operasional/daftar-gudang/permintaanpengiriman/:id_gudang",
         "/manager-operasional/permintaanpengiriman/:id_gudang/add",
 
     ];
