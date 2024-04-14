@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
-import Sidebar from '../../../../components/sidebar/manajer';
+import Sidebar from '../../../../components/sidebar/adminperusahaan';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
@@ -251,7 +251,7 @@ const PengadaanDetail = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full flex flex-col'>
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">
