@@ -107,7 +107,7 @@ const DetailPabrik = (props) => {
                                     <b>Alamat:</b> {pabrik.alamat}
                                 </div>
                                 <br />
-                                <TabPabrik 
+                                <TabPabrik
                                     tabAktif={"Daftar Barang"}
                                 />
                                 <DataTable
