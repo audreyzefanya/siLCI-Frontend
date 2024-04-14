@@ -1,13 +1,13 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/stafgudang';
 import { fetchDataGudang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import { Button, Form } from 'react-bootstrap';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DaftarGudang = (props) => {
     const [gudangData, setGudangData] = useState([]);

@@ -8,6 +8,7 @@ import AddBarang from '../../pages/barang/add-barang';
 import DaftarBarang from '../../pages/barang/daftar-barang';
 import DetailBarang from '../../pages/barang/detail-barang';
 import BarangUpdate from '../../pages/barang/update-barang';
+import AddPermintaanPengirimanManager from '../../pages/gudang/addpermintaanpengiriman';
 import DaftarGudang from '../../pages/gudang/daftargudang';
 import daftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
 import DetailGudang from '../../pages/gudang/detailgudang';
@@ -46,6 +47,7 @@ import daftarPerusahaanStafPengadaan from '../../pages/stafpengadaan/perusahaan/
 
 import detailBarangGudang from '../../pages/stafgudang/barang/detail-barang';
 import addBarangStafGudang from '../../pages/stafgudang/gudang/addbarang';
+import addPengirimanStafGudang from '../../pages/stafgudang/gudang/addpermintaanpengiriman';
 import daftarGudangStafGudang from '../../pages/stafgudang/gudang/daftargudang';
 import daftarPengirimanStafGudang from '../../pages/stafgudang/gudang/daftarpengiriman';
 import detailGudangStafGudang from '../../pages/stafgudang/gudang/detailgudang';
@@ -124,8 +126,9 @@ const Routing = () => {
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
             <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
-//            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
+//          <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={daftarPengirimanGudang} />} />
+            <Route path="/manager-operasional/permintaanpengiriman/:id_gudang/add" element={<ProtectedRoutes element={AddPermintaanPengirimanManager} />} />
 
             {/*-----Admin Karyawan Routes------*/}
             <Route path="/admin-karyawan/dashboard" element={<ProtectedRoutes element={dashboardAdminKaryawan} />} />
@@ -167,6 +170,7 @@ const Routing = () => {
             <Route path="/staf-gudang/add-pabrik" element={<ProtectedRoutes element={addPabrikStafGudang} />} />
             <Route path="/staf-gudang/barang/:id_barang" element={<ProtectedRoutes element={detailBarangGudang} />} />
             <Route path="/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang" element={<ProtectedRoutes element={daftarPengirimanStafGudang} />} />
+            <Route path="/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang/add" element={<ProtectedRoutes element={addPengirimanStafGudang} />} />
             <Route path="/staf-gudang/daftar-gudang/ubah/:id_gudang" element={<ProtectedRoutes element={ubahDetailGudang} />} />
 
              {/*-----Staf Pabrik Routes------*/}
