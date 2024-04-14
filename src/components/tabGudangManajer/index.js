@@ -12,9 +12,9 @@ const TabNavigation = ( {tabAktif} ) => {
 
   const handleNavigate = (tabName) => {
     if (tabName === 'Daftar Barang') {
-      navigate(`/staf-gudang/daftar-gudang/${id_gudang}`);
+      navigate(`/manager-operasional/daftar-gudang/${id_gudang}`);
     } else if (tabName === 'Pengiriman Barang') {
-      navigate(`/staf-gudang/daftar-gudang/permintaanpengiriman/${id_gudang}`);
+      navigate(`/manager-operasional/daftar-gudang/permintaanpengiriman/${id_gudang}`);
     }
   };
 
