@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
-import Sidebar from '../../../../components/sidebar/manajer';
+import Sidebar from '../../../../components/sidebar/stafpengadaan';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 import { addStokGudang, fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
