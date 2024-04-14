@@ -62,13 +62,23 @@ export const addStokGudang = async (dataTambah) => {
 
 export const getDaftarPengiriman = async (id_gudang) => {
   try {
-    const response = await GudangManagementService.get('/api/gudang/permintaanpengiriman/' + id_gudang );
+    const response = await GudangManagementService.get('/api/gudang/permintaanpengiriman/' + id_gudang);
     return response.data;
   } catch (error) {
          console.error('Terjadi kesalahan saat mengambil data:', error);
          throw error;
   }
 };
+
+export const addPermintaanPengiriman = async (id_gudang) => {
+    try {
+        const response = await GudangManagementService.post('/api/gudang/permintaanpengiriman/' + id_gudang);
+        return response.data;
+    } catch (error) {
+        console.error('Terjadi kesalahan saat mengambil data:', error);
+        throw error;
+    }
+}
 
 export const updateStatusPengiriman = async (kodePermintaan, newData) => {
     try {

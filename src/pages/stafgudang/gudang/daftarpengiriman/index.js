@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/stafgudang';
+import TabGudang from '../../../../components/tabGudang';
 import { fetchDetailGudang, getDaftarPengiriman, updateStatusPengiriman } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TabGudang from '../../../../components/tabGudang';
 
 const getStatusString = (status) => {
     switch (status) {
@@ -65,6 +65,10 @@ const DaftarPengiriman = (props) => {
         }
     };
 
+    const handleAddPermintaanPengiriman = () => {
+        navigate(`/staf-gudang/daftar-gudang/permintaanpengiriman/${id_gudang}/add`);
+    };
+
     const filteredPengiriman = daftarPengiriman
         ? daftarPengiriman.filter(pengiriman =>
             pengiriman.kode_permintaan.toLowerCase().includes(searchQuery.toLowerCase())
@@ -78,6 +82,24 @@ const DaftarPengiriman = (props) => {
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>{detailGudang ? detailGudang.nama_gudang : ''}</span>
+                    <Button
+                        size="sm"
+                        onClick={handleAddPermintaanPengiriman}
+                        style={{
+                        borderRadius: '20px',
+                        backgroundColor: '#DA3732',
+                        borderColor: '#DA3732',
+                        color: 'white',
+                        padding: '5px 15px',
+                        fontSize: '1rem',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.2s ease-in-out',
+                        }}
+                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                    >
+                        + Tambah Permintaan Pengiriman
+                    </Button>
                 </div>
                 <div className="alamat-gudang mb-4 ml-10">
                     <input
