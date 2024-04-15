@@ -44,7 +44,7 @@ const DaftarBarangPerusahaan = (props) => {
             },
             {
                 name: "Harga (Rp)",
-                selector: row => row.harga,
+                selector: row => row.harga.toLocaleString(),
                 sortable: true,
                 width: '10%' // Set a fixed width for the column
             },

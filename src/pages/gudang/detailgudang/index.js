@@ -5,7 +5,7 @@ import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
 import { fetchDetailGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import TabGudang from '../../../components/tabGudang';
+import TabGudangManajer from '../../../components/tabGudangManajer';
 
 const DetailGudang = (props) => {
     const { id_gudang } = useParams();
@@ -43,7 +43,9 @@ const DetailGudang = (props) => {
                 <div className="alamat-gudang mb-4 ml-10">{detailGudang ? detailGudang.alamat_gudang : ''}</div>
                 <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
                 <div className="kapasitas-gudang mb-8 ml-10">Kapasitas: {detailGudang ? detailGudang.kapasitas_gudang : ''}</div>
-                <TabGudang />
+                <TabGudangManajer
+                    tabAktif={"Daftar Barang"}
+                />
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
                 <div className="text-3xl font-bold mt-2 text-center"> Daftar Barang </div>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>

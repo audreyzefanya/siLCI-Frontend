@@ -20,15 +20,24 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/perusahaan",
         "/manager-operasional/perusahaan/:id_perusahaan",
         "/manager-operasional/pabrik",
+        "/manager-operasional/pabrik/detail/:nama_pabrik/batch",
         "/manager-operasional/pabrik/detail/:nama_pabrik",
+        "/manager-operasional/pabrik/detail/:nama_pabrik/:kode_batch",
+        "/manager-operasional/pabrik/detail/:nama_pabrik/:kode_batch/update",
         "/manager-operasional/daftar-gudang",
         "/manager-operasional/daftar-gudang/:id_gudang",
         "/manager-operasional/daftar-gudang/add",
         "/manager-operasional/barang",
         "/manager-operasional/barang/:id_barang",
+        "/manager-operasional/barang/update/:id_barang",
         "/manager-operasional/profile",
         "/manager-operasional/add-barang",
         "/manager-operasional/add-pabrik",
+        "/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik",
+        "/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id",
+        "/manager-operasional/daftar-gudang/permintaanpengiriman/:id_gudang",
+        "/manager-operasional/permintaanpengiriman/:id_gudang/add",
+
     ];
 
     const adminKaryawanRoutes = [
@@ -36,6 +45,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/admin-karyawan/barang",
         "/admin-karyawan/barang/:id_barang",
         "/admin-karyawan/add-barang",
+        "/admin-karyawan/barang/update/:id_barang",
         "/admin-karyawan/profile",
     ];
 
@@ -47,6 +57,8 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/admin-perusahaan/profile",
         "/admin-perusahaan/barang",
         "/admin-perusahaan/barang/:id_barang",
+        "/admin-perusahaan/perusahaan/all",
+        "/admin-perusahaan/perusahaan/pengadaan-detail/:pengadaan_id",
     ];
 
     const stafPengadaanRoutes = [
@@ -56,6 +68,8 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pengadaan/profile",
         "/staf-pengadaan/barang",
         "/staf-pengadaan/barang/:id_barang",
+        "/staf-pengadaan/perusahaan/all",
+        "/staf-pengadaan/perusahaan/pengadaan-detail/:pengadaan_id",
     ];
 
     const stafGudangRoutes = [
@@ -68,8 +82,10 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-gudang/add-pabrik",
         "/staf-gudang/pabrik/detail/:nama_pabrik",
         "/staf-gudang/profile",
-        '/staf-gudang/barang'
-        
+        "/staf-gudang/barang",
+        "/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang",
+        "/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang/add",
+        "/staf-gudang/daftar-gudang/ubah/:id_gudang",
     ];
 
     const stafPabrikRoutes = [
@@ -79,6 +95,10 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pabrik/add-pabrik",
         "/staf-pabrik/profile",
         "/staf-pabrik/barang",
+        "/staf-pabrik/pabrik/permintaan-pengiriman/:nama_pabrik",
+        "/staf-pabrik/pabrik/detail/:nama_pabrik/batch",
+        "/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch",
+        "/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch/update"
     ];
 
 

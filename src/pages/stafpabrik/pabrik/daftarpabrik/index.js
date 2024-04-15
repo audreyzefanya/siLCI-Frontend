@@ -50,7 +50,7 @@ const DaftarPabrik = (props) => {
       <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
       <div className='w-full h-screen flex flex-col'>
         <Header title=''/>
-        <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
+        <div className="flex items-center justify-between text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
           <span style={{ marginRight: '20px' }}>Daftar Pabrik</span>
           <Button
             size="sm"
@@ -83,29 +83,42 @@ const DaftarPabrik = (props) => {
             <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
           </Form.Group>
         </div>
-        <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' style={{ backgroundColor: '#F9FAFB' }}>
-          {filteredPabrikData.map(pabrik => (
-            <div key={pabrik.id} className="bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all duration-200 ease-in-out transform hover:-translate-y-1 hover:shadow-xl" style={{ borderLeft: `4px solid #2C358C` }}>
-              <h3 className="text-xl font-semibold mb-2" style={{ color: '#2C358C' }}>{pabrik.nama}</h3>
-              <p className="mb-4 text-gray-700">{pabrik.alamat}</p>
-              <Button
+        <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
+          <div className="grid gap-6">
+            {filteredPabrikData.map((pabrik) => (
+              <div
+                key={pabrik.id}
                 onClick={() => handleDetailPabrik(pabrik.nama)}
+                className="bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all duration-200 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"
                 style={{
-                  borderRadius: '5px',
-                  backgroundColor: '#2C358C',
-                  borderColor: '#2C358C',
-                  color: 'white',
-                  padding: '7px 10px',
-                  fontSize: '0.875rem',
-                  transition: 'background-color 0.2s',
+                  borderLeft: `4px solid #2C358C`,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
                 }}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
-                onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
               >
-                View Details
-              </Button>
-            </div>
-          ))}
+                <div>
+                  <h3 className="text-xl font-semibold mb-2" style={{ color: '#2C358C' }}>{pabrik.nama}</h3>
+                  <p className="mb-4 text-gray-700">{pabrik.alamat}</p>
+                </div>
+                <Button
+                  onClick={() => handleDetailPabrik(pabrik.nama)}
+                  style={{
+                    alignSelf: 'flex-end',
+                    borderRadius: '5px',
+                    backgroundColor: '#2C358C',
+                    borderColor: '#2C358C',
+                    color: 'white',
+                    padding: '7px 10px',
+                    fontSize: '0.875rem',
+                    transition: 'background-color 0.2s',
+                  }}
+                  onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
+                  onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
+                > View Details </Button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
