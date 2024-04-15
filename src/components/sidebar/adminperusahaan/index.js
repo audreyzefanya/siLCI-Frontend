@@ -34,6 +34,12 @@ const Sidebar = (props) => {
                     title: 'Request Pabrik',
                     // urlLink: '/system-admin/dashboard-user',
                 },
+                {
+                    currentNavigation: 2.3,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'Daftar Request',
+                    urlLink: '/admin-perusahaan/perusahaan/all',
+                },
             ],
         },
     ]);

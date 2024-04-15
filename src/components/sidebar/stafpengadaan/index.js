@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { PiArrowsClockwiseDuotone, PiArrowsClockwiseFill, PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiGearDuotone, PiGearFill, PiNotebookDuotone, PiNotebookFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
+import { PiCaretLeft, PiCaretRight, PiChartPieDuotone, PiChartPieFill, PiUserDuotone, PiUserFill } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
-import Menu from '../../menu';
 import Logo from '../../../assets/images/Logo_LC.png';
+import Menu from '../../menu';
 
 const Sidebar = (props) => {
     const [menu, setMenu] = useState([
@@ -28,10 +28,16 @@ const Sidebar = (props) => {
                     urlLink: '/staf-pengadaan/perusahaan',
                 },
                 {
-                    currentNavigation: 3.2,
+                    currentNavigation: 2.2,
                     logo: [PiUserDuotone, PiUserFill],
                     title: 'Request Pabrik',
                     // urlLink: '/system-admin/dashboard-user',
+                },
+                {
+                    currentNavigation: 2.3,
+                    logo: [PiUserDuotone, PiUserFill],
+                    title: 'Daftar Request',
+                    urlLink: '/staf-pengadaan/perusahaan/all',
                 },
             ],
         },
