@@ -55,7 +55,7 @@ const ProfileViewPage = (props) => {
                 <p style={{ marginBottom: '16px' }}><strong>Email:</strong> {userDetails.email}</p>
                 <p style={{ marginBottom: '16px' }}><strong>Role:</strong> {userDetails.role}</p>
                 <div className="mt-4 flex justify-end">
-                <Link to='/manager-operasional/profile' className="button-link-style">
+                <Link to="/staf-pengadaan/profile" className="button-link-style">
                     Edit Profile
                   </Link>
                 </div>
