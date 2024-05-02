@@ -1,0 +1,19 @@
+.button-link-style {
+    background-color: #023773; /* Example primary color */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none; /* Removes underline */
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+
+
+    /* Disabled state, if needed */
+    &:disabled {
+        background-color: #cccccc;
+        cursor: default;
+    }
+}

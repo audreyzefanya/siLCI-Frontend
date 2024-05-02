@@ -19,12 +19,12 @@ const Header = ({
 
     const roleToProfilePath = {
         "Manajer": "/manajer/profile",
-        "Manager Operasional": "/manager-operasional/profile",
-        "Admin Karyawan": "/admin-karyawan/profile",
-        "Admin Perusahaan Import": "/admin-perusahaan/profile",
-        "Staf Pengadaan": "/staf-pengadaan/profile",
-        "Staf Gudang": "/staf-gudang/profile",
-        "Staf Pabrik": "/staf-pabrik/profile",
+        "Manager Operasional": "/manager-operasional/view-profile",
+        "Admin Karyawan": "/admin-karyawan/view-profile",
+        "Admin Perusahaan Import": "/admin-perusahaan/view-profile",
+        "Staf Pengadaan": "/staf-pengadaan/view-profile",
+        "Staf Gudang": "/staf-gudang/view-profile",
+        "Staf Pabrik": "/staf-pabrik/view-profile",
     };
 
     const profilePath = roleToProfilePath[userInfo?.role] || "/"; // Fallback to home if role not found
