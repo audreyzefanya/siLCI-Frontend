@@ -110,7 +110,7 @@ const DaftarBarangPerusahaan = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title={perusahaan.nama}/>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
