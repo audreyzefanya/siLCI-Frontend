@@ -38,7 +38,7 @@ const DaftarPengiriman = (props) => {
     const [detailGudang, setDetailGudang] = useState(null);
     const [daftarPengiriman, setDaftarPengiriman] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
-    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false); // State untuk modal loading
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
         fetchDaftarPengiriman();
@@ -46,18 +46,16 @@ const DaftarPengiriman = (props) => {
 
     const fetchDaftarPengiriman = async () => {
         try {
-            setIsModalOpenLoading(true); // Set modal loading menjadi terbuka saat memulai fetch data
-            // Ambil detail gudang
+            setIsModalOpenLoading(true);
             const gudang = await fetchDetailGudang(id_gudang);
             setDetailGudang(gudang);
 
-            // Ambil daftar pengiriman
             const data = await getDaftarPengiriman(id_gudang);
             setDaftarPengiriman(data);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
-            setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -117,14 +115,7 @@ const DaftarPengiriman = (props) => {
                         readOnly
                     />
                 </div>
-                <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
-                <div className="kapasitas-gudang mb-8 ml-10">
-                    <input
-                        type="text"
-                        value={detailGudang ? detailGudang.kapasitas_gudang : ''}
-                        readOnly
-                    />
-                </div>
+                <div className="jenis-gudang mb-8 ml-10">Jenis Gudang: {detailGudang && detailGudang.jenis_gudang ? detailGudang.jenis_gudang : ''}</div>
                 <div className="ml-10 mb-4">
                     <Form.Group style={{ position: 'relative' }}>
                         <Form.Control
@@ -143,7 +134,7 @@ const DaftarPengiriman = (props) => {
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
                     {filteredPengiriman.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full">
-                            <img src={noDeliveryImage} alt="No Delivery" style={{ width: '400px', height: '350px' }} />
+                            <img src={noDeliveryImage} alt="No Delivery" style={{ width: '300px', height: '250px' }} />
                             <p className="text-xl font-bold mt-4">Belum ada pengiriman.</p>
                         </div>
                     ) : (
