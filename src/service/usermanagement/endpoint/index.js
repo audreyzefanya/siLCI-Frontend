@@ -64,3 +64,22 @@ export const GetAdminImport = async () => {
     }
 }
 
+// Get All Users
+export const GetAllUsers = async () => {
+    try {
+        const response = await UserManagementService.get('/api/users/');
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// Delete User By ID
+export const DeleteUserById = async (user_id) => {
+    try {
+        const response = await UserManagementService.delete(`/api/user/delete/${user_id}/`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
