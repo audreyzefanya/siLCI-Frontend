@@ -25,13 +25,13 @@ const DetailGudang = (props) => {
 
     const fetchDetail = async () => {
         try {
-            setIsModalOpenLoading(true); // Set modal loading menjadi terbuka saat memulai fetch data
+            setIsModalOpenLoading(true);
             const data = await fetchDetailGudang(id_gudang);
             setDetailGudang(data);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
-            setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -122,7 +122,7 @@ const DetailGudang = (props) => {
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
                     {detailGudang && detailGudang.barang.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full">
-                            <img src={emptyImage} alt="Empty" style={{ width: '450px', height: '350px' }} />
+                            <img src={emptyImage} alt="Empty" style={{ width: '250px', height: '200px' }} />
                             <p className="text-xl font-bold mt-4">Belum ada barang.</p>
                         </div>
                     ) : (
