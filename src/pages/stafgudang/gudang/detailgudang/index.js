@@ -1,16 +1,16 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import emptyImage from '../../../../assets/images/empty.png';
 import Header from '../../../../components/header';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/stafgudang';
+import TabGudang from '../../../../components/tabGudang';
 import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import { Button, Form } from 'react-bootstrap';
-import TabGudang from '../../../../components/tabGudang';
-import emptyImage from '../../../../assets/images/empty.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import ModalLoading from '../../../../components/modal/modalLoading';
 
 const DetailGudang = (props) => {
     const { id_gudang } = useParams();

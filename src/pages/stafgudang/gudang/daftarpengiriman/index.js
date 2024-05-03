@@ -1,17 +1,16 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
+import noDeliveryImage from '../../../../assets/images/nodelivery.png';
 import Header from '../../../../components/header';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/stafgudang';
 import TabGudang from '../../../../components/tabGudang';
 import { fetchDetailGudang, getDaftarPengiriman, updateStatusPengiriman } from '../../../../service/gudangmanagement/endpoint';
-import { GetAllPabrik } from '../../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import noDeliveryImage from '../../../../assets/images/nodelivery.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import ModalLoading from '../../../../components/modal/modalLoading';
 
 const getStatusString = (status) => {
     switch (status) {

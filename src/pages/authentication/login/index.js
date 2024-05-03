@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../../assets/images/Logo_LC.png';
 import PrimaryButton from '../../../components/button/buttonpilih';
-import TextInput from '../../../components/textinput';
 import ModalLoading from '../../../components/modal/modalLoading';
 import ModalResult from '../../../components/modal/modalResult';
+import TextInput from '../../../components/textinput';
 import { PostLoginUser } from '../../../service/usermanagement/endpoint';
-import Logo from '../../../assets/images/Logo_LC.png';
 
 const Login = () => {
     const [username, setUsername] = useState("")
@@ -112,7 +112,8 @@ const Login = () => {
                         "id": response.data.id,
                         "username": response.data.username,
                         "email": response.data.email,
-                        "role": response.data.role
+                        "role": response.data.role,
+                        "company": response.data.company
                     }));
                     setIsModalOpenLoading(false);
                     console.log()
