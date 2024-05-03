@@ -20,6 +20,7 @@ const DetailGudang = (props) => {
     const fetchDetail = async () => {
         try {
             const data = await fetchDetailGudang(id_gudang);
+            console.log("Detail Gudang:", data);
             setDetailGudang(data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -40,9 +41,8 @@ const DetailGudang = (props) => {
             <div className='w-full h-screen flex flex-col'>
                 <Header title=''/>
                 <div className="text-3xl font-bold ml-10 mt-8">{detailGudang ? detailGudang.nama_gudang : ''}</div>
-                <div className="alamat-gudang mb-4 ml-10">{detailGudang ? detailGudang.alamat_gudang : ''}</div>
-                <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
-                <div className="kapasitas-gudang mb-8 ml-10">Kapasitas: {detailGudang ? detailGudang.kapasitas_gudang : ''}</div>
+                <div className="alamat-gudang mb-3 ml-10">{detailGudang ? detailGudang.alamat_gudang : ''}</div>
+                <div className="jenis-gudang mb-8 ml-10">Jenis Gudang: {detailGudang && detailGudang.jenis_gudang ? detailGudang.jenis_gudang : ''}</div>
                 <TabGudangManajer
                     tabAktif={"Daftar Barang"}
                 />

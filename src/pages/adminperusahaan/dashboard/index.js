@@ -30,7 +30,6 @@ const Dashboard = (props) => {
   const [dashboardDetail, setDashboardDetail] = useState(null);
   const [chartData, setChartData] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-  const [userId, setUserId] = useState(null);
 
   const options = {
     responsive: true,

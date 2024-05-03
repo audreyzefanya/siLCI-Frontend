@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/stafgudang';
-import TabDash from '../../../components/tabDashboard';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const Dashboard = (props) => {
@@ -13,7 +12,6 @@ const Dashboard = (props) => {
         <div className='w-full h-screen flex flex-col'>
             <Header title=''/>
             <div className="text-3xl font-bold mb-10 ml-10 mt-8">Dashboard</div>
-            <TabDash />
         </div>
     </div>
   );

@@ -11,7 +11,6 @@ const GudangUpdate = (props) => {
     const navigate = useNavigate();
     const [namaGudang, setNamaGudang] = useState('');
     const [alamatGudang, setAlamatGudang] = useState('');
-    const [kapasitasGudang, setKapasitasGudang] = useState('');
     const [jenisGudang, setJenisGudang] = useState('');
 
     useEffect(() => {
@@ -21,7 +20,6 @@ const GudangUpdate = (props) => {
                 if (response) {
                     setNamaGudang(response.nama || '');
                     setAlamatGudang(response.alamat || '');
-                    setKapasitasGudang(response.kapasitas ? response.kapasitas.toString() : '');
                     setJenisGudang(response.jenis || '');
                 }
             } catch (error) {
@@ -36,7 +34,7 @@ const GudangUpdate = (props) => {
         const newData = {
             nama: namaGudang,
             alamat: alamatGudang,
-            kapasitas: parseInt(kapasitasGudang, 10),
+            kapasitas: 0, // Set kapasitas menjadi 0
             jenis: parseInt(jenisGudang, 10)
         };
         try {
@@ -80,17 +78,6 @@ const GudangUpdate = (props) => {
                                     onChange={(e) => setAlamatGudang(e.target.value)}
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
                                     placeholder="Masukkan Alamat Gudang"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700">Kapasitas Gudang</label>
-                                <input
-                                    type="number"
-                                    value={kapasitasGudang}
-                                    onChange={(e) => setKapasitasGudang(e.target.value)}
-                                    className="input-field rounded-lg p-2 w-full border border-gray-300"
-                                    placeholder="Masukkan Kapasitas Gudang"
-                                    min="0"
                                 />
                             </div>
                             <div className="mb-6">

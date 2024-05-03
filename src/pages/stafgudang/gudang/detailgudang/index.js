@@ -95,14 +95,7 @@ const DetailGudang = (props) => {
                         readOnly
                     />
                 </div>
-                <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
-                <div className="kapasitas-gudang mb-8 ml-10">
-                    <input
-                        type="text"
-                        value={detailGudang ? detailGudang.kapasitas_gudang : ''}
-                        readOnly
-                    />
-                </div>
+                <div className="jenis-gudang mb-8 ml-10">Jenis Gudang: {detailGudang && detailGudang.jenis_gudang ? detailGudang.jenis_gudang : ''}</div>
                 <TabGudang
                     tabAktif={"Daftar Barang"}
                 />
