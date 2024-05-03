@@ -3,10 +3,10 @@ import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/stafgudang';
 import { fetchDataGudang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import ModalLoading from '../../../../components/modal/modalLoading';
 
 const DaftarGudang = (props) => {
     const [gudangData, setGudangData] = useState([]);
