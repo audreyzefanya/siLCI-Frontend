@@ -14,7 +14,6 @@ const AddGudang = (props) => {
     const [daftarGudang, setDaftarGudang] = useState([]);
     const [namaGudang, setNamaGudang] = useState('');
     const [alamatGudang, setAlamatGudang] = useState('');
-    const [kapasitasGudang, setKapasitasGudang] = useState(0);
     const [jenisGudang, setJenisGudang] = useState('');
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const [isModalOpenResult, setIsModalOpenResult] = useState(false);
@@ -29,6 +28,8 @@ const AddGudang = (props) => {
         { id: 5, name: 'Sortir' },
         { id: 6, name: 'Transhipment' },
     ];
+
+    const kapasitasGudang = 0; // Atur kapasitas ke nilai 0 secara default
 
     useEffect(() => {
         fetchDataGudang();
@@ -64,7 +65,7 @@ const AddGudang = (props) => {
             const dataGudang = {
                 nama: namaGudang,
                 alamat: alamatGudang,
-                kapasitas: kapasitasGudang,
+                kapasitas: kapasitasGudang, // Menggunakan nilai kapasitas yang telah ditentukan
                 jenis: jenisGudang
             };
             const response = await tambahGudang(dataGudang);
@@ -85,16 +86,6 @@ const AddGudang = (props) => {
 
     const handleAlamatGudangChange = (e) => {
         setAlamatGudang(e.target.value);
-    };
-
-    const handleKapasitasGudangIncrement = () => {
-        setKapasitasGudang(prevKapasitas => prevKapasitas + 1);
-    };
-
-    const handleKapasitasGudangDecrement = () => {
-        if (kapasitasGudang > 0) {
-            setKapasitasGudang(prevKapasitas => prevKapasitas - 1);
-        }
     };
 
     const handleJenisGudangChange = (e) => {
@@ -135,24 +126,6 @@ const AddGudang = (props) => {
                                     placeholder="Alamat Gudang"
                                     className="bg-gray-100 w-full py-2 px-4 rounded-md"
                                 />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="kapasitasGudang" className="block font-semibold mb-2">Kapasitas Gudang</label>
-                                <div className="flex items-center">
-                                    <button onClick={handleKapasitasGudangDecrement} className="bg-gray-200 text-gray-600 py-2 px-4 rounded-l-md">
-                                        -
-                                    </button>
-                                    <input
-                                        type="text"
-                                        id="kapasitasGudang"
-                                        value={kapasitasGudang}
-                                        onChange={(e) => setKapasitasGudang(Number(e.target.value))}
-                                        className="bg-gray-100 w-full py-2 px-4 text-center font-semibold"
-                                    />
-                                    <button onClick={handleKapasitasGudangIncrement} className="bg-gray-200 text-gray-600 py-2 px-4 rounded-r-md">
-                                        +
-                                    </button>
-                                </div>
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="jenisGudang" className="block font-semibold mb-2">Jenis Gudang</label>
