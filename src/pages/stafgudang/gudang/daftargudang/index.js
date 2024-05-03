@@ -11,7 +11,7 @@ import ModalLoading from '../../../../components/modal/modalLoading';
 const DaftarGudang = (props) => {
     const [gudangData, setGudangData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false); // State untuk modal loading
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,13 +20,13 @@ const DaftarGudang = (props) => {
 
     const fetchData = async () => {
         try {
-            setIsModalOpenLoading(true); // Set modal loading menjadi terbuka saat memulai fetch data
+            setIsModalOpenLoading(true);
             const response = await fetchDataGudang('nama', 'alamat');
             setGudangData(response);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
-            setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -123,7 +123,7 @@ const DaftarGudang = (props) => {
                     </div>
                 </div>
             </div>
-            <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> // Menampilkan modal loading
+            <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
         </div>
     );
 };
