@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
-import Sidebar from '../../../../components/sidebar/manajer';
+import Sidebar from '../../../../components/sidebar/adminperusahaan';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
@@ -227,14 +227,14 @@ const PengadaanDetail = (props) => {
           )}
           {pengadaanDetail.fileInvoice && (
             <a href={pengadaanDetail.fileInvoice} target="_blank" rel="noopener noreferrer">
-              <img src={pengadaanDetail.fileInvoice} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+              <img src={pengadaanDetail.fileInvoice.replace(".pdf", ".png")} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
             </a>
           )}
         </>
       ) : (
         pengadaanDetail.fileInvoice ? (
           <a href={pengadaanDetail.fileInvoice} target="_blank" rel="noopener noreferrer">
-            <img src={pengadaanDetail.fileInvoice} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+            <img src={pengadaanDetail.fileInvoice.replace(".pdf", ".png")} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
           </a>
         ) : (
           <p>No Invoice has been uploaded</p>
@@ -243,7 +243,7 @@ const PengadaanDetail = (props) => {
 
     const paymentSection = pengadaanDetail.filePayment ? (
         <a href={pengadaanDetail.filePayment} target="_blank" rel="noopener noreferrer">
-          <img src={pengadaanDetail.filePayment} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+          <img src={pengadaanDetail.filePayment.replace(".pdf", ".png")} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
         </a>
       ) : (
         <p>No Payment has been uploaded</p>
@@ -251,7 +251,7 @@ const PengadaanDetail = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full flex flex-col'>
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">

@@ -37,6 +37,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id",
         "/manager-operasional/daftar-gudang/permintaanpengiriman/:id_gudang",
         "/manager-operasional/permintaanpengiriman/:id_gudang/add",
+        "/manager-operasional/view-profile",
 
     ];
 
@@ -47,6 +48,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/admin-karyawan/add-barang",
         "/admin-karyawan/barang/update/:id_barang",
         "/admin-karyawan/profile",
+        "/admin-karyawan/view-profile",
     ];
 
     const adminPerusahaanRoutes = [
@@ -59,6 +61,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/admin-perusahaan/barang/:id_barang",
         "/admin-perusahaan/perusahaan/all",
         "/admin-perusahaan/perusahaan/pengadaan-detail/:pengadaan_id",
+        "/admin-perusahaan/view-profile",
     ];
 
     const stafPengadaanRoutes = [
@@ -70,6 +73,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pengadaan/barang/:id_barang",
         "/staf-pengadaan/perusahaan/all",
         "/staf-pengadaan/perusahaan/pengadaan-detail/:pengadaan_id",
+        "/staf-pengadaan/view-profile",
     ];
 
     const stafGudangRoutes = [
@@ -86,6 +90,7 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang",
         "/staf-gudang/daftar-gudang/permintaanpengiriman/:id_gudang/add",
         "/staf-gudang/daftar-gudang/ubah/:id_gudang",
+        "/staf-gudang/view-profile"
     ];
 
     const stafPabrikRoutes = [
@@ -98,7 +103,8 @@ const ProtectedRoutes = ({ element: Component }) => {
         "/staf-pabrik/pabrik/permintaan-pengiriman/:nama_pabrik",
         "/staf-pabrik/pabrik/detail/:nama_pabrik/batch",
         "/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch",
-        "/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch/update"
+        "/staf-pabrik/pabrik/detail/:nama_pabrik/:kode_batch/update",
+        "/staf-pabrik/view-profile",
     ];
 
 

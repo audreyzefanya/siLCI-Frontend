@@ -72,7 +72,7 @@ const RequestPengadaan = (props) => {
                 const response = await PostCreatePengadaan(dataPengadaan);
                 setIsModalOpenLoading(false);
                 handleOpenModalResult('success', 'Permintaan Pengadaan berhasil dibuat');
-                navigateTo(`/staf-pengadaan/perusahaan/${id_perusahaan}`);
+                navigateTo(`/staf-pengadaan/perusahaan/all`);
             } catch (error) {
                 setIsModalOpenLoading(false);
                 handleOpenModalResult('failed', 'Galat Pada Server, coba beberapa saat lagi atau refresh laman');

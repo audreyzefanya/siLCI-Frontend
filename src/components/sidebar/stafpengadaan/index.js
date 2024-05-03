@@ -28,13 +28,13 @@ const Sidebar = (props) => {
                     urlLink: '/staf-pengadaan/perusahaan',
                 },
                 {
-                    currentNavigation: 3.2,
+                    currentNavigation: 2.2,
                     logo: [PiUserDuotone, PiUserFill],
                     title: 'Request Pabrik',
                     // urlLink: '/system-admin/dashboard-user',
                 },
                 {
-                    currentNavigation: 3.3,
+                    currentNavigation: 2.3,
                     logo: [PiUserDuotone, PiUserFill],
                     title: 'Daftar Request',
                     urlLink: '/staf-pengadaan/perusahaan/all',
