@@ -83,7 +83,6 @@ const DaftarPerusahaan = (props) => {
                         {filteredPerusahaan.map(perusahaan => (
                             <div key={perusahaan.id} className="bg-white rounded-lg p-6 flex flex-col justify-between">
                                 <img src={perusahaan.logo} alt={perusahaan.nama} className="h-24 w-24 mx-auto mb-4" />
-                                <img src={perusahaan.logo} alt={perusahaan.nama} className="h-24 w-24 mx-auto mb-2" />
                                 <div className="mt-4">
                                     <h3 className="text-xl font-semibold mb-2" style={{ color: '#2C358C' }}>{perusahaan.nama}</h3>
                                     <p className="mb-4 text-gray-700">{perusahaan.deskripsi.length > 100 ? perusahaan.deskripsi.substring(0, 100) + '...' : perusahaan.deskripsi}</p>

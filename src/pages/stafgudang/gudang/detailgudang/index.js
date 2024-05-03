@@ -5,14 +5,19 @@ import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/stafgudang';
 import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import TabGudang from '../../../../components/tabGudang';
+import emptyImage from '../../../../assets/images/empty.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import ModalLoading from '../../../../components/modal/modalLoading';
 
 const DetailGudang = (props) => {
     const { id_gudang } = useParams();
     const navigate = useNavigate();
     const [detailGudang, setDetailGudang] = useState(null);
     const [searchText, setSearchText] = useState('');
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
         fetchDetail();
@@ -20,10 +25,13 @@ const DetailGudang = (props) => {
 
     const fetchDetail = async () => {
         try {
+            setIsModalOpenLoading(true); // Set modal loading menjadi terbuka saat memulai fetch data
             const data = await fetchDetailGudang(id_gudang);
             setDetailGudang(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
         }
     };
 
@@ -96,40 +104,53 @@ const DetailGudang = (props) => {
                     />
                 </div>
                 <div className="jenis-gudang mb-8 ml-10">Jenis Gudang: {detailGudang && detailGudang.jenis_gudang ? detailGudang.jenis_gudang : ''}</div>
+                <div className="ml-10 mb-4">
+                    <Form.Group style={{ position: 'relative' }}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Cari barang..."
+                            value={searchText}
+                            onChange={handleSearch}
+                            style={{ paddingLeft: '40px' }}
+                        />
+                        <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
+                    </Form.Group>
+                </div>
                 <TabGudang
                     tabAktif={"Daftar Barang"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
-                    <div className="text-3xl font-bold mt-2 text-center"> Daftar Barang </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            value={searchText}
-                            onChange={handleSearch}
-                            style={{ padding: '5px', border: '2px solid #2C358C', borderRadius: '5px', marginRight: '10px' }}
-                        />
-                    </div>
-                    <table className="w-full table-auto">
-                        <thead>
-                            <tr>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Barang</th>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Stok</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {detailGudang && detailGudang.barang.filter((barang) =>
-                                barang.nama_barang.toLowerCase().includes(searchText.toLowerCase())
-                            ).map((barang, index) => (
-                                <tr key={index}>
-                                    <td className="border px-4 py-2">{barang.nama_barang}</td>
-                                    <td className="border px-4 py-2">{barang.stok}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {detailGudang && detailGudang.barang.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center h-full">
+                            <img src={emptyImage} alt="Empty" style={{ width: '450px', height: '350px' }} />
+                            <p className="text-xl font-bold mt-4">Belum ada barang.</p>
+                        </div>
+                    ) : (
+                        <div>
+                            <div className="text-3xl font-bold mt-2 mb-5 text-center"> Daftar Barang </div>
+                            <table className="w-full table-auto">
+                                <thead>
+                                    <tr>
+                                        <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Barang</th>
+                                        <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Stok</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {detailGudang && detailGudang.barang.filter((barang) =>
+                                        barang.nama_barang.toLowerCase().includes(searchText.toLowerCase())
+                                    ).map((barang, index) => (
+                                        <tr key={index}>
+                                            <td className="border px-4 py-2">{barang.nama_barang}</td>
+                                            <td className="border px-4 py-2">{barang.stok}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
                 </div>
             </div>
+            <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
         </div>
     );
 };
