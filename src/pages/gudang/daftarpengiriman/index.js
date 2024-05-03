@@ -4,20 +4,24 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
-import TabPabrik from '../../../components/tabGudang';
-import { getDaftarPengiriman, updateStatusPengiriman } from '../../../service/gudangmanagement/endpoint';
+import TabGudangManajer from '../../../components/tabGudangManajer';
+import { fetchDetailGudang, getDaftarPengiriman, updateStatusPengiriman } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const getStatusString = (status) => {
     switch (status) {
         case 1:
             return 'Menunggu Konfirmasi';
+        case 2:
+            return 'Sedang Diproses';
+        case 3:
+            return 'Telah Dikirim';
         case 4:
             return 'Telah Diterima';
         default:
             return 'Status Tidak Dikenal';
     }
-};
+    };
 
 const truncateDateString = (dateString) => {
     return dateString.slice(0, 10);
@@ -26,6 +30,7 @@ const truncateDateString = (dateString) => {
 const DaftarPengiriman = (props) => {
     const { id_gudang } = useParams();
     const navigate = useNavigate();
+    const [detailGudang, setDetailGudang] = useState(null);
     const [daftarPengiriman, setDaftarPengiriman] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -35,6 +40,11 @@ const DaftarPengiriman = (props) => {
 
     const fetchDaftarPengiriman = async () => {
         try {
+            // Ambil detail gudang
+            const gudang = await fetchDetailGudang(id_gudang);
+            setDetailGudang(gudang);
+
+            // Ambil daftar pengiriman
             const data = await getDaftarPengiriman(id_gudang);
             setDaftarPengiriman(data);
         } catch (error) {
@@ -56,7 +66,7 @@ const DaftarPengiriman = (props) => {
     };
 
     const handleAddPermintaanPengiriman = () => {
-        navigate(`/manager-operasional/permintaanpengiriman/${id_gudang}/add`);
+        navigate(`/staf-gudang/daftar-gudang/permintaanpengiriman/${id_gudang}/add`);
     };
 
     const filteredPengiriman = daftarPengiriman
@@ -70,8 +80,8 @@ const DaftarPengiriman = (props) => {
             <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title=''/>
-                <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
-                    <span style={{ marginRight: '20px' }}>Daftar Permintaan Pengiriman</span>
+                <div className="flex items-center text-3xl font-bold ml-10 mt-8" style={{ color: '#000000' }}>
+                    <span style={{ marginRight: '20px' }}>{detailGudang ? detailGudang.nama_gudang : ''}</span>
                     <Button
                         size="sm"
                         onClick={handleAddPermintaanPengiriman}
@@ -91,6 +101,21 @@ const DaftarPengiriman = (props) => {
                         + Tambah Permintaan Pengiriman
                     </Button>
                 </div>
+                <div className="alamat-gudang mb-4 ml-10">
+                    <input
+                        type="text"
+                        value={detailGudang ? detailGudang.alamat_gudang : ''}
+                        readOnly
+                    />
+                </div>
+                <div className="id-gudang ml-10">{detailGudang ? detailGudang.id_gudang : ''}</div>
+                <div className="kapasitas-gudang mb-8 ml-10">
+                    <input
+                        type="text"
+                        value={detailGudang ? detailGudang.kapasitas_gudang : ''}
+                        readOnly
+                    />
+                </div>
                 <div className="ml-10 mb-4">
                     <div style={{ position: 'relative' }}>
                         <input
@@ -102,11 +127,11 @@ const DaftarPengiriman = (props) => {
                         />
                     </div>
                 </div>
-                <TabPabrik 
+                <TabGudangManajer
                     tabAktif={"Pengiriman Barang"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
-                    <div className="text-3xl font-bold mb-6 ml-2 mt-2 text-center"> {id_gudang} </div>
+                    <div className="text-3xl font-bold mb-6 ml-2 mt-2 text-center"> Daftar Permintaan Pengiriman </div>
                     <table className="w-full table-auto">
                         <thead>
                             <tr>
@@ -130,8 +155,10 @@ const DaftarPengiriman = (props) => {
                                     <td className="border px-4 py-2">{truncateDateString(pengiriman.tanggal_pengiriman)}</td>
                                     <td className="border px-4 py-2">
                                         <select value={pengiriman.status} onChange={(e) => handleStatusChange(pengiriman.kode_permintaan, parseInt(e.target.value))}>
-                                            <option value={2}>Sedang Diproses</option>
-                                            <option value={3}>Telah Dikirim</option>
+                                            <option value={1} disabled>Menunggu Konfirmasi</option>
+                                            <option value={2} disabled>Sedang Diproses</option>
+                                            <option value={3} disabled>Telah Dikirim</option>
+                                            <option value={4} disabled>Telah Diterima</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -145,3 +172,4 @@ const DaftarPengiriman = (props) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DaftarPengiriman);
+

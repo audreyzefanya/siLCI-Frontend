@@ -15,19 +15,20 @@ export const PostLoginUser = async (username, password) => {
 }
 
 // Post Register
-export const PostRegisterUser = async (username, password, email, role) => {
+export const PostRegisterUser = async (userData) => {
     try {
-        const response = await UserManagementService.post('/api/register/', {
-            username: username,
-            password: password,
-            email: email,
-            role: role
+        const response = await UserManagementService.post('/api/register/', userData, {
+            headers: {
+                'Content-Type': 'application/json' // Ensure this matches the header used in Postman
+            }
         });
         return response.data;
     } catch (error) {
+        console.error("Error during registration:", error.response ? error.response.data : error);
         throw error;
     }
-}
+};
+
 
 // Get User Details
 export const GetUserDetails = async (id) => {

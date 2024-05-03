@@ -11,14 +11,23 @@ export const GetPerusahaan = async () => {
     }
 }
 
-export const GetBarangPerusahaanImpor = async (id_perusahaan) => {
+export const GetBarangPerusahaanImpor = async () => {
     try {
-        const response = await PerusahaanImporService.get(id_perusahaan);
-        return response.data;
+        // Assuming company ID is stored in localStorage
+        const userCompanyId = localStorage.getItem('userCompanyId');
+
+        const response = await PerusahaanImporService.get('all'); // Fetch all companies
+        if (!response.data) return [];
+
+        // Filter data to only include the barang of the user's company
+        const filteredData = response.data.filter(perusahaan => perusahaan.id === userCompanyId);
+
+        return filteredData;
     } catch (error) {
         throw error;
     }
 }
+
 
 export const GetDetailPerusahaan = async (id_perusahaan) => {
     try {
@@ -82,10 +91,17 @@ export const RejectPengadaan = async (pengadaan_id) => {
 // Get All Pengadaan
 export const GetAllPengadaan = async () => {
     try {
-        const response = await PerusahaanImporService.get(`request/all/`);
-        return response.data;
+        const userCompanyId = localStorage.getItem('userCompanyId'); // get user's company ID from storage
+        const response = await PerusahaanImporService.get(`request/all/`); // Get all pengadaan
+        if (!response.data) return [];
+
+        // Filter pengadaan to include only those that belong to the user's company
+        const filteredPengadaan = response.data.filter(pengadaan => pengadaan.perusahaan_id === userCompanyId);
+
+        return filteredPengadaan;
     } catch (error) {
         throw error;
     }
-} 
+}
+
 

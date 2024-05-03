@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
-import Sidebar from '../../../../components/sidebar/manajer';
+import Sidebar from '../../../../components/sidebar/stafpengadaan';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 import { addStokGudang, fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
@@ -173,7 +173,7 @@ const PengadaanDetail = (props) => {
 
     const invoiceSection = pengadaanDetail.fileInvoice ? (
           <a href={pengadaanDetail.fileInvoice} target="_blank" rel="noopener noreferrer">
-            <img src={pengadaanDetail.fileInvoice} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+            <img src={pengadaanDetail.fileInvoice.replace(".pdf", ".png")} alt="Invoice" style={{ maxHeight: '200px', marginBottom: '10px' }} />
           </a>
         ) : (
           <p>No Invoice has been uploaded</p>
@@ -219,14 +219,14 @@ const PengadaanDetail = (props) => {
         )}
         {pengadaanDetail.filePayment && (
           <a href={pengadaanDetail.filePayment} target="_blank" rel="noopener noreferrer">
-            <img src={pengadaanDetail.filePayment} alt="Payment" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+            <img src={pengadaanDetail.filePayment.replace(".pdf", ".png")} alt="Payment" style={{ maxHeight: '200px', marginBottom: '10px' }} />
           </a>
         )}
       </>
     ) : (
       pengadaanDetail.filePayment ? (
         <a href={pengadaanDetail.filePayment} target="_blank" rel="noopener noreferrer">
-          <img src={pengadaanDetail.filePayment} alt="Payment" style={{ maxHeight: '200px', marginBottom: '10px' }} />
+          <img src={pengadaanDetail.filePayment.replace(".pdf", ".png")} alt="Payment" style={{ maxHeight: '200px', marginBottom: '10px' }} />
         </a>
       ) : (
         <p>No Payment has been uploaded</p>
