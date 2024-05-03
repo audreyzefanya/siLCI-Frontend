@@ -15,6 +15,8 @@ const DaftarBarangPerusahaan = (props) => {
     const [barang, setBarang] = useState([]);
     const navigateTo = useNavigate();
     const [searchText, setSearchText] = useState('');
+    const [buttonTambah, setButtonTambah] = useState(false)
+    const [userInfo, setUserInfo] = useState(null);
     var columns = [];
 
     if (barang) {
@@ -91,6 +93,22 @@ const DaftarBarangPerusahaan = (props) => {
         }
     }
     
+    useEffect(() => {
+        // Get user info from localStorage
+        const storedUserInfo = localStorage.getItem('userInfo');
+        if (storedUserInfo) {
+          setUserInfo(JSON.parse(storedUserInfo));
+        }
+      }, []);
+
+    useEffect(() => {
+        if(userInfo && perusahaan) {
+            if(userInfo.id === perusahaan.admin) {
+                setButtonTambah(true);
+            } 
+        }
+    }, [userInfo, perusahaan]);
+
     const handleDetailBarang = (barangId) => {
         navigateTo(`/admin-perusahaan/barang/${barangId}`);
     };
@@ -110,7 +128,7 @@ const DaftarBarangPerusahaan = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={3.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title={perusahaan.nama}/>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-3 px-8'>
@@ -126,24 +144,26 @@ const DaftarBarangPerusahaan = (props) => {
                                         <div className="daftar-barang">
                                             Daftar Barang
                                         </div>
-                                        <Button
-                                            size="sm"
-                                            onClick={addBarangButton}
-                                            style={{
-                                            borderRadius: '20px',
-                                            backgroundColor: '#DA3732',
-                                            borderColor: '#DA3732',
-                                            color: 'white',
-                                            padding: '5px 15px',
-                                            fontSize: '1rem',
-                                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                                            transition: 'transform 0.2s ease-in-out',
-                                            }}
-                                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                                        >
-                                            + Tambah Barang
-                                        </Button>
+                                        {buttonTambah && (
+                                            <Button
+                                                size="sm"
+                                                onClick={addBarangButton}
+                                                style={{
+                                                borderRadius: '20px',
+                                                backgroundColor: '#DA3732',
+                                                borderColor: '#DA3732',
+                                                color: 'white',
+                                                padding: '5px 15px',
+                                                fontSize: '1rem',
+                                                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                                transition: 'transform 0.2s ease-in-out',
+                                                }}
+                                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                                            >
+                                                + Tambah Barang
+                                            </Button>
+                                        )}
                                     </div>
                                 }
                                 columns={columns}
