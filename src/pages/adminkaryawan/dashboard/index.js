@@ -1,3 +1,5 @@
+import { BarElement, CategoryScale, Chart, LinearScale } from 'chart.js';
+import 'chartjs-plugin-datalabels';
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { connect } from 'react-redux';
@@ -5,6 +7,12 @@ import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/adminkaryawan';
 import { GetDaftarBarang } from '../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement
+);
 
 const InfoCard = ({ title, count }) => {
   return (
@@ -14,8 +22,6 @@ const InfoCard = ({ title, count }) => {
     </div>
   );
 };
-
-
 
 const Dashboard = (props) => {
   const [chartData, setChartData] = useState({
@@ -48,7 +54,6 @@ const Dashboard = (props) => {
         try {
             const daftarBarang = await GetDaftarBarang();
             const brands = ['STP', 'Turtle Wax', 'Penray', 'Prestone', 'Armor All', 'SIP', 'CHW', 'AutoGard', 'California Scents'];
-
             const countPerBrand = brands.map(brand => ({
                 brand,
                 count: daftarBarang.filter(item => item.merk.nama === brand).length

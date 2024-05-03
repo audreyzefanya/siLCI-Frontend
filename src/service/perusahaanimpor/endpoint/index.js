@@ -91,17 +91,13 @@ export const RejectPengadaan = async (pengadaan_id) => {
 // Get All Pengadaan
 export const GetAllPengadaan = async () => {
     try {
-        const userCompanyId = localStorage.getItem('userCompanyId'); // get user's company ID from storage
-        const response = await PerusahaanImporService.get(`request/all/`); // Get all pengadaan
-        if (!response.data) return [];
-
-        // Filter pengadaan to include only those that belong to the user's company
-        const filteredPengadaan = response.data.filter(pengadaan => pengadaan.perusahaan_id === userCompanyId);
-
-        return filteredPengadaan;
+        const response = await PerusahaanImporService.get(`request/all/`);
+        return response.data;
     } catch (error) {
         throw error;
     }
-}
+} 
+
+
 
 
