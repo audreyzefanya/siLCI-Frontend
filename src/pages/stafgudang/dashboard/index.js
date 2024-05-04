@@ -11,7 +11,7 @@ const Dashboard = (props) => {
     const [gudangData, setGudangData] = useState([]);
     const [lowStockCount, setLowStockCount] = useState(0);
     const [activeStockCount, setActiveStockCount] = useState(0);
-    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false); // State untuk modal loading
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -19,17 +19,16 @@ const Dashboard = (props) => {
 
     const fetchData = async () => {
         try {
-            setIsModalOpenLoading(true); // Set modal loading menjadi terbuka saat memulai fetch data
+            setIsModalOpenLoading(true);
             const data = await fetchDataGudang();
             const detailedData = await Promise.all(data.map(gudang => fetchDetailGudang(gudang.id)));
             console.log('Detailed Gudang Data:', detailedData);
             setGudangData(detailedData);
-            // Hitung jumlah low stock dan active stock
             calculateStockStatus(detailedData);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
-            setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -62,7 +61,7 @@ const Dashboard = (props) => {
                 lineTension: 0.1,
                 backgroundColor: 'rgba(218, 55, 50, 0.4)',
                 borderColor: 'rgba(218, 55, 50, 1)',
-                borderWidth: 10,
+                borderWidth: 5,
                 borderCapStyle: 'round',
                 borderDash: [],
                 borderDashOffset: 0.0,
@@ -183,7 +182,7 @@ const Dashboard = (props) => {
                         </div>
                     ))}
                 </div>
-                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Profile from '../../assets/images/profile.png';
 import Notification from '../notification';
 import { PiDoorOpenDuotone, PiUserCircleDuotone, PiWalletDuotone, PiBellDuotone } from 'react-icons/pi';
-import { MdNotificationsActive } from "react-icons/md";
+//import { MdNotificationsActive } from "react-icons/md";
 //import { ImProfile } from "react-icons/im";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -67,11 +67,7 @@ const Header = ({
                         </div>
                     )}
                     <div className="w-px bg-neutral40 h-16 mx-6"></div>
-                    <div className='flex items-center justify-center mr-6'>
-                        <div className='h-10 w-10 rounded-full border border-neutral40 flex items-center justify-center'>
-                            <MdNotificationsActive className='h-6 w-6' color='white' />
-                        </div>
-                    </div>
+
                     <div className='flex items-center cursor-pointer' onClick={toggleProfileContent} ref={modalRef}>
                         <FaUserCircle className='h-10 w-9' color='white' />
                         {isProfileContentVisible && (

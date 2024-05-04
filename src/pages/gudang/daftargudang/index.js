@@ -3,7 +3,6 @@ import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header';
-import ModalLoading from '../../../components/modal/modalLoading';
 import Sidebar from '../../../components/sidebar/manajer';
 import { fetchDataGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
