@@ -12,8 +12,6 @@ import TabGudangManajer from '../../../components/tabGudangManajer';
 import { fetchDetailGudang, getDaftarPengiriman, updateStatusPengiriman } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import ModalLoading from '../../../components/modal/modalLoading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import noDeliveryImage from '../../../assets/images/nodelivery.png';
 
 const getStatusString = (status) => {

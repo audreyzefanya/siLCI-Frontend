@@ -9,18 +9,18 @@ import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 const GudangUpdate = (props) => {
     const { id_gudang } = useParams();
     const navigate = useNavigate();
-    const [namaGudang, setNamaGudang] = useState('');
-    const [alamatGudang, setAlamatGudang] = useState('');
-    const [jenisGudang, setJenisGudang] = useState('');
+    const [gudangData, setGudangData] = useState({
+        nama: '',
+        alamat: '',
+        jenis: ''
+    });
 
     useEffect(() => {
         const fetchGudangDetail = async () => {
             try {
                 const response = await fetchDataGudang(id_gudang);
                 if (response) {
-                    setNamaGudang(response.nama || '');
-                    setAlamatGudang(response.alamat || '');
-                    setJenisGudang(response.jenis || '');
+                    setGudangData(response);
                 }
             } catch (error) {
                 console.error('Error fetching details:', error);
@@ -29,16 +29,18 @@ const GudangUpdate = (props) => {
         fetchGudangDetail();
     }, [id_gudang]);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setGudangData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
     const handleSubmitUpdateGudang = async (event) => {
         event.preventDefault();
-        const newData = {
-            nama: namaGudang,
-            alamat: alamatGudang,
-            kapasitas: 0, // Set kapasitas menjadi 0
-            jenis: parseInt(jenisGudang, 10)
-        };
         try {
-            await updateDetailGudang(id_gudang, newData);
+            await updateDetailGudang(id_gudang, gudangData);
             alert('Data gudang berhasil diperbarui');
             navigate(`/staf-gudang/daftar-gudang/${id_gudang}`);
         } catch (error) {
@@ -64,8 +66,9 @@ const GudangUpdate = (props) => {
                                 <label className="block text-sm font-medium text-gray-700">Nama Gudang</label>
                                 <input
                                     type="text"
-                                    value={namaGudang}
-                                    onChange={(e) => setNamaGudang(e.target.value)}
+                                    name="nama"
+                                    value={gudangData.nama}
+                                    onChange={handleChange}
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
                                     placeholder="Masukkan Nama Gudang"
                                 />
@@ -74,8 +77,9 @@ const GudangUpdate = (props) => {
                                 <label className="block text-sm font-medium text-gray-700">Alamat Gudang</label>
                                 <input
                                     type="text"
-                                    value={alamatGudang}
-                                    onChange={(e) => setAlamatGudang(e.target.value)}
+                                    name="alamat"
+                                    value={gudangData.alamat}
+                                    onChange={handleChange}
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
                                     placeholder="Masukkan Alamat Gudang"
                                 />
@@ -83,8 +87,9 @@ const GudangUpdate = (props) => {
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-gray-700">Jenis Gudang</label>
                                 <select
-                                    value={jenisGudang}
-                                    onChange={(e) => setJenisGudang(e.target.value)}
+                                    name="jenis"
+                                    value={gudangData.jenis}
+                                    onChange={handleChange}
                                     className="input-field rounded-lg p-2 w-full border border-gray-300"
                                 >
                                     <option value="">Pilih Jenis Gudang</option>
