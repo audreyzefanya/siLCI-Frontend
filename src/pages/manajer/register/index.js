@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { connect } from 'react-redux';
 import PrimaryButton from '../../../components/button/primarybutton';
 import DropdownText from '../../../components/dropdown/dropdownText';
@@ -9,6 +9,7 @@ import Sidebar from '../../../components/sidebar/manajer';
 import TextInput from '../../../components/textinput';
 import { PostRegisterUser } from '../../../service/usermanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import { GetAllUsers, DeleteUserById } from '../../../service/usermanagement/endpoint';
 
 const roles = [
   "Admin Karyawan",
@@ -28,6 +29,7 @@ const RegisterPage = (props) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
+  const [emails, setEmails] = useState([]);
 
   const handleRegister = async () => {
     if (!emailRegex.test(email)) {
@@ -42,6 +44,17 @@ const RegisterPage = (props) => {
     if (!role) {
       setResultType('failed');
       setResultMessage('Please select a role.');
+      setIsResultOpen(true);
+      setTimeout(() => {
+        setIsResultOpen(false);
+      }, 2000);
+      return;
+    }
+
+    // Check if the email already exists
+    if (emails.includes(email)) {
+      setResultType('failed');
+      setResultMessage('Email already exists. Please use a different email.');
       setIsResultOpen(true);
       setTimeout(() => {
         setIsResultOpen(false);
@@ -87,6 +100,20 @@ const RegisterPage = (props) => {
     setEmail('');
     setRole('Select Role');
   };
+
+  useEffect(() => {
+    const fetchEmails = async () => {
+      try {
+        const response = await GetAllUsers(); // Assuming this fetches the user data
+        const emails = response.map(user => user.email);
+        setEmails(emails);
+      } catch (error) {
+        console.error('Failed to fetch emails:', error);
+      }
+    };
+
+    fetchEmails();
+  }, []);
 
 
 

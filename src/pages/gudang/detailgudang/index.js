@@ -11,8 +11,6 @@ import Sidebar from '../../../components/sidebar/manajer';
 import TabGudangManajer from '../../../components/tabGudangManajer';
 import { fetchDetailGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import DataTable from 'react-data-table-component';
 
 const DetailGudang = (props) => {
