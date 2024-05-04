@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TabDash = ({ activeTab, onTabChange }) => {
-  const tabs = ['Daftar Karyawan', 'Daftar Barang', 'Daftar Gudang'];
+  const tabs = ['Karyawan', 'Barang', 'Gudang'];
 
   return (
     <div className="flex border-b">
