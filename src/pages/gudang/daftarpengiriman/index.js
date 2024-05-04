@@ -11,6 +11,10 @@ import Sidebar from '../../../components/sidebar/manajer';
 import TabGudangManajer from '../../../components/tabGudangManajer';
 import { fetchDetailGudang, getDaftarPengiriman, updateStatusPengiriman } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from '../../../components/modal/modalLoading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import noDeliveryImage from '../../../assets/images/nodelivery.png';
 
 const getStatusString = (status) => {
     switch (status) {
@@ -25,7 +29,7 @@ const getStatusString = (status) => {
         default:
             return 'Status Tidak Dikenal';
     }
-    };
+};
 
 const truncateDateString = (dateString) => {
     return dateString.slice(0, 10);
@@ -182,4 +186,3 @@ const DaftarPengiriman = (props) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DaftarPengiriman);
-

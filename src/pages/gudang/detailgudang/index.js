@@ -11,6 +11,12 @@ import Sidebar from '../../../components/sidebar/manajer';
 import TabGudangManajer from '../../../components/tabGudangManajer';
 import { fetchDetailGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import TabGudangManajer from '../../../components/tabGudangManajer';
+import ModalLoading from '../../../components/modal/modalLoading';
+import { Form } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import emptyImage from '../../../assets/images/empty.png';
 
 const DetailGudang = (props) => {
     const { id_gudang } = useParams();
