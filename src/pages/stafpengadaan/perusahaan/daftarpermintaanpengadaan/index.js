@@ -74,12 +74,12 @@ const DaftarPermintaanPengiriman = (props) => {
         },
         {
             name: 'Tanggal Permintaan',
-            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString(),
+            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {
             name: 'Tanggal Update',
-            selector: row => new Date(row.tanggalUpdate).toLocaleDateString(),
+            selector: row => new Date(row.tanggalUpdate).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {
@@ -139,7 +139,7 @@ const DaftarPermintaanPengiriman = (props) => {
 
     return (
         <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
-            <Sidebar currentNavigation={3.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
+            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
             <div style={{ flexGrow: 1, overflowY: 'auto' }}>
                 <Header title={null}/>
                 <div style={{ padding: '20px' }}>

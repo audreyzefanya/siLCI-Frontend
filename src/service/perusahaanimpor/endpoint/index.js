@@ -88,7 +88,6 @@ export const RejectPengadaan = async (pengadaan_id) => {
     }
 }
 
-// Get All Pengadaan
 export const GetAllPengadaan = async () => {
     try {
         const response = await PerusahaanImporService.get(`request/all/`);
@@ -96,7 +95,18 @@ export const GetAllPengadaan = async () => {
     } catch (error) {
         throw error;
     }
-} 
+}
+
+export const GetAllPengadaanAdminImpor = async (id) => {
+    try {
+        const response = await PerusahaanImporService.get(`request/all/` + id);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 
 
 
