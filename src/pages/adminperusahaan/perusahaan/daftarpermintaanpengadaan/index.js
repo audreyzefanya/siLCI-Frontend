@@ -5,55 +5,53 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/adminperusahaan';
-import { GetAllPengadaan } from '../../../../service/perusahaanimpor/endpoint';
+import { GetAllPengadaanAdminImpor } from '../../../../service/perusahaanimpor/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 const DaftarPermintaanPengiriman = (props) => {
     const [pengadaanList, setPengadaanList] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const adminUserId = props.adminUserId; 
+    // const adminUserId = props.adminUserId; 
+    const [userInfo, setUserInfo] = useState(null);
+
 
     useEffect(() => {
-        const fetchPengadaanList = async () => {
-            try {
-                const allPengadaan = await GetAllPengadaan();
+        // Get user info from localStorage
+        const storedUserInfo = localStorage.getItem('userInfo');
+        if (storedUserInfo) {
+          setUserInfo(JSON.parse(storedUserInfo));
+        }
+      }, []);
 
-                const filteredPengadaan = allPengadaan.filter(pengadaan => pengadaan.adminUserId === adminUserId);
+      const fetchDetails = async (userInfo) => {
+        try {
+            const response = await GetAllPengadaanAdminImpor(userInfo.id);
+            setPengadaanList(response);
+        } catch (error) {
+            console.error('Error fetching dashboard details:', error);
+        }
+      };
 
-                setPengadaanList(filteredPengadaan);
-            } catch (error) {
-                setError(error.toString());
-            }
-        };
-
-        fetchPengadaanList();
-    }, [adminUserId]); 
+      useEffect(() => {
+        if(userInfo) {
+          fetchDetails(userInfo)
+        }
+      }, [userInfo]);
 
     const handleNavigateToDetail = (pengadaan_id) => {
         navigate(`/admin-perusahaan/perusahaan/pengadaan-detail/${pengadaan_id}`);
     };
 
     const renderFileLink = (fileUrl, text) => {
-        if (fileUrl) {
-            return (
-                <a
-                    href={fileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                        color: '#007bff',
-                        textDecoration: 'underline',
-                        cursor: 'pointer'
-                    }}
-                >
-                    View
-                </a>
-            );
-        }
-        return <span style={{ color: '#6c757d' }}>{text}</span>;
+        return fileUrl ? (
+            <a href={fileUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#007bff', textDecoration: 'underline', cursor: 'pointer' }}>
+                View
+            </a>
+        ) : (
+            <span style={{ color: '#6c757d' }}>{text}</span>
+        );
     };
-
 
     const columns = [
         {
@@ -78,12 +76,12 @@ const DaftarPermintaanPengiriman = (props) => {
         },
         {
             name: 'Tanggal Permintaan',
-            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString(),
+            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {
             name: 'Tanggal Update',
-            selector: row => new Date(row.tanggalUpdate).toLocaleDateString(),
+            selector: row => new Date(row.tanggalUpdate).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {

@@ -1,8 +1,14 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import emptyImage from '../../../assets/images/empty.png';
 import Header from '../../../components/header';
+import ModalLoading from '../../../components/modal/modalLoading';
 import Sidebar from '../../../components/sidebar/manajer';
+import TabGudangManajer from '../../../components/tabGudangManajer';
 import { fetchDetailGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import TabGudangManajer from '../../../components/tabGudangManajer';
