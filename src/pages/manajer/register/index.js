@@ -1,17 +1,14 @@
-import { GetPerusahaan } from '../../../service/perusahaanimpor/endpoint';
-
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import Sidebar from '../../../components/sidebar/manajer';
-import Header from '../../../components/header';
-import TextInput from '../../../components/textinput';
+import PrimaryButton from '../../../components/button/primarybutton';
 import DropdownText from '../../../components/dropdown/dropdownText';
+import Header from '../../../components/header';
 import ModalConfirm from '../../../components/modal/modalConfirm';
 import ModalResult from '../../../components/modal/modalResult';
-import PrimaryButton from '../../../components/button/primarybutton';
-import { PostRegisterUser} from '../../../service/usermanagement/endpoint';
+import Sidebar from '../../../components/sidebar/manajer';
+import TextInput from '../../../components/textinput';
+import { PostRegisterUser } from '../../../service/usermanagement/endpoint';
+import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 
 const roles = [
   "Admin Karyawan",
@@ -31,36 +28,6 @@ const RegisterPage = (props) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
-  const [companies, setCompanies] = useState([]);
-  const [selectedCompany, setSelectedCompany] = useState('');
-
-  useEffect(() => {
-    async function fetchCompanies() {
-      try {
-        const companyData = await GetPerusahaan();
-        if (companyData) {
-          console.log("Fetched companies:", companyData);
-          setCompanies(companyData.map(company => ({
-            name: company.nama,  // Assuming 'nama' is the correct field for the company name
-            id: company.id       // Assuming 'id' is the correct field for the company ID
-          })));
-        } else {
-          setCompanies([]); // Ensure companies is at least an empty array if no data is fetched
-        }
-      } catch (error) {
-        console.error('Error fetching companies:', error);
-        setCompanies([]); // Set companies to an empty array on error
-      }
-    }
-    fetchCompanies();
-  }, []);
-
-  const handleCompanySelection = (value) => {
-    console.log("Company selected:", value);
-    const selectedCompanyName = companies.find(company => company.id === value)?.name;
-    setSelectedCompany(selectedCompanyName);
-};
-
 
   const handleRegister = async () => {
     if (!emailRegex.test(email)) {
@@ -82,19 +49,8 @@ const RegisterPage = (props) => {
       return;
     }
 
-    // Check for company selection if role requires it
-    if (role === "Admin Perusahaan Import" && !selectedCompany) {
-      setResultType('failed');
-      setResultMessage('Please select a company.');
-      setIsResultOpen(true);
-      setTimeout(() => {
-        setIsResultOpen(false);
-      }, 2000);
-      return;
-    }
-
     try {
-      const userData = { username, password, email, role, company: selectedCompany };
+      const userData = { username, password, email, role };
       console.log(userData)
       const response = await PostRegisterUser(userData);
       console.log(response)
@@ -130,7 +86,6 @@ const RegisterPage = (props) => {
     setPassword('');
     setEmail('');
     setRole('Select Role');
-    setSelectedCompany('');
   };
 
 
@@ -154,16 +109,6 @@ const RegisterPage = (props) => {
                   onSelect={(value) => setRole(value)}
                   placeholder="Select Role"
                 />
-          {role === "Admin Perusahaan Import" && companies && companies.length > 0 && (
-            <DropdownText
-              title="Company"
-              options={companies.map(company => company.name)}  // Map for name
-              optionsValue={companies.map(company => company.id)}  // Map for ID
-              onSelect={handleCompanySelection}
-              placeholder="Select Company"
-              currentOption={selectedCompany}
-            />
-          )}
           <div className="mt-4 flex justify-end">
                   <PrimaryButton
                     title="Register"

@@ -22,16 +22,17 @@ const AddPermintaanPengiriman = (props) => {
     const [dataSubtitleModal, setDataSubtitleModal] = useState('');
     const [formData, setFormData] = useState({
         pabrik: '',
-        gudang: '',
+        gudang: id_gudang,
         barang: '',
         jumlah: '',
         status: 1,
-        waktu_permintaan: '',
+        waktu_permintaan: new Date().toISOString(), // Set waktu permintaan ke timestamp saat ini
         tanggal_pengiriman: ''
     });
     const [pabriks, setPabriks] = useState([]);
     const [gudangs, setGudangs] = useState([]);
     const [barangs, setBarangs] = useState([]);
+    const [selectedGudang, setSelectedGudang] = useState('');
     const [statusPermintaanPengiriman, setStatusPermintaanPengiriman] = useState('');
     const navigateTo = useNavigate();
 
@@ -61,12 +62,18 @@ const AddPermintaanPengiriman = (props) => {
     };
 
     const handleChange = (e) => {
-        const value = e.target.name === "jumlah" ? parseInt(e.target.value) || 0 : e.target.value;
-        setFormData({ ...formData, [e.target.name]: value });
-        console.log(formData); 
+        const { name, value } = e.target;
+        if (name === "jumlah") {
+            // Validasi agar nilai tidak kurang dari 0
+            const jumlah = parseInt(value) < 0 ? 0 : parseInt(value);
+            setFormData({ ...formData, [name]: jumlah });
+        } else if (name === "gudang") {
+            // Simpan nilai gudang yang dipilih
+            setSelectedGudang(value);
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
-    
-    
 
     const handleStatusChange = (e) => {
         setStatusPermintaanPengiriman(parseInt(e.target.value));
@@ -76,16 +83,20 @@ const AddPermintaanPengiriman = (props) => {
         e.preventDefault();
         setIsModalOpenLoading(true);
         try {
-            const response = await addPermintaanPengirimanAPI(formData, id_gudang);
+            // Gunakan nilai gudang yang dipilih
+            const dataToSend = {
+                ...formData,
+                gudang: selectedGudang
+            };
+            const response = await addPermintaanPengirimanAPI(dataToSend, id_gudang);
             handleOpenModalResult('success', 'Permintaan pengiriman berhasil ditambahkan');
             navigateTo(`/staf-gudang/daftar-gudang/permintaanpengiriman/${id_gudang}`);
         } catch (error) {
             setIsModalOpenLoading(false);
             handleOpenModalResult('failed', error.message || 'Gagal menambahkan permintaan pengiriman');
         }
-    }
-    
-    
+    };
+
     function handleOpenModalResult(type, subtitle) {
         setTimeout(() => {
             setFlagResult(type);
@@ -103,7 +114,7 @@ const AddPermintaanPengiriman = (props) => {
 
     return (
         <div className='flex w-screen h-screen bg-gray-100'>
-            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='flex flex-col flex-1 overflow-hidden'>
                 <Header title=""/>
                 <form className='flex-1 overflow-y-auto p-8' onSubmit={handleSubmit}>
@@ -115,12 +126,7 @@ const AddPermintaanPengiriman = (props) => {
                                 {pabriks.map(p => (<option key={p.id} value={p.id}>{p.nama}</option>))}
                             </select>
                         </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Gudang</label>
-                            <select name="gudang" value={formData.gudang} onChange={handleChange} required className="input-field">
-                                {gudangs.map(g => (<option key={g.id} value={g.id}>{g.nama}</option>))}
-                            </select>
-                        </div>
+
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Barang</label>
                             <select name="barang" value={formData.barang} onChange={handleChange} required className="input-field">
@@ -130,30 +136,6 @@ const AddPermintaanPengiriman = (props) => {
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Jumlah</label>
                             <input type="number" name="jumlah" value={formData.jumlah} onChange={handleChange} required className="input-field"/>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Status Batch</label>
-                            <select
-                                value={formData.statusPermintaanPengiriman}
-                                onChange={handleStatusChange}
-                                className="input-field rounded-lg p-2 w-full border border-gray-300"
-                            >
-                                <option value={1}>Menunggu Konfirmasi</option>
-                                <option value={2} disabled>Sedang Diproses</option>
-                                <option value={3} disabled>Telah Dikirim</option>
-                                <option value={4}>Telah Diterima</option>
-                            </select>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Waktu Permintaan</label>
-                            <input
-                                type="datetime-local"
-                                name="waktu_permintaan"
-                                value={formData.waktu_permintaan}
-                                onChange={handleChange}
-                                required
-                                className="input-field rounded-lg p-2 w-full border border-gray-300"
-                            />
                         </div>
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700">Tanggal Pengiriman</label>
