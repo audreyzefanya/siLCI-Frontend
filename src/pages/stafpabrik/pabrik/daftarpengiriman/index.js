@@ -7,6 +7,7 @@ import { getDaftarPengiriman, updateStatusPengiriman } from '../../../../service
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TabPabrik from '../../../../components/tabPabrikGudang';
+import ModalLoading from '../../../../components/modal/modalLoading';
 
 const getStatusString = (status) => {
         switch (status) {
@@ -32,6 +33,7 @@ const DaftarPengiriman = (props) => {
     const navigate = useNavigate();
     const [daftarPengiriman, setDaftarPengiriman] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
         fetchDaftarPengiriman();
@@ -39,10 +41,13 @@ const DaftarPengiriman = (props) => {
 
     const fetchDaftarPengiriman = async () => {
         try {
+            setIsModalOpenLoading(true);
             const data = await getDaftarPengiriman(nama_pabrik);
             setDaftarPengiriman(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -69,7 +74,7 @@ const DaftarPengiriman = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title=''/>
+                <Header title={nama_pabrik} style={{color: 'black'}}/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}> {nama_pabrik} </span>
                 </div>
@@ -123,6 +128,7 @@ const DaftarPengiriman = (props) => {
                         </tbody>
                     </table>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
         </div>
     );

@@ -10,7 +10,7 @@ import { Button } from 'react-bootstrap';
 import FloatingMenu from '../../../../components/floatingmenu';
 import { GetPabrik, PostAddBarangPabrik } from '../../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
-import TabPabrikGudang from '../../../../components/tabPabrikGudang';
+import TabPabrik from '../../../../components/tabPabrikGudang';
 import ModalLoading from '../../../../components/modal/modalLoading';
 
 const DetailPabrik = (props) => {
@@ -22,7 +22,6 @@ const DetailPabrik = (props) => {
     const [showFloatingMenu, setShowFloatingMenu] = useState(false);
     const [choosenBarang, setChoosenBarang] = useState('');
     const [activeTab, setActiveTab] = useState('listBarang');
-    const [searchQuery, setSearchQuery] = useState('');
     const navigateTo = useNavigate()
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     let columns = []
@@ -33,13 +32,13 @@ const DetailPabrik = (props) => {
                 name: "Merk",
                 selector: row => row.barang.merk.nama,
                 sortable: true,
-                width: '7.5%',
+                width: '7.5%'
             },
             {
                 name: "Nama",
                 selector: row => row.barang.nama,
                 sortable: true,
-                width: '20%',
+                width: '20%'
             },
             {
                 name: "Deskripsi",
@@ -67,7 +66,7 @@ const DetailPabrik = (props) => {
                             borderRadius: '5px',
                             marginRight: '5px',
                             border: '2px #266bff',
-                            backgroundColor: '#DA3732',
+                            backgroundColor: '#266bff',
                             color: 'white',
                             padding: '7px 8px'
                         }}
@@ -120,10 +119,6 @@ const DetailPabrik = (props) => {
         setSearchText(e.target.value);
     };
 
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
-
     async function handlePostBarang() {
         if (choosenBarang) {
             try {
@@ -151,76 +146,78 @@ const DetailPabrik = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
-            <div className='w-full h-screen flex flex-col'>
-                <Header title={pabrik.nama} style={{color: 'black'}}/>
-                <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{color: '#000000'}}>
-                    <span style={{marginRight: '20px'}}>Daftar Barang</span>
-                    <Button
-                        size="sm"
-                        onClick={addBarangButton}
-                        style={{
-                            borderRadius: '20px',
-                            backgroundColor: '#DA3732',
-                            borderColor: '#DA3732',
-                            color: 'white',
-                            padding: '5px 15px',
-                            fontSize: '1rem',
-                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                            transition: 'transform 0.2s ease-in-out',
-                        }}
-                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                    >
-                        + Tambah Barang
-                    </Button>
-                </div>
-                <div className="ml-10 mb-4">
-                    <div className="pabrik-deskripsi">
-                        <b>Alamat:</b> {pabrik.alamat}
+            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
+            <div className="w-full h-screen flex flex-col">
+                <Header title={pabrik.nama} style={{ color: 'white' }} />
+                <div className="flex-1 bg-neutral20">
+                    <div className={`flex-1 ${showFloatingMenu ? 'blur' : ''}`}>
+                        <div className='no-scrollbar overflow-y-auto py-3 px-8'>
+                            {pabrik && (
+                                <>
+                                    <div className="pabrik-deskripsi">
+                                        <b>Alamat:</b> {pabrik.alamat}
+                                    </div>
+                                    <br />
+                                    <TabPabrik
+                                        tabAktif={"Daftar Barang"}
+                                    />
+                                    <DataTable
+                                        title={
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                <div className="daftar-barang">
+                                                    Daftar Barang
+                                                </div>
+                                                <Button
+                                                    size="sm"
+                                                    onClick={addBarangButton}
+                                                    style={{
+                                                    borderRadius: '20px',
+                                                    backgroundColor: '#DA3732',
+                                                    borderColor: '#DA3732',
+                                                    color: 'white',
+                                                    padding: '5px 15px',
+                                                    fontSize: '1rem',
+                                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                                    transition: 'transform 0.2s ease-in-out',
+                                                    }}
+                                                    onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                                    onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                                                >
+                                                    + Tambah Barang
+                                                </Button>
+                                            </div>
+                                        }
+                                        columns={columns}
+                                        data={filteredData}
+                                        pagination
+                                        fixedHeader
+                                        subHeader
+                                        subHeaderComponent={[
+                                            <input
+                                                key="searchInput"
+                                                type="text"
+                                                placeholder="Search..."
+                                                value={searchText}
+                                                onChange={handleSearch}
+                                                style={{ marginRight: '10px', padding: '5px', border: '1px solid #ced4da', borderRadius: '5px' }}
+                                            />,
+                                        ]}
+                                    />
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
-                <TabPabrikGudang
-                    tabAktif={"Daftar Barang"}
-                />
-                <div className={`flex-1 ${showFloatingMenu ? 'blur' : ''}`}>
-                    <div className='no-scrollbar overflow-y-auto py-3 px-8'>
-                        <>
-                            <br/>
-                            <div className="text-3xl font-bold text-center"> {nama_pabrik} </div>
-                            <DataTable
-                                columns={columns}
-                                data={filteredData}
-                                pagination
-                                fixedHeader
-                                subHeader
-                                subHeaderComponent={[<input
-                                    key="searchInput"
-                                    type="text"
-                                    placeholder="Search..."
-                                    value={searchText}
-                                    onChange={handleSearch}
-                                    style={{
-                                        marginRight: '10px',
-                                        padding: '5px',
-                                        border: '1px solid #ced4da',
-                                        borderRadius: '5px'
-                                    }}
-                                />,]}
-                            />
-                        </>
-                    </div>
-                </div>
-                {showFloatingMenu && (<FloatingMenu
+                {showFloatingMenu && (
+                    <FloatingMenu
                         daftarBarang={daftarBarang}
                         setChoosenBarang={setChoosenBarang}
                         handlePostBarang={handlePostBarang}
                         setShowFloatingMenu={setShowFloatingMenu}
                         warningMessage={warningMessage}
-                    />)}
-                <ModalLoading title="Loading..." subtitle="Please wait a moment"
-                              isOpen={isModalOpenLoading}/> {/* Menampilkan modal loading */}
-
+                    />
+                )}
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
         </div>
     );
