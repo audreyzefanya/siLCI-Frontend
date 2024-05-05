@@ -9,7 +9,6 @@ import { fetchDataGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ModalLoading from '../../../components/modal/modalLoading';
 
 const DaftarGudang = (props) => {
     const [gudangData, setGudangData] = useState([]);
