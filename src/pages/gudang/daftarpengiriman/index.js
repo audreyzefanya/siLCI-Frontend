@@ -11,6 +11,8 @@ import Sidebar from '../../../components/sidebar/manajer';
 import TabGudangManajer from '../../../components/tabGudangManajer';
 import { fetchDetailGudang, getDaftarPengiriman, updateStatusPengiriman } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from '../../../components/modal/modalLoading';
+import noDeliveryImage from '../../../assets/images/nodelivery.png';
 
 const getStatusString = (status) => {
     switch (status) {
