@@ -7,6 +7,7 @@ import Sidebar from '../../../../components/sidebar/stafpabrik';
 import { postBatchProduksi } from '../../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
+import ModalLoading from '../../../../components/modal/modalLoading';
 
 const AddBatch = (props) => {
     const { nama_pabrik } = useParams();
@@ -29,10 +30,13 @@ const AddBatch = (props) => {
 
     async function fetchDataBarang() {
         try {
+            setIsModalOpenLoading(true);
             const dataBarang = await GetAllBarang();
             setDaftarBarang(dataBarang);
         } catch (error) {
             console.error('Error fetching data barang:', error);
+        } finally {
+            setIsModalOpenLoading(false);
         }
     }
 
@@ -154,6 +158,7 @@ const AddBatch = (props) => {
                         </div>
                     </div>
                 </div>
+                                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
             <ModalResult
                 subtitle={dataSubtitleModal}

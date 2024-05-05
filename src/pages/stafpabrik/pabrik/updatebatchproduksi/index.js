@@ -7,6 +7,7 @@ import Sidebar from '../../../../components/sidebar/stafpabrik';
 import { updateBatchProduksi } from '../../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
+import ModalLoading from '../../../../components/modal/modalLoading';
 
 const AddBatch = (props) => {
     const { nama_pabrik, kode_batch } = useParams();
@@ -132,6 +133,7 @@ const AddBatch = (props) => {
                         </div>
                     </div>
                 </div>
+                                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
             <ModalResult
                 subtitle={dataSubtitleModal}

@@ -4,7 +4,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
-import { getAllBatchProduksi } from '../../../service/pabrik/endpoint';
+import { getAllBatchProduksiInPabrik } from '../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TabPabrik from '../../../components/tabPabrik';
@@ -42,7 +42,7 @@ const DaftarBatch = (props) => {
 
     const fetchDaftarBatch = async () => {
         try {
-            const data = await getAllBatchProduksi(nama_pabrik);
+            const data = await getAllBatchProduksiInPabrik(nama_pabrik);
             setDaftarBatch(data);
         } catch (error) {
             console.error('Error fetching data:', error);

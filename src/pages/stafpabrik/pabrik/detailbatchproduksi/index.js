@@ -7,6 +7,7 @@ import Sidebar from '../../../../components/sidebar/stafpabrik';
 import Header from '../../../../components/header';
 import { getBatchProduksi } from '../../../../service/pabrik/endpoint';
 import TabPabrikGudang from '../../../../components/tabPabrikGudang';
+import ModalLoading from '../../../../components/modal/modalLoading';
 
 const getStatusString = (status) => {
     switch (status) {
@@ -29,6 +30,7 @@ const DetailBatch = (props) => {
     const { nama_pabrik, kode_batch } = useParams();
     const [batchProduksi, setBatchProduksi] = useState(null);
     const navigate = useNavigate();
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
         fetchBatchProduksi();
@@ -36,10 +38,13 @@ const DetailBatch = (props) => {
 
     const fetchBatchProduksi = async () => {
         try {
+            setIsModalOpenLoading(true);
             const data = await getBatchProduksi(nama_pabrik, kode_batch);
             setBatchProduksi(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -200,6 +205,7 @@ const DetailBatch = (props) => {
                             </>
                         )}
                     </div>
+                                    <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
                 </div>
             </div>
         );

@@ -1,30 +1,36 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header';
+import ModalLoading from '../../../components/modal/modalLoading';
 import Sidebar from '../../../components/sidebar/manajer';
 import { fetchDataGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DaftarGudang = (props) => {
     const [gudangData, setGudangData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetchDataGudang('nama', 'alamat');
-                setGudangData(response);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+            setIsModalOpenLoading(true);
+            const response = await fetchDataGudang('nama', 'alamat');
+            setGudangData(response);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setIsModalOpenLoading(false);
+        }
+    };
 
     const handleDetailGudang = (id_gudang) => {
         navigate(`/manager-operasional/daftar-gudang/${id_gudang}`);
@@ -117,6 +123,7 @@ const DaftarGudang = (props) => {
                         </tbody>
                     </table>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
             </div>
         </div>
     );

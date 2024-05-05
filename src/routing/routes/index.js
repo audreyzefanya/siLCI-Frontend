@@ -10,10 +10,9 @@ import DetailBarang from '../../pages/barang/detail-barang';
 import BarangUpdate from '../../pages/barang/update-barang';
 import AddPermintaanPengirimanManager from '../../pages/gudang/addpermintaanpengiriman';
 import DaftarGudang from '../../pages/gudang/daftargudang';
-import daftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
+import DaftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
 import DetailGudang from '../../pages/gudang/detailgudang';
 import TambahGudang from '../../pages/gudang/tambahgudang';
-import DaftarPengirimanGudang from '../../pages/gudang/daftarpengiriman';
 import ManajerDashboard from '../../pages/manajer/dashboard';
 import profilepage from '../../pages/manajer/profile/profilepage';
 import RegisterPage from '../../pages/manajer/register';
@@ -86,6 +85,15 @@ import PengadaanDetailAdmin from '../../pages/adminperusahaan/perusahaan/detailp
 import DaftarPermintaanPengirimanStaf from '../../pages/stafpengadaan/perusahaan/daftarpermintaanpengadaan';
 import PengadaanDetailStaf from '../../pages/stafpengadaan/perusahaan/detailpengadaan';
 
+import ProfileViewPageAdminKaryawan from "../../pages/adminkaryawan/profile/profilepage";
+import ProfileViewPageAdminPerusahaan from "../../pages/adminperusahaan/profile/profilepage";
+import ProfileViewPage from '../../pages/manajer/profile/editprofilepage';
+import ProfileViewPageStafGudang from "../../pages/stafgudang/profile/profilepage";
+import ProfileViewPageStafPabrik from "../../pages/stafpabrik/profile/profilepage";
+import ProfileViewPageStafPengadaan from "../../pages/stafpengadaan/profile/profilepage";
+
+
+
 // import DaftarPermintaanPengirimanAdmin from '../../pages/adminperusahaan/perusahaan/daftarpermintaanpengadaan';
 // import DaftarPermintaanPengirimanStaf from '../../pages/stafpengadaan/perusahaan/daftarpermintaanpengadaan';
 
@@ -119,9 +127,12 @@ const Routing = () => {
             <Route path="/manager-operasional/barang" element={<ProtectedRoutes element={DaftarBarang} />} />
             <Route path="/manager-operasional/barang/:id_barang" element={<ProtectedRoutes element={DetailBarang} />} />
             <Route path="/manager-operasional/barang/update/:id_barang" element={<ProtectedRoutes element={BarangUpdate} />} />
+            <Route path="/manager-operasional/barang/update/:id_barang" element={<ProtectedRoutes element={BarangUpdate} />} />
             <Route path="/manager-operasional/daftar-gudang/add" element={<ProtectedRoutes element={TambahGudang} />} />
             <Route path="/manager-operasional/add-barang" element={<ProtectedRoutes element={AddBarang} />} />
             <Route path="/manager-operasional/add-pabrik" element={<ProtectedRoutes element={AddPabrik} />} />
+            <Route path="/manager-operasional/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanStaf} />} />
+            <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanStaf} />} />
             <Route path="/manager-operasional/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
             <Route path="/manager-operasional/pabrik/permintaan-pengiriman/:nama_pabrik" element={<ProtectedRoutes element={daftarPengiriman} />} />
@@ -135,6 +146,7 @@ const Routing = () => {
             <Route path="/admin-karyawan/barang" element={<ProtectedRoutes element={daftarBarang} />} />
             <Route path="/admin-karyawan/barang/:id_barang" element={<ProtectedRoutes element={detailBarang} />} />
             <Route path="/admin-karyawan/barang/update/:id_barang" element={<ProtectedRoutes element={UpdateBarang} />} />
+            <Route path="/admin-karyawan/barang/update/:id_barang" element={<ProtectedRoutes element={UpdateBarang} />} />
             <Route path="/admin-karyawan/add-barang" element={<ProtectedRoutes element={addBarang} />} />
 
             {/*-----Admin Perusahaan Import Routes------*/}
@@ -144,6 +156,7 @@ const Routing = () => {
             <Route path="/admin-perusahaan/perusahaan/:id_perusahaan/add" element={<ProtectedRoutes element={addBarangPadaPerusahaan} />} />
             <Route path="/admin-perusahaan/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPerusahaan} />} />
             <Route path="/admin-perusahaan/barang" element={<ProtectedRoutes element={daftarBarangPerusahaan} />} />
+            <Route path="/admin-perusahaan/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanAdmin} />} />
             <Route path="/admin-perusahaan/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanAdmin} />} />
             <Route path="/admin-perusahaan/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailAdmin} />} />
 
@@ -155,6 +168,7 @@ const Routing = () => {
             <Route path="/staf-pengadaan/barang/:id_barang" element={<ProtectedRoutes element={detailBarangPengadaan} />} />
             <Route path="/staf-pengadaan/barang" element={<ProtectedRoutes element={daftarBarangPengadaan} />} />
             <Route path="/staf-pengadaan/perusahaan/:id_perusahaan/request/:id_barang" element={<ProtectedRoutes element={requestPengadaan} />} />
+            <Route path="/staf-pengadaan/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanStaf} />} />
             <Route path="/staf-pengadaan/perusahaan/all" element={<ProtectedRoutes element={DaftarPermintaanPengirimanStaf} />} />
             <Route path="/staf-pengadaan/perusahaan/pengadaan-detail/:pengadaan_id" element={<ProtectedRoutes element={PengadaanDetailStaf} />} />
 
@@ -190,6 +204,15 @@ const Routing = () => {
             <Route path="/admin-perusahaan/profile" element={<ProtectedRoutes element={profileAdminPerusahaan} />} />
             <Route path="/admin-karyawan/profile" element={<ProtectedRoutes element={profileAdminKaryawan} />} />
             <Route path="/manager-operasional/profile" element={<ProtectedRoutes element={profilepage} />} />
+
+            <Route path="/manager-operasional/view-profile" element={<ProtectedRoutes element={ProfileViewPage} />} />
+
+            <Route path="/staf-pabrik/view-profile" element={<ProtectedRoutes element={ProfileViewPageStafPabrik} />} />
+            <Route path="/staf-gudang/view-profile" element={<ProtectedRoutes element={ProfileViewPageStafGudang} />} />
+            <Route path="/staf-pengadaan/view-profile" element={<ProtectedRoutes element={ProfileViewPageStafPengadaan} />} />
+            <Route path="/admin-perusahaan/view-profile" element={<ProtectedRoutes element={ProfileViewPageAdminPerusahaan} />} />
+            <Route path="/admin-karyawan/view-profile" element={<ProtectedRoutes element={ProfileViewPageAdminKaryawan} />} />
+            
 {/*
             <Route path="/daftar-gudang" element={<ProtectedRoutes element={DaftarGudang} />} />/manager-operasional
             <Route path="/daftar-gudang/:id_gudang" element={<ProtectedRoutes element={DetailGudang} />} />
