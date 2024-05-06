@@ -11,18 +11,10 @@ export const GetPerusahaan = async () => {
     }
 }
 
-export const GetBarangPerusahaanImpor = async () => {
+export const GetBarangPerusahaanImpor = async (id_perusahaan) => {
     try {
-        // Assuming company ID is stored in localStorage
-        const userCompanyId = localStorage.getItem('userCompanyId');
-
-        const response = await PerusahaanImporService.get('all'); // Fetch all companies
-        if (!response.data) return [];
-
-        // Filter data to only include the barang of the user's company
-        const filteredData = response.data.filter(perusahaan => perusahaan.id === userCompanyId);
-
-        return filteredData;
+        const response = await PerusahaanImporService.get(id_perusahaan);
+        return response.data;
     } catch (error) {
         throw error;
     }
