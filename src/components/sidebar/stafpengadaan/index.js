@@ -34,7 +34,7 @@ const Sidebar = (props) => {
                     // urlLink: '/system-admin/dashboard-user',
                 },
                 {
-                    currentNavigation: 2.3,
+                    currentNavigation: 3.3,
                     logo: [PiUserDuotone, PiUserFill],
                     title: 'Daftar Request',
                     urlLink: '/staf-pengadaan/perusahaan/all',

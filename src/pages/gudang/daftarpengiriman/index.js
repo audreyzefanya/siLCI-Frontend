@@ -25,7 +25,7 @@ const getStatusString = (status) => {
         default:
             return 'Status Tidak Dikenal';
     }
-};
+    };
 
 const truncateDateString = (dateString) => {
     return dateString.slice(0, 10);
@@ -182,3 +182,4 @@ const DaftarPengiriman = (props) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DaftarPengiriman);
+

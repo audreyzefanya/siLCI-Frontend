@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
+import { connect } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import emptyImage from '../../../../assets/images/empty.png';
 import Header from '../../../../components/header';
 import ModalLoading from '../../../../components/modal/modalLoading';
@@ -10,8 +12,6 @@ import Sidebar from '../../../../components/sidebar/stafgudang';
 import TabGudang from '../../../../components/tabGudang';
 import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import { connect } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
 
 const DetailGudang = (props) => {
     const { id_gudang } = useParams();
