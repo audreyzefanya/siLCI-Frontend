@@ -5,66 +5,39 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/adminperusahaan';
-import { GetAllPengadaan, GetDetailPerusahaan } from '../../../../service/perusahaanimpor/endpoint';
+import { GetAllPengadaanAdminImpor } from '../../../../service/perusahaanimpor/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 
 const DaftarPermintaanPengiriman = (props) => {
     const [pengadaanList, setPengadaanList] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const adminUserId = props.adminUserId; 
+    // const adminUserId = props.adminUserId; 
+    const [userInfo, setUserInfo] = useState(null);
+
 
     useEffect(() => {
-        const fetchPengadaanList = async () => {
-            try {
-                const allPengadaan = await GetAllPengadaan();
-                const filteredPengadaan = allPengadaan.filter(pengadaan => pengadaan.adminUserId === adminUserId);
+        // Get user info from localStorage
+        const storedUserInfo = localStorage.getItem('userInfo');
+        if (storedUserInfo) {
+          setUserInfo(JSON.parse(storedUserInfo));
+        }
+      }, []);
 
-                const pengadaanWithCompanyNames = await Promise.all(filteredPengadaan.map(async (pengadaan) => {
-                    try {
-                        const perusahaanResponse = await GetDetailPerusahaan(pengadaan.perusahaan);
-                        return { ...pengadaan, companyName: perusahaanResponse.nama };
-                    } catch (error) {
-                        console.error('Error fetching company details:', error);
-                        return { ...pengadaan, companyName: 'Name not available' }; // Fallback if company details fail to fetch
-                    }
-                }));
+      const fetchDetails = async (userInfo) => {
+        try {
+            const response = await GetAllPengadaanAdminImpor(userInfo.id);
+            setPengadaanList(response);
+        } catch (error) {
+            console.error('Error fetching dashboard details:', error);
+        }
+      };
 
-                setPengadaanList(pengadaanWithCompanyNames);
-            } catch (error) {
-                setError(error.toString());
-            }
-        };
-
-        fetchPengadaanList();
-    }, [adminUserId]);
-    // const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    // const userCompanyId = userInfo ? userInfo.company : null;
-
-    // useEffect(() => {
-    // const fetchPengadaanList = async () => {
-    //     try {
-    //         const allPengadaan = await GetAllPengadaan();
-    //         const relevantPengadaan = userCompanyId ? allPengadaan.filter(p => p.company === userCompanyId) : allPengadaan;
-
-    //         const pengadaanWithCompanyNames = await Promise.all(relevantPengadaan.map(async (pengadaan) => {
-    //             try {
-    //                 const perusahaanResponse = await GetDetailPerusahaan(pengadaan.perusahaan);
-    //                 return { ...pengadaan, companyName: perusahaanResponse.nama };
-    //             } catch (error) {
-    //                 console.error('Error fetching company details:', error);
-    //                 return { ...pengadaan, companyName: 'Name not available' };
-    //             }
-    //         }));
-
-    //         setPengadaanList(pengadaanWithCompanyNames);
-    //     } catch (error) {
-    //         setError(error.toString());
-    //     }
-    // };
-
-    // fetchPengadaanList();
-    // }, [userCompanyId]);
+      useEffect(() => {
+        if(userInfo) {
+          fetchDetails(userInfo)
+        }
+      }, [userInfo]);
 
     const handleNavigateToDetail = (pengadaan_id) => {
         navigate(`/admin-perusahaan/perusahaan/pengadaan-detail/${pengadaan_id}`);
@@ -108,12 +81,12 @@ const DaftarPermintaanPengiriman = (props) => {
         },
         {
             name: 'Tanggal Permintaan',
-            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString(),
+            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {
             name: 'Tanggal Update',
-            selector: row => new Date(row.tanggalUpdate).toLocaleDateString(),
+            selector: row => new Date(row.tanggalUpdate).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {

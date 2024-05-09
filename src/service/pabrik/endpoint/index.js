@@ -21,7 +21,37 @@ export const GetPabrik = async (pabrik_name) => {
     }
 };
 
-export const getAllBatchProduksi = async (pabrik_name) => {
+export const getAllBarangPabrik = async () => {
+    try {
+        const response = await PabrikService.get('allbarangpabrik');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getAllPermintaanPengiriman = async () => {
+    try {
+        const response = await PabrikService.get('allpermintaanpengiriman');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getAllBatchProduksi = async () => {
+    try {
+        const response = await PabrikService.get('allbatchproduksi');
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getAllBatchProduksiInPabrik = async (pabrik_name) => {
     try {
         const response = await PabrikService.get('batch/' + pabrik_name);
         console.log(response.data);

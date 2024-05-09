@@ -2,6 +2,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import DataTable from 'react-data-table-component';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import emptyImage from '../../../../assets/images/empty.png';
@@ -51,8 +52,35 @@ const DetailGudang = (props) => {
         navigate(`/staf-gudang/daftar-gudang/ubah/${id_gudang}`);
     };
 
+    const filteredBarangData = detailGudang ? detailGudang.barang.filter((barang) =>
+        barang.nama_barang.toLowerCase().includes(searchText.toLowerCase())
+    ) : [];
+
+    const columns = [
+        {
+            name: 'Nama Barang',
+            selector: row => row.nama_barang,
+            sortable: true,
+            compact: true,
+        },
+        {
+            name: 'Stok',
+            selector: row => row.stok,
+            sortable: true,
+            compact: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.stok < 20,
+                    style: {
+                        color: 'red',
+                    },
+                },
+            ],
+        }
+    ];
+
     return (
-        <div className='flex w-screen h-screen'>
+        <div className='flex w-screen h-screen' style={{ backgroundColor: 'white' }}>
             <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title=''/>
@@ -62,14 +90,14 @@ const DetailGudang = (props) => {
                         size="sm"
                         onClick={addBarangButton}
                         style={{
-                        borderRadius: '20px',
-                        backgroundColor: '#DA3732',
-                        borderColor: '#DA3732',
-                        color: 'white',
-                        padding: '5px 15px',
-                        fontSize: '1rem',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                        transition: 'transform 0.2s ease-in-out',
+                            borderRadius: '20px',
+                            backgroundColor: '#DA3732',
+                            borderColor: '#DA3732',
+                            color: 'white',
+                            padding: '5px 15px',
+                            fontSize: '1rem',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            transition: 'transform 0.2s ease-in-out',
                         }}
                         onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                         onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
@@ -119,7 +147,7 @@ const DetailGudang = (props) => {
                 <TabGudang
                     tabAktif={"Daftar Barang"}
                 />
-                <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8'>
+                <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-6 px-8' style={{ backgroundColor: 'white' }}>
                     {detailGudang && detailGudang.barang.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full">
                             <img src={emptyImage} alt="Empty" style={{ width: '250px', height: '200px' }} />
@@ -128,24 +156,12 @@ const DetailGudang = (props) => {
                     ) : (
                         <div>
                             <div className="text-3xl font-bold mt-2 mb-5 text-center"> Daftar Barang </div>
-                            <table className="w-full table-auto">
-                                <thead>
-                                    <tr>
-                                        <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Barang</th>
-                                        <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Stok</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {detailGudang && detailGudang.barang.filter((barang) =>
-                                        barang.nama_barang.toLowerCase().includes(searchText.toLowerCase())
-                                    ).map((barang, index) => (
-                                        <tr key={index}>
-                                            <td className="border px-4 py-2">{barang.nama_barang}</td>
-                                            <td className="border px-4 py-2">{barang.stok}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <DataTable
+                                columns={columns}
+                                data={filteredBarangData}
+                                noHeader={true}
+                                pagination={true}
+                            />
                         </div>
                     )}
                 </div>
@@ -153,6 +169,7 @@ const DetailGudang = (props) => {
             <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
         </div>
     );
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailGudang);

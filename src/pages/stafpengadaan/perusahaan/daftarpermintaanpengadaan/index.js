@@ -74,12 +74,12 @@ const DaftarPermintaanPengiriman = (props) => {
         },
         {
             name: 'Tanggal Permintaan',
-            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString(),
+            selector: row => new Date(row.tanggalPermintaaan).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {
             name: 'Tanggal Update',
-            selector: row => new Date(row.tanggalUpdate).toLocaleDateString(),
+            selector: row => new Date(row.tanggalUpdate).toLocaleDateString('en-GB'),
             sortable: true,
         },
         {
