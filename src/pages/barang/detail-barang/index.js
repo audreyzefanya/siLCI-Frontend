@@ -6,20 +6,25 @@ import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
 import { GetDetailBarang } from '../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const BarangDetail = (props) => {
     const { id_barang } = useParams();
     const navigate = useNavigate();
     const [barangDetail, setBarangDetail] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchDetail = async () => {
+            setIsModalOpen(true);
             try {
                 const response = await GetDetailBarang(id_barang);
                 setBarangDetail(response);
             } catch (error) {
                 console.error('Error fetching detail:', error);
-            }
+            } finally {
+                setIsModalOpen(false); // Close modal on data fetch completion
+              }
         };
         fetchDetail();
     }, [id_barang]);
@@ -34,7 +39,7 @@ const BarangDetail = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full flex flex-col'>
                 <Header title=''/>
                 <div className="flex justify-center items-center flex-1">
@@ -70,6 +75,7 @@ const BarangDetail = (props) => {
                         </div>
                     </div>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
             </div>
         </div>
     );

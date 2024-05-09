@@ -7,10 +7,12 @@ import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
 import { GetPerusahaan } from '../../../service/perusahaanimpor/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const DaftarPerusahaan = (props) => {
     const [daftarPerusahaan, setPerusahaan] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigateTo = useNavigate()
 
     useEffect(() => {
@@ -18,12 +20,15 @@ const DaftarPerusahaan = (props) => {
     }, [])
 
     async function getPerusahaanImpor() {
+        setIsModalOpen(true);
         try {
             const perusahaanData = await GetPerusahaan(); // Call GetPerusahaan function
             setPerusahaan(perusahaanData)
         } catch (error) {
             console.error('Error fetching perusahaan data:', error);
-        }
+        } finally {
+            setIsModalOpen(false); // Close modal on data fetch completion
+          }
     }
     
     const handleDetail = (id_perusahaan) => {
@@ -46,7 +51,7 @@ const DaftarPerusahaan = (props) => {
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>Daftar Perusahaan</span>
-                    <Button
+                    {/* <Button
                         size="sm"
                         onClick={handleAddPerusahaan}
                         style={{
@@ -63,7 +68,7 @@ const DaftarPerusahaan = (props) => {
                         onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
                         + Tambah Perusahaan
-                    </Button>
+                    </Button> */}
                 </div>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-2 px-8'>
                     <div className="mt-2 flex justify-center items-center">
@@ -105,6 +110,7 @@ const DaftarPerusahaan = (props) => {
                         ))}
                     </div>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
             </div>
         </div>
     );

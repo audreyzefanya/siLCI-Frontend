@@ -8,19 +8,25 @@ import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
 import { GetDaftarBarang } from '../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from '../../../components/modal/modalLoading';
+
 
 const DaftarBarang = (props) => {
   const [barangData, setBarangData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsModalOpen(true);
       try {
         const response = await GetDaftarBarang();
         setBarangData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setIsModalOpen(false); // Close modal on data fetch completion
       }
     };
     fetchData();
@@ -60,7 +66,7 @@ const DaftarBarang = (props) => {
         <Header title=''/>
         <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
           <span style={{ marginRight: '20px' }}>Daftar Barang</span>
-          <Button
+          {/* <Button
             size="sm"
             onClick={handleAddBarang}
             style={{
@@ -77,7 +83,7 @@ const DaftarBarang = (props) => {
             onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
           >
             + Tambah Barang
-          </Button>
+          </Button> */}
         </div>
         <div className="ml-10 mb-4">
           <Form.Group style={{ position: 'relative' }}>
@@ -114,7 +120,7 @@ const DaftarBarang = (props) => {
                       onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
                       onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
                     > Lihat Detail </Button>
-                    <Button
+                    {/* <Button
                       onClick={(e) => handleUpdateBarang(barang.id, e)}
                       style={{
                         borderRadius: '5px',
@@ -124,13 +130,14 @@ const DaftarBarang = (props) => {
                         padding: '7px 10px',
                         fontSize: '0.875rem',
                       }}
-                    > Ubah Barang </Button>
+                    > Ubah Barang </Button> */}
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
+        <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
       </div>
     </div>
   );
