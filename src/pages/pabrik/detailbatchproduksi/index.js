@@ -7,6 +7,7 @@ import Sidebar from '../../../components/sidebar/manajer';
 import Header from '../../../components/header';
 import { getBatchProduksi } from '../../../service/pabrik/endpoint';
 import TabPabrik from '../../../components/tabPabrik';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const getStatusString = (status) => {
     switch (status) {
@@ -29,18 +30,22 @@ const DetailBatch = (props) => {
     const { nama_pabrik, kode_batch } = useParams();
     const [batchProduksi, setBatchProduksi] = useState(null);
     const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         fetchBatchProduksi();
     }, [nama_pabrik, kode_batch]);
 
     const fetchBatchProduksi = async () => {
+        setIsModalOpen(true);
         try {
             const data = await getBatchProduksi(nama_pabrik, kode_batch);
             setBatchProduksi(data);
         } catch (error) {
             console.error('Error fetching data:', error);
-        }
+        } finally {
+            setIsModalOpen(false); // Close modal on data fetch completion
+          }
     };
 
     const renderStatusSlider = () => {
@@ -136,7 +141,7 @@ const DetailBatch = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
@@ -201,6 +206,7 @@ const DetailBatch = (props) => {
                         )}
                     </div>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
             </div>
         );
 };

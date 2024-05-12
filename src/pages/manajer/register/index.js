@@ -10,6 +10,7 @@ import TextInput from '../../../components/textinput';
 import { PostRegisterUser } from '../../../service/usermanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import { GetAllUsers, DeleteUserById } from '../../../service/usermanagement/endpoint';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const roles = [
   "Admin Karyawan",
@@ -30,8 +31,32 @@ const RegisterPage = (props) => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [emails, setEmails] = useState([]);
+  const [isModalOpenLoading, setIsModalOpenLoading] = useState(false); // State untuk modal loading
 
   const handleRegister = async () => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+    if (!username.trim()) {
+      setResultType('failed');
+      setResultMessage('Please enter a username.');
+      setIsResultOpen(true);
+      setTimeout(() => {
+        setIsResultOpen(false);
+      }, 2000);
+      return;
+    }
+
+    // Password validation: Check if the password meets complexity requirements
+    if (!passwordRegex.test(password)) {
+      setResultType('failed');
+      setResultMessage('Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.');
+      setIsResultOpen(true);
+      setTimeout(() => {
+        setIsResultOpen(false);
+      }, 2000);
+      return;
+    }
+
     if (!emailRegex.test(email)) {
       setResultType('failed');
       setResultMessage('Please enter a valid email address.');
@@ -41,6 +66,7 @@ const RegisterPage = (props) => {
       }, 2000);
       return;
     }
+
     if (!role) {
       setResultType('failed');
       setResultMessage('Please select a role.');
@@ -65,6 +91,7 @@ const RegisterPage = (props) => {
     try {
       const userData = { username, password, email, role };
       console.log(userData)
+      setIsModalOpenLoading(true);
       const response = await PostRegisterUser(userData);
       console.log(response)
       setResultType('success');
@@ -86,6 +113,9 @@ const RegisterPage = (props) => {
       setTimeout(() => {
         setIsResultOpen(false);
       }, 3000);
+    }
+    finally {
+      setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
     }
   };
 
@@ -157,6 +187,7 @@ const RegisterPage = (props) => {
           />
         </div>
       </div>
+      <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
     </div>
   );
 };

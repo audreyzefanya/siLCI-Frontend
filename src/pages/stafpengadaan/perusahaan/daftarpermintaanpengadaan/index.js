@@ -118,7 +118,7 @@ const DaftarPermintaanPengiriman = (props) => {
         headCells: {
             style: {
                 color: '#FFFFFF', 
-                backgroundColor: '#2C358C', 
+                backgroundColor: '#DA3732', 
                 border: 'none',
             },
         },
