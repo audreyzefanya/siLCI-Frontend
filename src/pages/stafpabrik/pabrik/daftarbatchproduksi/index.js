@@ -9,6 +9,7 @@ import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TabPabrikGudang from '../../../../components/tabPabrikGudang';
 import ModalLoading from '../../../../components/modal/modalLoading';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Tambahkan ini
 
 const getStatusString = (status) => {
     switch (status) {
@@ -26,10 +27,6 @@ const getStatusString = (status) => {
             return 'Status Tidak Dikenal';
     }
 };
-
-//const truncateDateString = (dateString) => {
-//    return dateString.slice(0, 10);
-//};
 
 const DaftarBatch = (props) => {
     const { nama_pabrik } = useParams();
@@ -58,15 +55,6 @@ const DaftarBatch = (props) => {
         setSearchQuery(event.target.value);
     };
 
-//    const handleStatusChange = async (kode_batch, newStatus) => {
-//        try {
-//            await updateStatusBatch(kode_batch, { status: newStatus });
-//            fetchDaftarBatch();
-//        } catch (error) {
-//            console.error('Error updating status:', error);
-//        }
-//    };
-
     const filteredBatch = daftarBatch
         ? daftarBatch.filter(produksi =>
             produksi.kode_produksi.toLowerCase().includes(searchQuery.toLowerCase())
@@ -77,36 +65,37 @@ const DaftarBatch = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title={nama_pabrik} style={{color: 'black'}}/>
+                <Header title='' style={{color: 'black'}}/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
-                <span style={{ marginRight: '20px' }}>Daftar Batch Produksi</span>
+                    <span style={{ marginRight: '20px' }}>{nama_pabrik}</span>
                     <Button
-                    size="sm"
-                    onClick={() => navigate(`/staf-pabrik/pabrik/detail/${nama_pabrik}/batch/add`)}
-                    style={{
-                        borderRadius: '20px',
-                        backgroundColor: '#DA3732',
-                        borderColor: '#DA3732',
-                        color: 'white',
-                        padding: '5px 15px',
-                        fontSize: '1rem',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                        transition: 'transform 0.2s ease-in-out',
-                    }}
-                    onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                    onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                        size="sm"
+                        onClick={() => navigate(`/staf-pabrik/pabrik/detail/${nama_pabrik}/batch/add`)}
+                        style={{
+                            borderRadius: '20px',
+                            backgroundColor: '#DA3732',
+                            borderColor: '#DA3732',
+                            color: 'white',
+                            padding: '5px 15px',
+                            fontSize: '1rem',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            transition: 'transform 0.2s ease-in-out',
+                        }}
+                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
-                    + Tambah Batch Produksi
+                        + Tambah Batch Produksi
                     </Button>
                 </div>
                 <div className="ml-10 mb-4">
                     <div style={{ position: 'relative' }}>
+                        <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
                         <input
                             type="text"
                             placeholder="Cari kode batch..."
                             value={searchQuery}
                             onChange={handleSearchChange}
-                            style={{ paddingLeft: '40px', border: '2px solid #2C358C', borderRadius: '5px', padding: '5px', outline: 'none' }}
+                            style={{ paddingLeft: '40px' }}
                         />
                     </div>
                 </div>
@@ -114,7 +103,7 @@ const DaftarBatch = (props) => {
                     tabAktif={"Batch Produksi"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
-                    <div className="text-3xl font-bold mb-6 ml-2 mt-2 text-center"> {nama_pabrik} </div>
+                    <div className="text-3xl font-bold mb-6 ml-2 mt-2 text-center"> Daftar Batch Produksi</div>
                     <table className="w-full table-auto">
                         <thead>
                             <tr>
@@ -159,18 +148,10 @@ const DaftarBatch = (props) => {
                         </tbody>
                     </table>
                 </div>
-                                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
         </div>
     );
 };
-
-//                                    <td className="border px-4 py-2">
-//                                        <select value={produksi.status} onChange={(e) => handleStatusChange(produksi.kode_batch, parseInt(e.target.value))}>
-//                                            <option value={2}>Sedang Diproses</option>
-//                                            <option value={3}>Telah Dikirim</option>
-//                                        </select>
-//                                    </td>
-//<td className="border px-4 py-2">{truncateDateString(produksi.tanggal_produksi)}</td>
 
 export default connect(mapStateToProps, mapDispatchToProps)(DaftarBatch);

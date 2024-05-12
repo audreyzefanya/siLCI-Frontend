@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import { connect } from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import Sidebar from '../../../../components/sidebar/stafpabrik';
 import Header from '../../../../components/header';
 import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import FloatingMenu from '../../../../components/floatingmenu';
 import { GetPabrik, PostAddBarangPabrik } from '../../../../service/pabrik/endpoint';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
-import TabPabrikGudang from '../../../../components/tabPabrikGudang';
 import ModalLoading from '../../../../components/modal/modalLoading';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import TabPabrikGudang from '../../../../components/tabPabrikGudang';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
@@ -23,9 +25,9 @@ const DetailPabrik = (props) => {
     const [choosenBarang, setChoosenBarang] = useState('');
     const [activeTab, setActiveTab] = useState('listBarang');
     const [searchQuery, setSearchQuery] = useState('');
-    const navigateTo = useNavigate()
+    const navigateTo = useNavigate();
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
-    let columns = []
+    let columns = [];
 
     if (pabrik.listBarang) {
         columns = [
@@ -79,15 +81,15 @@ const DetailPabrik = (props) => {
     }
 
     useEffect(() => {
-        getDetailPabrik()
-        getAllBarang()
+        getDetailPabrik();
+        getAllBarang();
     }, [nama_pabrik]);
 
     async function getDetailPabrik() {
         try {
             setIsModalOpenLoading(true);
             const pabrikData = await GetPabrik(nama_pabrik);
-            setPabrik(pabrikData)
+            setPabrik(pabrikData);
         } catch (error) {
             console.error('Error fetching pabrik data:', error);
         } finally {
@@ -98,7 +100,7 @@ const DetailPabrik = (props) => {
     async function getAllBarang() {
         try {
             const barangData = await GetAllBarang();
-            setBarang(barangData)
+            setBarang(barangData);
         } catch (error) {
             console.error('Error fetching perusahaan data:', error);
         }
@@ -127,17 +129,16 @@ const DetailPabrik = (props) => {
     async function handlePostBarang() {
         if (choosenBarang) {
             try {
-                console.log(choosenBarang)
+                console.log(choosenBarang);
                 var response = await PostAddBarangPabrik(choosenBarang, nama_pabrik);
-                setShowFloatingMenu(false)
-                setWarningMessage('')
-                getDetailPabrik()
-
+                setShowFloatingMenu(false);
+                setWarningMessage('');
+                getDetailPabrik();
             } catch (error) {
                 if (error.request && error.request.status === 404) {
-                    setWarningMessage('ID Barang tidak ditemukan')
+                    setWarningMessage('ID Barang tidak ditemukan');
                 } else {
-                    setWarningMessage(error.response.data.message)
+                    setWarningMessage(error.response.data.message);
                 }
             }
         } else {
@@ -173,9 +174,10 @@ const DetailPabrik = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title={pabrik.nama} style={{color: 'black'}}/>
+                <Header title='' style={{color: 'black'}}/>
+
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{color: '#000000'}}>
-                    <span style={{marginRight: '20px'}}>Daftar Barang</span>
+                    <span style={{marginRight: '20px'}}>{nama_pabrik}</span>
                     <Button
                         size="sm"
                         onClick={addBarangButton}
@@ -195,38 +197,35 @@ const DetailPabrik = (props) => {
                         + Tambah Barang
                     </Button>
                 </div>
-                <div className="ml-10 mb-4">
-                    <div className="pabrik-deskripsi">
-                        <b>Alamat:</b> {pabrik.alamat}
-                    </div>
-                </div>
-                <TabPabrikGudang
+               <div className="ml-10">
+                   <div className="pabrik-deskripsi">
+                       <b>Alamat:</b> {pabrik.alamat}
+                   </div>
+                   <div className="mb-4" style={{ position: 'relative', marginTop: '15px' }}>
+                       <Form.Control
+                           type="text"
+                           placeholder="Cari barang..."
+                           value={searchText}
+                           onChange={handleSearch}
+                           style={{ paddingLeft: '40px' }}
+                       />
+                       <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
+                   </div>
+               </div>
+               <TabPabrikGudang
                     tabAktif={"Daftar Barang"}
                 />
                 <div className={`flex-1 ${showFloatingMenu ? 'blur' : ''}`}>
                     <div className='no-scrollbar overflow-y-auto py-3 px-8'>
                         <>
                             <br/>
-                            <div className="text-3xl font-bold text-center"> {nama_pabrik} </div>
+                            <div className="text-3xl font-bold text-center"> Daftar Barang </div>
                             <DataTable
                                 columns={columns}
                                 data={filteredData}
                                 pagination
                                 fixedHeader
                                 subHeader
-                                subHeaderComponent={[<input
-                                    key="searchInput"
-                                    type="text"
-                                    placeholder="Search..."
-                                    value={searchText}
-                                    onChange={handleSearch}
-                                    style={{
-                                        marginRight: '10px',
-                                        padding: '5px',
-                                        border: '1px solid #ced4da',
-                                        borderRadius: '5px'
-                                    }}
-                                />,]}
                                 customStyles={customStyles}
                             />
                         </>
