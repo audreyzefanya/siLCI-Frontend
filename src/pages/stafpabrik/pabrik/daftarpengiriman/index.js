@@ -8,21 +8,22 @@ import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TabPabrik from '../../../../components/tabPabrikGudang';
 import ModalLoading from '../../../../components/modal/modalLoading';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const getStatusString = (status) => {
-        switch (status) {
-            case 1:
-                return 'Menunggu Konfirmasi';
-            case 2:
-                return 'Sedang Diproses';
-            case 3:
-                return 'Telah Dikirim';
-            case 4:
-                return 'Telah Diterima';
-            default:
-                return 'Status Tidak Dikenal';
-        }
-        };
+    switch (status) {
+        case 1:
+            return 'Menunggu Konfirmasi';
+        case 2:
+            return 'Sedang Diproses';
+        case 3:
+            return 'Telah Dikirim';
+        case 4:
+            return 'Telah Diterima';
+        default:
+            return 'Status Tidak Dikenal';
+    }
+};
 
 const truncateDateString = (dateString) => {
     return dateString.slice(0, 10);
@@ -74,22 +75,23 @@ const DaftarPengiriman = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title={nama_pabrik} style={{color: 'black'}}/>
+                <Header title='' style={{color: 'black'}}/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
-                    <span style={{ marginRight: '20px' }}> {nama_pabrik} </span>
+                    <span style={{ marginRight: '20px' }}>{nama_pabrik}</span>
                 </div>
                 <div className="ml-10 mb-4">
                     <div style={{ position: 'relative' }}>
+                        <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
                         <input
                             type="text"
                             placeholder="Cari kode permintaan..."
                             value={searchQuery}
                             onChange={handleSearchChange}
-                            style={{ paddingLeft: '40px', border: '2px solid #2C358C', borderRadius: '5px', padding: '5px', outline: 'none' }}
+                            style={{ paddingLeft: '40px' }}
                         />
                     </div>
                 </div>
-                <TabPabrik 
+                <TabPabrik
                     tabAktif={"Pengiriman Barang"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>

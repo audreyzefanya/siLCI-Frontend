@@ -62,12 +62,14 @@ const DetailGudang = (props) => {
             selector: row => row.nama_barang,
             sortable: true,
             compact: true,
+            center: true, // Center align text
         },
         {
             name: 'Stok',
             selector: row => row.stok,
             sortable: true,
             compact: true,
+            center: true, // Center align text
             conditionalCellStyles: [
                 {
                     when: row => row.stok < 20,
@@ -78,6 +80,21 @@ const DetailGudang = (props) => {
             ],
         }
     ];
+
+    const customStyles = {
+        headCells: {
+            style: {
+                backgroundColor: '#DA3732',
+                color: 'white',
+                textAlign: 'center', // Center align column headers
+            },
+        },
+        cells: {
+            style: {
+                textAlign: 'center', // Center align cells
+            },
+        },
+    };
 
     return (
         <div className='flex w-screen h-screen' style={{ backgroundColor: 'white' }}>
@@ -161,6 +178,7 @@ const DetailGudang = (props) => {
                                 data={filteredBarangData}
                                 noHeader={true}
                                 pagination={true}
+                                customStyles={customStyles}
                             />
                         </div>
                     )}
