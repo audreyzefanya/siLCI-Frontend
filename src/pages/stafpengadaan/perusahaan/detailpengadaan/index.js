@@ -160,7 +160,7 @@ const PengadaanDetail = (props) => {
     };
 
     const finishPengadaanButton = async () => {
-
+      setModalLoadingOpen(true);
       const dataTambah = {
           gudang: pengadaanDetail.gudangTujuan,
           barang: pengadaanDetail.barang,

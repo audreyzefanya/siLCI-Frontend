@@ -178,11 +178,13 @@ const PengadaanDetail = (props) => {
     };
 
     const tolakButton = async () => {
+        setModalLoadingOpen(true);
         await RejectPengadaan(pengadaan_id);
         window.location.reload();
     };
 
     const increaseStatusButton = async () => {
+        setModalLoadingOpen(true);
         await IncreaseStatusPengadaan(pengadaan_id);
         window.location.reload();
     };
