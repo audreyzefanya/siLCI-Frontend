@@ -51,7 +51,7 @@ const DaftarPerusahaan = (props) => {
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>Daftar Perusahaan</span>
-                    {/* <Button
+                    <Button
                         size="sm"
                         onClick={handleAddPerusahaan}
                         style={{
@@ -68,7 +68,7 @@ const DaftarPerusahaan = (props) => {
                         onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
                         + Tambah Perusahaan
-                    </Button> */}
+                    </Button>
                 </div>
                 <div className='no-scrollbar flex-1 overflow-y-auto bg-neutral20 py-2 px-8'>
                     <div className="mt-2 flex justify-center items-center">
