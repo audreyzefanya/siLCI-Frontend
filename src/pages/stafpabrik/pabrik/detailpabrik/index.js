@@ -67,7 +67,7 @@ const DetailPabrik = (props) => {
                             borderRadius: '5px',
                             marginRight: '5px',
                             border: '2px #266bff',
-                            backgroundColor: '#DA3732',
+                            backgroundColor: '#2C358C',
                             color: 'white',
                             padding: '7px 8px'
                         }}
@@ -149,6 +149,26 @@ const DetailPabrik = (props) => {
         item.barang.merk.nama.toLowerCase().includes(searchText.toLowerCase())
     ) : [];
 
+    // Custom styles untuk DataTable
+    const customStyles = {
+        headCells: {
+            style: {
+                color: '#FFFFFF',
+                backgroundColor: '#DA3732', // Warna biru yang diinginkan
+            },
+        },
+        cells: {
+            style: {
+                color: '#000000',
+            },
+        },
+        pagination: {
+            style: {
+                color: '#000000',
+            },
+        },
+    };
+
     return (
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
@@ -207,6 +227,7 @@ const DetailPabrik = (props) => {
                                         borderRadius: '5px'
                                     }}
                                 />,]}
+                                customStyles={customStyles}
                             />
                         </>
                     </div>
@@ -219,7 +240,7 @@ const DetailPabrik = (props) => {
                         warningMessage={warningMessage}
                     />)}
                 <ModalLoading title="Loading..." subtitle="Please wait a moment"
-                              isOpen={isModalOpenLoading}/> {/* Menampilkan modal loading */}
+                              isOpen={isModalOpenLoading}/>
 
             </div>
         </div>

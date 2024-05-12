@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
 import { GetPabrik } from '../../../../service/pabrik/endpoint';
-import TabPabrik from '../../../../components/tabPabrikGudang';
+import TabPabrik from '../../../../components/tabPabrikk';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
@@ -107,7 +107,7 @@ const DetailPabrik = (props) => {
                                     <b>Alamat:</b> {pabrik.alamat}
                                 </div>
                                 <br />
-                                <TabPabrik 
+                                <TabPabrik
                                     tabAktif={"Daftar Barang"}
                                 />
                                 <DataTable
