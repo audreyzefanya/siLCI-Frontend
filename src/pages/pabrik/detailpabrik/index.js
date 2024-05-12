@@ -9,12 +9,15 @@ import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
 import { GetPabrik } from '../../../service/pabrik/endpoint';
 import TabPabrik from '../../../components/tabPabrik';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const DetailPabrik = (props) => {
     const { nama_pabrik } = useParams();
     const [pabrik, setPabrik] = useState([]);
     const [searchText, setSearchText] = useState('');
     const navigateTo = useNavigate()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     let columns = []
 
     if (pabrik.listBarang) {
@@ -73,12 +76,15 @@ const DetailPabrik = (props) => {
     }, [nama_pabrik]);
 
     async function getDetailPabrik() {
+        setIsModalOpen(true);
         try {
             const pabrikData = await GetPabrik(nama_pabrik);
             setPabrik(pabrikData)
         } catch (error) {
             console.error('Error fetching pabrik data:', error);
-        }
+        } finally {
+            setIsModalOpen(false); // Close modal on data fetch completion
+          }
     }
 
     const handleDetailBarang = (barangId) => {
@@ -136,6 +142,7 @@ const DetailPabrik = (props) => {
                         )}
                     </div>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
             </div>
         </div>
     );

@@ -30,12 +30,6 @@ const Sidebar = (props) => {
                 {
                     currentNavigation: 2.2,
                     logo: [PiUserDuotone, PiUserFill],
-                    title: 'Request Pabrik',
-                    // urlLink: '/system-admin/dashboard-user',
-                },
-                {
-                    currentNavigation: 2.3,
-                    logo: [PiUserDuotone, PiUserFill],
                     title: 'Daftar Request',
                     urlLink: '/staf-pengadaan/perusahaan/all',
                 },

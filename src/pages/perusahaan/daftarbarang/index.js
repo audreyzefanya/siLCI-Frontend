@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const DaftarBarangPerusahaan = (props) => {
     const { id_perusahaan } = useParams();
@@ -16,6 +17,7 @@ const DaftarBarangPerusahaan = (props) => {
     const [barang, setBarang] = useState([]);
     const navigateTo = useNavigate();
     const [searchText, setSearchText] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     var columns = [];
 
     if (barang) {
@@ -75,12 +77,15 @@ const DaftarBarangPerusahaan = (props) => {
     }, [])
 
     async function getDetailPerusahaan() {
+        setIsModalOpen(true);
         try {
             const perusahaanData = await GetDetailPerusahaan(id_perusahaan); 
             setPerusahaan(perusahaanData);
         } catch (error) {
             console.error('Error fetching perusahaan data:', error);
-        }
+        } finally {
+            setIsModalOpen(false); // Close modal on data fetch completion
+          }
     }
 
     async function getBarangPerusahaanImpor() {
@@ -143,6 +148,7 @@ const DaftarBarangPerusahaan = (props) => {
                         </div>
                     )}
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
             </div>
         </div>
     );

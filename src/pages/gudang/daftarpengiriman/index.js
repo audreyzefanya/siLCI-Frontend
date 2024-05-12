@@ -25,7 +25,7 @@ const getStatusString = (status) => {
         default:
             return 'Status Tidak Dikenal';
     }
-};
+    };
 
 const truncateDateString = (dateString) => {
     return dateString.slice(0, 10);
@@ -91,7 +91,7 @@ const DaftarPengiriman = (props) => {
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>{detailGudang ? detailGudang.nama_gudang : ''}</span>
-                    <Button
+                    {/* <Button
                         size="sm"
                         onClick={handleAddPermintaanPengiriman}
                         style={{
@@ -108,7 +108,7 @@ const DaftarPengiriman = (props) => {
                         onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
                         + Tambah Permintaan Pengiriman
-                    </Button>
+                    </Button> */}
                 </div>
                 <div className="alamat-gudang mb-4 ml-10">
                     <input
@@ -182,3 +182,4 @@ const DaftarPengiriman = (props) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DaftarPengiriman);
+

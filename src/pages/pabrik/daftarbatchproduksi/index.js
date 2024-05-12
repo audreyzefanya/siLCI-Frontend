@@ -8,6 +8,7 @@ import { getAllBatchProduksiInPabrik } from '../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TabPabrik from '../../../components/tabPabrik';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const getStatusString = (status) => {
     switch (status) {
@@ -35,18 +36,22 @@ const DaftarBatch = (props) => {
     const navigate = useNavigate();
     const [daftarBatch, setDaftarBatch] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         fetchDaftarBatch();
     }, [nama_pabrik]);
 
     const fetchDaftarBatch = async () => {
+        setIsModalOpen(true);
         try {
             const data = await getAllBatchProduksiInPabrik(nama_pabrik);
             setDaftarBatch(data);
         } catch (error) {
             console.error('Error fetching data:', error);
-        }
+        } finally {
+            setIsModalOpen(false); // Close modal on data fetch completion
+          }
     };
 
     const handleSearchChange = (event) => {
@@ -75,7 +80,7 @@ const DaftarBatch = (props) => {
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                 <span style={{ marginRight: '20px' }}>Daftar Batch Produksi</span>
-                    <Button
+                    {/* <Button
                     size="sm"
                     onClick={() => navigate(`/manager-operasional/pabrik/detail/${nama_pabrik}/batch/add`)}
                     style={{
@@ -92,7 +97,7 @@ const DaftarBatch = (props) => {
                     onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
                     + Tambah Batch Produksi
-                    </Button>
+                    </Button> */}
                 </div>
                 <div className="ml-10 mb-4">
                     <div style={{ position: 'relative' }}>
@@ -155,6 +160,7 @@ const DaftarBatch = (props) => {
                     </table>
                 </div>
             </div>
+            <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
         </div>
     );
 };

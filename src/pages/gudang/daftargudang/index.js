@@ -1,3 +1,5 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -7,8 +9,6 @@ import ModalLoading from '../../../components/modal/modalLoading';
 import Sidebar from '../../../components/sidebar/manajer';
 import { fetchDataGudang } from '../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DaftarGudang = (props) => {
     const [gudangData, setGudangData] = useState([]);
@@ -57,7 +57,7 @@ const DaftarGudang = (props) => {
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>Daftar Gudang</span>
-                    <Button
+                    {/* <Button
                         size="sm"
                         onClick={handleAddGudang}
                         style={{
@@ -74,7 +74,7 @@ const DaftarGudang = (props) => {
                         onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
                         + Tambah Gudang
-                    </Button>
+                    </Button> */}
                 </div>
                 <div className="ml-10 mb-4">
                     <Form.Group style={{ position: 'relative' }}>
