@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import Sidebar from '../../../../components/sidebar/stafpengadaan';
 import Header from '../../../../components/header';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import { useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { Button } from 'react-bootstrap';
@@ -15,6 +16,7 @@ const DaftarBarangPerusahaan = (props) => {
     const [barang, setBarang] = useState([]);
     const navigateTo = useNavigate();
     const [searchText, setSearchText] = useState('');
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false)
     var columns = [];
 
     if (barang) {
@@ -103,10 +105,13 @@ const DaftarBarangPerusahaan = (props) => {
     
     async function getBarangPerusahaanImpor() {
         try {
+            setIsModalOpenLoading(true)
             const barangData = await GetBarangPerusahaanImpor(id_perusahaan);
             setBarang(barangData);
         } catch (error) {
             console.error('Error fetching Barang data: ', error);
+        } finally {
+            setIsModalOpenLoading(false)
         }
     }
 
@@ -166,6 +171,7 @@ const DaftarBarangPerusahaan = (props) => {
                     )}
                 </div>
             </div>
+            <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
         </div>
     );
 };
