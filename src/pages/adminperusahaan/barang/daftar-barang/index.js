@@ -6,6 +6,7 @@ import DataTable from 'react-data-table-component';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../../components/header';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/adminperusahaan';
 import { GetDaftarBarang } from '../../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
@@ -13,19 +14,25 @@ import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 const DaftarBarang = (props) => {
   const [barangData, setBarangData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await GetDaftarBarang();
-        setBarangData(response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      setIsModalOpenLoading(true);
+      const response = await GetDaftarBarang();
+      setBarangData(response);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+  }
+
+};
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -166,6 +173,7 @@ const DaftarBarang = (props) => {
             pagination
           />
         </div>
+        <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
       </div>
     </div>
   );
