@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../components/header';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/adminkaryawan';
 import { GetDetailBarang } from '../../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
@@ -12,18 +13,25 @@ const BarangDetail = (props) => {
     const { id_barang } = useParams();
     const navigate = useNavigate();
     const [barangDetail, setBarangDetail] = useState(null);
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
-        const fetchDetail = async () => {
-            try {
-                const response = await GetDetailBarang(id_barang);
-                setBarangDetail(response);
-            } catch (error) {
-                console.error('Error fetching detail:', error);
-            }
-        };
         fetchDetail();
     }, [id_barang]);
+
+    const fetchDetail = async () => {
+        try {
+            setIsModalOpenLoading(true);
+            const response = await GetDetailBarang(id_barang);
+            setBarangDetail(response);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+        }
+      
+      };
+
 
     const kembaliButton = () => {
         navigate(-1);
@@ -71,6 +79,7 @@ const BarangDetail = (props) => {
                         </div>
                     </div>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
             </div>
         </div>
     );
