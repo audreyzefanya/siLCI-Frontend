@@ -8,19 +8,24 @@ import Header from '../../../../components/header';
 import Sidebar from '../../../../components/sidebar/stafpabrik';
 import { GetAllPabrik } from '../../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
+import ModalLoading from '../../../../components/modal/modalLoading';
 
 const DaftarPabrik = (props) => {
   const [pabrikData, setPabrikData] = useState([]);
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+  const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsModalOpenLoading(true);
         const response = await GetAllPabrik();
         setPabrikData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setIsModalOpenLoading(false);
       }
     };
     fetchData();
@@ -120,6 +125,7 @@ const DaftarPabrik = (props) => {
             ))}
           </div>
         </div>
+        <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { getDaftarPengiriman, updateStatusPengiriman } from '../../../service/pa
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TabPabrik from '../../../components/tabPabrik';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const getStatusString = (status) => {
     switch (status) {
@@ -32,18 +33,22 @@ const DaftarPengiriman = (props) => {
     const navigate = useNavigate();
     const [daftarPengiriman, setDaftarPengiriman] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         fetchDaftarPengiriman();
     }, [nama_pabrik]);
 
     const fetchDaftarPengiriman = async () => {
+        setIsModalOpen(true);
         try {
             const data = await getDaftarPengiriman(nama_pabrik);
             setDaftarPengiriman(data);
         } catch (error) {
             console.error('Error fetching data:', error);
-        }
+        } finally {
+            setIsModalOpen(false); // Close modal on data fetch completion
+          }
     };
 
     const handleSearchChange = (event) => {
@@ -123,6 +128,7 @@ const DaftarPengiriman = (props) => {
                         </tbody>
                     </table>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
             </div>
         </div>
     );

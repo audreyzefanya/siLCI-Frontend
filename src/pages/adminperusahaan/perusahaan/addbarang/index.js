@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { GetAllBarang } from '../../../../service/barang/endpoint';
 import DropdownText from '../../../../components/dropdown/dropdownText';
 import ModalResult from '../../../../components/modal/modalResult';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/adminperusahaan';
 
 const AddBarangPerusahaan = (props) => {
@@ -16,6 +17,7 @@ const AddBarangPerusahaan = (props) => {
     const [perusahaan, setPerusahaan] = useState([])
     const [choosenBarang, setChoosenBarang] = useState("")
     const [isModalOpenResult, setIsModalOpenResult] = useState(false)
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false)
     const [dataSubtitleModal, setDataSubtitleModal] = useState("")
     const [flagResult, setFlagResult] = useState("success")
     const navigateTo = useNavigate()
@@ -27,10 +29,13 @@ const AddBarangPerusahaan = (props) => {
 
     async function getAllBarang() {
         try {
+            setIsModalOpenLoading(true)
             const barangData = await GetAllBarang(); 
             setBarang(barangData)
         } catch (error) {
             console.error('Error fetching barang data:', error);
+        } finally {
+            setIsModalOpenLoading(false)
         }
     }
 
@@ -63,12 +68,15 @@ const AddBarangPerusahaan = (props) => {
     async function handlePostBarang() {
         if (choosenBarang) {
             try {
+                setIsModalOpenLoading(true)
                 var response = await PostAddBarangImpor(choosenBarang, id_perusahaan);
+                setIsModalOpenLoading(false)
                 handleOpenModalResult("success", "Barang berhasil ditambahkan");
                 setTimeout(() => {
                     handleToDaftarBarang()
                 }, 1000);
             } catch (error) {
+                setIsModalOpenLoading(false)
                 if (error.request && error.request.status === 404) {
                     handleOpenModalResult("failed", "ID Barang tidak ditemukan");
                 } else {
@@ -106,6 +114,7 @@ const AddBarangPerusahaan = (props) => {
             type={flagResult}
             isOpen={isModalOpenResult}
         />
+        <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
     </div>
   );
 };

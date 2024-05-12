@@ -242,7 +242,7 @@ const processChartData = (stokBarangData) => {
                 </div>
                 </div>
 
-q               <div className="text-2xl font-semibold mb-2 ml-10 mt-8">Grafik Barang Per Pabrik</div>
+               <div className="text-2xl font-semibold mb-2 ml-10 mt-8">Grafik Barang Per Pabrik</div>
                 <hr className="ml-10 mr-10 mb-6 border-gray-300"/>
                 <div className="flex flex-wrap justify-start p-6">
                 {Object.entries(stokBarangPerPabrik).map(([namaPabrik, dataBarang], index) => (

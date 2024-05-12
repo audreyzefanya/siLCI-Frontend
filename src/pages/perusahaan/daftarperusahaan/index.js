@@ -7,10 +7,12 @@ import Header from '../../../components/header';
 import Sidebar from '../../../components/sidebar/manajer';
 import { GetPerusahaan } from '../../../service/perusahaanimpor/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const DaftarPerusahaan = (props) => {
     const [daftarPerusahaan, setPerusahaan] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigateTo = useNavigate()
 
     useEffect(() => {
@@ -18,12 +20,15 @@ const DaftarPerusahaan = (props) => {
     }, [])
 
     async function getPerusahaanImpor() {
+        setIsModalOpen(true);
         try {
             const perusahaanData = await GetPerusahaan(); // Call GetPerusahaan function
             setPerusahaan(perusahaanData)
         } catch (error) {
             console.error('Error fetching perusahaan data:', error);
-        }
+        } finally {
+            setIsModalOpen(false); // Close modal on data fetch completion
+          }
     }
     
     const handleDetail = (id_perusahaan) => {
@@ -105,6 +110,7 @@ const DaftarPerusahaan = (props) => {
                         ))}
                     </div>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
             </div>
         </div>
     );

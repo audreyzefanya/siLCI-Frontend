@@ -7,7 +7,8 @@ import Sidebar from '../../../../components/sidebar/stafpabrik';
 import { getAllBatchProduksiInPabrik } from '../../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TapPabrikGudang from '../../../../components/tabPabrikGudang';
+import TabPabrikGudang from '../../../../components/tabPabrikGudang';
+import ModalLoading from '../../../../components/modal/modalLoading';
 
 const getStatusString = (status) => {
     switch (status) {
@@ -35,6 +36,7 @@ const DaftarBatch = (props) => {
     const navigate = useNavigate();
     const [daftarBatch, setDaftarBatch] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
         fetchDaftarBatch();
@@ -42,10 +44,13 @@ const DaftarBatch = (props) => {
 
     const fetchDaftarBatch = async () => {
         try {
+            setIsModalOpenLoading(true);
             const data = await getAllBatchProduksiInPabrik(nama_pabrik);
             setDaftarBatch(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -72,7 +77,7 @@ const DaftarBatch = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title=''/>
+                <Header title={nama_pabrik} style={{color: 'black'}}/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                 <span style={{ marginRight: '20px' }}>Daftar Batch Produksi</span>
                     <Button
@@ -105,7 +110,7 @@ const DaftarBatch = (props) => {
                         />
                     </div>
                 </div>
-                <TapPabrikGudang
+                <TabPabrikGudang
                     tabAktif={"Batch Produksi"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
@@ -154,6 +159,7 @@ const DaftarBatch = (props) => {
                         </tbody>
                     </table>
                 </div>
+                                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
         </div>
     );
