@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import Header from '../../../components/header';
+import ModalLoading from '../../../components/modal/modalLoading';
 import Sidebar from '../../../components/sidebar/adminkaryawan';
 import { GetDaftarBarang } from '../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
@@ -24,6 +25,7 @@ const InfoCard = ({ title, count }) => {
 };
 
 const Dashboard = (props) => {
+  const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [{
@@ -50,8 +52,12 @@ const Dashboard = (props) => {
   });
 
   useEffect(() => {
+    fetchAndProcessData();
+  }, []);
+
     const fetchAndProcessData = async () => {
         try {
+            setIsModalOpenLoading(true);
             const daftarBarang = await GetDaftarBarang();
             const brands = ['STP', 'Turtle Wax', 'Penray', 'Prestone', 'Armor All', 'SIP', 'CHW', 'AutoGard', 'California Scents'];
             const countPerBrand = brands.map(brand => ({
@@ -68,11 +74,13 @@ const Dashboard = (props) => {
             });
         } catch (error) {
             console.error('Failed to fetch data:', error);
-        }
+        } finally {
+          setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+      }
+
     };
 
-    fetchAndProcessData();
-  }, []);
+
 
   return (
     <div className='flex w-screen h-screen'>
@@ -87,6 +95,7 @@ const Dashboard = (props) => {
             <div className="p-6">
                 <Bar data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
             </div>
+            <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
         </div>
     </div>
   );

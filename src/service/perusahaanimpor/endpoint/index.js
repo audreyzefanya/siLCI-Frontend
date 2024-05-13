@@ -21,6 +21,7 @@ export const GetBarangPerusahaanImpor = async (id_perusahaan) => {
 }
 
 
+
 export const GetDetailPerusahaan = async (id_perusahaan) => {
     try {
         const response = await PerusahaanImporService.get('detail/' + id_perusahaan);
@@ -97,6 +98,9 @@ export const GetAllPengadaanAdminImpor = async (id) => {
         throw error;
     }
 }
+
+
+
 
 
 

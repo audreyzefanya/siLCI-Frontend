@@ -1,5 +1,6 @@
 import BarangManagementService from "../daftarbarangService";
 
+
 export const GetDaftarBarang = async () => {
     try {
         const response = await BarangManagementService.get('/api/barang/all');
@@ -18,36 +19,31 @@ export const GetDetailBarang = async (id_barang) => {
     }
 }
 
-export const PostAddBarang = async (dataBarang) => {
-    try {
-        const response = await BarangManagementService.post('api/barang/create', dataBarang);
-        return response.data;
-    } catch (error) {
-        console.error('Error adding warehouse:', error);
-        throw error;
-    }
-}
 
-// export const UpdateBarang = async (id_barang) => {
-//     try {
-//         const response = await BarangManagementService.put('/api/barang/update/'+ id_barang);
-//         return response.data;
-//     } catch (error) {
-//         throw error;
-//     }
-// }
-
-export const UpdateBarang = async (id_barang, updateData) => {
+export const PostAddBarang = async (formData) => {
     try {
-        const response = await BarangManagementService.put('/api/barang/update/'+ id_barang, updateData, {
+        const response = await BarangManagementService.post('/api/barang/create', formData, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data',
             }
         });
         return response.data;
     } catch (error) {
-        // Melakukan re-throw error agar bisa ditangkap dan dihandle di komponen
+        console.error('Error adding item:', error);
         throw error;
     }
 }
 
+export const UpdateBarang = async (id_barang, formData) => {
+    try {
+        const response = await BarangManagementService.put('/api/barang/update/'+ id_barang, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error adding item:', error);
+        throw error;
+    }
+}

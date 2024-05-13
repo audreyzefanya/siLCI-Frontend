@@ -118,7 +118,7 @@ const DaftarPermintaanPengiriman = (props) => {
         headCells: {
             style: {
                 color: '#FFFFFF', 
-                backgroundColor: '#2C358C', 
+                backgroundColor: '#DA3732', 
                 border: 'none',
             },
         },
@@ -139,7 +139,7 @@ const DaftarPermintaanPengiriman = (props) => {
 
     return (
         <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
-            <Sidebar currentNavigation={2.3} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
+            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus} />
             <div style={{ flexGrow: 1, overflowY: 'auto' }}>
                 <Header title={null}/>
                 <div style={{ padding: '20px' }}>

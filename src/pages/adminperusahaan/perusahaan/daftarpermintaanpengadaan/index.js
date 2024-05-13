@@ -65,6 +65,11 @@ const DaftarPermintaanPengiriman = (props) => {
             sortable: true,
         },
         {
+            name: 'Perusahaan',
+            selector: row => row.companyName || 'Name not available', // Use companyName if available
+            sortable: true,
+        },
+        {
             name: 'Jumlah Barang',
             selector: row => row.jumlahBarang,
             sortable: true,
@@ -121,7 +126,7 @@ const DaftarPermintaanPengiriman = (props) => {
         headCells: {
             style: {
                 color: '#FFFFFF', 
-                backgroundColor: '#2C358C', 
+                backgroundColor: '#DA3732', 
                 border: 'none',
             },
         },

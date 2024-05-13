@@ -7,21 +7,23 @@ import { getDaftarPengiriman, updateStatusPengiriman } from '../../../service/pa
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TabPabrik from '../../../components/tabPabrik';
+import ModalLoading from '../../../components/modal/modalLoading';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const getStatusString = (status) => {
     switch (status) {
         case 1:
-            return 'Menunggu Konfirmasi';
+            return { text: 'Menunggu Konfirmasi', color: '#E69B00' };
         case 2:
-            return 'Sedang Diproses';
+            return { text: 'Sedang Diproses', color: '#B2B2B2' };
         case 3:
-            return 'Telah Dikirim';
+            return { text: 'Telah Dikirim', color: '#00DC00' };
         case 4:
-            return 'Telah Diterima';
+            return { text: 'Telah Diterima', color: '#2C358C' };
         default:
-            return 'Status Tidak Dikenal';
+            return { text: 'Status Tidak Dikenal', color: '#000000' };
     }
-    };
+};
 
 const truncateDateString = (dateString) => {
     return dateString.slice(0, 10);
@@ -32,6 +34,7 @@ const DaftarPengiriman = (props) => {
     const navigate = useNavigate();
     const [daftarPengiriman, setDaftarPengiriman] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
 
     useEffect(() => {
         fetchDaftarPengiriman();
@@ -39,10 +42,13 @@ const DaftarPengiriman = (props) => {
 
     const fetchDaftarPengiriman = async () => {
         try {
+            setIsModalOpenLoading(true);
             const data = await getDaftarPengiriman(nama_pabrik);
             setDaftarPengiriman(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setIsModalOpenLoading(false);
         }
     };
 
@@ -69,60 +75,64 @@ const DaftarPengiriman = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title=''/>
+                <Header title='' style={{color: 'black'}}/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
                     <span style={{ marginRight: '20px' }}>{nama_pabrik}</span>
                 </div>
                 <div className="ml-10 mb-4">
                     <div style={{ position: 'relative' }}>
+                        <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
                         <input
                             type="text"
                             placeholder="Cari kode permintaan..."
                             value={searchQuery}
                             onChange={handleSearchChange}
-                            style={{ paddingLeft: '40px', border: '2px solid #2C358C', borderRadius: '5px', padding: '5px', outline: 'none' }}
+                            style={{ paddingLeft: '40px' }}
                         />
                     </div>
                 </div>
-                <TabPabrik 
+                <TabPabrik
                     tabAktif={"Pengiriman Barang"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
                     <div className="text-3xl font-bold mb-6 ml-2 mt-2 text-center"> Daftar Permintaan Pengiriman </div>
                     <table className="w-full table-auto">
                         <thead>
-                            <tr>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Kode Permintaan</th>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Gudang</th>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Barang</th>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Jumlah</th>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Waktu Permintaan</th>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Tanggal Pengiriman</th>
-                                <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Status</th>
-                            </tr>
+                        <tr>
+                            <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Kode Permintaan</th>
+                            <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Gudang</th>
+                            <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Nama Barang</th>
+                            <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Jumlah</th>
+                            <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Waktu Permintaan</th>
+                            <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Tanggal Pengiriman</th>
+                            <th className="border px-4 py-2" style={{ backgroundColor: '#DA3732', color: '#fff' }}>Status</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {filteredPengiriman.map((pengiriman, index) => (
-                                <tr key={index}>
-                                    <td className="border px-4 py-2">{pengiriman.kode_permintaan}</td>
-                                    <td className="border px-4 py-2">{pengiriman.gudang}</td>
-                                    <td className="border px-4 py-2">{pengiriman.barang}</td>
-                                    <td className="border px-4 py-2">{pengiriman.jumlah}</td>
-                                    <td className="border px-4 py-2">{truncateDateString(pengiriman.waktu_permintaan)}</td>
-                                    <td className="border px-4 py-2">{truncateDateString(pengiriman.tanggal_pengiriman)}</td>
-                                    <td className="border px-4 py-2">
-                                        <select value={pengiriman.status} onChange={(e) => handleStatusChange(pengiriman.kode_permintaan, parseInt(e.target.value))}>
-                                            <option value={1} disabled>Menunggu Konfirmasi</option>
-                                            <option value={2} disabled>Sedang Diproses</option>
-                                            <option value={3} disabled>Telah Dikirim</option>
-                                            <option value={4} disabled>Telah Diterima</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            ))}
+                        {filteredPengiriman.map((pengiriman, index) => (
+                            <tr key={index}>
+                                <td className="border px-4 py-2">{pengiriman.kode_permintaan}</td>
+                                <td className="border px-4 py-2">{pengiriman.gudang}</td>
+                                <td className="border px-4 py-2">{pengiriman.barang}</td>
+                                <td className="border px-4 py-2">{pengiriman.jumlah}</td>
+                                <td className="border px-4 py-2">{truncateDateString(pengiriman.waktu_permintaan)}</td>
+                                <td className="border px-4 py-2">{truncateDateString(pengiriman.tanggal_pengiriman)}</td>
+                                <td className="border px-4 py-2">
+                                    <select value={pengiriman.status}
+                                            onChange={(e) => handleStatusChange(pengiriman.kode_permintaan, parseInt(e.target.value))}>
+                                        <option value={1} style={{backgroundColor: getStatusString(1).color}} disabled>{getStatusString(1).text}</option>
+                                        <option value={2} style={{backgroundColor: getStatusString(2).color}}>{getStatusString(2).text}</option>
+                                        <option value={3} style={{backgroundColor: getStatusString(3).color}}>{getStatusString(3).text}</option>
+                                        <option value={4} style={{backgroundColor: getStatusString(4).color}} disabled>{getStatusString(4).text}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>
+                <ModalLoading title="Loading..." subtitle="Please wait a moment"
+                              isOpen={isModalOpenLoading}/> {/* Menampilkan modal loading */}
             </div>
         </div>
     );

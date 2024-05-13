@@ -9,20 +9,26 @@ import Sidebar from '../../../components/sidebar/manajer';
 import { GetAllPabrik } from '../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
 import TabPabrik from '../../../components/tabPabrik';
+import ModalLoading from '../../../components/modal/modalLoading';
 
 const DaftarPabrik = (props) => {
   const [pabrikData, setPabrikData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsModalOpen(true);
       try {
         const response = await GetAllPabrik();
         setPabrikData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setIsModalOpen(false); // Close modal on data fetch completion
       }
+      
     };
     fetchData();
   }, []);
@@ -52,7 +58,7 @@ const DaftarPabrik = (props) => {
         <Header title=''/>
         <div className="flex items-center justify-between text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
           <span style={{ marginRight: '20px' }}>Daftar Pabrik</span>
-          <Button
+          {/* <Button
             size="sm"
             onClick={handleAddPabrik}
             style={{
@@ -69,7 +75,7 @@ const DaftarPabrik = (props) => {
             onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
           >
             + Tambah Pabrik
-          </Button>
+          </Button> */}
         </div>
         <div className="ml-10 mb-4">
           <Form.Group style={{ position: 'relative' }}>
@@ -120,6 +126,7 @@ const DaftarPabrik = (props) => {
             ))}
           </div>
         </div>
+        <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
       </div>
     </div>
   );

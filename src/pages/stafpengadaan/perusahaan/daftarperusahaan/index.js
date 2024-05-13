@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import { GetPerusahaan } from '../../../../service/perusahaanimpor/endpoint';
 import { connect } from 'react-redux'
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
+import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/stafpengadaan';
 import Header from '../../../../components/header';
 import { FiSearch } from 'react-icons/fi';
@@ -11,6 +12,7 @@ import { FiSearch } from 'react-icons/fi';
 const DaftarPerusahaan = (props) => {
     const [daftarPerusahaan, setPerusahaan] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isModalOpenLoading, setIsModalOpenLoading] = useState(false)
     const navigateTo = useNavigate()
 
     useEffect(() => {
@@ -19,10 +21,13 @@ const DaftarPerusahaan = (props) => {
 
     async function getPerusahaanImpor() {
         try {
+            setIsModalOpenLoading(true)
             const perusahaanData = await GetPerusahaan();
             setPerusahaan(perusahaanData)
         } catch (error) {
             console.error('Error fetching perusahaan data:', error);
+        } finally {
+            setIsModalOpenLoading(false)
         }
     }
     
@@ -83,6 +88,7 @@ const DaftarPerusahaan = (props) => {
                     </div>
                 </div>
             </div>
+            <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
         </div>
     );
 };

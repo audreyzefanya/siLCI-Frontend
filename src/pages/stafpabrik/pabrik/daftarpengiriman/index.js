@@ -6,23 +6,24 @@ import Sidebar from '../../../../components/sidebar/stafpabrik';
 import { getDaftarPengiriman, updateStatusPengiriman } from '../../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TabPabrik from '../../../../components/tabPabrikGudang';
+import TabPabrikGudang from '../../../../components/tabPabrikGudang';
 import ModalLoading from '../../../../components/modal/modalLoading';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const getStatusString = (status) => {
-        switch (status) {
-            case 1:
-                return 'Menunggu Konfirmasi';
-            case 2:
-                return 'Sedang Diproses';
-            case 3:
-                return 'Telah Dikirim';
-            case 4:
-                return 'Telah Diterima';
-            default:
-                return 'Status Tidak Dikenal';
-        }
-        };
+    switch (status) {
+        case 1:
+            return { text: 'Menunggu Konfirmasi', color: '#E69B00' };
+        case 2:
+            return { text: 'Sedang Diproses', color: '#B2B2B2' };
+        case 3:
+            return { text: 'Telah Dikirim', color: '#00DC00' };
+        case 4:
+            return { text: 'Telah Diterima', color: '#2C358C' };
+        default:
+            return { text: 'Status Tidak Dikenal', color: '#000000' };
+    }
+};
 
 const truncateDateString = (dateString) => {
     return dateString.slice(0, 10);
@@ -74,22 +75,23 @@ const DaftarPengiriman = (props) => {
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
-                <Header title={nama_pabrik} style={{color: 'black'}}/>
+                <Header title='' style={{color: 'black'}}/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>
-                    <span style={{ marginRight: '20px' }}> {nama_pabrik} </span>
+                    <span style={{ marginRight: '20px' }}>{nama_pabrik}</span>
                 </div>
                 <div className="ml-10 mb-4">
                     <div style={{ position: 'relative' }}>
+                        <FontAwesomeIcon icon={faSearch} style={{ position: 'absolute', top: '50%', left: '12px', transform: 'translateY(-50%)', color: '#A0AEC0', fontSize: '18px' }} />
                         <input
                             type="text"
                             placeholder="Cari kode permintaan..."
                             value={searchQuery}
                             onChange={handleSearchChange}
-                            style={{ paddingLeft: '40px', border: '2px solid #2C358C', borderRadius: '5px', padding: '5px', outline: 'none' }}
+                            style={{ paddingLeft: '40px' }}
                         />
                     </div>
                 </div>
-                <TabPabrik 
+                <TabPabrikGudang
                     tabAktif={"Pengiriman Barang"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
@@ -116,11 +118,16 @@ const DaftarPengiriman = (props) => {
                                     <td className="border px-4 py-2">{truncateDateString(pengiriman.waktu_permintaan)}</td>
                                     <td className="border px-4 py-2">{truncateDateString(pengiriman.tanggal_pengiriman)}</td>
                                     <td className="border px-4 py-2">
-                                        <select value={pengiriman.status} onChange={(e) => handleStatusChange(pengiriman.kode_permintaan, parseInt(e.target.value))}>
-                                            <option value={1} disabled>Menunggu Konfirmasi</option>
-                                            <option value={2}>Sedang Diproses</option>
-                                            <option value={3}>Telah Dikirim</option>
-                                            <option value={4} disabled>Telah Diterima</option>
+                                        <select value={pengiriman.status}
+                                                onChange={(e) => handleStatusChange(pengiriman.kode_permintaan, parseInt(e.target.value))}>
+                                            <option value={1} style={{backgroundColor: getStatusString(1).color}}
+                                                    disabled>{getStatusString(1).text}</option>
+                                            <option value={2}
+                                                    style={{backgroundColor: getStatusString(2).color}}>{getStatusString(2).text}</option>
+                                            <option value={3}
+                                                    style={{backgroundColor: getStatusString(3).color}}>{getStatusString(3).text}</option>
+                                            <option value={4} style={{backgroundColor: getStatusString(4).color}}
+                                                    disabled>{getStatusString(4).text}</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -128,7 +135,8 @@ const DaftarPengiriman = (props) => {
                         </tbody>
                     </table>
                 </div>
-                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
+                <ModalLoading title="Loading..." subtitle="Please wait a moment"
+                              isOpen={isModalOpenLoading}/> {/* Menampilkan modal loading */}
             </div>
         </div>
     );
