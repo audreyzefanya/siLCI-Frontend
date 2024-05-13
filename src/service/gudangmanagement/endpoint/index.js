@@ -114,3 +114,12 @@ export const updateDetailGudang = async (id_gudang, newData) => {
         throw error;
     }
 }
+
+export const reduceStokBarang = async (data) => {
+    try {
+        const response = await GudangManagementService.put('/api/gudang/barang-gudang/update/reduce-stok', data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
