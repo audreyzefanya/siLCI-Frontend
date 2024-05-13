@@ -109,16 +109,31 @@ const DetailGudang = (props) => {
             ],
         },
         {
-            name: 'Kurangi Stok',
-            button: true,
-            ignoreRowClick: true,
-            allowOverflow: true,
-            cell: row => row.stok > 0 ? (
-                <Button variant="info" size="sm" onClick={() => handleReduceStockClick(row)}>
-                    Kurangi Stok
-                </Button>
-            ) : null
-        }
+                name: '',
+                button: true,
+                ignoreRowClick: true,
+                allowOverflow: true,
+                cell: row => row.stok > 0 ? (
+                    <Button
+                        variant="info"
+                        size="sm"
+                        onClick={() => handleReduceStockClick(row)}
+                        style={{
+                            borderRadius: '5px',
+                            backgroundColor: '#2C358C',
+                            borderColor: '#2C358C',
+                            color: 'white',
+                            padding: '5px 7px',
+                            fontSize: '0.875rem',
+                            transition: 'background-color 0.2s',
+                        }}
+                        onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
+                        onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
+                    >
+                        Kurangi Stok
+                    </Button>
+                ) : null
+            }
     ];
 
     const customStyles = {
