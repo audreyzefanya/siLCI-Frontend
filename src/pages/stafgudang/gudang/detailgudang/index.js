@@ -10,8 +10,9 @@ import Header from '../../../../components/header';
 import ModalLoading from '../../../../components/modal/modalLoading';
 import Sidebar from '../../../../components/sidebar/stafgudang';
 import TabGudang from '../../../../components/tabGudang';
-import { fetchDetailGudang } from '../../../../service/gudangmanagement/endpoint';
+import { fetchDetailGudang, reduceStokBarang } from '../../../../service/gudangmanagement/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
+import ReduceStockMenu from '../../../../components/reducestockmenu';
 
 const DetailGudang = (props) => {
     const { id_gudang } = useParams();
@@ -19,10 +20,38 @@ const DetailGudang = (props) => {
     const [detailGudang, setDetailGudang] = useState(null);
     const [searchText, setSearchText] = useState('');
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
+    const [showReduceMenu, setShowReduceMenu] = useState(false);
+    const [selectedBarang, setSelectedBarang] = useState(null);
 
     useEffect(() => {
         fetchDetail();
     }, [id_gudang]);
+
+    const handleReduceStockClick = (barang) => {
+        console.log(barang)
+        setSelectedBarang(barang);
+        setShowReduceMenu(true);
+    };
+
+    const closeReduceMenu = () => {
+        setShowReduceMenu(false);
+    };
+
+    const submitReduceStock = async (data) => {
+        try {
+            const dataKurang = {
+                barang: selectedBarang.id_barang,
+                gudang: id_gudang,
+                stok: data.stok
+            };
+            console.log(dataKurang);
+            await reduceStokBarang(dataKurang);
+            fetchDetail(); // Refresh data
+            closeReduceMenu();
+        } catch (error) {
+            console.error('Error reducing stock:', error);
+        }
+    };
 
     const fetchDetail = async () => {
         try {
@@ -78,7 +107,33 @@ const DetailGudang = (props) => {
                     },
                 },
             ],
-        }
+        },
+        {
+                name: '',
+                button: true,
+                ignoreRowClick: true,
+                allowOverflow: true,
+                cell: row => row.stok > 0 ? (
+                    <Button
+                        variant="info"
+                        size="sm"
+                        onClick={() => handleReduceStockClick(row)}
+                        style={{
+                            borderRadius: '5px',
+                            backgroundColor: '#2C358C',
+                            borderColor: '#2C358C',
+                            color: 'white',
+                            padding: '5px 7px',
+                            fontSize: '0.875rem',
+                            transition: 'background-color 0.2s',
+                        }}
+                        onMouseOver={(e) => e.target.style.backgroundColor = '#DA3732'}
+                        onMouseOut={(e) => e.target.style.backgroundColor = '#2C358C'}
+                    >
+                        Kurangi Stok
+                    </Button>
+                ) : null
+            }
     ];
 
     const customStyles = {
@@ -185,6 +240,14 @@ const DetailGudang = (props) => {
                 </div>
             </div>
             <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
+            {showReduceMenu && selectedBarang && (
+                <ReduceStockMenu
+                    onClose={closeReduceMenu}
+                    onSubmit={submitReduceStock}
+                    id_barang={selectedBarang.id_barang}
+                    id_gudang={id_gudang}
+                />
+            )}
         </div>
     );
 
