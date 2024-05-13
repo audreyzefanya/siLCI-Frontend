@@ -28,6 +28,7 @@ const DetailGudang = (props) => {
     }, [id_gudang]);
 
     const handleReduceStockClick = (barang) => {
+        console.log(barang)
         setSelectedBarang(barang);
         setShowReduceMenu(true);
     };
@@ -38,11 +39,13 @@ const DetailGudang = (props) => {
 
     const submitReduceStock = async (data) => {
         try {
-            await reduceStokBarang({
-                id_barang: data.id_barang,
-                id_gudang: data.id_gudang,
+            const dataKurang = {
+                barang: selectedBarang.id_barang,
+                gudang: id_gudang,
                 stok: data.stok
-            });
+            };
+            console.log(dataKurang);
+            await reduceStokBarang(dataKurang);
             fetchDetail(); // Refresh data
             closeReduceMenu();
         } catch (error) {
@@ -106,7 +109,7 @@ const DetailGudang = (props) => {
             ],
         },
         {
-            name: '',
+            name: 'Kurangi Stok',
             button: true,
             ignoreRowClick: true,
             allowOverflow: true,
@@ -227,7 +230,7 @@ const DetailGudang = (props) => {
                     onClose={closeReduceMenu}
                     onSubmit={submitReduceStock}
                     id_barang={selectedBarang.id_barang}
-                    id_gudang={selectedBarang.id_gudang}
+                    id_gudang={id_gudang}
                 />
             )}
         </div>
