@@ -5,32 +5,35 @@ import { Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header';
+import ModalLoading from '../../../components/modal/modalLoading';
 import Sidebar from '../../../components/sidebar/manajer';
 import { GetDaftarBarang } from '../../../service/daftarbarang/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
-import ModalLoading from '../../../components/modal/modalLoading';
 
 
 const DaftarBarang = (props) => {
   const [barangData, setBarangData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsModalOpen(true);
-      try {
-        const response = await GetDaftarBarang();
-        setBarangData(response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsModalOpen(false); // Close modal on data fetch completion
-      }
-    };
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      setIsModalOpenLoading(true);
+      const response = await GetDaftarBarang();
+      setBarangData(response);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setIsModalOpenLoading(false); // Set modal loading menjadi tertutup setelah selesai fetch data
+  }
+
+};
 
   const handleDetail = (id_barang) => {
     navigate(`/manager-operasional/barang/${id_barang}`);
@@ -137,7 +140,7 @@ const DaftarBarang = (props) => {
             ))}
           </div>
         </div>
-        <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpen} /> {/* Modal Loading component instance */}
+        <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} />
       </div>
     </div>
   );

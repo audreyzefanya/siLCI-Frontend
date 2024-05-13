@@ -6,7 +6,7 @@ import Sidebar from '../../../../components/sidebar/stafpabrik';
 import { getDaftarPengiriman, updateStatusPengiriman } from '../../../../service/pabrik/endpoint';
 import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TabPabrik from '../../../../components/tabPabrikGudang';
+import TabPabrikGudang from '../../../../components/tabPabrikGudang';
 import ModalLoading from '../../../../components/modal/modalLoading';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -91,7 +91,7 @@ const DaftarPengiriman = (props) => {
                         />
                     </div>
                 </div>
-                <TabPabrik
+                <TabPabrikGudang
                     tabAktif={"Pengiriman Barang"}
                 />
                 <div className='no-scrollbar flex-1 overflow-y-auto py-6 px-8' style={{ backgroundColor: '#F9FAFB' }}>
