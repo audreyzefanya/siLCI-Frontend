@@ -41,8 +41,8 @@ const Dashboard = (props) => {
         let batchData = {
             "Sedang Diproses": 0,
             "Menunggu QC": 0,
-            "Selesai dan menunggu dikirim": 0,
-            "Terkirim": 0,
+            "Selesai": 0,
+            "Siap Dikirim": 0,
             "Gagal": 0,
         };
         // Iterasi melalui setiap batch produksi
@@ -106,9 +106,9 @@ const Dashboard = (props) => {
             case 2:
                 return 'Menunggu QC';
             case 3:
-                return 'Selesai dan menunggu dikirim';
+                return 'Selesai';
             case 4:
-                return 'Terkirim';
+                return 'Siap Dikirim';
             case 5:
                 return 'Gagal';
             default:
@@ -140,7 +140,7 @@ const processChartData = (stokBarangData) => {
     // Iterasi melalui setiap pabrik
     Object.entries(stokBarangData).forEach(([namaPabrik, dataBarang]) => {
         let pabrikDataset = {
-            label: namaPabrik,
+            label: "Jumlah Barang",
             fill: false,
             lineTension: 0.1,
             backgroundColor: 'rgba(218, 55, 50, 0.4)',
@@ -173,7 +173,6 @@ const processChartData = (stokBarangData) => {
 
         chartData.datasets.push(pabrikDataset); // Tambahkan dataset pabrik ke dalam chart data
     });
-
     return chartData;
 };
 

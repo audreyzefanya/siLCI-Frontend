@@ -16,9 +16,9 @@ const getStatusString = (status) => {
         case 2:
             return 'Menunggu QC ';
         case 3:
-            return 'Selesai dan menunggu dikirim';
+            return 'Selesai';
         case 4:
-            return 'Terkirim';
+            return 'Siap Dikirim';
         case 5:
             return 'Gagal';
         default:

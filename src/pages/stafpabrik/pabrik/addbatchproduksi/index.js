@@ -17,15 +17,12 @@ const AddBatch = (props) => {
     const [daftarBarang, setDaftarBarang] = useState([]);
     const [kodeBarang, setKodeBarang] = useState('');
     const [jumlahBarang, setJumlahBarang] = useState('');
-    const [statusBatch, setStatusBatch] = useState('');
+    const [statusBatch, setStatusBatch] = useState(1); // Set default ke "Sedang Diproses"
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const navigateTo = useNavigate();
 
     useEffect(() => {
         fetchDataBarang();
-        if (statusBatch === '') {
-            setStatusBatch(1);
-        }
     }, []);
 
     async function fetchDataBarang() {
@@ -73,27 +70,25 @@ const AddBatch = (props) => {
         navigateTo(`/staf-pabrik/pabrik/detail/${nama_pabrik}/batch`);
     };
 
-    const handleStatusChange = (e) => {
-        setStatusBatch(parseInt(e.target.value));
-    };
-
     return (
         <div className='flex w-screen h-screen bg-gray-100'>
+            {/* Sidebar Component */}
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='flex flex-col flex-1 overflow-hidden'>
-            <Header title={<span style={{ fontWeight: 'bold' }}></span>}/>
+                <Header title={<span style={{ fontWeight: 'bold' }}></span>}/>
                 <div className='flex-1 overflow-y-auto p-8'>
+                    {/* Form Component */}
                     <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
-                    <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#000000', marginBottom: '20px' }}>Tambah Batch Produksi</div>
+                        <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#000000', marginBottom: '20px' }}>Tambah Batch Produksi</div>
                         <div className="mb-4">
                             <select
                                 value={kodeBarang}
                                 onChange={(e) => setKodeBarang(e.target.value)}
                                 className="input-field rounded-lg p-2 w-full border border-gray-300"
-                                >
+                            >
                                 <option value="">Pilih Barang</option>
                                 {daftarBarang.map(barang => (
-                                <option key={barang.id} value={barang.id}>{barang.nama}</option>
+                                    <option key={barang.id} value={barang.id}>{barang.nama}</option>
                                 ))}
                             </select>
                         </div>
@@ -110,55 +105,51 @@ const AddBatch = (props) => {
                             <label className="block text-sm font-medium text-gray-700">Status Batch</label>
                             <select
                                 value={statusBatch}
-                                onChange={handleStatusChange}
+                                disabled // Mencegah pengguna memilih
                                 className="input-field rounded-lg p-2 w-full border border-gray-300"
                             >
                                 <option value={1}>Sedang Diproses</option>
-                                <option value={2}>Menunggu QC</option>
-                                <option value={3}>Selesai dan menunggu dikirim</option>
-                                <option value={4}>Terkirim</option>
-                                <option value={5}>Gagal</option>
                             </select>
                         </div>
                         <div className="flex justify-center">
-                        <button
-                            onClick={handleCancel}
-                            className="btn-batal"
-                            style={{
-                                backgroundColor: '#DA3732',
-                                color: '#FFFFFF',
-                                border: 'none',
-                                padding: '10px 20px',
-                                borderRadius: '20px',
-                                cursor: 'pointer',
-                                transition: 'background-color 0.3s',
-                            }}
-                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                        >
-                            Batal
-                        </button>
-                        <button
-                            onClick={handleSubmitTambahBatch}
-                            className="btn-tambah-batch mr-4"
-                            style={{
-                                backgroundColor: '#2C358C',
-                                color: '#FFFFFF',
-                                border: 'none',
-                                padding: '10px 20px',
-                                borderRadius: '20px',
-                                cursor: 'pointer',
-                                transition: 'background-color 0.3s',
-                            }}
-                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                        >
-                            Tambah Batch Produksi
-                        </button>
+                            <button
+                                onClick={handleCancel}
+                                className="btn-batal"
+                                style={{
+                                    backgroundColor: '#DA3732',
+                                    color: '#FFFFFF',
+                                    border: 'none',
+                                    padding: '10px 20px',
+                                    borderRadius: '20px',
+                                    cursor: 'pointer',
+                                    transition: 'background-color 0.3s',
+                                }}
+                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                            >
+                                Batal
+                            </button>
+                            <button
+                                onClick={handleSubmitTambahBatch}
+                                className="btn-tambah-batch mr-4"
+                                style={{
+                                    backgroundColor: '#2C358C',
+                                    color: '#FFFFFF',
+                                    border: 'none',
+                                    padding: '10px 20px',
+                                    borderRadius: '20px',
+                                    cursor: 'pointer',
+                                    transition: 'background-color 0.3s',
+                                }}
+                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                            >
+                                Tambah Batch Produksi
+                            </button>
                         </div>
                     </div>
                 </div>
-                                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
+                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
             <ModalResult
                 subtitle={dataSubtitleModal}

@@ -16,9 +16,9 @@ const getStatusString = (status) => {
         case 2:
             return 'Menunggu QC ';
         case 3:
-            return 'Selesai dan menunggu dikirim';
+            return 'Selesai';
         case 4:
-            return 'Terkirim';
+            return 'Siap dikirim';
         case 5:
             return 'Gagal';
         default:
@@ -128,8 +128,8 @@ const DetailBatch = (props) => {
                     )}
                     <div style={{ position: 'absolute', left: '25%', transform: 'translateX(-50%)' }}>Sedang Diproses</div>
                     <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>Menunggu QC</div>
-                    <div style={{ position: 'absolute', left: '75%', transform: 'translateX(-50%)' }}>Selesai dan Menunggu Dikirim</div>
-                    <div style={{ position: 'absolute', right: '0', transform: 'translateX(50%)' }}>Terkirim</div>
+                    <div style={{ position: 'absolute', left: '75%', transform: 'translateX(-50%)' }}>Selesai</div>
+                    <div style={{ position: 'absolute', right: '0', transform: 'translateX(50%)' }}>Siap Dikirim</div>
                 </div>
             </div>
         );
