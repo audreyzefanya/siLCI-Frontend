@@ -17,7 +17,8 @@ const AddBatch = (props) => {
     const [daftarBarang, setDaftarBarang] = useState([]);
     const [kodeBarang, setKodeBarang] = useState('');
     const [jumlahBarang, setJumlahBarang] = useState('');
-    const [statusBatch, setStatusBatch] = useState(1); // Set default ke "Sedang Diproses"
+    const [tanggalProduksi, setTanggalProduksi] = useState('');
+    const [statusBatch, setStatusBatch] = useState();
     const [isModalOpenLoading, setIsModalOpenLoading] = useState(false);
     const navigateTo = useNavigate();
 
@@ -33,16 +34,28 @@ const AddBatch = (props) => {
         } catch (error) {
             console.error('Error fetching data barang:', error);
         } finally {
+            setStatusBatch(2)
             setIsModalOpenLoading(false);
         }
     }
 
     async function handleSubmitTambahBatch() {
         try {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const selectedDate = new Date(tanggalProduksi);
+            selectedDate.setHours(0, 0, 0, 0);
+
+            if (selectedDate < today) {
+                handleOpenModalResult('failed', 'Tanggal produksi tidak boleh sebelum tanggal saat ini');
+                return;
+            }
+
             setIsModalOpenLoading(true);
             const dataBatch = {
                 barang_id: kodeBarang,
                 jumlah: jumlahBarang,
+                tanggal_produksi: tanggalProduksi,
                 status: statusBatch
             };
             const response = await postBatchProduksi(dataBatch, nama_pabrik);
@@ -79,7 +92,19 @@ const AddBatch = (props) => {
                 <div className='flex-1 overflow-y-auto p-8'>
                     {/* Form Component */}
                     <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
-                        <div className="text-4xl font-bold mb-4 mt-8" style={{ color: '#000000', marginBottom: '20px' }}>Tambah Batch Produksi</div>
+                        <div className="text-4xl font-bold mb-4 mt-8"
+                             style={{color: '#000000', marginBottom: '20px'}}>Tambah Batch Produksi
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700">Tanggal Produksi</label>
+                            <input
+                                type="date"
+                                value={tanggalProduksi}
+                                onChange={(e) => setTanggalProduksi(e.target.value)}
+                                className="input-field rounded-lg p-2 w-full border border-gray-300"
+                                min={new Date().toISOString().split('T')[0]} // Set minimum date to today
+                            />
+                        </div>
                         <div className="mb-4">
                             <select
                                 value={kodeBarang}
@@ -100,16 +125,6 @@ const AddBatch = (props) => {
                                 placeholder="Masukkan Jumlah Barang"
                                 className="input-field rounded-lg p-2 w-full border border-gray-300"
                             />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700">Status Batch</label>
-                            <select
-                                value={statusBatch}
-                                disabled // Mencegah pengguna memilih
-                                className="input-field rounded-lg p-2 w-full border border-gray-300"
-                            >
-                                <option value={1}>Sedang Diproses</option>
-                            </select>
                         </div>
                         <div className="flex justify-center">
                             <button
@@ -149,7 +164,8 @@ const AddBatch = (props) => {
                         </div>
                     </div>
                 </div>
-                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
+                <ModalLoading title="Loading..." subtitle="Please wait a moment"
+                              isOpen={isModalOpenLoading}/> {/* Menampilkan modal loading */}
             </div>
             <ModalResult
                 subtitle={dataSubtitleModal}
