@@ -35,10 +35,27 @@ const RegisterPage = (props) => {
 
   const handleRegister = async () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    const usernameRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
+
+    // At least one lowercase letter: (?=.*[a-z])
+    // At least one uppercase letter: (?=.*[A-Z])
+    // At least one digit: (?=.*\d)
+    // At least one special character (from the set !@#$%^&*): (?=.*[!@#$%^&*])
+    // Minimum length of 8 characters: [a-zA-Z\d!@#$%^&*]{8,}, Aaaaaaaaaa11
 
     if (!username.trim()) {
       setResultType('failed');
       setResultMessage('Please enter a username.');
+      setIsResultOpen(true);
+      setTimeout(() => {
+        setIsResultOpen(false);
+      }, 2000);
+      return;
+    }
+
+    if (!usernameRegex.test(username)) {
+      setResultType('failed');
+      setResultMessage('Username must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one symbol (!@#$%^&*), and one number.');
       setIsResultOpen(true);
       setTimeout(() => {
         setIsResultOpen(false);
@@ -87,6 +104,8 @@ const RegisterPage = (props) => {
       }, 2000);
       return;
     }
+
+    // Aaaaaa11111
 
     try {
       const userData = { username, password, email, role };

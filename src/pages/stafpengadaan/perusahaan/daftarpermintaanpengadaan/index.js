@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ const DaftarPermintaanPengiriman = (props) => {
     const [pengadaanList, setPengadaanList] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [statusFilter, setStatusFilter] = useState('');
     
 
     useEffect(() => {
@@ -134,6 +135,10 @@ const DaftarPermintaanPengiriman = (props) => {
             },
         },
     };
+
+    const filteredPengadaanList = statusFilter
+        ? pengadaanList.filter(p => p.status === statusFilter)
+        : pengadaanList;
     
     if (error) return <div>Error: {error}</div>;
 
@@ -147,10 +152,24 @@ const DaftarPermintaanPengiriman = (props) => {
                         <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>
                             Daftar Permintaan Produk
                         </div>
+                        <Form.Group controlId="statusFilter">
+                            <Form.Label>Status Filter: </Form.Label>
+                            <Form.Control 
+                                as="select" 
+                                value={statusFilter} 
+                                onChange={e => setStatusFilter(e.target.value)}
+                            >
+                                <option value="">All</option>
+                                <option value="Pembayaran Dikirim">Pembayaran Dikirim</option>
+                                <option value="Penawaran Dikirim">Penawaran Dikirim</option>
+                                <option value="Menunggu Pembayaran">Menunggu Pembayaran</option>
+                                <option value="Barang Diterima">Barang Diterima</option>
+                            </Form.Control>
+                        </Form.Group>
                     </div>
                     <DataTable
                         columns={columns}
-                        data={pengadaanList}
+                        data={filteredPengadaanList}
                         pagination
                         highlightOnHover
                         customStyles={customStyles}
