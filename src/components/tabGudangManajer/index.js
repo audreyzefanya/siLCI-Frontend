@@ -21,7 +21,7 @@ const TabNavigation = ( {tabAktif} ) => {
   return (
     <div className="flex">
       <TabItem tabName="Daftar Barang" isActive={activeTab === 'Daftar Barang'} onClick={() => { handleTabClick('Daftar Barang'); handleNavigate('Daftar Barang'); }} />
-      <TabItem tabName="Pengiriman Barang" isActive={activeTab === 'Pengiriman Barang'} onClick={() => { handleTabClick('Pengiriman Barang'); handleNavigate('Pengiriman Barang'); }} />
+      <TabItem tabName="Permintaan Barang" isActive={activeTab === 'Permintaan Barang'} onClick={() => { handleTabClick('Pengiriman Barang'); handleNavigate('Pengiriman Barang'); }} />
     </div>
   );
 };
