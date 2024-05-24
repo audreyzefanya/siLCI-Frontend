@@ -65,11 +65,6 @@ const DaftarPermintaanPengiriman = (props) => {
             sortable: true,
         },
         {
-            name: 'Perusahaan',
-            selector: row => row.companyName || 'Name not available', // Use companyName if available
-            sortable: true,
-        },
-        {
             name: 'Jumlah Barang',
             selector: row => row.jumlahBarang,
             sortable: true,
