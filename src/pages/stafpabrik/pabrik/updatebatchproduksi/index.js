@@ -90,8 +90,8 @@ const AddBatch = (props) => {
                             >
                                 <option value={1}>Sedang Diproses</option>
                                 <option value={2}>Menunggu QC</option>
-                                <option value={3}>Selesai dan menunggu dikirim</option>
-                                <option value={4}>Terkirim</option>
+                                <option value={3}>Selesai</option>
+                                <option value={4}>Siap Dikirim</option>
                                 <option value={5}>Gagal</option>
                             </select>
                         </div>
