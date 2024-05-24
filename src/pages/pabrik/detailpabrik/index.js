@@ -178,24 +178,6 @@ const DetailPabrik = (props) => {
 
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{color: '#000000'}}>
                     <span style={{marginRight: '20px'}}>{nama_pabrik}</span>
-                    <Button
-                        size="sm"
-                        onClick={addBarangButton}
-                        style={{
-                            borderRadius: '20px',
-                            backgroundColor: '#DA3732',
-                            borderColor: '#DA3732',
-                            color: 'white',
-                            padding: '5px 15px',
-                            fontSize: '1rem',
-                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                            transition: 'transform 0.2s ease-in-out',
-                        }}
-                        onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                        onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                    >
-                        + Tambah Barang
-                    </Button>
                 </div>
                 <div className="ml-10">
                     <div className="pabrik-deskripsi">
