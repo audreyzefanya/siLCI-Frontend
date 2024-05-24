@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../../../../components/header';
-import Sidebar from '../../../../components/sidebar/stafpabrik';
-import { GetDetailBarang } from '../../../../service/daftarbarang/endpoint';
-import { mapDispatchToProps, mapStateToProps } from '../../../../state/redux';
-import ModalLoading from "../../../../components/modal/modalLoading";
+import Header from '../../../components/header';
+import Sidebar from '../../../components/sidebar/manajer';
+import { GetDetailBarang } from '../../../service/daftarbarang/endpoint';
+import { mapDispatchToProps, mapStateToProps } from '../../../state/redux';
+import ModalLoading from "../../../components/modal/modalLoading";
 
 const BarangDetail = (props) => {
     const { id_barang } = useParams();

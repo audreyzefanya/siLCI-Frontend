@@ -16,9 +16,9 @@ const getStatusString = (status) => {
         case 2:
             return 'Menunggu QC ';
         case 3:
-            return 'Selesai dan menunggu dikirim';
+            return 'Selesai';
         case 4:
-            return 'Terkirim';
+            return 'Siap Dikirim';
         case 5:
             return 'Gagal';
         default:
@@ -141,7 +141,7 @@ const DetailBatch = (props) => {
 
     return (
         <div className='flex w-screen h-screen'>
-            <Sidebar currentNavigation={2.1} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
+            <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
                 <Header title=''/>
                 <div className="flex items-center text-3xl font-bold mb-10 ml-10 mt-8" style={{ color: '#000000' }}>

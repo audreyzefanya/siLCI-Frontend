@@ -18,9 +18,9 @@ const getStatusString = (status) => {
         case 2:
             return 'Menunggu QC ';
         case 3:
-            return 'Selesai dan menunggu dikirim';
+            return 'Selesai';
         case 4:
-            return 'Terkirim';
+            return 'Siap Dikirim';
         case 5:
             return 'Gagal';
         default:
@@ -148,7 +148,7 @@ const DaftarBatch = (props) => {
                         </tbody>
                     </table>
                 </div>
-                <ModalLoading title="Loading..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
+                <ModalLoading title="Loading Barang..." subtitle="Please wait a moment" isOpen={isModalOpenLoading} /> {/* Menampilkan modal loading */}
             </div>
         </div>
     );
