@@ -71,7 +71,7 @@ const DaftarPengiriman = (props) => {
         )
         : [];
 
-    return (
+return (
         <div className='flex w-screen h-screen'>
             <Sidebar currentNavigation={2.2} isExpand={props.isExpandSidebar} onClick={props.handleSidebarStatus}/>
             <div className='w-full h-screen flex flex-col'>
@@ -117,14 +117,8 @@ const DaftarPengiriman = (props) => {
                                 <td className="border px-4 py-2">{pengiriman.jumlah}</td>
                                 <td className="border px-4 py-2">{truncateDateString(pengiriman.waktu_permintaan)}</td>
                                 <td className="border px-4 py-2">{truncateDateString(pengiriman.tanggal_pengiriman)}</td>
-                                <td className="border px-4 py-2">
-                                    <select value={pengiriman.status}
-                                            onChange={(e) => handleStatusChange(pengiriman.kode_permintaan, parseInt(e.target.value))}>
-                                        <option value={1} style={{backgroundColor: getStatusString(1).color}} disabled>{getStatusString(1).text}</option>
-                                        <option value={2} style={{backgroundColor: getStatusString(2).color}}>{getStatusString(2).text}</option>
-                                        <option value={3} style={{backgroundColor: getStatusString(3).color}}>{getStatusString(3).text}</option>
-                                        <option value={4} style={{backgroundColor: getStatusString(4).color}} disabled>{getStatusString(4).text}</option>
-                                    </select>
+                                <td className="border px-4 py-2" style={{ color: getStatusString(pengiriman.status).color }}>
+                                    {getStatusString(pengiriman.status).text}
                                 </td>
                             </tr>
                         ))}
